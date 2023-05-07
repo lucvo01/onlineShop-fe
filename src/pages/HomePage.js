@@ -102,7 +102,7 @@ function applyFilter(products, filters) {
   }
 
   // FILTER PRODUCTS
-  if (filters.gender) {
+  if (filters.gender.length) {
     filteredProducts = products.filter((product) =>
       filters.gender.includes(product.gender)
     );
