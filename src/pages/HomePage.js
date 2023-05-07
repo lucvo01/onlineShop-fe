@@ -23,7 +23,7 @@ function HomePage() {
     searchQuery: ""
   };
   const methods = useForm({
-    defaultValues,
+    defaultValues
   });
   const { watch, reset } = methods;
   const filters = watch();
@@ -102,7 +102,7 @@ function applyFilter(products, filters) {
   }
 
   // FILTER PRODUCTS
-  if (filters.gender.length > 0) {
+  if (filters.gender) {
     filteredProducts = products.filter((product) =>
       filters.gender.includes(product.gender)
     );

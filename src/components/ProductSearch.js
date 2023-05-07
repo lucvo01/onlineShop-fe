@@ -4,20 +4,19 @@ import React from "react";
 import { FTextField } from "./form";
 
 function ProductSearch() {
-    return (
-        <FTextField
-      name= "searchQuery"
-    sx = {{ width: 300 }
-}
-size = "small"
-InputProps = {{
-    startAdornment: (
-        <InputAdornment position= "start" >
-        <SearchIcon />
-        < /InputAdornment>
-        ),
-}}
-/>
+  return (
+    <FTextField
+      name="searchQuery"
+      sx={{ width: 300 }}
+      size="small"
+      InputProps={{
+        startAdornment: (
+          <InputAdornment position="start">
+            <SearchIcon />
+          </InputAdornment>
+        )
+      }}
+    />
   );
 }
 
