@@ -83,51 +83,108 @@ function HomePage() {
   );
 }
 
+// function applyFilter(products, filters) {
+//   const { sortBy } = filters;
+//   let filteredProducts = products;
+
+//   // SORT BY
+//   if (sortBy === "featured") {
+//     filteredProducts = orderBy(products, ["sold"], ["desc"]);
+//   }
+//   if (sortBy === "newest") {
+//     filteredProducts = orderBy(products, ["createdAt"], ["desc"]);
+//   }
+//   if (sortBy === "priceDesc") {
+//     filteredProducts = orderBy(products, ["price"], ["desc"]);
+//   }
+//   if (sortBy === "priceAsc") {
+//     filteredProducts = orderBy(products, ["price"], ["asc"]);
+//   }
+
+//   // FILTER PRODUCTS
+
+//   if (filters.gender) {
+//     filteredProducts = products.filter((product) =>
+//       filters.gender.includes(product.gender)
+//     );
+//   }
+
+//   if (filters.category !== "All") {
+//     filteredProducts = products.filter(
+//       (product) => product.category === filters.category
+//     );
+//   }
+
+//   // if (filters.category === "All") {
+//   //   filteredProducts = products;
+//   // }
+//   if (filters.priceRange) {
+//     filteredProducts = products.filter((product) => {
+//       if (filters.priceRange === "below") {
+//         return product.price < 25;
+//       }
+//       if (filters.priceRange === "between") {
+//         return product.price >= 25 && product.price <= 75;
+//       }
+//       return product.price > 75;
+//     });
+//   }
+//   if (filters.searchQuery) {
+//     filteredProducts = products.filter((product) =>
+//       product.name.toLowerCase().includes(filters.searchQuery.toLowerCase())
+//     );
+//   }
+//   return filteredProducts;
+// }
+
 function applyFilter(products, filters) {
-  const { sortBy } = filters;
-  let filteredProducts = products;
+  const { sortBy, gender, category, priceRange, searchQuery } = filters;
+
+  let filteredProducts = [...products];
 
   // SORT BY
   if (sortBy === "featured") {
-    filteredProducts = orderBy(products, ["sold"], ["desc"]);
-  }
-  if (sortBy === "newest") {
-    filteredProducts = orderBy(products, ["createdAt"], ["desc"]);
-  }
-  if (sortBy === "priceDesc") {
-    filteredProducts = orderBy(products, ["price"], ["desc"]);
-  }
-  if (sortBy === "priceAsc") {
-    filteredProducts = orderBy(products, ["price"], ["asc"]);
+    filteredProducts = orderBy(filteredProducts, ["sold"], ["desc"]);
+  } else if (sortBy === "newest") {
+    filteredProducts = orderBy(filteredProducts, ["createdAt"], ["desc"]);
+  } else if (sortBy === "priceDesc") {
+    filteredProducts = orderBy(filteredProducts, ["price"], ["desc"]);
+  } else if (sortBy === "priceAsc") {
+    filteredProducts = orderBy(filteredProducts, ["price"], ["asc"]);
   }
 
   // FILTER PRODUCTS
-  if (filters.gender) {
-    filteredProducts = products.filter((product) =>
-      filters.gender.includes(product.gender)
+  if (gender && gender.length > 0) {
+    filteredProducts = filteredProducts.filter((product) =>
+      gender.includes(product.gender)
     );
   }
-  if (filters.category !== "All") {
-    filteredProducts = products.filter(
-      (product) => product.category === filters.category
+
+  if (category !== "All") {
+    filteredProducts = filteredProducts.filter(
+      (product) => product.category === category
     );
   }
-  if (filters.priceRange) {
-    filteredProducts = products.filter((product) => {
-      if (filters.priceRange === "below") {
+
+  if (priceRange) {
+    filteredProducts = filteredProducts.filter((product) => {
+      if (priceRange === "below") {
         return product.price < 25;
-      }
-      if (filters.priceRange === "between") {
+      } else if (priceRange === "between") {
         return product.price >= 25 && product.price <= 75;
+      } else if (priceRange === "above") {
+        return product.price > 75;
       }
-      return product.price > 75;
+      return true;
     });
   }
-  if (filters.searchQuery) {
-    filteredProducts = products.filter((product) =>
-      product.name.toLowerCase().includes(filters.searchQuery.toLowerCase())
+
+  if (searchQuery) {
+    filteredProducts = filteredProducts.filter((product) =>
+      product.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
   }
+
   return filteredProducts;
 }
 

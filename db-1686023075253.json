@@ -155,9 +155,12 @@
       "description": "\n<p><strong><small> SPECIFICATION</small></strong></p>\n<p>Leather panels. Laces. Rounded toe. Rubber sole.\n<br /><br />\n<p><strong><small> MATERIAL AND WASHING INSTRUCTIONS</small></strong></p>\n<p>Shoeupper: 54% bovine leather,46% polyurethane. Lining: 65% polyester,35% cotton. Insole: 100% polyurethane. Sole: 100% thermoplastic. Fixing sole: 100% glued.</p>\n",
       "sold": 343,
       "createdAt": "2022-03-13T05:49:40.476Z",
-      "category": "Shoes",
+      "category": "Shose",
       "gender": "Women",
-      "colors": ["#00AB55", "#000000"]
+      "colors": [
+        "#00AB55",
+        "#000000"
+      ]
     },
     {
       "id": "e99f09a7-dd88-49d5-b1c8-1daf80c2d7b2",
@@ -314,9 +317,12 @@
       "description": "\n<p><strong><small> SPECIFICATION</small></strong></p>\n<p>Leather panels. Laces. Rounded toe. Rubber sole.\n<br /><br />\n<p><strong><small> MATERIAL AND WASHING INSTRUCTIONS</small></strong></p>\n<p>Shoeupper: 54% bovine leather,46% polyurethane. Lining: 65% polyester,35% cotton. Insole: 100% polyurethane. Sole: 100% thermoplastic. Fixing sole: 100% glued.</p>\n",
       "sold": 582,
       "createdAt": "2022-03-12T04:49:40.476Z",
-      "category": "Shoes",
+      "category": "Shose",
       "gender": "Kids",
-      "colors": ["#000000", "#FFFFFF"]
+      "colors": [
+        "#000000",
+        "#FFFFFF"
+      ]
     },
     {
       "id": "e99f09a7-dd88-49d5-b1c8-1daf80c2d7b3",
@@ -475,7 +481,10 @@
       "createdAt": "2022-03-11T03:49:40.476Z",
       "category": "Apparel",
       "gender": "Kids",
-      "colors": ["#FFFFFF", "#FFC0CB"]
+      "colors": [
+        "#FFFFFF",
+        "#FFC0CB"
+      ]
     },
     {
       "id": "e99f09a7-dd88-49d5-b1c8-1daf80c2d7b4",
@@ -632,9 +641,13 @@
       "description": "\n<p><strong><small> SPECIFICATION</small></strong></p>\n<p>Leather panels. Laces. Rounded toe. Rubber sole.\n<br /><br />\n<p><strong><small> MATERIAL AND WASHING INSTRUCTIONS</small></strong></p>\n<p>Shoeupper: 54% bovine leather,46% polyurethane. Lining: 65% polyester,35% cotton. Insole: 100% polyurethane. Sole: 100% thermoplastic. Fixing sole: 100% glued.</p>\n",
       "sold": 631,
       "createdAt": "2022-03-10T02:49:40.476Z",
-      "category": "Shoes",
+      "category": "Shose",
       "gender": "Kids",
-      "colors": ["#FFC0CB", "#FF4842", "#1890FF"]
+      "colors": [
+        "#FFC0CB",
+        "#FF4842",
+        "#1890FF"
+      ]
     },
     {
       "id": "e99f09a7-dd88-49d5-b1c8-1daf80c2d7b5",
@@ -793,7 +806,10 @@
       "createdAt": "2022-03-09T01:49:40.476Z",
       "category": "Accessories",
       "gender": "Kids",
-      "colors": ["#FF4842", "#1890FF"]
+      "colors": [
+        "#FF4842",
+        "#1890FF"
+      ]
     },
     {
       "id": "e99f09a7-dd88-49d5-b1c8-1daf80c2d7b6",
@@ -950,9 +966,11 @@
       "description": "\n<p><strong><small> SPECIFICATION</small></strong></p>\n<p>Leather panels. Laces. Rounded toe. Rubber sole.\n<br /><br />\n<p><strong><small> MATERIAL AND WASHING INSTRUCTIONS</small></strong></p>\n<p>Shoeupper: 54% bovine leather,46% polyurethane. Lining: 65% polyester,35% cotton. Insole: 100% polyurethane. Sole: 100% thermoplastic. Fixing sole: 100% glued.</p>\n",
       "sold": 16,
       "createdAt": "2022-03-08T00:49:40.476Z",
-      "category": "Shoes",
+      "category": "Shose",
       "gender": "Kids",
-      "colors": ["#1890FF"]
+      "colors": [
+        "#1890FF"
+      ]
     },
     {
       "id": "e99f09a7-dd88-49d5-b1c8-1daf80c2d7b7",
@@ -1111,7 +1129,10 @@
       "createdAt": "2022-03-06T23:49:40.476Z",
       "category": "Accessories",
       "gender": "Women",
-      "colors": ["#00AB55", "#000000"]
+      "colors": [
+        "#00AB55",
+        "#000000"
+      ]
     },
     {
       "id": "e99f09a7-dd88-49d5-b1c8-1daf80c2d7b8",
@@ -1270,7 +1291,10 @@
       "createdAt": "2022-03-05T22:49:40.476Z",
       "category": "Apparel",
       "gender": "Women",
-      "colors": ["#FF4842", "#1890FF"]
+      "colors": [
+        "#FF4842",
+        "#1890FF"
+      ]
     },
     {
       "id": "e99f09a7-dd88-49d5-b1c8-1daf80c2d7b9",
@@ -1429,7 +1453,10 @@
       "createdAt": "2022-03-04T21:49:40.476Z",
       "category": "Accessories",
       "gender": "Men",
-      "colors": ["#FFFFFF", "#FFC0CB"]
+      "colors": [
+        "#FFFFFF",
+        "#FFC0CB"
+      ]
     },
     {
       "id": "e99f09a7-dd88-49d5-b1c8-1daf80c2d7b10",
@@ -1588,7 +1615,12 @@
       "createdAt": "2022-03-03T20:49:40.476Z",
       "category": "Apparel",
       "gender": "Women",
-      "colors": ["#FFFFFF", "#FFC0CB", "#FF4842", "#1890FF"]
+      "colors": [
+        "#FFFFFF",
+        "#FFC0CB",
+        "#FF4842",
+        "#1890FF"
+      ]
     },
     {
       "id": "e99f09a7-dd88-49d5-b1c8-1daf80c2d7b11",
@@ -1747,7 +1779,11 @@
       "createdAt": "2022-03-02T19:49:40.476Z",
       "category": "Accessories",
       "gender": "Kids",
-      "colors": ["#FFC0CB", "#FF4842", "#1890FF"]
+      "colors": [
+        "#FFC0CB",
+        "#FF4842",
+        "#1890FF"
+      ]
     },
     {
       "id": "e99f09a7-dd88-49d5-b1c8-1daf80c2d7b12",
@@ -1906,7 +1942,12 @@
       "createdAt": "2022-03-01T18:49:40.476Z",
       "category": "Accessories",
       "gender": "Kids",
-      "colors": ["#FFFFFF", "#FFC0CB", "#FF4842", "#1890FF"]
+      "colors": [
+        "#FFFFFF",
+        "#FFC0CB",
+        "#FF4842",
+        "#1890FF"
+      ]
     },
     {
       "id": "e99f09a7-dd88-49d5-b1c8-1daf80c2d7b13",
@@ -2065,7 +2106,13 @@
       "createdAt": "2022-02-28T17:49:40.476Z",
       "category": "Accessories",
       "gender": "Men",
-      "colors": ["#FFFFFF", "#FFC0CB", "#FF4842", "#1890FF", "#94D82D"]
+      "colors": [
+        "#FFFFFF",
+        "#FFC0CB",
+        "#FF4842",
+        "#1890FF",
+        "#94D82D"
+      ]
     },
     {
       "id": "e99f09a7-dd88-49d5-b1c8-1daf80c2d7b14",
@@ -2222,9 +2269,13 @@
       "description": "\n<p><strong><small> SPECIFICATION</small></strong></p>\n<p>Leather panels. Laces. Rounded toe. Rubber sole.\n<br /><br />\n<p><strong><small> MATERIAL AND WASHING INSTRUCTIONS</small></strong></p>\n<p>Shoeupper: 54% bovine leather,46% polyurethane. Lining: 65% polyester,35% cotton. Insole: 100% polyurethane. Sole: 100% thermoplastic. Fixing sole: 100% glued.</p>\n",
       "sold": 763,
       "createdAt": "2022-02-27T16:49:40.476Z",
-      "category": "Shoes",
+      "category": "Shose",
       "gender": "Kids",
-      "colors": ["#FF4842", "#1890FF", "#94D82D"]
+      "colors": [
+        "#FF4842",
+        "#1890FF",
+        "#94D82D"
+      ]
     },
     {
       "id": "e99f09a7-dd88-49d5-b1c8-1daf80c2d7b15",
@@ -2381,9 +2432,12 @@
       "description": "\n<p><strong><small> SPECIFICATION</small></strong></p>\n<p>Leather panels. Laces. Rounded toe. Rubber sole.\n<br /><br />\n<p><strong><small> MATERIAL AND WASHING INSTRUCTIONS</small></strong></p>\n<p>Shoeupper: 54% bovine leather,46% polyurethane. Lining: 65% polyester,35% cotton. Insole: 100% polyurethane. Sole: 100% thermoplastic. Fixing sole: 100% glued.</p>\n",
       "sold": 571,
       "createdAt": "2022-02-26T15:49:40.476Z",
-      "category": "Shoes",
+      "category": "Shose",
       "gender": "Kids",
-      "colors": ["#00AB55", "#000000"]
+      "colors": [
+        "#00AB55",
+        "#000000"
+      ]
     },
     {
       "id": "e99f09a7-dd88-49d5-b1c8-1daf80c2d7b16",
@@ -2542,7 +2596,11 @@
       "createdAt": "2022-02-25T14:49:40.476Z",
       "category": "Apparel",
       "gender": "Women",
-      "colors": ["#1890FF", "#94D82D", "#FFC107"]
+      "colors": [
+        "#1890FF",
+        "#94D82D",
+        "#FFC107"
+      ]
     },
     {
       "id": "e99f09a7-dd88-49d5-b1c8-1daf80c2d7b17",
@@ -2699,9 +2757,12 @@
       "description": "\n<p><strong><small> SPECIFICATION</small></strong></p>\n<p>Leather panels. Laces. Rounded toe. Rubber sole.\n<br /><br />\n<p><strong><small> MATERIAL AND WASHING INSTRUCTIONS</small></strong></p>\n<p>Shoeupper: 54% bovine leather,46% polyurethane. Lining: 65% polyester,35% cotton. Insole: 100% polyurethane. Sole: 100% thermoplastic. Fixing sole: 100% glued.</p>\n",
       "sold": 557,
       "createdAt": "2022-02-24T13:49:40.476Z",
-      "category": "Shoes",
+      "category": "Shose",
       "gender": "Kids",
-      "colors": ["#FF4842", "#1890FF"]
+      "colors": [
+        "#FF4842",
+        "#1890FF"
+      ]
     },
     {
       "id": "e99f09a7-dd88-49d5-b1c8-1daf80c2d7b18",
@@ -2860,7 +2921,9 @@
       "createdAt": "2022-02-23T12:49:40.477Z",
       "category": "Apparel",
       "gender": "Women",
-      "colors": ["#1890FF"]
+      "colors": [
+        "#1890FF"
+      ]
     },
     {
       "id": "e99f09a7-dd88-49d5-b1c8-1daf80c2d7b19",
@@ -3019,7 +3082,10 @@
       "createdAt": "2022-02-22T11:49:40.477Z",
       "category": "Accessories",
       "gender": "Kids",
-      "colors": ["#00AB55", "#000000"]
+      "colors": [
+        "#00AB55",
+        "#000000"
+      ]
     },
     {
       "id": "e99f09a7-dd88-49d5-b1c8-1daf80c2d7b20",
@@ -3176,9 +3242,12 @@
       "description": "\n<p><strong><small> SPECIFICATION</small></strong></p>\n<p>Leather panels. Laces. Rounded toe. Rubber sole.\n<br /><br />\n<p><strong><small> MATERIAL AND WASHING INSTRUCTIONS</small></strong></p>\n<p>Shoeupper: 54% bovine leather,46% polyurethane. Lining: 65% polyester,35% cotton. Insole: 100% polyurethane. Sole: 100% thermoplastic. Fixing sole: 100% glued.</p>\n",
       "sold": 288,
       "createdAt": "2022-02-21T10:49:40.477Z",
-      "category": "Shoes",
+      "category": "Shose",
       "gender": "Kids",
-      "colors": ["#FF4842", "#1890FF"]
+      "colors": [
+        "#FF4842",
+        "#1890FF"
+      ]
     },
     {
       "id": "e99f09a7-dd88-49d5-b1c8-1daf80c2d7b21",
@@ -3335,9 +3404,12 @@
       "description": "\n<p><strong><small> SPECIFICATION</small></strong></p>\n<p>Leather panels. Laces. Rounded toe. Rubber sole.\n<br /><br />\n<p><strong><small> MATERIAL AND WASHING INSTRUCTIONS</small></strong></p>\n<p>Shoeupper: 54% bovine leather,46% polyurethane. Lining: 65% polyester,35% cotton. Insole: 100% polyurethane. Sole: 100% thermoplastic. Fixing sole: 100% glued.</p>\n",
       "sold": 372,
       "createdAt": "2022-02-20T09:49:40.477Z",
-      "category": "Shoes",
+      "category": "Shose",
       "gender": "Men",
-      "colors": ["#FF4842", "#1890FF"]
+      "colors": [
+        "#FF4842",
+        "#1890FF"
+      ]
     },
     {
       "id": "e99f09a7-dd88-49d5-b1c8-1daf80c2d7b22",
@@ -3496,7 +3568,9 @@
       "createdAt": "2022-02-19T08:49:40.477Z",
       "category": "Apparel",
       "gender": "Men",
-      "colors": ["#1890FF"]
+      "colors": [
+        "#1890FF"
+      ]
     },
     {
       "id": "e99f09a7-dd88-49d5-b1c8-1daf80c2d7b23",
@@ -3655,7 +3729,11 @@
       "createdAt": "2022-02-18T07:49:40.477Z",
       "category": "Accessories",
       "gender": "Women",
-      "colors": ["#1890FF", "#94D82D", "#FFC107"]
+      "colors": [
+        "#1890FF",
+        "#94D82D",
+        "#FFC107"
+      ]
     },
     {
       "id": "e99f09a7-dd88-49d5-b1c8-1daf80c2d7b24",
@@ -3814,7 +3892,10 @@
       "createdAt": "2022-02-17T06:49:40.477Z",
       "category": "Accessories",
       "gender": "Kids",
-      "colors": ["#FF4842", "#1890FF"]
+      "colors": [
+        "#FF4842",
+        "#1890FF"
+      ]
     }
   ]
 }
