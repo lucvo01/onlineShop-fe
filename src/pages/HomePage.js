@@ -34,7 +34,7 @@ function HomePage() {
       setLoading(true);
       try {
         const res = await apiService.get("/products");
-        setProducts(res.data);
+        setProducts(res.data.data.products);
         setError("");
       } catch (error) {
         console.log(error);
@@ -82,60 +82,6 @@ function HomePage() {
     </Container>
   );
 }
-
-// function applyFilter(products, filters) {
-//   const { sortBy } = filters;
-//   let filteredProducts = products;
-
-//   // SORT BY
-//   if (sortBy === "featured") {
-//     filteredProducts = orderBy(products, ["sold"], ["desc"]);
-//   }
-//   if (sortBy === "newest") {
-//     filteredProducts = orderBy(products, ["createdAt"], ["desc"]);
-//   }
-//   if (sortBy === "priceDesc") {
-//     filteredProducts = orderBy(products, ["price"], ["desc"]);
-//   }
-//   if (sortBy === "priceAsc") {
-//     filteredProducts = orderBy(products, ["price"], ["asc"]);
-//   }
-
-//   // FILTER PRODUCTS
-
-//   if (filters.gender) {
-//     filteredProducts = products.filter((product) =>
-//       filters.gender.includes(product.gender)
-//     );
-//   }
-
-//   if (filters.category !== "All") {
-//     filteredProducts = products.filter(
-//       (product) => product.category === filters.category
-//     );
-//   }
-
-//   // if (filters.category === "All") {
-//   //   filteredProducts = products;
-//   // }
-//   if (filters.priceRange) {
-//     filteredProducts = products.filter((product) => {
-//       if (filters.priceRange === "below") {
-//         return product.price < 25;
-//       }
-//       if (filters.priceRange === "between") {
-//         return product.price >= 25 && product.price <= 75;
-//       }
-//       return product.price > 75;
-//     });
-//   }
-//   if (filters.searchQuery) {
-//     filteredProducts = products.filter((product) =>
-//       product.name.toLowerCase().includes(filters.searchQuery.toLowerCase())
-//     );
-//   }
-//   return filteredProducts;
-// }
 
 function applyFilter(products, filters) {
   const { sortBy, gender, category, priceRange, searchQuery } = filters;
