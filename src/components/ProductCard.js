@@ -10,12 +10,12 @@ import { fCurrency } from "../utils";
 function ProductCard({ product }) {
   const navigate = useNavigate();
   return (
-    <Card onClick={() => navigate(`/product/${product.id}`)}>
+    <Card onClick={() => navigate(`/product/${product._id}`)}>
       <CardActionArea>
         <CardMedia
           component="img"
           height="200"
-          image={product.cover}
+          image={product.image}
           alt="green iguana"
         />
         <CardContent>
@@ -28,14 +28,14 @@ function ProductCard({ product }) {
             alignItems="center"
             justifyContent="flex-end"
           >
-            {product.priceSale && (
+            {/* {product.priceSale && (
               <Typography
                 component="span"
                 sx={{ color: "text.disabled", textDecoration: "line-through" }}
               >
                 {fCurrency(product.priceSale)}
               </Typography>
-            )}
+            )} */}
             <Typography variant="subtitle1">
               {fCurrency(product.price)}
             </Typography>

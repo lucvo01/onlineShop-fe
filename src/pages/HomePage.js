@@ -9,11 +9,16 @@ import { useForm } from "react-hook-form";
 import apiService from "../app/apiService";
 import orderBy from "lodash/orderBy";
 import LoadingScreen from "../components/LoadingScreen";
+import PaginationBar from "../components/PaginationBar";
 
 function HomePage() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
+  const [pageNum, setPageNum] = useState(1);
+  const totalPage = 10;
+  const limit = 10;
 
   const defaultValues = {
     gender: [],
@@ -33,7 +38,9 @@ function HomePage() {
     const getProducts = async () => {
       setLoading(true);
       try {
-        const res = await apiService.get("/products");
+        const res = await apiService.get(
+          `/products?page=${pageNum}&limit=${limit}`
+        );
         setProducts(res.data.data.products);
         setError("");
       } catch (error) {
@@ -43,7 +50,7 @@ function HomePage() {
       setLoading(false);
     };
     getProducts();
-  }, []);
+  }, [pageNum]);
 
   return (
     <Container sx={{ display: "flex", minHeight: "100vh", mt: 3 }}>
@@ -78,6 +85,11 @@ function HomePage() {
             </>
           )}
         </Box>
+        <PaginationBar
+          pageNum={pageNum}
+          setPageNum={setPageNum}
+          totalPageNum={totalPage}
+        />
       </Stack>
     </Container>
   );

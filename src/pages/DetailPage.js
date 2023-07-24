@@ -31,7 +31,7 @@ function DetailPage() {
         setLoading(true);
         try {
           const res = await apiService.get(`/products/${params.id}`);
-          setProduct(res.data);
+          setProduct(res.data.data);
           setError("");
         } catch (error) {
           console.log(error);
@@ -78,7 +78,7 @@ function DetailPage() {
                                 width: 1,
                                 height: 1
                               }}
-                              src={product.cover}
+                              src={product.image}
                               alt="product"
                             />
                           </Box>
