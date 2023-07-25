@@ -28,11 +28,11 @@ function MainHeader() {
             <Logo />
           </IconButton>
           <Typography variant="h6" color="inherit" component="div">
-            CoderStore
+            Online Shop
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
           <Typography variant="h6" color="inherit" component="div">
-            Welcome {auth.user?.username}!
+            Welcome {auth.user?.name}!
           </Typography>
 
           {auth.user ? (

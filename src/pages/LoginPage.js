@@ -5,7 +5,7 @@ import {
   Alert,
   IconButton,
   InputAdornment,
-  Container,
+  Container
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -21,13 +21,13 @@ import * as Yup from "yup";
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Email is required"),
-  password: Yup.string().required("Password is required"),
+  password: Yup.string().required("Password is required")
 });
 
 const defaultValues = {
   email: "",
   password: "",
-  remember: true,
+  remember: true
 };
 
 function LoginPage() {
@@ -38,13 +38,13 @@ function LoginPage() {
 
   const methods = useForm({
     resolver: yupResolver(LoginSchema),
-    defaultValues,
+    defaultValues
   });
   const {
     handleSubmit,
     reset,
     setError,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting }
   } = methods;
 
   const onSubmit = async (data) => {
@@ -91,7 +91,7 @@ function LoginPage() {
                     {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
                   </IconButton>
                 </InputAdornment>
-              ),
+              )
             }}
           />
         </Stack>
