@@ -11,7 +11,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 function MainHeader() {
   const auth = useAuth();
-const navigate = useNavigate();
+  const navigate = useNavigate();
   let location = useLocation();
   let from = location.state?.from?.pathname || "/";
 
@@ -23,7 +23,8 @@ const navigate = useNavigate();
             edge="start"
             color="inherit"
             aria-label="menu"
-            sx={{ mr: 2 }}>
+            sx={{ mr: 2 }}
+          >
             <Logo />
           </IconButton>
           <Typography variant="h6" color="inherit" component="div">
@@ -33,27 +34,32 @@ const navigate = useNavigate();
           <Typography variant="h6" color="inherit" component="div">
             Welcome {auth.user?.username}!
           </Typography>
-          {auth.user ? <Button
-            variant="h6"
-            color="inherit"
-            component="div"
-            onClick={() => {
-              auth.logout(() => {
-      navigate(from, { replace: true });
-    })
-            }}>
-            Logout
-          </Button> : <Button
-            variant="h6"
-            color="inherit"
-            component="div"
-            onClick={() => {
-              navigate("/login", from);
-            }}>
-            Login
-          </Button>}
-          
-          
+
+          {auth.user ? (
+            <Button
+              variant="h6"
+              color="inherit"
+              component="div"
+              onClick={() => {
+                auth.logout(() => {
+                  navigate(from, { replace: true });
+                });
+              }}
+            >
+              Logout
+            </Button>
+          ) : (
+            <Button
+              variant="h6"
+              color="inherit"
+              component="div"
+              onClick={() => {
+                navigate("/login", from);
+              }}
+            >
+              Login
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
     </Box>
