@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 import Logo from "../components/Logo";
 import useAuth from "../hooks/useAuth";
 import { useNavigate, useLocation } from "react-router-dom";
-
+import Cart from '../components/Cart'
 function MainHeader() {
   const auth = useAuth();
   const navigate = useNavigate();
@@ -60,6 +60,8 @@ function MainHeader() {
               Login
             </Button>
           )}
+
+          <Cart/>
         </Toolbar>
       </AppBar>
     </Box>
