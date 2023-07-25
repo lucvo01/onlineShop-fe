@@ -10,6 +10,7 @@ import apiService from "../app/apiService";
 import orderBy from "lodash/orderBy";
 import LoadingScreen from "../components/LoadingScreen";
 import PaginationBar from "../components/PaginationBar";
+import { useDispatch, useSelector } from "react-redux";
 
 function CartPage() {
   const [products, setProducts] = useState([]);
