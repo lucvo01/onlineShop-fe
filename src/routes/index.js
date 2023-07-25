@@ -6,7 +6,7 @@ import DetailPage from "../pages/DetailPage";
 import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
 import NotFoundPage from "../pages/NotFoundPage";
-import AuthRequire from "./AuthRequire";
+// import AuthRequire from "./AuthRequire";
 
 function Router() {
   return (
@@ -14,9 +14,9 @@ function Router() {
       <Route
         path="/"
         element={
-          <AuthRequire>
+          // <AuthRequire>
             <MainLayout />
-          </AuthRequire>
+          // </AuthRequire>
         }
       >
         <Route index element={<HomePage />} />

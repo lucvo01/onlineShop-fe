@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
-
+import Button from "@mui/material/Button";
 import Logo from "../components/Logo";
 import useAuth from "../hooks/useAuth";
 
@@ -19,8 +19,7 @@ function MainHeader() {
             edge="start"
             color="inherit"
             aria-label="menu"
-            sx={{ mr: 2 }}
-          >
+            sx={{ mr: 2 }}>
             <Logo />
           </IconButton>
           <Typography variant="h6" color="inherit" component="div">
@@ -30,6 +29,15 @@ function MainHeader() {
           <Typography variant="h6" color="inherit" component="div">
             Welcome {user?.username}!
           </Typography>
+          <Button
+            variant="h6"
+            color="inherit"
+            component="div"
+            onClick={() => {
+              alert("clicked");
+            }}>
+            Login
+          </Button>
         </Toolbar>
       </AppBar>
     </Box>
