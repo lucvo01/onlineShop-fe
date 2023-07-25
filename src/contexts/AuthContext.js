@@ -1,5 +1,5 @@
 import { createContext, useReducer, useEffect } from "react";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import apiService from "../app/apiService";
 import { isValidToken } from "../utils/jwt";
 
@@ -62,7 +62,6 @@ const AuthContext = createContext({ ...initialState });
 
 function AuthProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const updatedProfile = useSelector((state) => state.user.updatedProfile);
 
   useEffect(() => {
     const initialize = async () => {
@@ -72,7 +71,7 @@ function AuthProvider({ children }) {
         if (accessToken && isValidToken(accessToken)) {
           setSession(accessToken);
 
-          const response = await apiService.get("/users/me");
+          const response = await apiService.get("/users/login");
           const user = response.data;
 
           dispatch({
