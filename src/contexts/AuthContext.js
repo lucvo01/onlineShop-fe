@@ -45,12 +45,12 @@ function AuthProvider({ children }) {
   useEffect(() => {
     const initialize = async () => {
       try {
-        const username = window.localStorage.getItem("username");
+        const email = window.localStorage.getItem("email");
 
-        if (username) {
+        if (email) {
           dispatch({
             type: INITIALIZE,
-            payload: { isAuthenticated: true, user: { username } },
+            payload: { isAuthenticated: true, user: { email } },
           });
         } else {
           dispatch({
@@ -72,17 +72,17 @@ function AuthProvider({ children }) {
     initialize();
   }, []);
 
-  const login = async (username, callback) => {
-    window.localStorage.setItem("username", username);
+  const login = async (email, callback) => {
+    window.localStorage.setItem("email", email);
     dispatch({
       type: LOGIN_SUCCESS,
-      payload: { user: { username } },
+      payload: { user: { email } },
     });
     callback();
   };
 
   const logout = async (callback) => {
-    window.localStorage.removeItem("username");
+    window.localStorage.removeItem("email");
     dispatch({ type: LOGOUT });
     callback();
   };

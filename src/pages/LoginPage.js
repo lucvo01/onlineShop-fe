@@ -8,10 +8,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 
 const LoginSchema = Yup.object().shape({
-  username: Yup.string().required("Username is required"),
+  email: Yup.string().required("email is required"),
 });
 const defaultValues = {
-  username: "",
+  email: "",
 };
 
 function LoginPage() {
@@ -27,9 +27,9 @@ function LoginPage() {
 
   const onSubmit = async (data) => {
     let from = location.state?.from?.pathname || "/";
-    let username = data.username;
+    let email = data.email;
 
-    auth.login(username, () => {
+    auth.login(email, () => {
       navigate(from, { replace: true });
     });
   };
@@ -40,7 +40,8 @@ function LoginPage() {
         <Typography variant="h4" textAlign="center">
           Login
         </Typography>
-        <FTextField name="username" label="Username" />
+        <FTextField name="email" label="Email" />
+        <FTextField name="password" label="Password" />
 
         <Button type="submit" variant="contained">
           Login
