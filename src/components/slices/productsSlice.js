@@ -58,19 +58,18 @@ const slice = createSlice({
 export default slice.reducer;
 
 export const getProducts =
-  ({page = 1, limit = PRODUCTS_PER_PAGE }) =>
+  ({pageNum = 1, limit = PRODUCTS_PER_PAGE }) =>
   async (dispatch) => {
     dispatch(slice.actions.startLoading());
     try {
-      const params = { page, limit };
+      const params = { pageNum, limit };
       const response = await apiService.get(
-        `/products?page=${page}&limit=${limit}`,
+        `/products?page=${pageNum}&limit=${limit}`,
         {
           params
         }
       );
-      // if (page === 1) dispatch(slice.actions.resetProducts());
-      dispatch(slice.actions.getProductsSuccess(response.data));
+      dispatch(slice.actions.getProductsSuccess(response.data.data));
     } catch (error) {
       dispatch(slice.actions.hasError(error.message));
       toast.error(error.message);

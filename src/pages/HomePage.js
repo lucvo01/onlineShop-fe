@@ -10,8 +10,10 @@ import apiService from "../app/apiService";
 import orderBy from "lodash/orderBy";
 import LoadingScreen from "../components/LoadingScreen";
 import PaginationBar from "../components/PaginationBar";
+import {useDispatch} from 'react-redux'
 
 function HomePage() {
+  const dispatch = userDispatch();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -35,22 +37,25 @@ function HomePage() {
   const filterProducts = applyFilter(products, filters);
 
   useEffect(() => {
-    const getProducts = async () => {
-      setLoading(true);
-      try {
-        const res = await apiService.get(
-          `/products?page=${pageNum}&limit=${limit}`
-        );
-        setProducts(res.data.data.products);
-        setError("");
-      } catch (error) {
-        console.log(error);
-        setError(error.message);
-      }
-      setLoading(false);
-    };
-    getProducts();
-  }, [pageNum]);
+    dispatch(getProducts(pageNum));
+  }, [pageNum])
+  // useEffect(() => {
+  //   const getProducts = async () => {
+  //     setLoading(true);
+  //     try {
+  //       const res = await apiService.get(
+  //         `/products?page=${pageNum}&limit=${limit}`
+  //       );
+  //       setProducts(res.data.data.products);
+  //       setError("");
+  //     } catch (error) {
+  //       console.log(error);
+  //       setError(error.message);
+  //     }
+  //     setLoading(false);
+  //   };
+  //   getProducts();
+  // }, [pageNum]);
 
   return (
     <Container sx={{ display: "flex", minHeight: "100vh", mt: 3 }}>
