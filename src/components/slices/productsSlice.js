@@ -1,15 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import apiService from "../../app/apiService";
-import { ProductS_PER_PAGE } from "../../app/config";
+import { PRODUCTS_PER_PAGE } from "../../app/config";
 import { cloudinaryUpload } from "../../utils/cloudinary";
-import { getCurrentUserProfile } from "../user/userSlice";
 
 const initialState = {
   isLoading: false,
   error: null,
-  productsById: {},
-  currentPageProducts: []
+  items: [],
+  status: null,
+  createStatus: null,
+
 };
 
 const slice = createSlice({
@@ -42,7 +43,7 @@ const slice = createSlice({
       state.isLoading = false;
       state.error = null;
       const newProduct = action.payload;
-      if (state.currentPageProducts.length % ProductS_PER_PAGE === 0)
+      if (state.currentPageProducts.length % PRODUCTS_PER_PAGE === 0)
         state.currentPageProducts.pop();
       state.ProductsById[newProduct._id] = newProduct;
       state.currentPageProducts.unshift(newProduct._id);
@@ -65,15 +66,18 @@ const slice = createSlice({
 export default slice.reducer;
 
 export const getProducts =
-  ({ userId, page = 1, limit = ProductS_PER_PAGE }) =>
+  ({page = 1, limit = PRODUCTS_PER_PAGE }) =>
   async (dispatch) => {
     dispatch(slice.actions.startLoading());
     try {
       const params = { page, limit };
-      const response = await apiService.get(`/Products/user/${userId}`, {
-        params
-      });
-      if (page === 1) dispatch(slice.actions.resetProducts());
+      const response = await apiService.get(
+        `/products?page=${page}&limit=${limit}`,
+        {
+          params
+        }
+      );
+      // if (page === 1) dispatch(slice.actions.resetProducts());
       dispatch(slice.actions.getProductsSuccess(response.data));
     } catch (error) {
       dispatch(slice.actions.hasError(error.message));
@@ -94,29 +98,6 @@ export const createProduct =
       });
       dispatch(slice.actions.createProductSuccess(response.data));
       toast.success("Product successfully");
-      dispatch(getCurrentUserProfile());
-    } catch (error) {
-      dispatch(slice.actions.hasError(error.message));
-      toast.error(error.message);
-    }
-  };
-
-export const sendProductReaction =
-  ({ ProductId, emoji }) =>
-  async (dispatch) => {
-    dispatch(slice.actions.startLoading());
-    try {
-      const response = await apiService.Product(`/reactions`, {
-        targetType: "Product",
-        targetId: ProductId,
-        emoji
-      });
-      dispatch(
-        slice.actions.sendProductReactionSuccess({
-          ProductId,
-          reactions: response.data
-        })
-      );
     } catch (error) {
       dispatch(slice.actions.hasError(error.message));
       toast.error(error.message);
@@ -124,14 +105,13 @@ export const sendProductReaction =
   };
 
 export const deleteProduct =
-  ({ userId, ProductId, authorId }) =>
+  ({ productId }) =>
   async (dispatch) => {
     dispatch(slice.actions.startLoading());
     try {
-      await apiService.delete(`/Products/${ProductId}`);
+      await apiService.put(`/products/${productId}/delete`);
       toast.success("Delete successfully");
-      dispatch(getCurrentUserProfile());
-      dispatch(getProducts({ userId }));
+      dispatch(getProducts());
     } catch (error) {
       dispatch(slice.actions.hasError(error.message));
       toast.error(error.message);
@@ -139,19 +119,18 @@ export const deleteProduct =
   };
 
 export const editProduct =
-  ({ userId, ProductId, authorId, content, image }) =>
+  ({  productId, name, description, price, image }) =>
   async (dispatch) => {
     dispatch(slice.actions.startLoading());
     try {
       // upload image to cloudinary
       const imageUrl = await cloudinaryUpload(image);
-      await apiService.put(`/Products/${ProductId}`, {
-        content,
+      await apiService.put(`/products/${productId}/edit`, {
+        name, description, price,
         image: imageUrl
       });
       toast.success("Edit successfully");
-      dispatch(getCurrentUserProfile());
-      dispatch(getProducts({ userId }));
+      dispatch(getProducts());
     } catch (error) {
       dispatch(slice.actions.hasError(error.message));
       toast.error(error.message);

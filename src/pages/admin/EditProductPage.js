@@ -1,160 +1,103 @@
-import { useEffect, useState } from "react";
-import {
-  Card,
-  Grid,
-  Container,
-  Typography,
-  Box,
-  Stack,
-  Rating,
-  Divider,
-  Breadcrumbs,
-  Link
-} from "@mui/material";
-import { Link as RouterLink, useParams } from "react-router-dom";
-import { fCurrency } from "../../utils";
-import ReactMarkdown from "react-markdown";
-import rehypeRaw from "rehype-raw";
-import apiService from "../../app/apiService";
-import LoadingScreen from "../../components/LoadingScreen";
-import { Alert } from "@mui/material";
+import React, { useCallback } from "react";
+import { Box, Card, alpha, Stack } from "@mui/material";
+import { FormProvider, FTextField, FUploadImage } from "../../components/form";
+import { useDispatch, useSelector } from "react-redux";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
+import {  editProduct } from "../../components/slices/productsSlice";
+import { LoadingButton } from "@mui/lab";
+// import useAuth from "../../hooks/useAuth";
 
-function EditProductPage() {
-  const [product, setProduct] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-  const params = useParams();
+const yupSchema = Yup.object().shape({
+  content: Yup.string().required("Content is required")
+});
 
-  useEffect(() => {
-    if (params.id) {
-      const getProduct = async () => {
-        setLoading(true);
-        try {
-          const res = await apiService.get(`/products/${params.id}`);
-          setProduct(res.data.data);
-          setError("");
-        } catch (error) {
-          console.log(error);
-          setError(error.message);
-        }
-        setLoading(false);
-      };
-      getProduct();
-    }
-  }, [params]);
+const defaultValues = {
+  content: "",
+  image: null
+};
+
+function EditProductPage({ productId }) {
+  const { isLoading } = useSelector((state) => state.prouducts);
+
+  const methods = useForm({
+    resolver: yupResolver(yupSchema),
+    defaultValues
+  });
+  const {
+    handleSubmit,
+
+    setValue,
+    formState: { isSubmitting }
+  } = methods;
+
+  const dispatch = useDispatch();
+
+  const handleDrop = useCallback(
+    (acceptedFiles) => {
+      const file = acceptedFiles[0];
+
+      if (file) {
+        setValue(
+          "image",
+          Object.assign(file, {
+            preview: URL.createObjectURL(file)
+          })
+        );
+      }
+    },
+    [setValue]
+  );
+
+  // const { user } = useAuth();
+  // const productId = user._id;
+  const onSubmit = (data) => {
+    dispatch(editProduct({ ...data, productId }));
+  };
 
   return (
-    <Container sx={{ my: 3 }}>
-      <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 4 }}>
-        <Link underline="hover" color="inherit" component={RouterLink} to="/">
-          CoderStore
-        </Link>
-        <Typography color="text.primary">{product?.name}</Typography>
-      </Breadcrumbs>
-      <Box sx={{ position: "relative", height: 1 }}>
-        {loading ? (
-          <LoadingScreen />
-        ) : (
-          <>
-            {error ? (
-              <Alert severity="error">{error}</Alert>
-            ) : (
-              <>
-                {product && (
-                  <Card>
-                    <Grid container>
-                      <Grid item xs={12} md={6}>
-                        <Box p={2}>
-                          <Box
-                            sx={{
-                              borderRadius: 2,
-                              overflow: "hidden",
-                              display: "flex"
-                            }}
-                          >
-                            <Box
-                              component="img"
-                              sx={{
-                                width: 1,
-                                height: 1
-                              }}
-                              src={product.image}
-                              alt="product"
-                            />
-                          </Box>
-                        </Box>
-                      </Grid>
-                      <Grid item xs={12} md={6}>
-                        <Typography
-                          variant="h6"
-                          sx={{
-                            mt: 2,
-                            mb: 1,
-                            display: "block",
-                            textTransform: "uppercase",
-                            color:
-                              product.status === "sale"
-                                ? "error.main"
-                                : "info.main"
-                          }}
-                        >
-                          {product.status}
-                        </Typography>
-                        <Typography variant="h5" paragraph>
-                          {product.name}
-                        </Typography>
-                        <Stack
-                          direction="row"
-                          alignItems="center"
-                          spacing={1}
-                          sx={{ mb: 2 }}
-                        >
-                          <Rating
-                            value={product.totalRating}
-                            precision={0.1}
-                            readOnly
-                          />
-                          <Typography
-                            variant="body2"
-                            sx={{ color: "text.secondary" }}
-                          >
-                            ({product.totalReview} reviews)
-                          </Typography>
-                        </Stack>
-                        <Typography variant="h4" sx={{ mb: 3 }}>
-                          <Box
-                            component="span"
-                            sx={{
-                              color: "text.disabled",
-                              textDecoration: "line-through"
-                            }}
-                          >
-                            {product.priceSale && fCurrency(product.priceSale)}
-                          </Box>
-                          &nbsp;{fCurrency(product.price)}
-                        </Typography>
+    <Card sx={{ p: 3 }}>
+      <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
+        <Stack spacing={2}>
+          <FTextField
+            name="content"
+            multiline
+            fullWidth
+            rows={4}
+            // placeholder={post.content}
+            sx={{
+              "& fieldset": {
+                borderWidth: `1px !important`,
+                borderColor: alpha("#919EAB", 0.32)
+              }
+            }}
+          />
 
-                        <Divider sx={{ borderStyle: "dashed" }} />
-                        <Box>
-                          <ReactMarkdown
-                            rehypePlugins={[rehypeRaw]}
-                            children={product.description}
-                          />
-                        </Box>
-                        <Box></Box>
-                      </Grid>
-                    </Grid>
-                  </Card>
-                )}
-                {!product && (
-                  <Typography variant="h6">404 Product not found</Typography>
-                )}
-              </>
-            )}
-          </>
-        )}
-      </Box>
-    </Container>
+          <FUploadImage
+            name="image"
+            accept="image/*"
+            maxSize={3145728}
+            onDrop={handleDrop}
+          />
+
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "flex-end"
+            }}>
+            <LoadingButton
+              type="submit"
+              variant="contained"
+              size="small"
+              loading={isSubmitting || isLoading}>
+              Post
+            </LoadingButton>
+          </Box>
+        </Stack>
+      </FormProvider>
+    </Card>
   );
 }
 
