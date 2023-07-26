@@ -7,10 +7,8 @@ import { cloudinaryUpload } from "../../utils/cloudinary";
 const initialState = {
   isLoading: false,
   error: null,
-  items: [],
-  status: null,
-  createStatus: null,
-
+  productsById: {},
+  currentPageProducts: []
 };
 
 const slice = createSlice({
@@ -25,19 +23,19 @@ const slice = createSlice({
       state.error = action.payload;
     },
     resetProducts(state, action) {
-      state.ProductsById = {};
+      state.productsById = {};
       state.currentPageProducts = [];
     },
     getProductsSuccess(state, action) {
       state.isLoading = false;
       state.error = null;
-      const { posts, count } = action.payload;
-      posts.forEach((post) => {
-        state.postsById[post._id] = post;
-        if (!state.currentPagePosts.includes(post._id))
-          state.currentPagePosts.push(post._id);
+      const { products, count } = action.payload;
+      products.forEach((product) => {
+        state.productsById[product._id] = product;
+        if (!state.currentPageProducts.includes(product._id))
+          state.currentPageProducts.push(product._id);
       });
-      state.totalPosts = count;
+      state.totalProducts = count;
     },
     createProductSuccess(state, action) {
       state.isLoading = false;
@@ -45,20 +43,14 @@ const slice = createSlice({
       const newProduct = action.payload;
       if (state.currentPageProducts.length % PRODUCTS_PER_PAGE === 0)
         state.currentPageProducts.pop();
-      state.ProductsById[newProduct._id] = newProduct;
+      state.productsById[newProduct._id] = newProduct;
       state.currentPageProducts.unshift(newProduct._id);
-    },
-    sendProductReactionSuccess(state, action) {
-      state.isLoading = false;
-      state.error = null;
-      const { ProductId, reactions } = action.payload;
-      state.ProductsById[ProductId].reactions = reactions;
     },
     editProductSuccess(state, action) {
       state.isLoading = false;
       state.error = null;
-      const { ProductId } = action.payload;
-      state.ProductsById[ProductId] = action.payload;
+      const { productId } = action.payload;
+      state.productsById[productId] = action.payload;
     }
   }
 });
@@ -86,14 +78,13 @@ export const getProducts =
   };
 
 export const createProduct =
-  ({ content, image }) =>
+  ({ values, image }) =>
   async (dispatch) => {
     dispatch(slice.actions.startLoading());
     try {
-      // upload image to cloudinary
       const imageUrl = await cloudinaryUpload(image);
       const response = await apiService.Product("/Products", {
-        content,
+        values,
         image: imageUrl
       });
       dispatch(slice.actions.createProductSuccess(response.data));

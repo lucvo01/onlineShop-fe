@@ -1,6 +1,6 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { Box, Card, alpha, Stack } from "@mui/material";
-import { FormProvider, FTextField } from "../components/form";
+import { FormProvider, FTextField } from "./form";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -8,6 +8,7 @@ import * as Yup from "yup";
 import { editProduct } from "./slices/productsSlice";
 import { LoadingButton } from "@mui/lab";
 // import useAuth from "../../hooks/useAuth";
+import apiService from "../app/apiService";
 
 const yupSchema = Yup.object().shape({
   content: Yup.string().required("Content is required")
@@ -18,9 +19,21 @@ const defaultValues = {
   image: null
 };
 
-function ProductEditFrom({ productId }) {
-  console.log("edit product page");
+function ProductEditForm({ productId }) {
   const { isLoading } = useSelector((state) => state.prouducts);
+  
+let product;
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await apiService.get(`/products/${productId}`);
+        product = res.data.data
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData(); 
+  }, [productId]);
 
   const methods = useForm({
     resolver: yupResolver(yupSchema),
@@ -52,7 +65,7 @@ function ProductEditFrom({ productId }) {
   );
 
   // const { user } = useAuth();
-  // const productId = user._id;
+  // const productId = product._id;
   const onSubmit = (data) => {
     dispatch(editProduct({ ...data, productId }));
   };
@@ -66,7 +79,7 @@ function ProductEditFrom({ productId }) {
             multiline
             fullWidth
             rows={4}
-            // placeholder={post.content}
+            placeholder={product.name}
             sx={{
               "& fieldset": {
                 borderWidth: `1px !important`,
@@ -87,14 +100,12 @@ function ProductEditFrom({ productId }) {
               display: "flex",
               alignItems: "center",
               justifyContent: "flex-end"
-            }}
-          >
+            }}>
             <LoadingButton
               type="submit"
               variant="contained"
               size="small"
-              loading={isSubmitting || isLoading}
-            >
+              loading={isSubmitting || isLoading}>
               Post
             </LoadingButton>
           </Box>
@@ -104,4 +115,4 @@ function ProductEditFrom({ productId }) {
   );
 }
 
-export default ProductEditFrom;
+export default ProductEditForm;

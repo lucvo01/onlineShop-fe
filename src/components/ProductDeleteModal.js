@@ -6,7 +6,7 @@ import Box from "@mui/material/Box";
 import { useParams } from "react-router-dom";
 import ProductEditForm from "./ProductEditForm";
 
-function ProductEditModal() {
+function ProductDeleteModal() {
   const { productId } = useParams();
   const navigate = useNavigate();
 
@@ -29,4 +29,4 @@ function ProductEditModal() {
   );
 }
 
-export default ProductEditModal;
+export default ProductDeleteModal;
