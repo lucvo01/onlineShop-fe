@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 import Logo from "../components/Logo";
 import useAuth from "../hooks/useAuth";
 import { useNavigate, useLocation } from "react-router-dom";
-import Cart from '../components/Cart'
+import Cart from "../components/Cart";
 function MainHeader() {
   const auth = useAuth();
   const navigate = useNavigate();
@@ -23,7 +23,8 @@ function MainHeader() {
             edge="start"
             color="inherit"
             aria-label="menu"
-            sx={{ mr: 2 }}>
+            sx={{ mr: 2 }}
+          >
             <Logo />
           </IconButton>
           <Typography variant="h6" color="inherit" component="div">
@@ -42,7 +43,8 @@ function MainHeader() {
                 auth.logout(() => {
                   navigate(from, { replace: true });
                 });
-              }}>
+              }}
+            >
               Logout
             </Button>
           ) : (
@@ -52,7 +54,8 @@ function MainHeader() {
               component="div"
               onClick={() => {
                 navigate("/login", from);
-              }}>
+              }}
+            >
               Login
             </Button>
           )}
@@ -64,7 +67,8 @@ function MainHeader() {
                 component="div"
                 onClick={() => {
                   navigate("/orders", { replace: true });
-                }}>
+                }}
+              >
                 Orders
               </Button>
               <Button
@@ -72,8 +76,9 @@ function MainHeader() {
                 color="inherit"
                 component="div"
                 onClick={() => {
-                  navigate("/admin/products", { replace: true });
-                }}>
+                  navigate("/products", { replace: true });
+                }}
+              >
                 Products
               </Button>
               <Button
@@ -82,7 +87,8 @@ function MainHeader() {
                 component="div"
                 onClick={() => {
                   navigate("/users", { replace: true });
-                }}>
+                }}
+              >
                 Users
               </Button>
             </>

@@ -14,14 +14,17 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import apiService from "../../app/apiService";
 import ProductCard from "../../components/ProductCard";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import PaginationBar from "../../components/PaginationBar";
 
 function ProductsPage() {
+  const location = useLocation;
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
+  const from = location.state?.from?.pathname || "/";
 
   const [pageNum, setPageNum] = useState(1);
   const totalPage = 10;
@@ -79,10 +82,16 @@ function ProductsPage() {
                       // align="left"
                       sx={{ display: { xs: "none", md: "table-cell" } }}
                     >
-                      <Button onClick={() => navigate(`/${item._id}/edit`)}>
+                      <Button
+                        onClick={() => navigate(`/products/${item._id}/edit`)}
+                      >
                         Edit
                       </Button>
-                      <Button onClick={() => navigate(`/${item._id}/delete`)}>
+                      <Button
+                        onClick={
+                          (() => navigate(`/products/${item._id}/delete`), from)
+                        }
+                      >
                         Delete
                       </Button>
                     </TableCell>

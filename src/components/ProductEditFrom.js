@@ -1,11 +1,11 @@
 import React, { useCallback } from "react";
 import { Box, Card, alpha, Stack } from "@mui/material";
-import { FormProvider, FTextField } from "../../components/form";
+import { FormProvider, FTextField } from "../components/form";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
-import { editProduct } from "../../components/slices/productsSlice";
+import { editProduct } from "./slices/productsSlice";
 import { LoadingButton } from "@mui/lab";
 // import useAuth from "../../hooks/useAuth";
 
@@ -18,7 +18,7 @@ const defaultValues = {
   image: null
 };
 
-function EditProductPage({ productId }) {
+function ProductEditFrom({ productId }) {
   console.log("edit product page");
   const { isLoading } = useSelector((state) => state.prouducts);
 
@@ -104,4 +104,4 @@ function EditProductPage({ productId }) {
   );
 }
 
-export default EditProductPage;
+export default ProductEditFrom;
