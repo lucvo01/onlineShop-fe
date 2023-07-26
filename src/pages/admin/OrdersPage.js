@@ -1,10 +1,7 @@
-import React from 'react'
+import React from "react";
 
 function OrdersPage() {
-  return <div>OrdersPage
-    
-  </div>;
+  return <div>OrdersPage</div>;
 }
 
-export default OrdersPage
-s
+export default OrdersPage;

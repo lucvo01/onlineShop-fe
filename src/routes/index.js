@@ -11,6 +11,7 @@ import NotFoundPage from "../pages/NotFoundPage";
 import OrdersPage from "../pages/admin/OrdersPage";
 import ProductsPage from "../pages/admin/ProductsPage";
 import UsersPage from "../pages/admin/UsersPage";
+import EditProductPage from "../pages/admin/EditProductPage";
 // import AuthRequire from "./AuthRequire";
 
 function Router() {
@@ -28,7 +29,10 @@ function Router() {
         <Route path="product/:id" element={<DetailPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/orders" element={<OrdersPage />} />
-        <Route path="/products" element={<ProductsPage />} />
+        <Route path="/products" element={<ProductsPage />}>
+          <Route path=":productId/edit" element={<OrdersPage />} />
+        </Route>
+
         <Route path="/users" element={<UsersPage />} />
       </Route>
 
