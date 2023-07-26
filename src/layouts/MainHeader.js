@@ -72,7 +72,7 @@ function MainHeader() {
                 color="inherit"
                 component="div"
                 onClick={() => {
-                  navigate("/products", { replace: true });
+                  navigate("/admin/products", { replace: true });
                 }}>
                 Products
               </Button>

@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { Box, Card, alpha, Stack } from "@mui/material";
-import { FormProvider, FTextField, FUploadImage } from "../../components/form";
+import { FormProvider, FTextField } from "../../components/form";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -74,12 +74,12 @@ function EditProductPage({ productId }) {
             }}
           />
 
-          <FUploadImage
+          {/* <FUploadImage
             name="image"
             accept="image/*"
             maxSize={3145728}
             onDrop={handleDrop}
-          />
+          /> */}
 
           <Box
             sx={{

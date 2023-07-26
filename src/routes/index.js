@@ -29,7 +29,7 @@ function Router() {
         <Route path="product/:id" element={<DetailPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/orders" element={<OrdersPage />} />
-        <Route path="/products" element={<ProductsPage />}>
+        <Route path="/admin/products" element={<ProductsPage />}>
           <Route path=":productId/edit" element={<EditProductPage />} />
         </Route>
 
