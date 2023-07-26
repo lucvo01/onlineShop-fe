@@ -11,9 +11,10 @@ import orderBy from "lodash/orderBy";
 import LoadingScreen from "../components/LoadingScreen";
 import PaginationBar from "../components/PaginationBar";
 import {useDispatch} from 'react-redux'
+import { getProducts } from "../components/slices/productsSlice";
 
 function HomePage() {
-  const dispatch = userDispatch();
+  const dispatch = useDispatch();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -38,7 +39,8 @@ function HomePage() {
 
   useEffect(() => {
     dispatch(getProducts(pageNum));
-  }, [pageNum])
+  }, [dispatch, pageNum]);
+  
   // useEffect(() => {
   //   const getProducts = async () => {
   //     setLoading(true);

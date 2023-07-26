@@ -7,8 +7,7 @@ import { cloudinaryUpload } from "../../utils/cloudinary";
 const initialState = {
   isLoading: false,
   error: null,
-  productsById: {},
-  currentPageProducts: []
+  products: []
 };
 
 const slice = createSlice({
@@ -23,34 +22,27 @@ const slice = createSlice({
       state.error = action.payload;
     },
     resetProducts(state, action) {
-      state.productsById = {};
       state.currentPageProducts = [];
     },
     getProductsSuccess(state, action) {
       state.isLoading = false;
       state.error = null;
-      const { products, count } = action.payload;
-      products.forEach((product) => {
-        state.productsById[product._id] = product;
-        if (!state.currentPageProducts.includes(product._id))
-          state.currentPageProducts.push(product._id);
-      });
-      state.totalProducts = count;
+      state.products = action.payload;
     },
     createProductSuccess(state, action) {
       state.isLoading = false;
       state.error = null;
       const newProduct = action.payload;
-      if (state.currentPageProducts.length % PRODUCTS_PER_PAGE === 0)
-        state.currentPageProducts.pop();
-      state.productsById[newProduct._id] = newProduct;
-      state.currentPageProducts.unshift(newProduct._id);
+      state.products = state.products.push(newProduct)
     },
     editProductSuccess(state, action) {
       state.isLoading = false;
       state.error = null;
-      const { productId } = action.payload;
-      state.productsById[productId] = action.payload;
+      const newProduct = action.payload;
+      state.products.forEach((product) => {
+        if(product._id = newProduct._id) product = newProduct
+      });
+      
     }
   }
 });
