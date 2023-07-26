@@ -7,6 +7,8 @@ import { CardActionArea, Stack } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { fCurrency } from "../utils";
 import AddToCartButton from "./AddToCartButton";
+// import DeccreaseButton from "./DeccreaseButton";
+// import RemoveItemButton from "./RemoveItemButton";
 
 function ProductCard({ product }) {
   const navigate = useNavigate();
@@ -35,7 +37,9 @@ function ProductCard({ product }) {
           </Stack>
         </CardContent>
       </CardActionArea>
-      <AddToCartButton product={product} />
+      <AddToCartButton product={product} display={"Add"} />
+      {/* <DeccreaseButton product={product} />
+      <RemoveItemButton product={product} /> */}
     </Card>
   );
 }

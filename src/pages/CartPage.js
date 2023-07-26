@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   Box,
   Container,
@@ -11,12 +11,12 @@ import {
 } from "@mui/material";
 import { useSelector } from "react-redux";
 import ProductCard from "../components/ProductCard";
+import AddToCartButton from "../components/AddToCartButton";
+import DeccreaseButton from "../components/DeccreaseButton";
+import RemoveItemButton from "../components/RemoveItemButton";
 
 function CartPage() {
   const cartItems = useSelector((state) => state.cart.cartItems);
-  console.log("cartItems", cartItems);
-
-  useEffect(() => {}, []);
 
   return (
     <Container sx={{ display: "flex", minHeight: "100vh", mt: 3 }}>
@@ -28,9 +28,9 @@ function CartPage() {
                 <TableCell sx={{ width: { xs: "20%", sm: "25%" } }}>
                   Product
                 </TableCell>
-                <TableCell sx={{ display: { xs: "none", md: "table-cell" } }}>
+                {/* <TableCell sx={{ display: { xs: "none", md: "table-cell" } }}>
                   Quantity
-                </TableCell>
+                </TableCell> */}
                 <TableCell>Action</TableCell>
               </TableRow>
             </TableHead>
@@ -51,7 +51,10 @@ function CartPage() {
                       // align="left"
                       sx={{ display: { xs: "none", md: "table-cell" } }}
                     >
+                      <AddToCartButton product={item} display={"+"} />
                       {item.cartQuantity}
+                      <DeccreaseButton product={item} />
+                      <RemoveItemButton product={item} />
                     </TableCell>
                     <TableCell
                       align="left"

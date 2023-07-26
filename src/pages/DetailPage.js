@@ -18,6 +18,9 @@ import rehypeRaw from "rehype-raw";
 import apiService from "../app/apiService";
 import LoadingScreen from "../components/LoadingScreen";
 import { Alert } from "@mui/material";
+import AddToCartButton from "../components/AddToCartButton";
+// import DeccreaseButton from "../components/DeccreaseButton";
+// import RemoveItemButton from "../components/RemoveItemButton";
 
 function DetailPage() {
   const [product, setProduct] = useState(null);
@@ -140,6 +143,11 @@ function DetailPage() {
                             rehypePlugins={[rehypeRaw]}
                             children={product.description}
                           />
+                        </Box>
+                        <Box>
+                          <AddToCartButton product={product} display={"Add"} />
+                          {/* <DeccreaseButton product={product} />
+                          <RemoveItemButton product={product} /> */}
                         </Box>
                       </Grid>
                     </Grid>
