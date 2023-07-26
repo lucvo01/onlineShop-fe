@@ -23,8 +23,7 @@ function MainHeader() {
             edge="start"
             color="inherit"
             aria-label="menu"
-            sx={{ mr: 2 }}
-          >
+            sx={{ mr: 2 }}>
             <Logo />
           </IconButton>
           <Typography variant="h6" color="inherit" component="div">
@@ -34,7 +33,6 @@ function MainHeader() {
           <Typography variant="h6" color="inherit" component="div">
             Welcome {auth.user?.name}!
           </Typography>
-
           {auth.user ? (
             <Button
               variant="h6"
@@ -44,8 +42,7 @@ function MainHeader() {
                 auth.logout(() => {
                   navigate(from, { replace: true });
                 });
-              }}
-            >
+              }}>
               Logout
             </Button>
           ) : (
@@ -55,13 +52,45 @@ function MainHeader() {
               component="div"
               onClick={() => {
                 navigate("/login", from);
-              }}
-            >
+              }}>
               Login
             </Button>
           )}
+          {auth.user?.isAdmin ? (
+            <>
+              <Button
+                variant="h6"
+                color="inherit"
+                component="div"
+                onClick={() => {
+                  navigate("/orders", { replace: true });
+                }}>
+                Orders
+              </Button>
+              <Button
+                variant="h6"
+                color="inherit"
+                component="div"
+                onClick={() => {
+                  navigate("/products", { replace: true });
+                }}>
+                Products
+              </Button>
+              <Button
+                variant="h6"
+                color="inherit"
+                component="div"
+                onClick={() => {
+                  navigate("/users", { replace: true });
+                }}>
+                Users
+              </Button>
+            </>
+          ) : (
+            ""
+          )}
 
-          <Cart/>
+          <Cart />
         </Toolbar>
       </AppBar>
     </Box>

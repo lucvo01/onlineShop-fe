@@ -8,6 +8,9 @@ import CartPage from "../pages/CartPage";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import NotFoundPage from "../pages/NotFoundPage";
+import OrdersPage from "../pages/admin/OrdersPage";
+import ProductsPage from "../pages/admin/ProductsPage";
+import UsersPage from "../pages/admin/UsersPage";
 // import AuthRequire from "./AuthRequire";
 
 function Router() {
@@ -24,6 +27,9 @@ function Router() {
         <Route index element={<HomePage />} />
         <Route path="product/:id" element={<DetailPage />} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/orders" element={<OrdersPage />} />
+        <Route path="/products" element={<ProductsPage />} />
+        <Route path="/users" element={<UsersPage />} />
       </Route>
 
       <Route element={<BlankLayout />}>
