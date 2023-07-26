@@ -6,12 +6,13 @@ import Typography from "@mui/material/Typography";
 import { CardActionArea, Stack } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { fCurrency } from "../utils";
+import AddToCartButton from "./AddToCartButton";
 
 function ProductCard({ product }) {
   const navigate = useNavigate();
   return (
-    <Card onClick={() => navigate(`/product/${product._id}`)}>
-      <CardActionArea>
+    <Card>
+      <CardActionArea onClick={() => navigate(`/product/${product._id}`)}>
         <CardMedia
           component="img"
           height="200"
@@ -28,13 +29,13 @@ function ProductCard({ product }) {
             alignItems="center"
             justifyContent="flex-end"
           >
-
             <Typography variant="subtitle1">
               {fCurrency(product.price)}
             </Typography>
           </Stack>
         </CardContent>
       </CardActionArea>
+      <AddToCartButton product={product} />
     </Card>
   );
 }

@@ -17,18 +17,19 @@ function Router() {
         path="/"
         element={
           // <AuthRequire>
-            <MainLayout />
+          <MainLayout />
           // </AuthRequire>
         }
       >
         <Route index element={<HomePage />} />
         <Route path="product/:id" element={<DetailPage />} />
+        <Route path="/cart" element={<CartPage />} />
       </Route>
 
       <Route element={<BlankLayout />}>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/cart" element={<CartPage />} />
+
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
