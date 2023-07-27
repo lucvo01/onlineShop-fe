@@ -71,9 +71,9 @@ function AuthProvider({ children }) {
         if (accessToken && isValidToken(accessToken)) {
           setSession(accessToken);
 
-          const response = await apiService.get("/users/login");
+          const response = await apiService.get("/users/me");
           const user = response.data;
-
+          console.log("initialize", user);
           dispatch({
             type: INITIALIZE,
             payload: { isAuthenticated: true, user }

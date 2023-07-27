@@ -29,8 +29,8 @@ const cartSlice = createSlice({
           position: "bottom-left"
         });
       }
-      localStorage.setItem("cartItems", JSON.stringify(state.items));
-      console.log("items", state.items);
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+      console.log("items", state.cartItems);
     },
     decreaseItem: (state, action) => {
       const itemIndex = state.cartItems.findIndex(
@@ -51,12 +51,14 @@ const cartSlice = createSlice({
         });
       }
 
-      localStorage.setItem("cartItems", JSON.stringify(state.items));
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
+
     removeItem: (state, action) => {
       state.cartItems = state.cartItems.filter(
         (item) => item._id !== action.payload._id
       );
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     }
   }
 });
