@@ -88,9 +88,7 @@ function ProductsPage() {
                         Edit
                       </Button>
                       <Button
-                        onClick={
-                          (() => navigate(`/products/${item._id}/delete`), from)
-                        }
+                        onClick={() => navigate(`/products/${item._id}/delete`)}
                       >
                         Delete
                       </Button>

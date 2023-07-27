@@ -117,7 +117,7 @@ function AuthProvider({ children }) {
   };
 
   const register = async ({ name, email, password }, callback) => {
-    const response = await apiService.post("/users", {
+    const response = await apiService.post("/users/register", {
       name,
       email,
       password

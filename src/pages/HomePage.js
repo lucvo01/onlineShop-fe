@@ -6,22 +6,23 @@ import ProductSort from "../components/ProductSort";
 import ProductList from "../components/ProductList";
 import { FormProvider } from "../components/form";
 import { useForm } from "react-hook-form";
-import apiService from "../app/apiService";
 import orderBy from "lodash/orderBy";
 import LoadingScreen from "../components/LoadingScreen";
 import PaginationBar from "../components/PaginationBar";
-import {useDispatch} from 'react-redux'
+import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../components/slices/productsSlice";
 
 function HomePage() {
   const dispatch = useDispatch();
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-
   const [pageNum, setPageNum] = useState(1);
-  const totalPage = 10;
-  const limit = 10;
+
+  const { products, isLoading, totalPages, error } = useSelector(
+    (state) => state.products
+  );
+
+  useEffect(() => {
+    dispatch(getProducts({ pageNum }));
+  }, [dispatch, pageNum]);
 
   const defaultValues = {
     gender: [],
@@ -36,28 +37,6 @@ function HomePage() {
   const { watch, reset } = methods;
   const filters = watch();
   const filterProducts = applyFilter(products, filters);
-
-  useEffect(() => {
-    dispatch(getProducts(pageNum));
-  }, [dispatch, pageNum]);
-  
-  // useEffect(() => {
-  //   const getProducts = async () => {
-  //     setLoading(true);
-  //     try {
-  //       const res = await apiService.get(
-  //         `/products?page=${pageNum}&limit=${limit}`
-  //       );
-  //       setProducts(res.data.data.products);
-  //       setError("");
-  //     } catch (error) {
-  //       console.log(error);
-  //       setError(error.message);
-  //     }
-  //     setLoading(false);
-  //   };
-  //   getProducts();
-  // }, [pageNum]);
 
   return (
     <Container sx={{ display: "flex", minHeight: "100vh", mt: 3 }}>
@@ -80,7 +59,7 @@ function HomePage() {
           </Stack>
         </FormProvider>
         <Box sx={{ position: "relative", height: 1 }}>
-          {loading ? (
+          {isLoading ? (
             <LoadingScreen />
           ) : (
             <>
@@ -95,12 +74,13 @@ function HomePage() {
         <PaginationBar
           pageNum={pageNum}
           setPageNum={setPageNum}
-          totalPageNum={totalPage}
+          totalPageNum={totalPages || 10}
         />
       </Stack>
     </Container>
   );
 }
+export default HomePage;
 
 function applyFilter(products, filters) {
   const { sortBy, gender, category, priceRange, searchQuery } = filters;
@@ -152,5 +132,3 @@ function applyFilter(products, filters) {
 
   return filteredProducts;
 }
-
-export default HomePage;

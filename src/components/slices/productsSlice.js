@@ -7,7 +7,8 @@ import { cloudinaryUpload } from "../../utils/cloudinary";
 const initialState = {
   isLoading: false,
   error: null,
-  products: []
+  products: [],
+  totalPages: null
 };
 
 const slice = createSlice({
@@ -27,22 +28,22 @@ const slice = createSlice({
     getProductsSuccess(state, action) {
       state.isLoading = false;
       state.error = null;
-      state.products = action.payload;
+      state.products = action.payload.products;
+      state.totalPages = action.payload.totalPages;
     },
     createProductSuccess(state, action) {
       state.isLoading = false;
       state.error = null;
       const newProduct = action.payload;
-      state.products = state.products.push(newProduct)
+      state.products = state.products.push(newProduct);
     },
     editProductSuccess(state, action) {
       state.isLoading = false;
       state.error = null;
       const newProduct = action.payload;
       state.products.forEach((product) => {
-        if(product._id = newProduct._id) product = newProduct
+        if ((product._id = newProduct._id)) product = newProduct;
       });
-      
     }
   }
 });
@@ -50,16 +51,13 @@ const slice = createSlice({
 export default slice.reducer;
 
 export const getProducts =
-  ({pageNum = 1, limit = PRODUCTS_PER_PAGE }) =>
+  ({ pageNum, limit = PRODUCTS_PER_PAGE }) =>
   async (dispatch) => {
     dispatch(slice.actions.startLoading());
     try {
-      const params = { pageNum, limit };
+      // const params = { pageNum, limit };
       const response = await apiService.get(
-        `/products?page=${pageNum}&limit=${limit}`,
-        {
-          params
-        }
+        `/products?page=${pageNum}&limit=${limit}`
       );
       dispatch(slice.actions.getProductsSuccess(response.data.data));
     } catch (error) {
@@ -86,29 +84,30 @@ export const createProduct =
     }
   };
 
-export const deleteProduct =
-  ({ productId }) =>
-  async (dispatch) => {
-    dispatch(slice.actions.startLoading());
-    try {
-      await apiService.put(`/products/${productId}/delete`);
-      toast.success("Delete successfully");
-      dispatch(getProducts());
-    } catch (error) {
-      dispatch(slice.actions.hasError(error.message));
-      toast.error(error.message);
-    }
-  };
+export const deleteProduct = (productId) => async (dispatch) => {
+  dispatch(slice.actions.startLoading());
+  try {
+    console.log("id", productId);
+    await apiService.put(`/products/${productId}/delete`);
+    toast.success("Delete successfully");
+    dispatch(getProducts());
+  } catch (error) {
+    dispatch(slice.actions.hasError(error.message));
+    toast.error(error.message);
+  }
+};
 
 export const editProduct =
-  ({  productId, name, description, price, image }) =>
+  ({ productId, name, description, price, image }) =>
   async (dispatch) => {
     dispatch(slice.actions.startLoading());
     try {
       // upload image to cloudinary
       const imageUrl = await cloudinaryUpload(image);
       await apiService.put(`/products/${productId}/edit`, {
-        name, description, price,
+        name,
+        description,
+        price,
         image: imageUrl
       });
       toast.success("Edit successfully");

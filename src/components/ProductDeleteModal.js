@@ -4,14 +4,22 @@ import { useNavigate } from "react-router-dom";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import { useParams } from "react-router-dom";
-import ProductEditForm from "./ProductEditForm";
+import { Button, Card, CardContent, Typography } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { deleteProduct } from "./slices/productsSlice";
 
 function ProductDeleteModal() {
   const { productId } = useParams();
+
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleClose = () => {
     navigate(-1);
+  };
+  const handleClick = () => {
+    dispatch(deleteProduct(productId));
+    handleClose();
   };
   return (
     <Stack>
@@ -20,9 +28,31 @@ function ProductDeleteModal() {
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center"
+        }}
       >
         <Box>
-          <ProductEditForm productId={productId} />
+          <Card>
+            <CardContent>
+              <Typography variant="subtitle" sx={{ color: "text.secondary" }}>
+                Do you want to delete product?
+              </Typography>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "flex-end"
+                }}
+              >
+                <Button variant="contained" size="small" onClick={handleClick}>
+                  Confirm Delete
+                </Button>
+              </Box>
+            </CardContent>
+          </Card>
         </Box>
       </Modal>
     </Stack>
