@@ -51,6 +51,7 @@ function ProductsPage() {
     };
     getProducts();
   }, [pageNum]);
+
   return (
     <Container>
       <Box sx={{ overflowX: "auto" }}>

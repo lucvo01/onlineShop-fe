@@ -1,6 +1,7 @@
 import React from "react";
 import {
   Box,
+  Button,
   Container,
   Table,
   TableBody,
@@ -14,9 +15,15 @@ import ProductCard from "../components/ProductCard";
 import AddToCartButton from "../components/AddToCartButton";
 import DeccreaseButton from "../components/DeccreaseButton";
 import RemoveItemButton from "../components/RemoveItemButton";
+import { useNavigate } from "react-router-dom";
 
 function CartPage() {
   const cartItems = useSelector((state) => state.cart.cartItems);
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/products/create`);
+  };
 
   return (
     <Container sx={{ display: "flex", minHeight: "100vh", mt: 3 }}>
@@ -66,6 +73,9 @@ function CartPage() {
             </TableBody>
           </Table>
         </TableContainer>
+        <Box sx={{ display: "flex", justifyContent: "center", mt: "1rem" }}>
+          <Button onClick={handleClick}>Checkout</Button>
+        </Box>
       </Box>
     </Container>
   );

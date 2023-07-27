@@ -7,8 +7,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { createProduct, editProduct } from "./slices/productsSlice";
 import { LoadingButton } from "@mui/lab";
-// import useAuth from "../../hooks/useAuth";
 import FUploadImage from "./form/FUploadImage";
+import { useNavigate } from "react-router-dom";
 
 const yupSchema = Yup.object().shape({
   content: Yup.string().required("Content is required")
@@ -22,6 +22,7 @@ const defaultValues = {
 };
 
 function ProductEditForm({ productId }) {
+  const navigate = useNavigate();
   const { isLoading } = useSelector((state) => state.products);
 
   const methods = useForm({
@@ -51,19 +52,21 @@ function ProductEditForm({ productId }) {
     },
     [setValue]
   );
+  const handleClose = () => {
+    navigate(-1);
+  };
 
-  let onSubmit;
-  if (productId) {
-    console.log(`Update Product ${productId}`);
-    onSubmit = (name, description, price, image) => {
-      dispatch(editProduct({ name, description, price, image, productId }));
-    };
-  } else {
-    console.log(`Create Product`);
-    onSubmit = (name, description, price, image) => {
-      dispatch(createProduct({ name, description, price, image, productId }));
-    };
-  }
+  const onSubmit = (data) => {
+    if (productId) {
+      console.log(`Update Product ${productId}`);
+      dispatch(editProduct({ data }));
+      handleClose();
+    } else {
+      console.log(`Create Product`);
+      dispatch(createProduct({ data }));
+      handleClose();
+    }
+  };
 
   return (
     <Card sx={{ p: 3 }}>
