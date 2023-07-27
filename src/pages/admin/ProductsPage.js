@@ -54,6 +54,12 @@ function ProductsPage() {
   return (
     <Container>
       <Box sx={{ overflowX: "auto" }}>
+        <Box sx={{ display: "flex", justifyContent: "center", mt: "1rem" }}>
+          <Button onClick={() => navigate(`/products/create`)}>
+            Create New Product
+          </Button>
+        </Box>
+
         <TableContainer sx={{ minWidth: 800 }}>
           <Table>
             <TableHead>

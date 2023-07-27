@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
-import { editProduct } from "./slices/productsSlice";
+import { createProduct, editProduct } from "./slices/productsSlice";
 import { LoadingButton } from "@mui/lab";
 // import useAuth from "../../hooks/useAuth";
 import FUploadImage from "./form/FUploadImage";
@@ -52,10 +52,18 @@ function ProductEditForm({ productId }) {
     [setValue]
   );
 
-  const onSubmit = (name, description, price, image) => {
-    console.log(productId);
-    dispatch(editProduct({ name, description, price, image, productId }));
-  };
+  let onSubmit;
+  if (productId) {
+    console.log(`Update Product ${productId}`);
+    onSubmit = (name, description, price, image) => {
+      dispatch(editProduct({ name, description, price, image, productId }));
+    };
+  } else {
+    console.log(`Create Product`);
+    onSubmit = (name, description, price, image) => {
+      dispatch(createProduct({ name, description, price, image, productId }));
+    };
+  }
 
   return (
     <Card sx={{ p: 3 }}>
@@ -106,12 +114,12 @@ function ProductEditForm({ productId }) {
               }
             }}
           />
-          <FUploadImage
+          {/* <FUploadImage
             name="image"
             accept="image/*"
             maxSize={3145728}
             onDrop={handleDrop}
-          />
+          /> */}
 
           <Box
             sx={{
