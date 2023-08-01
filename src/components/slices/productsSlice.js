@@ -35,7 +35,7 @@ const productSlice = createSlice({
       state.isLoading = false;
       state.error = null;
       const newProduct = action.payload;
-      state.products = state.products.push(newProduct);
+      state.products = state.products.push(action.payload);
     },
     editProductSuccess(state, action) {
       state.isLoading = false;
@@ -67,17 +67,20 @@ export const getProducts =
   };
 
 export const createProduct =
-  ({ values, image }) =>
+  ({ name, description, price, image }) =>
   async (dispatch) => {
     dispatch(productSlice.actions.startLoading());
     try {
       const imageUrl = await cloudinaryUpload(image);
       const response = await apiService.post("/products", {
-        values,
+        name,
+        description,
+        price,
         image: imageUrl
       });
       dispatch(productSlice.actions.createProductSuccess(response.data));
-      toast.success("Product successfully");
+      toast.success("Create Product Success");
+      dispatch(getProducts());
     } catch (error) {
       dispatch(productSlice.actions.hasError(error.message));
       toast.error(error.message);
