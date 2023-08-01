@@ -56,7 +56,7 @@ function CheckoutPage() {
 
   const onSubmit = async (data) => {
     let { shipping, payment_status } = data;
-    console.log("payment_status", payment_status);
+    // console.log("payment_status", payment_status);
     dispatch(
       createOrder({ userId, shipping, subtotal, products, payment_status })
     );

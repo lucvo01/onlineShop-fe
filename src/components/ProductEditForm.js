@@ -61,11 +61,11 @@ function ProductEditForm({ productId }) {
     if (productId) {
       console.log(`Update Product ${productId}`);
       dispatch(editProduct({ ...data, productId }));
-      // handleClose();
+      handleClose();
     } else {
       console.log(`Create Product`);
       dispatch(createProduct({ ...data }));
-      // handleClose();
+      handleClose();
     }
   };
 
