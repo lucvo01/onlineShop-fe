@@ -35,7 +35,8 @@ const productSlice = createSlice({
       state.isLoading = false;
       state.error = null;
       const newProduct = action.payload;
-      state.products = state.products.push(action.payload);
+      // state.products = state.products.push(newProduct);
+      state.products = [...state.products, newProduct];
     },
     editProductSuccess(state, action) {
       state.isLoading = false;
