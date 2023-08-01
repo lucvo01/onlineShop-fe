@@ -13,6 +13,7 @@ import ProductsPage from "../pages/admin/ProductsPage";
 import UsersPage from "../pages/admin/UsersPage";
 import ProductEditModal from "../components/ProductEditModal";
 import ProductDeleteModal from "../components/ProductDeleteModal";
+import CheckoutPage from "../pages/CheckoutPage";
 // import AuthRequire from "./AuthRequire";
 
 function Router() {
@@ -29,13 +30,14 @@ function Router() {
         <Route index element={<HomePage />} />
         <Route path="product/:id" element={<DetailPage />} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/cart/checkout" element={<CheckoutPage />} />
         <Route path="/orders" element={<OrdersPage />} />
-        <Route path="/products" element={<ProductsPage />} />
-        <Route path="/products/create" element={<ProductEditModal />} />
-        <Route
-          path="/products/:productId/edit"
-          element={<ProductEditModal />}
-        />
+        <Route path="/products">
+          <Route index element={<ProductsPage />} />
+          <Route path="create" element={<ProductEditModal />} />
+          <Route path=":productId/edit" element={<ProductEditModal />} />
+        </Route>
+
         <Route
           path="/products/:productId/delete"
           element={<ProductDeleteModal />}

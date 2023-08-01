@@ -11,7 +11,7 @@ import FUploadImage from "./form/FUploadImage";
 import { useNavigate } from "react-router-dom";
 
 const yupSchema = Yup.object().shape({
-  content: Yup.string().required("Content is required")
+  // content: Yup.string().required("Content is required")
 });
 
 const defaultValues = {
@@ -32,7 +32,7 @@ function ProductEditForm({ productId }) {
   const {
     handleSubmit,
     setValue,
-    formState: { isSubmitting }
+    formState: { isSubmitting, errors }
   } = methods;
 
   const dispatch = useDispatch();
@@ -57,14 +57,15 @@ function ProductEditForm({ productId }) {
   };
 
   const onSubmit = (data) => {
+    console.log(data);
     if (productId) {
       console.log(`Update Product ${productId}`);
-      dispatch(editProduct({ data }));
-      handleClose();
+      dispatch(editProduct({ ...data, productId }));
+      // handleClose();
     } else {
       console.log(`Create Product`);
-      dispatch(createProduct({ data }));
-      handleClose();
+      dispatch(createProduct({ ...data, productId }));
+      // handleClose();
     }
   };
 

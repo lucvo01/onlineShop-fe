@@ -11,7 +11,7 @@ const initialState = {
   totalPages: null
 };
 
-const slice = createSlice({
+const productSlice = createSlice({
   name: "product",
   initialState,
   reducers: {
@@ -48,20 +48,20 @@ const slice = createSlice({
   }
 });
 
-export default slice.reducer;
+export default productSlice.reducer;
 
 export const getProducts =
   ({ pageNum, limit = PRODUCTS_PER_PAGE }) =>
   async (dispatch) => {
-    dispatch(slice.actions.startLoading());
+    dispatch(productSlice.actions.startLoading());
     try {
       // const params = { pageNum, limit };
       const response = await apiService.get(
         `/products?page=${pageNum}&limit=${limit}`
       );
-      dispatch(slice.actions.getProductsSuccess(response.data.data));
+      dispatch(productSlice.actions.getProductsSuccess(response.data.data));
     } catch (error) {
-      dispatch(slice.actions.hasError(error.message));
+      dispatch(productSlice.actions.hasError(error.message));
       toast.error(error.message);
     }
   };
@@ -69,30 +69,30 @@ export const getProducts =
 export const createProduct =
   ({ values, image }) =>
   async (dispatch) => {
-    dispatch(slice.actions.startLoading());
+    dispatch(productSlice.actions.startLoading());
     try {
       const imageUrl = await cloudinaryUpload(image);
-      const response = await apiService.Product("/Products", {
+      const response = await apiService.post("/products", {
         values,
         image: imageUrl
       });
-      dispatch(slice.actions.createProductSuccess(response.data));
+      dispatch(productSlice.actions.createProductSuccess(response.data));
       toast.success("Product successfully");
     } catch (error) {
-      dispatch(slice.actions.hasError(error.message));
+      dispatch(productSlice.actions.hasError(error.message));
       toast.error(error.message);
     }
   };
 
 export const deleteProduct = (productId) => async (dispatch) => {
-  dispatch(slice.actions.startLoading());
+  dispatch(productSlice.actions.startLoading());
   try {
     console.log("id", productId);
     await apiService.put(`/products/${productId}/delete`);
     toast.success("Delete successfully");
     dispatch(getProducts());
   } catch (error) {
-    dispatch(slice.actions.hasError(error.message));
+    dispatch(productSlice.actions.hasError(error.message));
     toast.error(error.message);
   }
 };
@@ -100,7 +100,7 @@ export const deleteProduct = (productId) => async (dispatch) => {
 export const editProduct =
   ({ productId, name, description, price, image }) =>
   async (dispatch) => {
-    dispatch(slice.actions.startLoading());
+    dispatch(productSlice.actions.startLoading());
     try {
       // upload image to cloudinary
       const imageUrl = await cloudinaryUpload(image);
@@ -113,7 +113,7 @@ export const editProduct =
       toast.success("Edit successfully");
       dispatch(getProducts());
     } catch (error) {
-      dispatch(slice.actions.hasError(error.message));
+      dispatch(productSlice.actions.hasError(error.message));
       toast.error(error.message);
     }
   };

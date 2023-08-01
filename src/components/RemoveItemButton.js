@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { removeItem } from "./slices/cartSlice";
+import { removeItem, getSubtotal } from "./slices/cartSlice";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 function RemoveItemButton({ product }) {
@@ -9,6 +9,7 @@ function RemoveItemButton({ product }) {
 
   const handleClick = () => {
     dispatch(removeItem(product));
+    dispatch(getSubtotal());
   };
 
   return (

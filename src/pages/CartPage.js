@@ -10,19 +10,22 @@ import {
   TableHead,
   TableRow
 } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import ProductCard from "../components/ProductCard";
 import AddToCartButton from "../components/AddToCartButton";
 import DeccreaseButton from "../components/DeccreaseButton";
 import RemoveItemButton from "../components/RemoveItemButton";
 import { useNavigate } from "react-router-dom";
+import { createOrder } from "../components/slices/ordersSlice";
+import { values } from "lodash";
 
 function CartPage() {
-  const cartItems = useSelector((state) => state.cart.cartItems);
+  const { products, subtotal } = useSelector((state) => state.cart);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleClick = () => {
-    navigate(`/products/create`);
+    navigate("/cart/checkout");
   };
 
   return (
@@ -35,14 +38,14 @@ function CartPage() {
                 <TableCell sx={{ width: { xs: "20%", sm: "25%" } }}>
                   Product
                 </TableCell>
-                {/* <TableCell sx={{ display: { xs: "none", md: "table-cell" } }}>
-                  Quantity
-                </TableCell> */}
                 <TableCell>Action</TableCell>
+                <TableCell sx={{ display: { xs: "none", md: "table-cell" } }}>
+                  Total
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {cartItems.map((item) => {
+              {products.map((item) => {
                 return (
                   <TableRow key={item._id} hover>
                     <TableCell
@@ -52,24 +55,40 @@ function CartPage() {
                         cursor: "pointer"
                       }}
                     >
-                      <ProductCard product={item} />
+                      <ProductCard product={item} sx={{ width: "50%" }} />
                     </TableCell>
                     <TableCell
                       // align="left"
                       sx={{ display: { xs: "none", md: "table-cell" } }}
                     >
                       <AddToCartButton product={item} display={"+"} />
-                      {item.cartQuantity}
+                      {item.quantity}
                       <DeccreaseButton product={item} />
                       <RemoveItemButton product={item} />
                     </TableCell>
                     <TableCell
                       align="left"
                       sx={{ display: { xs: "none", md: "table-cell" } }}
-                    ></TableCell>
+                    >
+                      ${item.itemTotal.toFixed(2)}
+                    </TableCell>
                   </TableRow>
                 );
               })}
+              <TableRow hover>
+                <TableCell sx={{ display: { xs: "none", md: "table-cell" } }}>
+                  Subtotal:
+                </TableCell>
+                <TableCell
+                  sx={{ display: { xs: "none", md: "table-cell" } }}
+                ></TableCell>
+                <TableCell
+                  align="left"
+                  sx={{ display: { xs: "none", md: "table-cell" } }}
+                >
+                  ${subtotal}
+                </TableCell>
+              </TableRow>
             </TableBody>
           </Table>
         </TableContainer>
