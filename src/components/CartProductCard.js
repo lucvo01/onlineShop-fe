@@ -6,6 +6,9 @@ import Typography from "@mui/material/Typography";
 import { CardActionArea, Stack } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { fCurrency } from "../utils";
+import AddToCartButton from "./AddToCartButton";
+import DeccreaseButton from "./DeccreaseButton";
+import RemoveItemButton from "./RemoveItemButton";
 // import AddToCartButton from "./AddToCartButton";
 // import DeccreaseButton from "./DeccreaseButton";
 // import RemoveItemButton from "./RemoveItemButton";
@@ -17,9 +20,9 @@ function CartProductCard({ product }) {
       <CardActionArea onClick={() => navigate(`/product/${product._id}`)}>
         <CardMedia
           component="img"
-          height="15"
+          height="30"
           image={product.image}
-          alt="green iguana"
+          alt={product.name}
         />
         <CardContent>
           <Typography gutterBottom variant="body1" component="div" noWrap>
@@ -37,9 +40,10 @@ function CartProductCard({ product }) {
           </Stack>
         </CardContent>
       </CardActionArea>
-      {/* <AddToCartButton product={product} display={"Add"} /> */}
-      {/* <DeccreaseButton product={product} />
-      <RemoveItemButton product={product} /> */}
+      <AddToCartButton product={product} display={"+"} />
+      {product.quantity}
+      <DeccreaseButton product={product} />
+      <RemoveItemButton product={product} />
     </Card>
   );
 }

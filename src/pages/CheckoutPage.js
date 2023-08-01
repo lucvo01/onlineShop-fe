@@ -67,7 +67,13 @@ function CheckoutPage() {
   return (
     <Container
       maxWidth="md"
-      sx={{ mt: "5rem", display: "flex", height: "100vh" }}>
+      sx={{ mt: "5rem", display: "flex", height: "100vh" }}
+    >
+      <Box sx={{ flex: "2", padding: "20px" }}>
+        {products.map((item) => {
+          return <CartProductCard key={item._id} product={item} />;
+        })}
+      </Box>
       <Box sx={{ flex: "1", padding: "20px" }}>
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
           <Stack spacing={3}>
@@ -78,7 +84,8 @@ function CheckoutPage() {
             direction="row"
             alignItems="center"
             justifyContent="space-between"
-            sx={{ my: 2 }}>
+            sx={{ my: 2 }}
+          >
             <FSelect name="payment_status">
               <option disabled selected>
                 Select Payment Method
@@ -97,15 +104,11 @@ function CheckoutPage() {
             size="large"
             type="submit"
             variant="contained"
-            loading={isSubmitting || isLoading}>
+            loading={isSubmitting || isLoading}
+          >
             Submit
           </LoadingButton>
         </FormProvider>
-      </Box>
-      <Box sx={{ flex: "2", padding: "20px" }}>
-        {products.map((item) => {
-          return <CartProductCard key={item._id} product={item} />;
-        })}
       </Box>
     </Container>
   );

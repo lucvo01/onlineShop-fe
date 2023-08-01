@@ -16,28 +16,32 @@ import ProductCard from "../../components/ProductCard";
 import { useLocation, useNavigate } from "react-router-dom";
 import PaginationBar from "../../components/PaginationBar";
 import { useDispatch, useSelector } from "react-redux";
+import { getProducts } from "../../components/slices/productsSlice";
 
 function ProductsPage() {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
-  
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
 
+  // const [products, setProducts] = useState([]);
+  // const [loading, setLoading] = useState(true);
+  // const [error, setError] = useState("");
+  const { products, isLoading, totalPages, error } = useSelector(
+    (state) => state.products
+  );
   const from = location.state?.from?.pathname || "/";
 
   const [pageNum, setPageNum] = useState(1);
-  const totalPage = 10;
-  const limit = 10;
+  // const totalPage = 10;
+  // const limit = 10;
 
   const methods = useForm({});
   const { watch, reset } = methods;
   const filters = watch();
 
-   useEffect(() => {
-    dispatch(getProducts({ pageNum }));
+  useEffect(() => {
+    const res = dispatch(getProducts({ pageNum }));
+    console.log("test", res);
   }, [dispatch, pageNum]);
 
   // useEffect(() => {
@@ -119,7 +123,7 @@ function ProductsPage() {
         <PaginationBar
           pageNum={pageNum}
           setPageNum={setPageNum}
-          totalPageNum={totalPage}
+          totalPageNum={totalPages || 10}
         />
       </Box>
     </Container>
