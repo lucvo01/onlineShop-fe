@@ -8,8 +8,11 @@ import {
   TableRow
 } from "@mui/material";
 import React from "react";
+import {useSelector} from "react-redux";
 
 function OrdersPage() {
+  const {orders} = useSelector((state) => state.orders)
+  
   return (
     <Container>
       <TableContainer>
@@ -17,13 +20,18 @@ function OrdersPage() {
           <TableHead>
             <TableRow>
               <TableCell>Order</TableCell>
-              <TableCell>User</TableCell>
+              <TableCell>Action</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             <TableRow>
-              <TableCell></TableCell>
-              <TableCell></TableCell>
+              {orders.map(order) => {
+                return   
+                (
+                <TableCell>{order.quantity}</TableCell>
+              <TableCell></TableCell>)
+              }}
+              
             </TableRow>
           </TableBody>
         </Table>

@@ -15,10 +15,13 @@ import apiService from "../../app/apiService";
 import ProductCard from "../../components/ProductCard";
 import { useLocation, useNavigate } from "react-router-dom";
 import PaginationBar from "../../components/PaginationBar";
+import { useDispatch, useSelector } from "react-redux";
 
 function ProductsPage() {
-  const location = useLocation;
+  const dispatch = useDispatch();
+  const location = useLocation();
   const navigate = useNavigate();
+  
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -33,23 +36,27 @@ function ProductsPage() {
   const { watch, reset } = methods;
   const filters = watch();
 
-  useEffect(() => {
-    const getProducts = async () => {
-      setLoading(true);
-      try {
-        const res = await apiService.get(
-          `/products?page=${pageNum}&limit=${limit}`
-        );
-        setProducts(res.data.data.products);
-        setError("");
-      } catch (error) {
-        console.log(error);
-        setError(error.message);
-      }
-      setLoading(false);
-    };
-    getProducts();
-  }, [pageNum]);
+   useEffect(() => {
+    dispatch(getProducts({ pageNum }));
+  }, [dispatch, pageNum]);
+
+  // useEffect(() => {
+  //   const getProducts = async () => {
+  //     setLoading(true);
+  //     try {
+  //       const res = await apiService.get(
+  //         `/products?page=${pageNum}&limit=${limit}`
+  //       );
+  //       setProducts(res.data.data.products);
+  //       setError("");
+  //     } catch (error) {
+  //       console.log(error);
+  //       setError(error.message);
+  //     }
+  //     setLoading(false);
+  //   };
+  //   getProducts();
+  // }, [pageNum]);
 
   return (
     <Container>

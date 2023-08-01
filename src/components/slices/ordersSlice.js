@@ -34,7 +34,7 @@ const ordersSlice = createSlice({
     createOrderSuccess(state, action) {
       state.isLoading = false;
       state.error = null;
-      console.log("set statee", state, action);
+      console.log("set state", state, action);
       // const newOrder = action.payload;
       // state.orders = state.orders.push(newOrder);
     },
@@ -58,7 +58,7 @@ export const getOrders =
     try {
       // const params = { pageNum, limit };
       const response = await apiService.get(
-        `/products?page=${pageNum}&limit=${limit}`
+        `/orders?page=${pageNum}&limit=${limit}`
       );
       dispatch(ordersSlice.actions.getOrdersSuccess(response.data.data));
     } catch (error) {
