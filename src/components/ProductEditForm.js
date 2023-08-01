@@ -64,7 +64,7 @@ function ProductEditForm({ productId }) {
       // handleClose();
     } else {
       console.log(`Create Product`);
-      dispatch(createProduct({ ...data, productId }));
+      dispatch(createProduct({ ...data }));
       // handleClose();
     }
   };
@@ -118,12 +118,12 @@ function ProductEditForm({ productId }) {
               }
             }}
           />
-          {/* <FUploadImage
+          <FUploadImage
             name="image"
             accept="image/*"
             maxSize={3145728}
             onDrop={handleDrop}
-          /> */}
+          />
 
           <Box
             sx={{
