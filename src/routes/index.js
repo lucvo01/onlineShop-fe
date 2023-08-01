@@ -25,23 +25,24 @@ function Router() {
           // <AuthRequire>
           <MainLayout />
           // </AuthRequire>
-        }
-      >
+        }>
         <Route index element={<HomePage />} />
         <Route path="product/:id" element={<DetailPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/cart/checkout" element={<CheckoutPage />} />
-        <Route path="/orders" element={<OrdersPage />} />
+        <Route path="/orders" element={<OrdersPage />}>
+          <Route index element={<OrdersPage />} />
+          {/* <Route path="create" element={<ProductEditModal />} /> */}
+          {/* <Route path=":orderId/edit" element={<OrderEditModal />} /> */}
+          {/* <Route path=":orderId/delete" element={<OrderDeleteModal />} /> */}
+        </Route>
         <Route path="/products">
           <Route index element={<ProductsPage />} />
           <Route path="create" element={<ProductEditModal />} />
           <Route path=":productId/edit" element={<ProductEditModal />} />
+          <Route path=":productId/delete" element={<ProductDeleteModal />} />
         </Route>
 
-        <Route
-          path="/products/:productId/delete"
-          element={<ProductDeleteModal />}
-        />
         <Route path="/users" element={<UsersPage />} />
       </Route>
 

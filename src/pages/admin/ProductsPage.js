@@ -23,17 +23,12 @@ function ProductsPage() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // const [products, setProducts] = useState([]);
-  // const [loading, setLoading] = useState(true);
-  // const [error, setError] = useState("");
   const { products, isLoading, totalPages, error } = useSelector(
     (state) => state.products
   );
   const from = location.state?.from?.pathname || "/";
 
   const [pageNum, setPageNum] = useState(1);
-  // const totalPage = 10;
-  // const limit = 10;
 
   const methods = useForm({});
   const { watch, reset } = methods;
@@ -44,24 +39,7 @@ function ProductsPage() {
     console.log("test", res);
   }, [dispatch, pageNum]);
 
-  // useEffect(() => {
-  //   const getProducts = async () => {
-  //     setLoading(true);
-  //     try {
-  //       const res = await apiService.get(
-  //         `/products?page=${pageNum}&limit=${limit}`
-  //       );
-  //       setProducts(res.data.data.products);
-  //       setError("");
-  //     } catch (error) {
-  //       console.log(error);
-  //       setError(error.message);
-  //     }
-  //     setLoading(false);
-  //   };
-  //   getProducts();
-  // }, [pageNum]);
-
+  
   return (
     <Container>
       <Box sx={{ overflowX: "auto" }}>

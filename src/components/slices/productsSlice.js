@@ -93,7 +93,7 @@ export const deleteProduct = (productId) => async (dispatch) => {
   try {
     console.log("id", productId);
     await apiService.put(`/products/${productId}/delete`);
-    toast.success("Delete successfully");
+    toast.success("Delete product successful");
     dispatch(getProducts());
   } catch (error) {
     dispatch(productSlice.actions.hasError(error.message));

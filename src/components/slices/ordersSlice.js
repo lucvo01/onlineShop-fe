@@ -87,11 +87,11 @@ export const createOrder =
     }
   };
 
-export const deleteOrder = (productId) => async (dispatch) => {
+export const deleteOrder = (orderId) => async (dispatch) => {
   dispatch(ordersSlice.actions.startLoading());
   try {
-    console.log("id", productId);
-    await apiService.put(`/products/${productId}/delete`);
+    console.log("id", orderId);
+    await apiService.put(`/orders/${orderId}/delete`);
     toast.success("Delete Order successfully");
     dispatch(getOrders());
   } catch (error) {
@@ -100,19 +100,18 @@ export const deleteOrder = (productId) => async (dispatch) => {
   }
 };
 
-export const editOrder =
-  ({ values, orderId }) =>
-  async (dispatch) => {
-    dispatch(ordersSlice.actions.startLoading());
-    try {
-      // upload image to cloudinary
-      await apiService.put(`/orders/${orderId}/edit`, {
-        values
-      });
-      toast.success("Edit Order successfully");
-      dispatch(getOrders());
-    } catch (error) {
-      dispatch(ordersSlice.actions.hasError(error.message));
-      toast.error(error.message);
-    }
-  };
+// export const editOrder =
+//   ({ ...values, orderId }) =>
+//   async (dispatch) => {
+//     dispatch(ordersSlice.actions.startLoading());
+//     try {
+//       await apiService.put(`/orders/${orderId}/edit`, {
+//         ...values
+//       });
+//       toast.success("Edit Order successfully");
+//       dispatch(getOrders());
+//     } catch (error) {
+//       dispatch(ordersSlice.actions.hasError(error.message));
+//       toast.error(error.message);
+//     }
+//   };
