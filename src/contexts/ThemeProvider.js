@@ -1,3 +1,4 @@
+import * as React from "react";
 import { CssBaseline } from "@mui/material";
 import {
   createTheme,
@@ -29,24 +30,54 @@ const SUCCESS = {
   contrastText: "#FFF",
 };
 
-function ThemeProvider({ children }) {
-  const themeOptions = {
-    palette: {
-      primary: PRIMARY,
+const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
+
+const ThemeProvider = ({ children }) => {
+   const [mode, setMode] = React.useState('light');
+  const colorMode = React.useMemo(
+    () => ({
+      toggleColorMode: () => {
+        setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+      },
+    }),
+    [],
+  );
+
+  const theme = React.useMemo(
+    () =>
+      createTheme({
+        palette: {
+           primary: PRIMARY,
       secondary: SECONDARY,
       success: SUCCESS,
-    },
-    shape: { borderRadius: 8 },
-  };
+          mode: `${mode}`,
+        },
+      }),
+    [mode],
+  );
 
-  const theme = createTheme(themeOptions);
+  
+  // const themeOptions = {
+  //   palette: {
+  //     primary: PRIMARY,
+  //     secondary: SECONDARY,
+  //     success: SUCCESS,
+  //     mode
+  //   },
+  //   shape: { borderRadius: 8 },
+
+  // };
+
+  // const theme = createTheme(themeOptions);
 
   return (
-    <MUIThemeProvider theme={theme}>
-      <CssBaseline />
-      {children}
-    </MUIThemeProvider>
+    <ColorModeContext.Provider value={colorMode}>
+      <MUIThemeProvider theme={theme}>
+        <CssBaseline />
+        {children}
+      </MUIThemeProvider>
+    </ColorModeContext.Provider>
   );
 }
 
-export default ThemeProvider;
+export  {ThemeProvider, ColorModeContext};

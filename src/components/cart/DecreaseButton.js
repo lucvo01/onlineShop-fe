@@ -3,7 +3,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { decreaseItem, getSubtotal } from "../slices/cartSlice";
 
-function DeccreaseButton({ product }) {
+function DecreaseButton({ product }) {
   const dispatch = useDispatch();
 
   const handleClick = () => {
@@ -14,4 +14,4 @@ function DeccreaseButton({ product }) {
   return <Button onClick={handleClick}>-</Button>;
 }
 
-export default DeccreaseButton;
+export default DecreaseButton;

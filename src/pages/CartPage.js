@@ -3,6 +3,7 @@ import {
   Box,
   Button,
   Container,
+  Grid,
   Table,
   TableBody,
   TableCell,
@@ -13,7 +14,7 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import ProductCard from "../components/product/ProductCard";
 import AddToCartButton from "../components/cart/AddToCartButton";
-import DeccreaseButton from "../components/cart/DeccreaseButton";
+import DecreaseButton from "../components/cart/DecreaseButton";
 import RemoveItemButton from "../components/cart/RemoveItemButton";
 import { useNavigate } from "react-router-dom";
 import { createOrder } from "../components/slices/ordersSlice";
@@ -29,7 +30,9 @@ function CartPage() {
   };
 
   return (
-    <Container sx={{ display: "flex", minHeight: "100vh", mt: 3 }}>
+    <Grid container
+      spacing={2}
+      sx={{ mt: "3rem", display: "flex", height: "100vh" }}  md={12} xs={12}>
       <Box sx={{ overflowX: "auto" }}>
         <TableContainer sx={{ minWidth: 800 }}>
           <Table>
@@ -63,7 +66,7 @@ function CartPage() {
                     >
                       <AddToCartButton product={item} display={"+"} />
                       {item.quantity}
-                      <DeccreaseButton product={item} />
+                      <DecreaseButton product={item} />
                       <RemoveItemButton product={item} />
                     </TableCell>
                     <TableCell
@@ -96,7 +99,7 @@ function CartPage() {
           <Button onClick={handleClick}>Checkout</Button>
         </Box>
       </Box>
-    </Container>
+    </Grid>
   );
 }
 

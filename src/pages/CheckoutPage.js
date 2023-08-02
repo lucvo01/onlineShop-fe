@@ -1,4 +1,4 @@
-import { Box, Container, Stack } from "@mui/material";
+import { Typography, Grid, Stack } from "@mui/material";
 import React from "react";
 import {
   FCheckbox,
@@ -19,7 +19,7 @@ import {
 import useAuth from "../hooks/useAuth";
 import { clearCart } from "../components/slices/cartSlice";
 import CartPage from "./CartPage";
-import CartProductCard from "../components/cart/CartProductCard";
+import CartProductList from "../components/cart/CartProductList";
 import { useNavigate } from "react-router-dom";
 
 const shippingSchema = Yup.object().shape({
@@ -71,16 +71,17 @@ function CheckoutPage() {
     dispatch(getSingleUserOrders(userId));
   };
   return (
-    <Container
-      maxWidth="md"
-      sx={{ mt: "5rem", display: "flex", height: "100vh" }}
-    >
-      <Box sx={{ flex: "2", padding: "20px" }}>
+    <Grid
+      container
+      spacing={2}
+      sx={{ mt: "3rem", display: "flex", height: "100vh", width: "100vw" }}>
+
+      <Grid sx={{ flex: "2", padding: "10px" }} md={8} xs={12}>
         {products.map((item) => {
-          return <CartProductCard key={item._id} product={item} />;
+          return <CartProductList key={item._id} product={item} />;
         })}
-      </Box>
-      <Box sx={{ flex: "1", padding: "20px" }}>
+      </Grid>
+      <Grid sx={{ flex: "1", padding: "10px" }} md={4} xs={12}>
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
           <Stack spacing={3}>
             <FTextField name="shipping" label="Shipping address" />
@@ -90,8 +91,7 @@ function CheckoutPage() {
             direction="row"
             alignItems="center"
             justifyContent="space-between"
-            sx={{ my: 2 }}
-          >
+            sx={{ my: 2 }}>
             <FSelect name="payment_method" required>
               <option disabled selected>
                 Select Payment Method
@@ -99,7 +99,7 @@ function CheckoutPage() {
               <option>Cash On Delivery</option>
               <option>Credit Card</option>
             </FSelect>
-            {/* <FCheckbox name="payment_status" label="Cash On Delivery" /> */}
+            {/* <FCheckGrid name="payment_status" label="Cash On Delivery" /> */}
             {/* <Link component={RouterLink} variant="subtitle2" to="/">
               Forgot password?
             </Link> */}
@@ -110,13 +110,12 @@ function CheckoutPage() {
             size="large"
             type="submit"
             variant="contained"
-            loading={isSubmitting || isLoading}
-          >
+            loading={isSubmitting || isLoading}>
             Place Order
           </LoadingButton>
         </FormProvider>
-      </Box>
-    </Container>
+      </Grid>
+    </Grid>
   );
 }
 

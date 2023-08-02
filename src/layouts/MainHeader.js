@@ -10,6 +10,7 @@ import useAuth from "../hooks/useAuth";
 import Cart from "../components/cart/Cart";
 import { Avatar, Divider, Menu, MenuItem } from "@mui/material";
 import { useLocation, useNavigate, Link as RouterLink } from "react-router-dom";
+import ColorModeButton from '../components/ColorModeButton'
 
 function MainHeader() {
   let location = useLocation();
@@ -123,6 +124,7 @@ function MainHeader() {
           </Typography>
 
           <Box sx={{ flexGrow: 1 }} />
+          <ColorModeButton/>
           <Cart />
           <Box>
             <Avatar
