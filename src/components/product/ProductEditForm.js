@@ -1,13 +1,13 @@
 import React, { useCallback, useEffect } from "react";
 import { Box, Card, alpha, Stack, InputAdornment } from "@mui/material";
-import { FormProvider, FTextField } from "./form";
+import { FormProvider, FTextField } from "../form";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
-import { createProduct, editProduct } from "./slices/productsSlice";
+import { createProduct, editProduct } from "../slices/productsSlice";
 import { LoadingButton } from "@mui/lab";
-import FUploadImage from "./form/FUploadImage";
+import FUploadImage from "../form/FUploadImage";
 import { useNavigate } from "react-router-dom";
 
 const yupSchema = Yup.object().shape({

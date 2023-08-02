@@ -6,7 +6,7 @@ import Box from "@mui/material/Box";
 import { useParams } from "react-router-dom";
 import { Button, Card, CardContent, Typography } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { deleteProduct } from "./slices/productsSlice";
+import { deleteProduct } from "../slices/productsSlice";
 
 function ProductDeleteModal() {
   const { productId } = useParams();

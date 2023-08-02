@@ -12,12 +12,14 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { createOrder } from "../components/slices/ordersSlice";
+import {
+  createOrder,
+  getSingleUserOrders
+} from "../components/slices/ordersSlice";
 import useAuth from "../hooks/useAuth";
 import { clearCart } from "../components/slices/cartSlice";
 import CartPage from "./CartPage";
-import ProductCard from "../components/ProductCard";
-import CartProductCard from "../components/CartProductCard";
+import CartProductCard from "../components/cart/CartProductCard";
 import { useNavigate } from "react-router-dom";
 
 const shippingSchema = Yup.object().shape({
@@ -33,7 +35,6 @@ function CheckoutPage() {
   const navigate = useNavigate;
   const dispatch = useDispatch();
   const { isLoading } = useSelector((state) => {
-    console.log("state.orders", state.orders);
     return state.orders;
   });
   const { subtotal, products } = useSelector((state) => state.cart);
@@ -55,15 +56,20 @@ function CheckoutPage() {
   } = methods;
 
   const onSubmit = async (data) => {
-    let { shipping, payment_status } = data;
-    // console.log("payment_status", payment_status);
+    let { shipping, payment_method } = data;
     dispatch(
-      createOrder({ userId, shipping, subtotal, products, payment_status })
+      createOrder({
+        userId,
+        shipping,
+        subtotal,
+        products,
+        payment_method
+      })
     );
     dispatch(clearCart());
-    // navigate("/");
+    // navigate(`/order/${orderId}`);
+    dispatch(getSingleUserOrders(userId));
   };
-  console.log("is submit", isSubmitting, isLoading);
   return (
     <Container
       maxWidth="md"
@@ -86,7 +92,7 @@ function CheckoutPage() {
             justifyContent="space-between"
             sx={{ my: 2 }}
           >
-            <FSelect name="payment_status">
+            <FSelect name="payment_method" required>
               <option disabled selected>
                 Select Payment Method
               </option>
@@ -106,7 +112,7 @@ function CheckoutPage() {
             variant="contained"
             loading={isSubmitting || isLoading}
           >
-            Submit
+            Place Order
           </LoadingButton>
         </FormProvider>
       </Box>

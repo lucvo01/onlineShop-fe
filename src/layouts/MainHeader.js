@@ -7,98 +7,135 @@ import IconButton from "@mui/material/IconButton";
 import Button from "@mui/material/Button";
 import Logo from "../components/Logo";
 import useAuth from "../hooks/useAuth";
-import { useNavigate, useLocation } from "react-router-dom";
-import Cart from "../components/Cart";
+import Cart from "../components/cart/Cart";
+import { Avatar, Divider, Menu, MenuItem } from "@mui/material";
+import { useLocation, useNavigate, Link as RouterLink } from "react-router-dom";
+
 function MainHeader() {
-  const auth = useAuth();
-  const navigate = useNavigate();
   let location = useLocation();
   let from = location.state?.from?.pathname || "/";
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const isMenuOpen = Boolean(anchorEl);
+
+  const handleProfileMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleLogout = async () => {
+    try {
+      handleMenuClose();
+      await logout(() => {
+        navigate("/login");
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const menuId = "primary-search-account-menu";
+  const renderMenu = (
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{
+        vertical: "bottom",
+        horizontal: "right"
+      }}
+      id={menuId}
+      keepMounted
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "right"
+      }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+    >
+      <Box sx={{ my: 1.5, px: 2.5 }}>
+        <Typography variant="subtitle2" noWrap>
+          {user?.name}
+        </Typography>
+        <Typography variant="body2" sx={{ color: "text.secondary" }} noWrap>
+          {user?.email}
+        </Typography>
+      </Box>
+
+      <Divider sx={{ borderStyle: "dashed" }} />
+
+      <MenuItem
+        onClick={handleMenuClose}
+        to="/"
+        component={RouterLink}
+        sx={{ mx: 1 }}
+      >
+        My Profile
+      </MenuItem>
+      <MenuItem
+        onClick={handleMenuClose}
+        to="/orders"
+        component={RouterLink}
+        sx={{ mx: 1 }}
+      >
+        My Order
+      </MenuItem>
+      <MenuItem
+        onClick={handleMenuClose}
+        to="/products"
+        component={RouterLink}
+        sx={{ mx: 1 }}
+      >
+        Manage Products
+      </MenuItem>
+
+      <Divider sx={{ borderStyle: "dashed" }} />
+
+      <MenuItem onClick={handleLogout} sx={{ m: 1 }}>
+        Logout
+      </MenuItem>
+    </Menu>
+  );
   return (
-    <Box>
-      <AppBar position="static">
-        <Toolbar variant="dense">
+    <Box sx={{ mb: 3 }}>
+      <AppBar position="static" color="transparent">
+        <Toolbar>
           <IconButton
+            size="large"
             edge="start"
             color="inherit"
-            aria-label="menu"
+            aria-label="open drawer"
             sx={{ mr: 2 }}
           >
             <Logo />
           </IconButton>
-          <Typography variant="h6" color="inherit" component="div">
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{ display: { xs: "none", sm: "block" } }}
+          >
             Online Shop
           </Typography>
-          <Box sx={{ flexGrow: 1 }} />
-          <Typography variant="h6" color="inherit" component="div">
-            Welcome {auth.user?.name}!
-          </Typography>
-          {auth.user ? (
-            <Button
-              variant="h6"
-              color="inherit"
-              component="div"
-              onClick={() => {
-                auth.logout(() => {
-                  navigate(from, { replace: true });
-                });
-              }}
-            >
-              Logout
-            </Button>
-          ) : (
-            <Button
-              variant="h6"
-              color="inherit"
-              component="div"
-              onClick={() => {
-                navigate("/login", from);
-              }}
-            >
-              Login
-            </Button>
-          )}
-          {auth.user?.isAdmin ? (
-            <>
-              <Button
-                variant="h6"
-                color="inherit"
-                component="div"
-                onClick={() => {
-                  navigate("/orders", { replace: true });
-                }}
-              >
-                Orders
-              </Button>
-              <Button
-                variant="h6"
-                color="inherit"
-                component="div"
-                onClick={() => {
-                  navigate("/products", { replace: true });
-                }}
-              >
-                Products
-              </Button>
-              <Button
-                variant="h6"
-                color="inherit"
-                component="div"
-                onClick={() => {
-                  navigate("/users", { replace: true });
-                }}
-              >
-                Users
-              </Button>
-            </>
-          ) : (
-            ""
-          )}
 
+          <Box sx={{ flexGrow: 1 }} />
           <Cart />
+          <Box>
+            <Avatar
+              onClick={handleProfileMenuOpen}
+              // src={user.avatarUrl}
+              // alt={user.name}
+              sx={{ width: 32, height: 32 }}
+            />
+          </Box>
         </Toolbar>
       </AppBar>
+
+      {renderMenu}
     </Box>
   );
 }

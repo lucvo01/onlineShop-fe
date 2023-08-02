@@ -11,11 +11,10 @@ const initialState = {
 };
 
 const ordersSlice = createSlice({
-  name: "order",
+  name: "orders",
   initialState,
   reducers: {
     startLoading(state) {
-      console.log("start loading");
       state.isLoading = true;
     },
     hasError(state, action) {
@@ -35,8 +34,9 @@ const ordersSlice = createSlice({
       state.isLoading = false;
       state.error = null;
       console.log("set state", state, action);
-      // const newOrder = action.payload;
-      // state.orders = state.orders.push(newOrder);
+      const newOrder = action.payload;
+      state.orders = [...state.orders, newOrder];
+      console.log(state.orders);
     },
     editOrderSuccess(state, action) {
       state.isLoading = false;
@@ -60,6 +60,7 @@ export const getOrders =
       const response = await apiService.get(
         `/orders?page=${pageNum}&limit=${limit}`
       );
+      console.log("getOrders", response);
       dispatch(ordersSlice.actions.getOrdersSuccess(response.data.data));
     } catch (error) {
       dispatch(ordersSlice.actions.hasError(error.message));
@@ -67,8 +68,21 @@ export const getOrders =
     }
   };
 
+export const getSingleUserOrders = (userId) => async (dispatch) => {
+  dispatch(ordersSlice.actions.startLoading());
+  try {
+    // const params = { pageNum, limit };
+    const response = await apiService.get(`/orders/find/${userId}`);
+    console.log("getSingleOrder", response);
+    // dispatch(ordersSlice.actions.getOrdersSuccess(response.data.data));
+  } catch (error) {
+    dispatch(ordersSlice.actions.hasError(error.message));
+    toast.error(error.message);
+  }
+};
+
 export const createOrder =
-  ({ userId, shipping, subtotal, products, payment_status }) =>
+  ({ userId, shipping, subtotal, products, payment_status, payment_method }) =>
   async (dispatch) => {
     dispatch(ordersSlice.actions.startLoading());
     try {
@@ -77,9 +91,12 @@ export const createOrder =
         shipping,
         subtotal,
         products,
-        payment_status
+        payment_status,
+        payment_method
       });
-      dispatch(ordersSlice.actions.createOrderSuccess(response.data));
+      dispatch(ordersSlice.actions.createOrderSuccess(response.data.data));
+      // const orderId = response.data.data._id;
+      // dispatch(getSingleOrder(orderId));
       toast.success("Create Order successfully");
     } catch (error) {
       dispatch(ordersSlice.actions.hasError(error.message));

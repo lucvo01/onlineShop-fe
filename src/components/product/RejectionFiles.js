@@ -1,5 +1,5 @@
 import { Box, Typography, Paper } from "@mui/material";
-import { fData } from "../utils/numberFormat";
+import { fData } from "../../utils/numberFormat";
 import { alpha } from "@mui/material/styles";
 
 function RejectionFiles({ fileRejections }) {

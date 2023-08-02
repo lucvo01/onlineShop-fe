@@ -11,10 +11,11 @@ import NotFoundPage from "../pages/NotFoundPage";
 import OrdersPage from "../pages/admin/OrdersPage";
 import ProductsPage from "../pages/admin/ProductsPage";
 import UsersPage from "../pages/admin/UsersPage";
-import ProductEditModal from "../components/ProductEditModal";
-import ProductDeleteModal from "../components/ProductDeleteModal";
+import ProductEditModal from "../components/product/ProductEditModal";
+import ProductDeleteModal from "../components/product/ProductDeleteModal";
 import CheckoutPage from "../pages/CheckoutPage";
-// import AuthRequire from "./AuthRequire";
+import AuthRequire from "./AuthRequire";
+import UserOrderPage from "../pages/UserOrderPage";
 
 function Router() {
   return (
@@ -25,11 +26,13 @@ function Router() {
           // <AuthRequire>
           <MainLayout />
           // </AuthRequire>
-        }>
+        }
+      >
         <Route index element={<HomePage />} />
         <Route path="product/:id" element={<DetailPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/cart/checkout" element={<CheckoutPage />} />
+        <Route path="/order/:ordersId" element={<UserOrderPage />} />
         <Route path="/orders" element={<OrdersPage />}>
           <Route index element={<OrdersPage />} />
           {/* <Route path="create" element={<ProductEditModal />} /> */}

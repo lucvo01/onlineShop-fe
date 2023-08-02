@@ -18,8 +18,7 @@ import rehypeRaw from "rehype-raw";
 import apiService from "../app/apiService";
 import LoadingScreen from "../components/LoadingScreen";
 import { Alert } from "@mui/material";
-import AddToCartButton from "../components/AddToCartButton";
-
+import AddToCartButton from "../components/cart/AddToCartButton";
 
 function DetailPage() {
   const [product, setProduct] = useState(null);

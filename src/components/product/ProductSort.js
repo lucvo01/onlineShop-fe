@@ -1,5 +1,5 @@
 import React from "react";
-import { FSelect } from "./form";
+import { FSelect } from "../form";
 
 function ProductSort() {
   return (
@@ -8,7 +8,7 @@ function ProductSort() {
         { value: "featured", label: "Featured" },
         { value: "newest", label: "Newest" },
         { value: "priceDesc", label: "Price: High-Low" },
-        { value: "priceAsc", label: "Price: Low-High" },
+        { value: "priceAsc", label: "Price: Low-High" }
       ].map((option) => (
         <option key={option.value} value={option.value}>
           {option.label}

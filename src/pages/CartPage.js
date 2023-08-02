@@ -11,10 +11,10 @@ import {
   TableRow
 } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
-import ProductCard from "../components/ProductCard";
-import AddToCartButton from "../components/AddToCartButton";
-import DeccreaseButton from "../components/DeccreaseButton";
-import RemoveItemButton from "../components/RemoveItemButton";
+import ProductCard from "../components/product/ProductCard";
+import AddToCartButton from "../components/cart/AddToCartButton";
+import DeccreaseButton from "../components/cart/DeccreaseButton";
+import RemoveItemButton from "../components/cart/RemoveItemButton";
 import { useNavigate } from "react-router-dom";
 import { createOrder } from "../components/slices/ordersSlice";
 import { values } from "lodash";

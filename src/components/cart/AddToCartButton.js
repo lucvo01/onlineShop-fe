@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { addToCart, getSubtotal } from "./slices/cartSlice";
+import { addToCart, getSubtotal } from "../slices/cartSlice";
 
 function AddToCartButton({ product, display }) {
   const dispatch = useDispatch();

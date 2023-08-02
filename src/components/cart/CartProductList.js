@@ -1,5 +1,4 @@
 import {
-  Button,
   Container,
   Table,
   TableBody,
@@ -8,24 +7,10 @@ import {
   TableHead,
   TableRow
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
-import { getOrders } from "../../components/slices/ordersSlice";
-// import PaginationBar from "../components/PaginationBar";
+import React from "react";
 
-function OrdersPage() {
-  const dispatch = useDispatch();
-  const location = useLocation();
-  const navigate = useNavigate();
-  const [pageNum, setPageNum] = useState(1);
-  const { orders, isLoading, totalPages, error } = useSelector(
-    (state) => state.orders
-  );
-  console.log("orders", orders);
-  useEffect(() => {
-    dispatch(getOrders({ pageNum }));
-  }, [dispatch, pageNum]);
+function CartProductList() {
+  const orders = [];
 
   return (
     <Container>
@@ -63,4 +48,4 @@ function OrdersPage() {
   );
 }
 
-export default OrdersPage;
+export default CartProductList;

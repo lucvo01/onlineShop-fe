@@ -12,7 +12,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import apiService from "../../app/apiService";
-import ProductCard from "../../components/ProductCard";
+import ProductCard from "../../components/product/ProductCard";
 import { useLocation, useNavigate } from "react-router-dom";
 import PaginationBar from "../../components/PaginationBar";
 import { useDispatch, useSelector } from "react-redux";
@@ -39,7 +39,6 @@ function ProductsPage() {
     console.log("test", res);
   }, [dispatch, pageNum]);
 
-  
   return (
     <Container>
       <Box sx={{ overflowX: "auto" }}>

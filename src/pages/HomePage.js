@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Alert, Box, Container, Stack } from "@mui/material";
-import ProductFilter from "../components/ProductFilter";
-import ProductSearch from "../components/ProductSearch";
-import ProductSort from "../components/ProductSort";
-import ProductList from "../components/ProductList";
+import ProductFilter from "../components/product/ProductFilter";
+import ProductSearch from "../components/product/ProductSearch";
+import ProductSort from "../components/product/ProductSort";
+import ProductList from "../components/product/ProductList";
 import { FormProvider } from "../components/form";
 import { useForm } from "react-hook-form";
 import orderBy from "lodash/orderBy";
