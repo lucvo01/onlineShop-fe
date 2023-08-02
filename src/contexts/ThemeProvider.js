@@ -50,6 +50,7 @@ const ThemeProvider = ({ children }) => {
            primary: PRIMARY,
             secondary: SECONDARY,
             success: SUCCESS,
+               mode: `${mode}`
             },
       }),
 
