@@ -13,7 +13,7 @@ const UserProfilePage = () => {
 
   const handleChangeTab = (event, newValue) => {
     setCurrentTab(newValue);
-    console.log("currentTab", newValue)
+   
   };
 
   const PROFILE_TABS = [
@@ -39,10 +39,10 @@ const UserProfilePage = () => {
         scrollButtons="auto"
         variant="scrollable"
         allowScrollButtonsMobile
-        onChange={(e, value) => handleChangeTab(value)}>
+        onChange={ handleChangeTab}>
         {PROFILE_TABS.map((tab) => (
           <Tab
-            disableRipple
+            // disableRipple
             key={tab.value}
             value={tab.value}
             icon={tab.icon}
