@@ -21,12 +21,10 @@ function AccountGeneral() {
   const isLoading = false;
 
   const defaultValues = {
-    name: user?.name || "",
-    email: user?.email || "",
-    avatarUrl: user?.avatarUrl || "",
-    coverUrl: user?.coverUrl || "",
-    phoneNumber: user?.phoneNumber || "",
-    address: user?.address || ""
+    name: user?.data.name || "",
+    email: user?.data.email || "",
+    phoneNumber: user?.data.phoneNumber || "",
+    address: user?.data.address || ""
   };
 
   const methods = useForm({
@@ -51,20 +49,11 @@ function AccountGeneral() {
         <Grid container spacing={3}>
           <Grid item xs={12} md={8}>
             <Card sx={{ p: 3 }}>
-              <Box
-                sx={{
-                  display: "grid",
-                  rowGap: 3,
-                  columnGap: 2,
-                  gridTemplateColumns: {
-                    xs: "repeat(1, 1fr)",
-                    sm: "repeat(2, 1fr)"
-                  }
-                }}
+              <Stack 
+                spacing ={3}
               >
                 <FTextField name="name" label="Name" placeholder={user.name} />
                 <FTextField name="email" label="Email" disabled />
-
                 <FTextField name="address" label="Address" />
                 <FTextField name="phoneNumber" label="Phone Number" />
               </Box>

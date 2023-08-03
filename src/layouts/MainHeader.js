@@ -24,6 +24,7 @@ function MainHeader() {
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
+    console.log("auth", user.data.name)
   };
 
   const handleMenuClose = () => {
@@ -60,10 +61,10 @@ function MainHeader() {
     >
       <Box sx={{ my: 1.5, px: 2.5 }}>
         <Typography variant="subtitle2" noWrap>
-          {user?.name}
+          {user?.data.name}
         </Typography>
         <Typography variant="body2" sx={{ color: "text.secondary" }} noWrap>
-          {user?.email}
+          {user?.data.email}
         </Typography>
       </Box>
 
