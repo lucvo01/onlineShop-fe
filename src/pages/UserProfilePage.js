@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { Box, Tab, Tabs } from "@mui/material";
+import { Box, Container, Tab, Tabs, Typography } from "@mui/material";
 import useAuth from "../hooks/useAuth";
 import AccountGeneral from "../components/user/AccountGeneral";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import { capitalCase } from "change-case";
+import AccountSocialLinks from "../components/user/AccountSocialLinks";
 
 const UserProfilePage = () => {
-      const { user } = useAuth();
+  const { user } = useAuth();
   const [currentTab, setCurrentTab] = useState("profile");
 
   const handleChangeTab = (event, newValue) => {
@@ -17,29 +18,27 @@ const UserProfilePage = () => {
     {
       value: "profile",
       icon: <AccountBoxIcon sx={{ fontSize: 24 }} />,
-      component: <AccountGeneral user={user} />
+      component: <AccountGeneral />
     },
     {
       value: "password",
       icon: <AccountBoxIcon sx={{ fontSize: 24 }} />,
-      component: <AccountGeneral user={user} />
-    },
-    // {
-    //   value: "favorite",
-    //   icon: <ContactMailIcon sx={{ fontSize: 24 }} />,
-    //   component: < />
-    // },
-    
+      component: <AccountSocialLinks />
+    }
   ];
+
   return (
-    <Box>
+    <Container>
+      <Typography variant="h5" gutterBottom>
+        Account Settings
+      </Typography>
       <Tabs
         value={currentTab}
         scrollButtons="auto"
         variant="scrollable"
         allowScrollButtonsMobile
-        onChange={(e, value) => handleChangeTab(value)}>
-
+        onChange={(e, value) => handleChangeTab(value)}
+      >
         {PROFILE_TABS.map((tab) => (
           <Tab
             disableRipple
@@ -49,9 +48,14 @@ const UserProfilePage = () => {
             label={capitalCase(tab.value)}
           />
         ))}
-
       </Tabs>
-    </Box>
+      <Box sx={{ mb: 5 }} />
+
+      {PROFILE_TABS.map((tab) => {
+        const isMatched = tab.value === currentTab;
+        return isMatched && <Box key={tab.value}>{tab.component}</Box>;
+      })}
+    </Container>
   );
 };
 
