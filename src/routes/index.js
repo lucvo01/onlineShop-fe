@@ -16,6 +16,7 @@ import ProductDeleteModal from "../components/product/ProductDeleteModal";
 import CheckoutPage from "../pages/CheckoutPage";
 import AuthRequire from "./AuthRequire";
 import UserOrderPage from "../pages/UserOrderPage";
+import UserProfilePage from "../pages/UserProfilePage";
 
 function Router() {
   return (
@@ -47,6 +48,7 @@ function Router() {
         </Route>
 
         <Route path="/users" element={<UsersPage />} />
+        <Route path="/account" element={<UserProfilePage />} />
       </Route>
 
       <Route element={<BlankLayout />}>

@@ -71,7 +71,7 @@ function MainHeader() {
 
       <MenuItem
         onClick={handleMenuClose}
-        to="/"
+        to="/account"
         component={RouterLink}
         sx={{ mx: 1 }}
       >
