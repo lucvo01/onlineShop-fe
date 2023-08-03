@@ -32,7 +32,7 @@ const UserProfilePage = () => {
   return (
     <Container>
       <Typography variant="h5" gutterBottom>
-        Account Settings
+        My Profile
       </Typography>
       <Tabs
         value={currentTab}

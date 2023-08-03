@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { Box, Grid, Card, Stack, Typography } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import useAuth from "../../hooks/useAuth";
@@ -44,7 +44,7 @@ function AccountGeneral() {
   };
 
   return (
-    <Grid container spacing={3}>
+  
       <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
         <Grid container spacing={3}>
           <Grid item xs={12} md={8}>
@@ -52,11 +52,11 @@ function AccountGeneral() {
               <Stack 
                 spacing ={3}
               >
-                <FTextField name="name" label="Name" placeholder={user.name} />
+                <FTextField name="name" label="Name" placeholder={user?.data.name} />
                 <FTextField name="email" label="Email" disabled />
                 <FTextField name="address" label="Address" />
                 <FTextField name="phoneNumber" label="Phone Number" />
-              </Box>
+              </Stack>
 
               <Stack spacing={3} alignItems="flex-end" sx={{ mt: 3 }}>
                 <FTextField
@@ -78,7 +78,7 @@ function AccountGeneral() {
           </Grid>
         </Grid>
       </FormProvider>
-    </Grid>
+ 
   );
 }
 

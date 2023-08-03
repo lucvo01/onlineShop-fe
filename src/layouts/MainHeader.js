@@ -24,7 +24,7 @@ function MainHeader() {
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
-    console.log("auth", user.data.name)
+    // console.log("auth", user.data.name)
   };
 
   const handleMenuClose = () => {
