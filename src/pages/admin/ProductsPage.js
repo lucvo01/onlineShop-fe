@@ -97,11 +97,13 @@ function ProductsPage() {
             </TableBody>
           </Table>
         </TableContainer>
-        <PaginationBar
-          pageNum={pageNum}
-          setPageNum={setPageNum}
-          totalPageNum={totalPages || 10}
-        />
+        <Box sx={{ display: "flex", justifyContent: "center", mt: "2rem" }}>
+          <PaginationBar
+            pageNum={pageNum}
+            setPageNum={setPageNum}
+            totalPageNum={totalPages}
+          />
+        </Box>
       </Box>
     </Container>
   );

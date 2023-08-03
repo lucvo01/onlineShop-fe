@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Container,
   Table,
@@ -12,23 +13,31 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getOrders } from "../../components/slices/ordersSlice";
-// import PaginationBar from "../components/PaginationBar";
+import PaginationBar from "../../components/PaginationBar";
+import styled from "styled-components";
+
+const CenteredContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 function OrdersPage() {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
   const [pageNum, setPageNum] = useState(1);
-  const { orders, isLoading, totalPages, error } = useSelector(
-    (state) => state.orders
-  );
-  console.log("orders", orders);
+
   useEffect(() => {
     dispatch(getOrders({ pageNum }));
   }, [dispatch, pageNum]);
 
+  const { orders, isLoading, totalPages, error } = useSelector(
+    (state) => state.orders
+  );
+
   return (
-    <Container>
+    <CenteredContainer>
       <TableContainer>
         <Table>
           <TableHead>
@@ -59,7 +68,14 @@ function OrdersPage() {
           </TableBody>
         </Table>
       </TableContainer>
-    </Container>
+      <Box sx={{ mt: "2rem" }}>
+        <PaginationBar
+          pageNum={pageNum}
+          setPageNum={setPageNum}
+          totalPageNum={totalPages}
+        />
+      </Box>
+    </CenteredContainer>
   );
 }
 

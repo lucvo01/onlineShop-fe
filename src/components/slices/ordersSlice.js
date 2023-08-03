@@ -56,7 +56,6 @@ export const getOrders =
   async (dispatch) => {
     dispatch(ordersSlice.actions.startLoading());
     try {
-      // const params = { pageNum, limit };
       const response = await apiService.get(
         `/orders?page=${pageNum}&limit=${limit}`
       );

@@ -52,14 +52,22 @@ const productSlice = createSlice({
 export default productSlice.reducer;
 
 export const getProducts =
-  ({ pageNum, limit = PRODUCTS_PER_PAGE }) =>
+  ({ pageNum, limit = PRODUCTS_PER_PAGE, searchQuery, gender }) =>
   async (dispatch) => {
     dispatch(productSlice.actions.startLoading());
+
     try {
-      // const params = { pageNum, limit };
-      const response = await apiService.get(
-        `/products?page=${pageNum}&limit=${limit}`
-      );
+      let url = `/products?page=${pageNum}&limit=${limit}`;
+
+      if (searchQuery) {
+        url += `&name=${searchQuery}`;
+      }
+
+      // if (typeof gender === "string") {
+      //   gender = gender.toLowerCase();
+      //   url += `&gender=${gender}`;
+      // }
+      const response = await apiService.get(url);
       dispatch(productSlice.actions.getProductsSuccess(response.data.data));
     } catch (error) {
       dispatch(productSlice.actions.hasError(error.message));

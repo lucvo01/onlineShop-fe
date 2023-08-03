@@ -9,7 +9,7 @@ export const SORT_BY_OPTIONS = [
   { value: "priceAsc", label: "Price: Low-High" }
 ];
 
-export const FILTER_GENDER_OPTIONS = ["Men", "Women", "Kids"];
+export const FILTER_GENDER_OPTIONS = ["Male", "Famale"];
 
 export const FILTER_CATEGORY_OPTIONS = [
   "All",

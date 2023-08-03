@@ -20,10 +20,6 @@ function HomePage() {
     (state) => state.products
   );
 
-  useEffect(() => {
-    dispatch(getProducts({ pageNum }));
-  }, [dispatch, pageNum]);
-
   const defaultValues = {
     gender: [],
     category: "All",
@@ -37,6 +33,11 @@ function HomePage() {
   const { watch, reset } = methods;
   const filters = watch();
   const filterProducts = applyFilter(products, filters);
+
+  const { searchQuery, gender } = filters;
+  useEffect(() => {
+    dispatch(getProducts({ pageNum, searchQuery, gender }));
+  }, [dispatch, pageNum, searchQuery, gender]);
 
   return (
     <Container sx={{ display: "flex", minHeight: "100vh", mt: 3 }}>
@@ -71,11 +72,13 @@ function HomePage() {
             </>
           )}
         </Box>
-        <PaginationBar
-          pageNum={pageNum}
-          setPageNum={setPageNum}
-          totalPageNum={totalPages || 10}
-        />
+        <Box sx={{ display: "flex", justifyContent: "center", mt: "2rem" }}>
+          <PaginationBar
+            pageNum={pageNum}
+            setPageNum={setPageNum}
+            totalPageNum={totalPages}
+          />
+        </Box>
       </Stack>
     </Container>
   );
@@ -125,9 +128,9 @@ function applyFilter(products, filters) {
   }
 
   if (searchQuery) {
-    filteredProducts = filteredProducts.filter((product) =>
-      product.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+    // filteredProducts = filteredProducts.filter((product) =>
+    //   product.name.toLowerCase().includes(searchQuery.toLowerCase())
+    // );
   }
 
   return filteredProducts;
