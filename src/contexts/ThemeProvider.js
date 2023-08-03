@@ -47,13 +47,13 @@ const ThemeProvider = ({ children }) => {
     () =>
       createTheme({
         palette: {
-           primary: PRIMARY,
-            secondary: SECONDARY,
-            success: SUCCESS,
-               mode: `${mode}`
-            },
+          primary: PRIMARY,
+          secondary: SECONDARY,
+          success: SUCCESS,
+          mode: `${mode}`
+        }
       }),
-
+    [mode]
   );
 
   

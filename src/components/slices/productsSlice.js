@@ -57,16 +57,16 @@ export const getProducts =
     dispatch(productSlice.actions.startLoading());
 
     try {
+      console.log(gender)
       let url = `/products?page=${pageNum}&limit=${limit}`;
 
       if (searchQuery) {
         url += `&name=${searchQuery}`;
       }
 
-      // if (typeof gender === "string") {
-      //   gender = gender.toLowerCase();
-      //   url += `&gender=${gender}`;
-      // }
+      if (gender) {
+           url += `&gender=${gender}`;
+      }
       const response = await apiService.get(url);
       dispatch(productSlice.actions.getProductsSuccess(response.data.data));
     } catch (error) {

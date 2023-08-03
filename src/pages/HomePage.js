@@ -36,6 +36,7 @@ function HomePage() {
 
   const { searchQuery, gender } = filters;
   useEffect(() => {
+    console.log("gender", gender)
     dispatch(getProducts({ pageNum, searchQuery, gender }));
   }, [dispatch, pageNum, searchQuery, gender]);
 
