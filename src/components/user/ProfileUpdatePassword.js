@@ -15,7 +15,7 @@ const UpdateUserSchema = yup.object().shape({
   name: yup.string().required("Name is required")
 });
 
-function AccountGeneral() {
+function ProfileUpdatePassword() {
   const { user } = useAuth();
   // const isLoading = useSelector((state) => state.user.isLoading);
   const isLoading = false;
@@ -53,20 +53,12 @@ function AccountGeneral() {
             <Card sx={{ p: 3 }}>
               <Box
                 sx={{
-                  display: "grid",
-                  rowGap: 3,
-                  columnGap: 2,
-                  gridTemplateColumns: {
-                    xs: "repeat(1, 1fr)",
-                    sm: "repeat(2, 1fr)"
-                  }
+                  
                 }}
               >
-                <FTextField name="name" label="Name" placeholder={user.name} />
-                <FTextField name="email" label="Email" disabled />
+                <FTextField name="password" label="Password" placeholder={user.name} />
+                <FTextField name="confirm password" label="Confirm Password" disabled />
 
-                <FTextField name="address" label="Address" />
-                <FTextField name="phoneNumber" label="Phone Number" />
               </Box>
 
               <Stack spacing={3} alignItems="flex-end" sx={{ mt: 3 }}>
@@ -93,4 +85,4 @@ function AccountGeneral() {
   );
 }
 
-export default AccountGeneral;
+export default ProfileUpdatePassword;

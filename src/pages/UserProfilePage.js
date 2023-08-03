@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { Box, Container, Tab, Tabs, Typography } from "@mui/material";
 import useAuth from "../hooks/useAuth";
 import AccountGeneral from "../components/user/AccountGeneral";
+import ProfileUpdatePassword from "../components/user/ProfileUpdatePassword";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import { capitalCase } from "change-case";
-import AccountSocialLinks from "../components/user/AccountSocialLinks";
+
 
 const UserProfilePage = () => {
   const { user } = useAuth();
@@ -12,6 +13,7 @@ const UserProfilePage = () => {
 
   const handleChangeTab = (event, newValue) => {
     setCurrentTab(newValue);
+    console.log("currentTab", newValue)
   };
 
   const PROFILE_TABS = [
@@ -23,7 +25,7 @@ const UserProfilePage = () => {
     {
       value: "password",
       icon: <AccountBoxIcon sx={{ fontSize: 24 }} />,
-      component: <AccountSocialLinks />
+      component: <ProfileUpdatePassword />
     }
   ];
 
@@ -37,8 +39,7 @@ const UserProfilePage = () => {
         scrollButtons="auto"
         variant="scrollable"
         allowScrollButtonsMobile
-        onChange={(e, value) => handleChangeTab(value)}
-      >
+        onChange={(e, value) => handleChangeTab(value)}>
         {PROFILE_TABS.map((tab) => (
           <Tab
             disableRipple
