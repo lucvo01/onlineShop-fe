@@ -4,8 +4,15 @@ import useAuth from "../hooks/useAuth";
 import AccountGeneral from "../components/user/AccountGeneral";
 import ProfileUpdatePassword from "../components/user/ProfileUpdatePassword";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
+import PasswordIcon from "@mui/icons-material/Password";
 import { capitalCase } from "change-case";
+import styled from "styled-components";
 
+const CenteredContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const UserProfilePage = () => {
   const { user } = useAuth();
@@ -13,7 +20,6 @@ const UserProfilePage = () => {
 
   const handleChangeTab = (event, newValue) => {
     setCurrentTab(newValue);
-   
   };
 
   const PROFILE_TABS = [
@@ -24,7 +30,7 @@ const UserProfilePage = () => {
     },
     {
       value: "password",
-      icon: <AccountBoxIcon sx={{ fontSize: 24 }} />,
+      icon: <PasswordIcon sx={{ fontSize: 24 }} />,
       component: <ProfileUpdatePassword />
     }
   ];
@@ -39,7 +45,8 @@ const UserProfilePage = () => {
         scrollButtons="auto"
         variant="scrollable"
         allowScrollButtonsMobile
-        onChange={ handleChangeTab}>
+        onChange={handleChangeTab}
+      >
         {PROFILE_TABS.map((tab) => (
           <Tab
             // disableRipple

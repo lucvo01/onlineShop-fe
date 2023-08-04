@@ -12,7 +12,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateUserProfile } from "../slices/userSlice";
 
 const UpdateUserSchema = yup.object().shape({
-  name: yup.string().required("Name is required")
+  name: yup.string().required("Name is required"),
+  address: yup.string()
 });
 
 function AccountGeneral() {
@@ -23,7 +24,7 @@ function AccountGeneral() {
   const defaultValues = {
     name: user?.data.name || "",
     email: user?.data.email || "",
-    phoneNumber: user?.data.phoneNumber || "",
+    phone: user?.data.phone || "",
     address: user?.data.address || ""
   };
 
@@ -32,7 +33,6 @@ function AccountGeneral() {
     defaultValues
   });
   const {
-    setValue,
     handleSubmit,
     formState: { isSubmitting }
   } = methods;
@@ -40,45 +40,34 @@ function AccountGeneral() {
   const dispatch = useDispatch();
 
   const onSubmit = (data) => {
-    dispatch(updateUserProfile({ userId: user._id, ...data }));
+    dispatch(updateUserProfile({ userId: user.data._id, ...data }));
   };
 
   return (
-  
-      <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={8}>
-            <Card sx={{ p: 3 }}>
-              <Stack 
-                spacing ={3}
+    <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
+      <Grid container spacing={3}>
+        <Grid item xs={12} md={8}>
+          <Card sx={{ p: 3 }}>
+            <Stack spacing={3}>
+              <FTextField name="name" label="Name" />
+              <FTextField name="email" label="Email" disabled />
+              <FTextField name="address" label="Address" />
+              <FTextField name="phone" label="Phone Number" />
+            </Stack>
+
+            <Stack spacing={3} alignItems="flex-end" sx={{ mt: 3 }}>
+              <LoadingButton
+                type="submit"
+                variant="contained"
+                loading={isSubmitting || isLoading}
               >
-                <FTextField name="name" label="Name" placeholder={user?.data.name} />
-                <FTextField name="email" label="Email" disabled />
-                <FTextField name="address" label="Address" />
-                <FTextField name="phoneNumber" label="Phone Number" />
-              </Stack>
-
-              <Stack spacing={3} alignItems="flex-end" sx={{ mt: 3 }}>
-                <FTextField
-                  name="aboutMe"
-                  multiline
-                  rows={4}
-                  label="About Me"
-                />
-
-                <LoadingButton
-                  type="submit"
-                  variant="contained"
-                  loading={isSubmitting || isLoading}
-                >
-                  Save Changes
-                </LoadingButton>
-              </Stack>
-            </Card>
-          </Grid>
+                Save Changes
+              </LoadingButton>
+            </Stack>
+          </Card>
         </Grid>
-      </FormProvider>
- 
+      </Grid>
+    </FormProvider>
   );
 }
 

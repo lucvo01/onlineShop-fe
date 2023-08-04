@@ -8,7 +8,7 @@ const initialState = {
   isLoading: false,
   error: null,
   products: [],
-  totalPages: null
+  totalPages: 1
 };
 
 const productSlice = createSlice({
@@ -57,15 +57,14 @@ export const getProducts =
     dispatch(productSlice.actions.startLoading());
 
     try {
-      console.log(gender)
       let url = `/products?page=${pageNum}&limit=${limit}`;
 
       if (searchQuery) {
         url += `&name=${searchQuery}`;
       }
 
-      if (gender) {
-           url += `&gender=${gender}`;
+      if (gender.length === 1) {
+        url += `&gender=${gender}`;
       }
       const response = await apiService.get(url);
       dispatch(productSlice.actions.getProductsSuccess(response.data.data));

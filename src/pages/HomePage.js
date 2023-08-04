@@ -14,6 +14,7 @@ import { getProducts } from "../components/slices/productsSlice";
 
 function HomePage() {
   const dispatch = useDispatch();
+  // const [page, setPage] = useState(1);
   const [pageNum, setPageNum] = useState(1);
 
   const { products, isLoading, totalPages, error } = useSelector(
@@ -36,7 +37,6 @@ function HomePage() {
 
   const { searchQuery, gender } = filters;
   useEffect(() => {
-    console.log("gender", gender)
     dispatch(getProducts({ pageNum, searchQuery, gender }));
   }, [dispatch, pageNum, searchQuery, gender]);
 
@@ -77,7 +77,7 @@ function HomePage() {
           <PaginationBar
             pageNum={pageNum}
             setPageNum={setPageNum}
-            totalPageNum={totalPages}
+            totalPages={totalPages}
           />
         </Box>
       </Stack>
@@ -103,11 +103,11 @@ function applyFilter(products, filters) {
   }
 
   // FILTER PRODUCTS
-  if (gender && gender.length > 0) {
-    filteredProducts = filteredProducts.filter((product) =>
-      gender.includes(product.gender)
-    );
-  }
+  // if (gender && gender.length > 0) {
+  //   filteredProducts = filteredProducts.filter((product) =>
+  //     gender.includes(product.gender)
+  //   );
+  // }
 
   if (category !== "All") {
     filteredProducts = filteredProducts.filter(

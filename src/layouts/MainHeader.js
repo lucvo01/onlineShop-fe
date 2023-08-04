@@ -9,22 +9,19 @@ import Logo from "../components/Logo";
 import useAuth from "../hooks/useAuth";
 import Cart from "../components/cart/Cart";
 import { Avatar, Divider, Menu, MenuItem } from "@mui/material";
-import { useLocation, useNavigate, Link as RouterLink } from "react-router-dom";
-import ColorModeButton from '../components/ColorModeButton'
+import { useNavigate, Link as RouterLink } from "react-router-dom";
+import ColorModeButton from "../components/ColorModeButton";
 
 function MainHeader() {
-  let location = useLocation();
-  let from = location.state?.from?.pathname || "/";
   const { user, logout } = useAuth();
   const navigate = useNavigate();
-
+  // console.log("admin", user);
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
-    // console.log("auth", user.data.name)
   };
 
   const handleMenuClose = () => {
@@ -43,6 +40,29 @@ function MainHeader() {
   };
 
   const menuId = "primary-search-account-menu";
+
+  const adminMenu = (
+    <Box>
+      <MenuItem
+        onClick={handleMenuClose}
+        to="/manage_orders"
+        component={RouterLink}
+        sx={{ mx: 1 }}
+      >
+        Manage Orders
+      </MenuItem>
+      <MenuItem
+        onClick={handleMenuClose}
+        to="/manage_products"
+        component={RouterLink}
+        sx={{ mx: 1 }}
+      >
+        Manage Products
+      </MenuItem>
+      <Divider sx={{ borderStyle: "dashed" }} />
+    </Box>
+  );
+
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
@@ -61,10 +81,10 @@ function MainHeader() {
     >
       <Box sx={{ my: 1.5, px: 2.5 }}>
         <Typography variant="subtitle2" noWrap>
-          {user?.data.name}
+          {user?.data?.name}
         </Typography>
         <Typography variant="body2" sx={{ color: "text.secondary" }} noWrap>
-          {user?.data.email}
+          {user?.data?.email}
         </Typography>
       </Box>
 
@@ -80,22 +100,16 @@ function MainHeader() {
       </MenuItem>
       <MenuItem
         onClick={handleMenuClose}
-        to="/orders"
+        to="/my_order"
         component={RouterLink}
         sx={{ mx: 1 }}
       >
         My Order
       </MenuItem>
-      <MenuItem
-        onClick={handleMenuClose}
-        to="/products"
-        component={RouterLink}
-        sx={{ mx: 1 }}
-      >
-        Manage Products
-      </MenuItem>
 
       <Divider sx={{ borderStyle: "dashed" }} />
+
+      {user && user.isAdmin ? adminMenu : <Box></Box>}
 
       <MenuItem onClick={handleLogout} sx={{ m: 1 }}>
         Logout
@@ -125,7 +139,7 @@ function MainHeader() {
           </Typography>
 
           <Box sx={{ flexGrow: 1 }} />
-          <ColorModeButton/>
+          <ColorModeButton />
           <Cart />
           <Box>
             <Avatar

@@ -2,12 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import apiService from "../../app/apiService";
 import { PRODUCTS_PER_PAGE } from "../../app/config";
+import { clearCart } from "./cartSlice";
 
 const initialState = {
   isLoading: false,
   error: null,
   orders: [],
-  totalPages: null
+  totalPages: 1
 };
 
 const ordersSlice = createSlice({
@@ -36,7 +37,6 @@ const ordersSlice = createSlice({
       console.log("set state", state, action);
       const newOrder = action.payload;
       state.orders = [...state.orders, newOrder];
-      console.log(state.orders);
     },
     editOrderSuccess(state, action) {
       state.isLoading = false;
@@ -67,35 +67,34 @@ export const getOrders =
     }
   };
 
-export const getSingleUserOrders = (userId) => async (dispatch) => {
-  dispatch(ordersSlice.actions.startLoading());
-  try {
-    // const params = { pageNum, limit };
-    const response = await apiService.get(`/orders/find/${userId}`);
-    console.log("getSingleOrder", response);
-    // dispatch(ordersSlice.actions.getOrdersSuccess(response.data.data));
-  } catch (error) {
-    dispatch(ordersSlice.actions.hasError(error.message));
-    toast.error(error.message);
-  }
-};
-
-export const createOrder =
-  ({ userId, shipping, subtotal, products, payment_status, payment_method }) =>
+export const getSingleUserOrders =
+  ({ userId }) =>
   async (dispatch) => {
     dispatch(ordersSlice.actions.startLoading());
     try {
+      const response = await apiService.get(`/orders/find/${userId}`);
+      console.log("getSingleOrder", response);
+      // dispatch(ordersSlice.actions.getOrdersSuccess(response.data.data));
+    } catch (error) {
+      dispatch(ordersSlice.actions.hasError(error.message));
+      toast.error(error.message);
+    }
+  };
+
+export const createOrder =
+  ({ userId, products, subtotal, ...data }) =>
+  async (dispatch) => {
+    dispatch(ordersSlice.actions.startLoading());
+    try {
+      console.log(userId);
       const response = await apiService.post("/orders", {
+        ...data,
         userId,
-        shipping,
-        subtotal,
         products,
-        payment_status,
-        payment_method
+        subtotal
       });
       dispatch(ordersSlice.actions.createOrderSuccess(response.data.data));
-      // const orderId = response.data.data._id;
-      // dispatch(getSingleOrder(orderId));
+      dispatch(clearCart());
       toast.success("Create Order successfully");
     } catch (error) {
       dispatch(ordersSlice.actions.hasError(error.message));

@@ -1,4 +1,5 @@
 import {
+  Typography,
   Container,
   Table,
   TableBody,
@@ -8,13 +9,14 @@ import {
   TableRow
 } from "@mui/material";
 import React from "react";
-import {useSelector} from 'react-redux'
+import { useSelector } from "react-redux";
 import RemoveItemButton from "./RemoveItemButton";
 import DecreaseButton from "./DecreaseButton";
 import AddToCartButton from "./AddToCartButton";
+import CardMedia from "@mui/material/CardMedia";
 
 function CartProductList() {
-  const {products, subtotal} = useSelector((state) => state.cart)
+  const { products, subtotal } = useSelector((state) => state.cart);
 
   return (
     <Container>
@@ -33,32 +35,35 @@ function CartProductList() {
             {products?.map((item) => {
               return (
                 <TableRow key={item._id} hover>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell><AddToCartButton product={item} display={"+"}/>{item.quantity}<DecreaseButton product={item} /></TableCell>
+                  <TableCell>
+                    <CardMedia
+                      component="img"
+                      image={item.image}
+                      height="50"
+                      width="100%"
+                      sx={{ display: { xs: "none", md: "block" } }}
+                    />
+                    <Typography>{item.name}</Typography>
+                  </TableCell>
+                  <TableCell>
+                    <AddToCartButton product={item} display={"+"} />
+                    {item.quantity}
+                    <DecreaseButton product={item} />
+                  </TableCell>
                   <TableCell>${item.price}</TableCell>
                   <TableCell>${item.itemTotal.toFixed(2)}</TableCell>
-                  <TableCell><RemoveItemButton product={item} /></TableCell>
-
+                  <TableCell>
+                    <RemoveItemButton product={item} />
+                  </TableCell>
                 </TableRow>
               );
             })}
             <TableRow hover>
-                <TableCell sx={{ display: { xs: "none", md: "table-cell" } }}>
-                  Subtotal:
-                </TableCell>
-                <TableCell
-                  sx={{ display: { xs: "none", md: "table-cell" } }}
-                ></TableCell>
-                <TableCell
-                  sx={{ display: { xs: "none", md: "table-cell" } }}
-                ></TableCell>
-                <TableCell
-                  align="left"
-                  sx={{ display: { xs: "none", md: "table-cell" } }}
-                >
-                  ${subtotal}
-                </TableCell>
-              </TableRow>
+              <TableCell>Subtotal:</TableCell>
+              <TableCell></TableCell>
+              <TableCell></TableCell>
+              <TableCell align="left">${subtotal}</TableCell>
+            </TableRow>
           </TableBody>
         </Table>
       </TableContainer>

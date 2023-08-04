@@ -101,7 +101,7 @@ function ProductsPage() {
           <PaginationBar
             pageNum={pageNum}
             setPageNum={setPageNum}
-            totalPageNum={totalPages}
+            totalPages={totalPages}
           />
         </Box>
       </Box>

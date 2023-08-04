@@ -33,14 +33,14 @@ function Router() {
         <Route path="product/:id" element={<DetailPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/cart/checkout" element={<CheckoutPage />} />
-        <Route path="/order/:ordersId" element={<UserOrderPage />} />
-        <Route path="/orders" element={<OrdersPage />}>
+        <Route path="/my_order" element={<UserOrderPage />} />
+        <Route path="/manage_orders" element={<OrdersPage />}>
           <Route index element={<OrdersPage />} />
           {/* <Route path="create" element={<ProductEditModal />} /> */}
           {/* <Route path=":orderId/edit" element={<OrderEditModal />} /> */}
           {/* <Route path=":orderId/delete" element={<OrderDeleteModal />} /> */}
         </Route>
-        <Route path="/products">
+        <Route path="/manage_products">
           <Route index element={<ProductsPage />} />
           <Route path="create" element={<ProductEditModal />} />
           <Route path=":productId/edit" element={<ProductEditModal />} />
