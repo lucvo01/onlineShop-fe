@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Typography,
   Table,
   TableBody,
@@ -11,13 +12,11 @@ import {
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // import { useLocation, useNavigate } from "react-router-dom";
-import { getSingleUserOrders } from "../components/slices/ordersSlice";
-import PaginationBar from "../components/PaginationBar";
+import { getOrders } from "../../components/slices/ordersSlice";
+import PaginationBar from "../../components/PaginationBar";
 import styled from "styled-components";
-// import useAuth from "../hooks/useAuth";
-import Cookies from "js-cookie";
+import LoadingScreen from "../../components/LoadingScreen";
 import { useNavigate } from "react-router-dom";
-import LoadingScreen from "../components/LoadingScreen";
 
 const CenteredContainer = styled.div`
   display: flex;
@@ -25,23 +24,20 @@ const CenteredContainer = styled.div`
   align-items: center;
 `;
 
-function UserOrderPage() {
+function ManageOrdersPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [pageNum, setPageNum] = useState(1);
-  // const auth = useAuth();
-  // console.log("auth", auth);
-  // const userId = auth.user?.data._id;
-  const user = JSON.parse(Cookies.get("user"));
-  const userId = user._id;
+
   useEffect(() => {
-    // console.log(user);
-    dispatch(getSingleUserOrders({ userId }));
-  }, []);
+    console.log(pageNum);
+    dispatch(getOrders({ pageNum }));
+  }, [dispatch, pageNum]);
 
   const { orders, isLoading, totalPages } = useSelector(
     (state) => state.orders
   );
+  console.log("orders", orders);
 
   return (
     <CenteredContainer>
@@ -50,7 +46,7 @@ function UserOrderPage() {
       ) : (
         <>
           <Typography variant="h5" gutterBottom>
-            My Order
+            Manage Orders
           </Typography>
           <TableContainer>
             <Table>
@@ -63,26 +59,28 @@ function UserOrderPage() {
                   <TableCell>Payment Method</TableCell>
                   <TableCell>Payment Status</TableCell>
                   <TableCell>Delivery Status</TableCell>
-                  <TableCell>Detail</TableCell>
+                  <TableCell>Edit</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {orders?.map((item) => {
+                {orders?.map((order) => {
                   return (
-                    <TableRow key={item._id} hover>
-                      <TableCell>{item._id}</TableCell>
-                      <TableCell>{item.createdAt}</TableCell>
+                    <TableRow key={order._id} hover>
+                      <TableCell>{order._id}</TableCell>
+                      <TableCell>{order.createdAt}</TableCell>
                       <TableCell>product</TableCell>
-                      <TableCell>${item.subtotal}</TableCell>
-                      <TableCell>{item.payment_method}</TableCell>
-                      <TableCell>{item.payment_status}</TableCell>
-                      <TableCell>{item.delivery_status}</TableCell>
+                      <TableCell>${order.subtotal}</TableCell>
+                      <TableCell>{order.payment_method}</TableCell>
+                      <TableCell>{order.payment_status}</TableCell>
+                      <TableCell>{order.delivery_status}</TableCell>
                       <TableCell>
-                        <button
-                          onClick={() => navigate(`/my_order/${item._id}`)}
+                        <Button
+                          onClick={() =>
+                            navigate(`/manage_orders/${order._id}/edit`)
+                          }
                         >
-                          Detail
-                        </button>
+                          Edit
+                        </Button>
                       </TableCell>
                     </TableRow>
                   );
@@ -103,4 +101,4 @@ function UserOrderPage() {
   );
 }
 
-export default UserOrderPage;
+export default ManageOrdersPage;

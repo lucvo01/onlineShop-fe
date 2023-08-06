@@ -52,7 +52,7 @@ const productSlice = createSlice({
 export default productSlice.reducer;
 
 export const getProducts =
-  ({ pageNum, limit = PRODUCTS_PER_PAGE, searchQuery, gender }) =>
+  ({ pageNum = 1, limit = PRODUCTS_PER_PAGE, searchQuery, gender }) =>
   async (dispatch) => {
     dispatch(productSlice.actions.startLoading());
 
@@ -63,7 +63,7 @@ export const getProducts =
         url += `&name=${searchQuery}`;
       }
 
-      if (gender.length === 1) {
+      if (gender && gender.length === 1) {
         url += `&gender=${gender}`;
       }
       const response = await apiService.get(url);

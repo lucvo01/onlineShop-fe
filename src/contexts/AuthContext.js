@@ -1,7 +1,8 @@
-import { createContext, useReducer, useEffect } from "react";
-// import { useSelector } from "react-redux";
+import { createContext, useReducer, useEffect, useContext } from "react";
 import apiService from "../app/apiService";
 import { isValidToken } from "../utils/jwt";
+// import { parseCookies, setCookie, destroyCookie } from "nookies";
+import Cookies from "js-cookie";
 
 const initialState = {
   isInitialized: false,
@@ -25,6 +26,7 @@ const reducer = (state, action) => {
         user
       };
     case LOGIN_SUCCESS:
+      console.log("login sucess", action.payload.user);
       return {
         ...state,
         isAuthenticated: true,
@@ -61,23 +63,39 @@ const setSession = (accessToken) => {
 const AuthContext = createContext({ ...initialState });
 
 function AuthProvider({ children }) {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  let defaultValue = initialState;
+  const cookie = Cookies.get("user");
+
+  if (cookie) {
+    const user = JSON.parse(cookie);
+    defaultValue.isAuthenticated = true;
+    defaultValue.user = { data: user };
+  }
+
+  const [state, dispatch] = useReducer(reducer, defaultValue);
 
   useEffect(() => {
     const initialize = async () => {
       try {
-        const accessToken = window.localStorage.getItem("accessToken");
+        // const accessToken = window.localStorage.getItem("accessToken");
+        if (Cookies.get("user")) {
+          const { accessToken } = JSON.parse(Cookies.get("user"));
 
-        if (accessToken && isValidToken(accessToken)) {
-          setSession(accessToken);
+          if (accessToken && isValidToken(accessToken)) {
+            setSession(accessToken);
+            // const response = await apiService.get("/users/me");
+            // const user = response.data;
+            const user = JSON.parse(Cookies.get("user"));
+            // console.log("user", user);
 
-          const response = await apiService.get("/users/me");
-          const user = response.data;
-
-          dispatch({
-            type: INITIALIZE,
-            payload: { isAuthenticated: true, user }
-          });
+            dispatch({
+              type: INITIALIZE,
+              payload: {
+                isAuthenticated: true,
+                user: { data: user }
+              }
+            });
+          }
         } else {
           setSession(null);
 
@@ -108,10 +126,15 @@ function AuthProvider({ children }) {
     const { user, accessToken } = response.data.data;
 
     setSession(accessToken);
+
     dispatch({
       type: LOGIN_SUCCESS,
       payload: { user }
     });
+
+    Cookies.set("user", JSON.stringify({ ...user, accessToken }), {
+      expires: 2
+    }); // Store the user object for 2 days
 
     callback();
   };
@@ -134,6 +157,7 @@ function AuthProvider({ children }) {
   };
 
   const logout = async (callback) => {
+    // Cookies.remove("user");
     setSession(null);
     dispatch({ type: LOGOUT });
     callback();
@@ -153,4 +177,12 @@ function AuthProvider({ children }) {
   );
 }
 
-export { AuthContext, AuthProvider };
+function useUserState() {
+  var context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error("useUserState must be used within a AuthContext");
+  }
+  return context;
+}
+
+export { AuthContext, useUserState, AuthProvider };

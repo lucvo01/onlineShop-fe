@@ -26,7 +26,6 @@ function ProductsPage() {
   const { products, isLoading, totalPages, error } = useSelector(
     (state) => state.products
   );
-  const from = location.state?.from?.pathname || "/";
 
   const [pageNum, setPageNum] = useState(1);
 
@@ -35,15 +34,14 @@ function ProductsPage() {
   const filters = watch();
 
   useEffect(() => {
-    const res = dispatch(getProducts({ pageNum }));
-    console.log("test", res);
+    dispatch(getProducts({ pageNum }));
   }, [dispatch, pageNum]);
 
   return (
     <Container>
       <Box sx={{ overflowX: "auto" }}>
         <Box sx={{ display: "flex", justifyContent: "center", mt: "1rem" }}>
-          <Button onClick={() => navigate(`/products/create`)}>
+          <Button onClick={() => navigate(`/manage_products/create`)}>
             Create New Product
           </Button>
         </Box>
@@ -77,12 +75,16 @@ function ProductsPage() {
                       sx={{ display: { xs: "none", md: "table-cell" } }}
                     >
                       <Button
-                        onClick={() => navigate(`/products/${item._id}/edit`)}
+                        onClick={() =>
+                          navigate(`/manage_products/${item._id}/edit`)
+                        }
                       >
                         Edit
                       </Button>
                       <Button
-                        onClick={() => navigate(`/products/${item._id}/delete`)}
+                        onClick={() =>
+                          navigate(`/manage_products/${item._id}/delete`)
+                        }
                       >
                         Delete
                       </Button>

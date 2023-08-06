@@ -4,21 +4,28 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
-import Button from "@mui/material/Button";
 import Logo from "../components/Logo";
 import useAuth from "../hooks/useAuth";
+import { useUserState } from "../contexts/AuthContext";
 import Cart from "../components/cart/Cart";
 import { Avatar, Divider, Menu, MenuItem } from "@mui/material";
 import { useNavigate, Link as RouterLink } from "react-router-dom";
 import ColorModeButton from "../components/ColorModeButton";
+import Cookies from "js-cookie";
 
 function MainHeader() {
-  const { user, logout } = useAuth();
+  const { logout } = useAuth();
   const navigate = useNavigate();
-  // console.log("admin", user);
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
+  // const { user } = useUserState();
+  // console.log("useUserState", useUserState());
+
+  // React.useEffect(() => {
+  //   console.log(user);
+  //   console.log("user.name", user);
+  // }, [user]);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -41,7 +48,17 @@ function MainHeader() {
 
   const menuId = "primary-search-account-menu";
 
-  const adminMenu = (
+  // Retrieve user information from cookies
+  const cookie = Cookies.get("user");
+  let user;
+  if (cookie) {
+    user = JSON.parse(Cookies.get("user"));
+  }
+  // console.log("storedUser", user);
+
+  const isAdmin = user && user.isAdmin;
+
+  const adminMenu = isAdmin ? (
     <Box>
       <MenuItem
         onClick={handleMenuClose}
@@ -61,7 +78,7 @@ function MainHeader() {
       </MenuItem>
       <Divider sx={{ borderStyle: "dashed" }} />
     </Box>
-  );
+  ) : null;
 
   const renderMenu = (
     <Menu
@@ -81,10 +98,10 @@ function MainHeader() {
     >
       <Box sx={{ my: 1.5, px: 2.5 }}>
         <Typography variant="subtitle2" noWrap>
-          {user?.data?.name}
+          {user?.name}
         </Typography>
         <Typography variant="body2" sx={{ color: "text.secondary" }} noWrap>
-          {user?.data?.email}
+          {user?.email}
         </Typography>
       </Box>
 
@@ -109,8 +126,8 @@ function MainHeader() {
 
       <Divider sx={{ borderStyle: "dashed" }} />
 
-      {user && user.isAdmin ? adminMenu : <Box></Box>}
-
+      {/* {user && user.isAdmin ? adminMenu : <Box></Box>} */}
+      {adminMenu}
       <MenuItem onClick={handleLogout} sx={{ m: 1 }}>
         Logout
       </MenuItem>

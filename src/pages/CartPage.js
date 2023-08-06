@@ -1,26 +1,11 @@
 import React from "react";
-import {
-  Box,
-  Button,
-  Container,
-  Grid,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow
-} from "@mui/material";
-import { useSelector, useDispatch } from "react-redux";
+import { Box, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { createOrder } from "../components/slices/ordersSlice";
-import { values } from "lodash";
 import CartProductList from "../components/cart/CartProductList";
 
 function CartPage() {
-  const { products, subtotal } = useSelector((state) => state.cart);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const handleClick = () => {
     navigate("/cart/checkout");

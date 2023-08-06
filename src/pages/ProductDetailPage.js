@@ -20,7 +20,7 @@ import LoadingScreen from "../components/LoadingScreen";
 import { Alert } from "@mui/material";
 import AddToCartButton from "../components/cart/AddToCartButton";
 
-function DetailPage() {
+function ProductDetailPage() {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -161,4 +161,4 @@ function DetailPage() {
   );
 }
 
-export default DetailPage;
+export default ProductDetailPage;

@@ -10,6 +10,7 @@ import { FormProvider, FTextField, FUploadAvatar } from "../../components/form";
 import { fData } from "../../utils/numberFormat";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserProfile } from "../slices/userSlice";
+import Cookies from "js-cookie";
 
 const UpdateUserSchema = yup.object().shape({
   name: yup.string().required("Name is required"),
@@ -17,15 +18,16 @@ const UpdateUserSchema = yup.object().shape({
 });
 
 function AccountGeneral() {
-  const { user } = useAuth();
+  // const { user } = useAuth();
+  const user = JSON.parse(Cookies.get("user"));
   // const isLoading = useSelector((state) => state.user.isLoading);
   const isLoading = false;
 
   const defaultValues = {
-    name: user?.data.name || "",
-    email: user?.data.email || "",
-    phone: user?.data.phone || "",
-    address: user?.data.address || ""
+    name: user?.name || "",
+    email: user?.email || "",
+    phone: user?.phone || "",
+    address: user?.address || ""
   };
 
   const methods = useForm({
@@ -40,7 +42,7 @@ function AccountGeneral() {
   const dispatch = useDispatch();
 
   const onSubmit = (data) => {
-    dispatch(updateUserProfile({ userId: user.data._id, ...data }));
+    dispatch(updateUserProfile({ userId: user._id, ...data }));
   };
 
   return (

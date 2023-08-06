@@ -7,7 +7,12 @@ import { clearCart } from "./cartSlice";
 const initialState = {
   isLoading: false,
   error: null,
-  orders: [],
+  orders: [
+    {
+      productId: null,
+      quantity: 1
+    }
+  ],
   totalPages: 1
 };
 
@@ -59,7 +64,7 @@ export const getOrders =
       const response = await apiService.get(
         `/orders?page=${pageNum}&limit=${limit}`
       );
-      console.log("getOrders", response);
+      // console.log("getOrders", response);
       dispatch(ordersSlice.actions.getOrdersSuccess(response.data.data));
     } catch (error) {
       dispatch(ordersSlice.actions.hasError(error.message));
@@ -73,8 +78,7 @@ export const getSingleUserOrders =
     dispatch(ordersSlice.actions.startLoading());
     try {
       const response = await apiService.get(`/orders/find/${userId}`);
-      console.log("getSingleOrder", response);
-      // dispatch(ordersSlice.actions.getOrdersSuccess(response.data.data));
+      dispatch(ordersSlice.actions.getOrdersSuccess(response.data.data));
     } catch (error) {
       dispatch(ordersSlice.actions.hasError(error.message));
       toast.error(error.message);
@@ -115,18 +119,18 @@ export const deleteOrder = (orderId) => async (dispatch) => {
   }
 };
 
-// export const editOrder =
-//   ({ ...values, orderId }) =>
-//   async (dispatch) => {
-//     dispatch(ordersSlice.actions.startLoading());
-//     try {
-//       await apiService.put(`/orders/${orderId}/edit`, {
-//         ...values
-//       });
-//       toast.success("Edit Order successfully");
-//       dispatch(getOrders());
-//     } catch (error) {
-//       dispatch(ordersSlice.actions.hasError(error.message));
-//       toast.error(error.message);
-//     }
-//   };
+export const editOrder =
+  ({ orderId, ...data }) =>
+  async (dispatch) => {
+    dispatch(ordersSlice.actions.startLoading());
+    try {
+      await apiService.put(`/orders/${orderId}`, {
+        ...data
+      });
+      toast.success("Edit Order successfully");
+      dispatch(getOrders());
+    } catch (error) {
+      dispatch(ordersSlice.actions.hasError(error.message));
+      toast.error(error.message);
+    }
+  };

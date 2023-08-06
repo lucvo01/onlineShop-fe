@@ -14,8 +14,7 @@ import useAuth from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { FormProvider, FTextField, FUploadAvatar } from "../../components/form";
-import { fData } from "../../utils/numberFormat";
+import { FormProvider, FTextField } from "../../components/form";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserProfile } from "../slices/userSlice";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -50,8 +49,9 @@ function ProfileUpdatePassword() {
 
   const dispatch = useDispatch();
 
-  const onSubmit = (data) => {
-    dispatch(updateUserProfile({ userId: user.data._id, ...data }));
+  const onSubmit = (password) => {
+    console.log("password", password);
+    dispatch(updateUserProfile({ userId: user.data._id, ...password }));
   };
 
   return (

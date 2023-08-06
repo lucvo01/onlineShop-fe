@@ -32,7 +32,7 @@ const cartSlice = createSlice({
         position: "bottom-left"
       });
       localStorage.setItem("products", JSON.stringify(state.products));
-      console.log("items", state.products);
+      // console.log("items", state.products);
     },
     decreaseItem: (state, action) => {
       const itemIndex = state.products.findIndex(

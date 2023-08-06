@@ -10,6 +10,8 @@ import { createOrder } from "../components/slices/ordersSlice";
 import useAuth from "../hooks/useAuth";
 
 import { useNavigate } from "react-router-dom";
+import { useUserState } from "../contexts/AuthContext";
+import Cookies from "js-cookie";
 
 const shippingSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Email is required"),
@@ -25,12 +27,16 @@ function CheckoutPage() {
     return state.orders;
   });
   const { subtotal, products } = useSelector((state) => state.cart);
-  const { user } = useAuth();
+  // const { user } = useAuth();
+  // const { user } = useUserState();
+  // console.log(useAuth());
+  const user = JSON.parse(Cookies.get("user"));
+  console.log("storedUser", user);
 
   const defaultValues = {
-    email: user?.data.email || "",
-    phone: user?.data.phone || "",
-    shipping: user?.data.address || ""
+    email: user?.email || "",
+    phone: user?.phone || "",
+    shipping: user?.address || ""
   };
 
   const methods = useForm({
@@ -47,16 +53,16 @@ function CheckoutPage() {
 
   const onSubmit = async (data) => {
     try {
-      // console.log(user.data._id);
+      console.log(user);
       dispatch(
         createOrder({
           ...data,
-          userId: user.data._id,
+          userId: user._id,
           subtotal,
           products
         })
       );
-      navigate("/orders");
+      navigate("/my_order");
     } catch (error) {
       console.log(error);
     }
