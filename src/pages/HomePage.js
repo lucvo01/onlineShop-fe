@@ -115,18 +115,18 @@ function applyFilter(products, filters) {
     );
   }
 
-  if (priceRange) {
-    filteredProducts = filteredProducts.filter((product) => {
-      if (priceRange === "below") {
-        return product.price < 25;
-      } else if (priceRange === "between") {
-        return product.price >= 25 && product.price <= 75;
-      } else if (priceRange === "above") {
-        return product.price > 75;
-      }
-      return true;
-    });
-  }
+  // if (priceRange) {
+  //   filteredProducts = filteredProducts.filter((product) => {
+  //     if (priceRange === "below") {
+  //       return product.price < 25;
+  //     } else if (priceRange === "between") {
+  //       return product.price >= 25 && product.price <= 75;
+  //     } else if (priceRange === "above") {
+  //       return product.price > 75;
+  //     }
+  //     return true;
+  //   });
+  // }
 
   if (searchQuery) {
     // filteredProducts = filteredProducts.filter((product) =>

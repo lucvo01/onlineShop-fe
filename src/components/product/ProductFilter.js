@@ -3,26 +3,26 @@ import { FMultiCheckbox, FRadioGroup } from "../form";
 import ClearAllIcon from "@mui/icons-material/ClearAll";
 
 export const SORT_BY_OPTIONS = [
-  { value: "featured", label: "Featured" },
-  { value: "newest", label: "Newest" },
+  // { value: "featured", label: "Featured" },
+  // { value: "newest", label: "Newest" },
   { value: "priceDesc", label: "Price: High-Low" },
   { value: "priceAsc", label: "Price: Low-High" }
 ];
 
 export const FILTER_GENDER_OPTIONS = ["Male", "Female"];
 
-export const FILTER_CATEGORY_OPTIONS = [
-  "All",
-  "Shoes",
-  "Apparel",
-  "Accessories"
-];
+// export const FILTER_CATEGORY_OPTIONS = [
+//   "All",
+//   "Shoes",
+//   "Apparel",
+//   "Accessories"
+// ];
 
-export const FILTER_PRICE_OPTIONS = [
-  { value: "below", label: "Below $25" },
-  { value: "between", label: "Between $25 - $75" },
-  { value: "above", label: "Above $75" }
-];
+// export const FILTER_PRICE_OPTIONS = [
+//   { value: "below", label: "Below $25" },
+//   { value: "between", label: "Between $25 - $75" },
+//   { value: "above", label: "Above $75" }
+// ];
 
 function ProductFilter({ resetFilter }) {
   return (
@@ -38,7 +38,7 @@ function ProductFilter({ resetFilter }) {
         />
       </Stack>
 
-      <Stack spacing={1}>
+      {/* <Stack spacing={1}>
         <Typography variant="h6" sx={{ fontWeight: 600 }}>
           Category
         </Typography>
@@ -47,9 +47,9 @@ function ProductFilter({ resetFilter }) {
           options={FILTER_CATEGORY_OPTIONS}
           row={false}
         />
-      </Stack>
+      </Stack> */}
 
-      <Stack spacing={1}>
+      {/* <Stack spacing={1}>
         <Typography variant="h6" sx={{ fontWeight: 600 }}>
           Price
         </Typography>
@@ -58,7 +58,7 @@ function ProductFilter({ resetFilter }) {
           options={FILTER_PRICE_OPTIONS.map((item) => item.value)}
           getOptionLabel={FILTER_PRICE_OPTIONS.map((item) => item.label)}
         />
-      </Stack>
+      </Stack> */}
 
       <Box>
         <Button

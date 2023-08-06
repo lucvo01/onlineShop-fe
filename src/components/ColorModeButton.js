@@ -9,6 +9,7 @@ import { ColorModeContext } from "../contexts/ThemeProvider";
 function ColorModeButton() {
   const theme = useTheme();
   const colorMode = React.useContext(ColorModeContext);
+
   return (
     <Box
       sx={{

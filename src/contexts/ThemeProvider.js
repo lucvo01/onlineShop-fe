@@ -2,7 +2,7 @@ import * as React from "react";
 import { CssBaseline } from "@mui/material";
 import {
   createTheme,
-  ThemeProvider as MUIThemeProvider,
+  ThemeProvider as MUIThemeProvider
 } from "@mui/material/styles";
 
 const PRIMARY = {
@@ -11,7 +11,7 @@ const PRIMARY = {
   main: "#FF8243",
   dark: "#E26A2C",
   darker: "#cc571f",
-  contrastText: "#FFF",
+  contrastText: "#FFF"
 };
 const SECONDARY = {
   lighter: "#D6E4FF",
@@ -19,7 +19,7 @@ const SECONDARY = {
   main: "#3366FF",
   dark: "#1939B7",
   darker: "#091A7A",
-  contrastText: "#FFF",
+  contrastText: "#FFF"
 };
 const SUCCESS = {
   lighter: "#E9FCD4",
@@ -27,20 +27,28 @@ const SUCCESS = {
   main: "#54D62C",
   dark: "#229A16",
   darker: "#08660D",
-  contrastText: "#FFF",
+  contrastText: "#FFF"
 };
 
 const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
 const ThemeProvider = ({ children }) => {
-   const [mode, setMode] = React.useState('light');
+  // const [mode, setMode] = React.useState("light");
+  const [mode, setMode] = React.useState(
+    window.localStorage.getItem("colorMode") || "light"
+  );
+
   const colorMode = React.useMemo(
     () => ({
       toggleColorMode: () => {
-        setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
-      },
+        setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+        window.localStorage.setItem(
+          "colorMode",
+          mode === "light" ? "dark" : "light"
+        );
+      }
     }),
-    [],
+    [mode]
   );
 
   const theme = React.useMemo(
@@ -50,13 +58,13 @@ const ThemeProvider = ({ children }) => {
           primary: PRIMARY,
           secondary: SECONDARY,
           success: SUCCESS,
+          // mode: `${mode}`
           mode: `${mode}`
         }
       }),
     [mode]
   );
 
-  
   // const themeOptions = {
   //   palette: {
   //     primary: PRIMARY,
@@ -65,9 +73,7 @@ const ThemeProvider = ({ children }) => {
   //     mode
   //   },
   //   shape: { borderRadius: 8 },
-
   // };
-
   // const theme = createTheme(themeOptions);
 
   return (
@@ -78,6 +84,6 @@ const ThemeProvider = ({ children }) => {
       </MUIThemeProvider>
     </ColorModeContext.Provider>
   );
-}
+};
 
-export  {ThemeProvider, ColorModeContext};
+export { ThemeProvider, ColorModeContext };

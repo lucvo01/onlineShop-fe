@@ -35,7 +35,6 @@ const productSlice = createSlice({
       state.isLoading = false;
       state.error = null;
       const newProduct = action.payload;
-      // state.products = state.products.push(newProduct);
       state.products = [...state.products, newProduct];
     },
     editProductSuccess(state, action) {
@@ -55,18 +54,19 @@ export const getProducts =
   ({ pageNum = 1, limit = PRODUCTS_PER_PAGE, searchQuery, gender }) =>
   async (dispatch) => {
     dispatch(productSlice.actions.startLoading());
-
     try {
-      let url = `/products?page=${pageNum}&limit=${limit}`;
-
-      if (searchQuery) {
-        url += `&name=${searchQuery}`;
-      }
-
-      if (gender && gender.length === 1) {
-        url += `&gender=${gender}`;
-      }
-      const response = await apiService.get(url);
+      const params = { page: pageNum, limit };
+      if (searchQuery) params.name = searchQuery;
+      if (gender && gender.length === 1) params.gender = gender;
+      const response = await apiService.get("/products", { params });
+      // let url = `/products?page=${pageNum}&limit=${limit}`;
+      // if (searchQuery) {
+      //   url += `&name=${searchQuery}`;
+      // }
+      // if (gender && gender.length === 1) {
+      //   url += `&gender=${gender}`;
+      // }
+      // const response = await apiService.get(url);
       dispatch(productSlice.actions.getProductsSuccess(response.data.data));
     } catch (error) {
       dispatch(productSlice.actions.hasError(error.message));
@@ -113,7 +113,6 @@ export const editProduct =
   async (dispatch) => {
     dispatch(productSlice.actions.startLoading());
     try {
-      // upload image to cloudinary
       const imageUrl = await cloudinaryUpload(image);
       await apiService.put(`/products/${productId}/edit`, {
         name,

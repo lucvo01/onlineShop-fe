@@ -76,6 +76,14 @@ function MainHeader() {
       >
         Manage Products
       </MenuItem>
+      <MenuItem
+        onClick={handleMenuClose}
+        to="/manage_users"
+        component={RouterLink}
+        sx={{ mx: 1 }}
+      >
+        Manage Users
+      </MenuItem>
       <Divider sx={{ borderStyle: "dashed" }} />
     </Box>
   ) : null;
@@ -109,7 +117,7 @@ function MainHeader() {
 
       <MenuItem
         onClick={handleMenuClose}
-        to="/account"
+        to="/my_profile"
         component={RouterLink}
         sx={{ mx: 1 }}
       >

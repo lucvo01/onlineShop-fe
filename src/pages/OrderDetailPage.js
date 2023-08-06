@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Box,
   Chip,
@@ -14,32 +14,38 @@ import {
   Typography,
   CardMedia
 } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import LoadingScreen from "../components/LoadingScreen";
 import Cookies from "js-cookie";
+import { getAnOrder } from "../components/slices/ordersSlice";
 
 function OrderDetailPage() {
+  const dispatch = useDispatch();
   const { orderId } = useParams();
-  const { orders, isLoading } = useSelector((state) => state.orders);
 
-  const order = orders.find((order) => order._id === orderId);
-  const products = order.products;
+  useEffect(() => {
+    dispatch(getAnOrder({ orderId }));
+  }, [dispatch, orderId]);
 
-  console.log("isLoading", isLoading);
-  console.log("products", products);
-  console.log("order", order);
+  const { currentOrder, isLoading } = useSelector((state) => state.orders);
 
-  const cookie = Cookies.get("user");
-  let user;
-  if (cookie) {
-    user = JSON.parse(Cookies.get("user"));
-  }
-  // console.log("storedUser", user);
+  // const order = orders.find((order) => order._id === orderId);
+  const products = currentOrder.products;
 
-  const isAdmin = user && user.isAdmin;
+  // console.log("isLoading", isLoading);
+  // console.log("products", products);
+  // console.log("currentOrder", currentOrder);
 
-  const renderEdit = isAdmin ? <></> : null;
+  // const cookie = Cookies.get("user");
+  // let user;
+  // if (cookie) {
+  //   user = JSON.parse(Cookies.get("user"));
+  // }
+
+  // const isAdmin = user && user.isAdmin;
+
+  // const renderEdit = isAdmin ? <></> : null;
 
   return (
     <Container>
@@ -76,7 +82,7 @@ function OrderDetailPage() {
                         <TableCell>{item.quantity}</TableCell>
                         <TableCell>${item._id.price}</TableCell>
                         <TableCell>${item._id.price * item.quantity}</TableCell>
-                        <TableCell>{order.delivery_status}</TableCell>
+                        <TableCell>{currentOrder.delivery_status}</TableCell>
                       </TableRow>
                     );
                   })}
@@ -84,7 +90,7 @@ function OrderDetailPage() {
                     <TableCell>Subtotal:</TableCell>
                     <TableCell></TableCell>
                     <TableCell></TableCell>
-                    <TableCell align="left">${order.subtotal}</TableCell>
+                    <TableCell align="left">${currentOrder.subtotal}</TableCell>
                   </TableRow>
                 </TableBody>
               </Table>
@@ -99,25 +105,25 @@ function OrderDetailPage() {
             <Stack spacing={3}>
               <Stack spacing={1}>
                 <Typography style={{ fontWeight: "bold" }}>Customer</Typography>
-                <Typography>{order.email}</Typography>
+                <Typography>{currentOrder.email}</Typography>
                 <Typography></Typography>
               </Stack>
               <Stack spacing={1}>
                 <Typography style={{ fontWeight: "bold" }}>
                   Dividery To
                 </Typography>
-                <Typography>Address: {order.shipping}</Typography>
-                <Typography>Phone: {order.phone}</Typography>
+                <Typography>Address: {currentOrder.shipping}</Typography>
+                <Typography>Phone: {currentOrder.phone}</Typography>
               </Stack>
               <Stack spacing={1}>
                 <Typography style={{ fontWeight: "bold" }}>
-                  Order Info
+                  currentOrder Info
                 </Typography>
                 <Box>
-                  Payment status: <Chip label={order.payment_status} />
+                  Payment status: <Chip label={currentOrder.payment_status} />
                 </Box>
                 <Box>
-                  Deliverd status: <Chip label={order.delivery_status} />{" "}
+                  Deliverd status: <Chip label={currentOrder.delivery_status} />{" "}
                 </Box>
               </Stack>
             </Stack>

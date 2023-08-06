@@ -23,85 +23,72 @@ import OrderEditModal from "../components/order/OrderEditModal";
 function Router() {
   return (
     <Routes>
-      <Route path="/" element={<MainLayout />}>
+      <Route
+        path="/"
+        element={
+          // <AuthRequire>
+          <MainLayout />
+          // </AuthRequire>
+        }
+      >
         <Route index element={<HomePage />} />
         <Route path="product/:id" element={<ProductDetailPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/cart/checkout" element={<CheckoutPage />} />
 
-        <Route path="/my_order">
-          <Route
-            index
-            element={
-              <AuthRequire>
-                <UserOrderPage />
-              </AuthRequire>
-            }
-          />
-          <Route
-            path=":orderId"
-            element={
-              <AuthRequire>
-                <OrderDetailPage />
-              </AuthRequire>
-            }
-          />
+        <Route
+          path="/my_order"
+          element={
+            <AuthRequire>
+              <UserOrderPage />
+            </AuthRequire>
+          }
+        >
+          <Route index element={<UserOrderPage />} />
+          <Route path=":orderId" element={<OrderDetailPage />} />
         </Route>
 
-        <Route path="/my_profile">
-          <Route
-            index
-            element={
-              <AuthRequire>
-                <UserProfilePage />
-              </AuthRequire>
-            }
-          />
+        <Route
+          path="/my_profile"
+          element={
+            <AuthRequire>
+              <UserProfilePage />
+            </AuthRequire>
+          }
+        >
+          <Route index element={<UserProfilePage />} />
         </Route>
 
         <Route path="/manage_orders">
-          <Route
-            index
-            element={
-              <AuthRequire>
-                <ManageOrdersPage />
-              </AuthRequire>
-            }
-          />
-          <Route
-            path=":orderId"
-            element={
-              <AuthRequire>
-                <OrderDetailPage />
-              </AuthRequire>
-            }
-          />
+          <Route index element={<ManageOrdersPage />} />
+          <Route path=":orderId" element={<OrderDetailPage />} />
           <Route path=":orderId/edit" element={<OrderEditModal />} />
         </Route>
 
-        <Route path="/manage_products">
-          <Route
-            index
-            element={
-              <AuthRequire>
-                <ManageProductsPage />
-              </AuthRequire>
-            }
-          />
+        <Route
+          path="/manage_products"
+          element={
+            <AuthRequire>
+              <ManageProductsPage />
+            </AuthRequire>
+          }
+        >
+          <Route index element={<ManageProductsPage />} />
           <Route path="create" element={<ProductEditModal />} />
           <Route path=":productId/edit" element={<ProductEditModal />} />
           <Route path=":productId/delete" element={<ProductDeleteModal />} />
         </Route>
 
-        <Route path="/manage_users" />
         <Route
-          index
+          path="/manage_users"
           element={
             <AuthRequire>
               <ManageUsersPage />
             </AuthRequire>
           }
         />
+        <Route index element={<ManageUsersPage />} />
+        {/* <Route path="/account" element={<UserProfilePage />} /> */}
       </Route>
 
       <Route element={<BlankLayout />}>

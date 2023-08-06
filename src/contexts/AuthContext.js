@@ -157,7 +157,7 @@ function AuthProvider({ children }) {
   };
 
   const logout = async (callback) => {
-    // Cookies.remove("user");
+    Cookies.remove("user");
     setSession(null);
     dispatch({ type: LOGOUT });
     callback();

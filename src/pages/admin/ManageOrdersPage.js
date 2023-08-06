@@ -30,14 +30,13 @@ function ManageOrdersPage() {
   const [pageNum, setPageNum] = useState(1);
 
   useEffect(() => {
-    console.log(pageNum);
+    // console.log(pageNum);
     dispatch(getOrders({ pageNum }));
   }, [dispatch, pageNum]);
 
   const { orders, isLoading, totalPages } = useSelector(
     (state) => state.orders
   );
-  console.log("orders", orders);
 
   return (
     <CenteredContainer>
@@ -60,12 +59,13 @@ function ManageOrdersPage() {
                   <TableCell>Payment Status</TableCell>
                   <TableCell>Delivery Status</TableCell>
                   <TableCell>Edit</TableCell>
+                  <TableCell>Detail</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {orders?.map((order) => {
+                {orders?.map((order, index) => {
                   return (
-                    <TableRow key={order._id} hover>
+                    <TableRow key={order._id || index} hover>
                       <TableCell>{order._id}</TableCell>
                       <TableCell>{order.createdAt}</TableCell>
                       <TableCell>product</TableCell>
@@ -80,6 +80,15 @@ function ManageOrdersPage() {
                           }
                         >
                           Edit
+                        </Button>
+                      </TableCell>
+                      <TableCell>
+                        <Button
+                          onClick={() =>
+                            navigate(`/manage_orders/${order._id}`)
+                          }
+                        >
+                          Detail
                         </Button>
                       </TableCell>
                     </TableRow>

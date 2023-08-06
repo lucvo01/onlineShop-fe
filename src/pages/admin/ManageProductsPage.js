@@ -18,7 +18,7 @@ import PaginationBar from "../../components/PaginationBar";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../components/slices/productsSlice";
 
-function ProductsPage() {
+function ManageProductsPage() {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
@@ -58,9 +58,9 @@ function ProductsPage() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {products.map((item) => {
+              {products.map((item, index) => {
                 return (
-                  <TableRow key={item._id} hover>
+                  <TableRow key={item._id || index} hover>
                     <TableCell
                       sx={{
                         display: "flex",
@@ -111,4 +111,4 @@ function ProductsPage() {
   );
 }
 
-export default ProductsPage;
+export default ManageProductsPage;

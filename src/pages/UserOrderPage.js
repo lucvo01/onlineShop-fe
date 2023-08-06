@@ -34,10 +34,11 @@ function UserOrderPage() {
   // const userId = auth.user?.data._id;
   const user = JSON.parse(Cookies.get("user"));
   const userId = user._id;
+
   useEffect(() => {
     // console.log(user);
     dispatch(getSingleUserOrders({ userId }));
-  }, []);
+  }, [dispatch, userId]);
 
   const { orders, isLoading, totalPages } = useSelector(
     (state) => state.orders
@@ -67,19 +68,19 @@ function UserOrderPage() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {orders?.map((item) => {
+                {orders?.map((order, index) => {
                   return (
-                    <TableRow key={item._id} hover>
-                      <TableCell>{item._id}</TableCell>
-                      <TableCell>{item.createdAt}</TableCell>
+                    <TableRow key={order._id || index} hover>
+                      <TableCell>{order._id}</TableCell>
+                      <TableCell>{order.createdAt}</TableCell>
                       <TableCell>product</TableCell>
-                      <TableCell>${item.subtotal}</TableCell>
-                      <TableCell>{item.payment_method}</TableCell>
-                      <TableCell>{item.payment_status}</TableCell>
-                      <TableCell>{item.delivery_status}</TableCell>
+                      <TableCell>${order.subtotal}</TableCell>
+                      <TableCell>{order.payment_method}</TableCell>
+                      <TableCell>{order.payment_status}</TableCell>
+                      <TableCell>{order.delivery_status}</TableCell>
                       <TableCell>
                         <button
-                          onClick={() => navigate(`/my_order/${item._id}`)}
+                          onClick={() => navigate(`/my_order/${order._id}`)}
                         >
                           Detail
                         </button>

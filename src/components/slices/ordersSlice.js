@@ -13,7 +13,8 @@ const initialState = {
       quantity: 1
     }
   ],
-  totalPages: 1
+  totalPages: 1,
+  currentOrder: {}
 };
 
 const ordersSlice = createSlice({
@@ -36,10 +37,15 @@ const ordersSlice = createSlice({
       state.orders = action.payload.orders;
       state.totalPages = action.payload.totalPages;
     },
+    getCurrentOrder(state, action) {
+      state.isLoading = false;
+      state.error = null;
+      state.currentOrder = action.payload;
+      console.log("action.payload", action.payload);
+    },
     createOrderSuccess(state, action) {
       state.isLoading = false;
       state.error = null;
-      console.log("set state", state, action);
       const newOrder = action.payload;
       state.orders = [...state.orders, newOrder];
     },
@@ -64,7 +70,6 @@ export const getOrders =
       const response = await apiService.get(
         `/orders?page=${pageNum}&limit=${limit}`
       );
-      // console.log("getOrders", response);
       dispatch(ordersSlice.actions.getOrdersSuccess(response.data.data));
     } catch (error) {
       dispatch(ordersSlice.actions.hasError(error.message));
@@ -79,6 +84,21 @@ export const getSingleUserOrders =
     try {
       const response = await apiService.get(`/orders/find/${userId}`);
       dispatch(ordersSlice.actions.getOrdersSuccess(response.data.data));
+    } catch (error) {
+      dispatch(ordersSlice.actions.hasError(error.message));
+      toast.error(error.message);
+    }
+  };
+
+export const getAnOrder =
+  ({ orderId }) =>
+  async (dispatch) => {
+    dispatch(ordersSlice.actions.startLoading());
+    try {
+      const response = await apiService.get(`/orders/${orderId}`);
+      // console.log("ordersSlice", response);
+      dispatch(ordersSlice.actions.getCurrentOrder(response.data.data));
+      // console.log("ordersSlice", state.orders);
     } catch (error) {
       dispatch(ordersSlice.actions.hasError(error.message));
       toast.error(error.message);
@@ -109,7 +129,7 @@ export const createOrder =
 export const deleteOrder = (orderId) => async (dispatch) => {
   dispatch(ordersSlice.actions.startLoading());
   try {
-    console.log("id", orderId);
+    // console.log("id", orderId);
     await apiService.put(`/orders/${orderId}/delete`);
     toast.success("Delete Order successfully");
     dispatch(getOrders());

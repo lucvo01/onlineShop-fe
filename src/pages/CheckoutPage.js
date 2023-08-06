@@ -6,7 +6,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { createOrder } from "../components/slices/ordersSlice";
+import {
+  createOrder,
+  getSingleUserOrders
+} from "../components/slices/ordersSlice";
 import useAuth from "../hooks/useAuth";
 
 import { useNavigate } from "react-router-dom";
@@ -62,6 +65,7 @@ function CheckoutPage() {
           products
         })
       );
+      dispatch(getSingleUserOrders({ userId: user._id }));
       navigate("/my_order");
     } catch (error) {
       console.log(error);
