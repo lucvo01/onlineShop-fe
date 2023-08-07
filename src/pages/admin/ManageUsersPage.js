@@ -51,7 +51,7 @@ function ManageUsersPage() {
                   <TableCell>{user.name}</TableCell>
 
                   <TableCell>
-                    <Button
+                    <Button variant="outlined"
                       onClick={() =>
                         navigate(`/manage_users/${user._id}/orders`)
                       }

@@ -15,6 +15,7 @@ import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { useUserState } from "../contexts/AuthContext";
 import Cookies from "js-cookie";
+import PaypalButton from "../components/cart/PaypalButton";
 
 const shippingSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Email is required"),
@@ -101,6 +102,7 @@ function CheckoutPage() {
               <option>Cash On Delivery</option>
               <option>Credit Card</option>
             </FSelect>
+            <PaypalButton/>
           </Stack>
 
           <Stack spacing={3} alignItems="flex-end" sx={{ mt: 3 }}>

@@ -16,7 +16,6 @@ import SearchInput from "../components/SearchInput";
 
 function HomePage() {
   const dispatch = useDispatch();
-  // const [page, setPage] = useState(1);
   const [pageNum, setPageNum] = useState(1);
 
   const { products, isLoading, totalPages, error } = useSelector(
@@ -39,7 +38,6 @@ function HomePage() {
 
   const { searchQuery, gender } = filters;
   useEffect(() => {
-    console.log("gender",gender)
     dispatch(getProducts({ pageNum, searchQuery, gender }));
   }, [dispatch, pageNum, searchQuery, gender]);
 
@@ -115,11 +113,11 @@ function applyFilter(products, filters) {
   //   );
   // }
 
-  if (category !== "All") {
-    filteredProducts = filteredProducts.filter(
-      (product) => product.category === category
-    );
-  }
+  // if (category !== "All") {
+  //   filteredProducts = filteredProducts.filter(
+  //     (product) => product.category === category
+  //   );
+  // }
 
   // if (priceRange) {
   //   filteredProducts = filteredProducts.filter((product) => {
@@ -134,11 +132,11 @@ function applyFilter(products, filters) {
   //   });
   // }
 
-  if (searchQuery) {
-    // filteredProducts = filteredProducts.filter((product) =>
-    //   product.name.toLowerCase().includes(searchQuery.toLowerCase())
-    // );
-  }
+  // if (searchQuery) {
+  //   filteredProducts = filteredProducts.filter((product) =>
+  //     product.name.toLowerCase().includes(searchQuery.toLowerCase())
+  //   );
+  // }
 
   return filteredProducts;
 }
