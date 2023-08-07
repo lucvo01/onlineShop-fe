@@ -10,7 +10,25 @@ const initialOptions = {
 function PaypalButton(){
  return (
    <PayPalScriptProvider options={initialOptions}>
-     <PayPalButtons type="subscription" />
+     <PayPalButtons createOrder={(data, action) => {
+      return actions.order.create({
+        purchase_units: [
+          {
+            amount: {
+              value: "13.99"
+            }
+          }
+        ]
+      })
+     }}
+     onApprove = {(data, action) => {
+      return actions.order.capture().then(function (details) {
+        alert(
+          "Transaction Completed By" + details.payer.name.given_name
+        )
+      })
+     }}
+     />
    </PayPalScriptProvider>
  );
 }
