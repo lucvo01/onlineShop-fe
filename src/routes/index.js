@@ -27,7 +27,7 @@ function Router() {
         <Route index element={<HomePage />} />
         <Route path="product/:id" element={<ProductDetailPage />} />
         <Route path="/cart" element={<CartPage />} />
-        <Route path="/cart/checkout" element={<CheckoutPage />} />
+        <Route path="/cart/checkout" element={<AuthRequire><CheckoutPage /> </AuthRequire>} />
 
         <Route path="/my_order">
           <Route
@@ -117,6 +117,14 @@ function Router() {
             </AuthRequire>
           }
         />
+        {/* <Route
+          path=":userId/Deactivate"
+          element={
+            <AuthRequire>
+              <OrderDetailPage />
+            </AuthRequire>
+          }
+        /> */}
       </Route>
 
       <Route element={<BlankLayout />}>

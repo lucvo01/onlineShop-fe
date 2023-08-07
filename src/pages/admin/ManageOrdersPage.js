@@ -17,6 +17,7 @@ import PaginationBar from "../../components/PaginationBar";
 import styled from "styled-components";
 import LoadingScreen from "../../components/LoadingScreen";
 import { useNavigate } from "react-router-dom";
+import formatDate from "../../utils/formatDate";
 
 const CenteredContainer = styled.div`
   display: flex;
@@ -53,7 +54,7 @@ function ManageOrdersPage() {
                 <TableRow>
                   <TableCell>OrderId</TableCell>
                   <TableCell>Date</TableCell>
-                  <TableCell>Product</TableCell>
+                  {/* <TableCell>Product</TableCell> */}
                   <TableCell>Amount</TableCell>
                   <TableCell>Payment Method</TableCell>
                   <TableCell>Payment Status</TableCell>
@@ -67,8 +68,8 @@ function ManageOrdersPage() {
                   return (
                     <TableRow key={order._id || index} hover>
                       <TableCell>{order._id}</TableCell>
-                      <TableCell>{order.createdAt}</TableCell>
-                      <TableCell>product</TableCell>
+                      <TableCell>{formatDate(order.createdAt)}</TableCell>
+                      {/* <TableCell>product</TableCell> */}
                       <TableCell>${order.subtotal}</TableCell>
                       <TableCell>{order.payment_method}</TableCell>
                       <TableCell>{order.payment_status}</TableCell>

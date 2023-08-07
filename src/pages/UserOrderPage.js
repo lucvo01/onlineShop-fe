@@ -18,6 +18,7 @@ import styled from "styled-components";
 import Cookies from "js-cookie";
 import { useNavigate, useParams } from "react-router-dom";
 import LoadingScreen from "../components/LoadingScreen";
+import formatDate from "../utils/formatDate";
 
 const CenteredContainer = styled.div`
   display: flex;
@@ -72,7 +73,7 @@ function UserOrderPage() {
                   return (
                     <TableRow key={order._id || index} hover>
                       <TableCell>{order._id}</TableCell>
-                      <TableCell>{order.createdAt}</TableCell>
+                      <TableCell>{formatDate(order.createdAt)}</TableCell>
                       <TableCell>product</TableCell>
                       <TableCell>${order.subtotal}</TableCell>
                       <TableCell>{order.payment_method}</TableCell>

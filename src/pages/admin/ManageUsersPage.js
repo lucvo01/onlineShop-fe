@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { getAllUsers } from "../../components/slices/usersSlice";
 import { useNavigate } from "react-router-dom";
+import updateUserProfile from '../../components/slices/usersSlice'
 
 function ManageUsersPage() {
   const navigate = useNavigate();
@@ -55,7 +56,8 @@ function ManageUsersPage() {
                   <TableCell>
                     <Button
                       onClick={() =>
-                        navigate(`/manage_users/${user._id}/Deactivate`)
+                        // navigate(`/manage_users/${user._id}/Deactivate`)
+                        dispatch(updateUserProfile({isDeleted: true}))
                       }
                     >
                       Deactivate

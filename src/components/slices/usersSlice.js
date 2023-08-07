@@ -45,17 +45,19 @@ const slice = createSlice({
 export default slice.reducer;
 
 export const updateUserProfile =
-  ({ userId, name, address, phone, password }) =>
+  ({ userId, ...data }) =>
   async (dispatch) => {
     dispatch(slice.actions.startLoading());
     try {
-      const data = {
-        name,
-        address,
-        phone,
-        password
+      const info = {
+        ...data
+        // name,
+        // address,
+        // phone,
+        // password,
+        // isDeleted
       };
-      const response = await apiService.put(`/users/${userId}`, data);
+      const response = await apiService.put(`/users/${userId}`, info);
       dispatch(slice.actions.updateUserProfileSuccess(response.data));
       toast.success("Update Profile successfully");
     } catch (error) {
@@ -97,15 +99,14 @@ export const getCurrentUserProfile = () => async (dispatch) => {
   }
 };
 
-// export const getCurrentUserOrders =
-//   ({ userId }) =>
-//   async (dispatch) => {
-//     dispatch(slice.actions.startLoading());
-//     try {
-//       // dispatch(getCurrentUserProfile());
-//       const response = await apiService.get(`/orders/find/${userId}`);
-//       dispatch(slice.actions.updateUserProfileSuccess(response.data));
-//     } catch (error) {
-//       dispatch(slice.actions.hasError(error));
-//     }
-//   };
+// export const deleteUser = () => async (dispatch) => {
+//   dispatch(slice.actions.startLoading())
+//    try {
+//      const response = await apiService.put(`/users/${userId}`, data);
+//     dispatch(slice.actions.updateUserProfileSuccess(response.data));
+//   } catch (error) {
+//     dispatch(slice.actions.hasError(error));
+//   }
+// }
+
+

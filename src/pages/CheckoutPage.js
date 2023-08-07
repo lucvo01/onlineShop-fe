@@ -30,11 +30,18 @@ function CheckoutPage() {
     return state.orders;
   });
   const { subtotal, products } = useSelector((state) => state.cart);
-  // const { user } = useAuth();
+
+  // const auth = useAuth();
   // const { user } = useUserState();
   // console.log(useAuth());
-  const user = JSON.parse(Cookies.get("user"));
+
+  const cookies = Cookies.get("user")
+  let user;
+  if (cookies){
+  user = JSON.parse(cookies);
   console.log("storedUser", user);
+  }
+ 
 
   const defaultValues = {
     email: user?.email || "",
@@ -60,7 +67,7 @@ function CheckoutPage() {
       dispatch(
         createOrder({
           ...data,
-          userId: user._id,
+          userId: user._id || null,
           subtotal,
           products
         })
