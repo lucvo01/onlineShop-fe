@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Button,
@@ -12,17 +12,20 @@ import {
 } from "@mui/material";
 import { getAllUsers } from "../../components/slices/usersSlice";
 import { useNavigate } from "react-router-dom";
-import updateUserProfile from '../../components/slices/usersSlice'
+import { updateUserProfile } from "../../components/slices/usersSlice";
+import { set } from "lodash";
 
 function ManageUsersPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [deleteStatus, setDeleteStatus] = useState();
 
   useEffect(() => {
     dispatch(getAllUsers());
   }, [dispatch]);
 
   const { users } = useSelector((state) => state.users);
+
   console.log(users);
 
   return (
@@ -55,10 +58,19 @@ function ManageUsersPage() {
                   </TableCell>
                   <TableCell>
                     <Button
-                      onClick={() =>
-                        // navigate(`/manage_users/${user._id}/Deactivate`)
-                        dispatch(updateUserProfile({isDeleted: true}))
-                      }
+                      onClick={() => {
+                        if (user.isDeleted === true) {
+                          setDeleteStatus(false);
+                        } else {
+                          setDeleteStatus(true);
+                        }
+                        dispatch(
+                          updateUserProfile({
+                            userId: user._id,
+                            isDeleted: deleteStatus
+                          })
+                        );
+                      }}
                     >
                       Deactivate
                     </Button>
