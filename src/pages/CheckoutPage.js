@@ -36,13 +36,12 @@ function CheckoutPage() {
   // const { user } = useUserState();
   // console.log(useAuth());
 
-  const cookies = Cookies.get("user")
+  const cookies = Cookies.get("user");
   let user;
-  if (cookies){
-  user = JSON.parse(cookies);
-  console.log("storedUser", user);
+  if (cookies) {
+    user = JSON.parse(cookies);
+    console.log("storedUser", user);
   }
- 
 
   const defaultValues = {
     email: user?.email || "",
@@ -100,9 +99,9 @@ function CheckoutPage() {
             >
               <option disabled>Select Payment Method</option>
               <option>Cash On Delivery</option>
-              <option>Credit Card</option>
+              <option>Paypal</option>
             </FSelect>
-            <PaypalButton/>
+            <PaypalButton />
           </Stack>
 
           <Stack spacing={3} alignItems="flex-end" sx={{ mt: 3 }}>

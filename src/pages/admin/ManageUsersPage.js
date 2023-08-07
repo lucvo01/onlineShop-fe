@@ -32,7 +32,6 @@ function ManageUsersPage() {
 
   return (
     <Container>
-      ManageUsersPage
       <TableContainer>
         <Table>
           <TableHead>
@@ -51,7 +50,8 @@ function ManageUsersPage() {
                   <TableCell>{user.name}</TableCell>
 
                   <TableCell>
-                    <Button variant="outlined"
+                    <Button
+                      variant="outlined"
                       onClick={() =>
                         navigate(`/manage_users/${user._id}/orders`)
                       }
@@ -60,36 +60,41 @@ function ManageUsersPage() {
                     </Button>
                   </TableCell>
                   <TableCell>
-                    {user.isDeleted ? (<Button variant="contained" color="success"
-                      onClick={() => {
-                        console.log(!user.isDeleted);
-                        dispatch(
-                          updateUserProfile({
-                            userId: user._id,
-                            isDeleted: !user.isDeleted
-                          })
-                        );
-                        dispatch(getAllUsers());
-                      }}
-                    > 
-                    activate
-                      
-                    </Button>)  : (<Button variant="contained" color="error"
-                      onClick={() => {
-                        console.log(!user.isDeleted);
-                        dispatch(
-                          updateUserProfile({
-                            userId: user._id,
-                            isDeleted: !user.isDeleted
-                          })
-                        );
-                        dispatch(getAllUsers());
-                      }}
-                    > 
-                    Deactivate
-                      
-                    </Button>)}
-                    
+                    {user.isDeleted ? (
+                      <Button
+                        variant="contained"
+                        color="success"
+                        onClick={() => {
+                          console.log(!user.isDeleted);
+                          dispatch(
+                            updateUserProfile({
+                              userId: user._id,
+                              isDeleted: !user.isDeleted
+                            })
+                          );
+                          dispatch(getAllUsers());
+                        }}
+                      >
+                        activate
+                      </Button>
+                    ) : (
+                      <Button
+                        variant="contained"
+                        color="error"
+                        onClick={() => {
+                          console.log(!user.isDeleted);
+                          dispatch(
+                            updateUserProfile({
+                              userId: user._id,
+                              isDeleted: !user.isDeleted
+                            })
+                          );
+                          dispatch(getAllUsers());
+                        }}
+                      >
+                        Deactivate
+                      </Button>
+                    )}
                   </TableCell>
                 </TableRow>
               );

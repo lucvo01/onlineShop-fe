@@ -1,4 +1,5 @@
 import {
+  Chip,
   Box,
   Button,
   Typography,
@@ -72,8 +73,20 @@ function ManageOrdersPage() {
                       {/* <TableCell>product</TableCell> */}
                       <TableCell>${order.subtotal}</TableCell>
                       <TableCell>{order.payment_method}</TableCell>
-                      <TableCell>{order.payment_status}</TableCell>
-                      <TableCell>{order.delivery_status}</TableCell>
+                      <TableCell>
+                        {order.payment_status === "Paid" ? (
+                          <Chip label={order.payment_status} color="success" />
+                        ) : (
+                          <Chip label={order.payment_status} />
+                        )}
+                      </TableCell>
+                      <TableCell>
+                        {order.delivery_status === "Delivered" ? (
+                          <Chip label={order.delivery_status} color="success" />
+                        ) : (
+                          <Chip label={order.delivery_status} />
+                        )}
+                      </TableCell>
                       <TableCell>
                         <Button
                           onClick={() =>
