@@ -16,7 +16,7 @@ import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormProvider, FTextField } from "../../components/form";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUserProfile } from "../slices/userSlice";
+import { updateUserProfile } from "../slices/usersSlice";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 

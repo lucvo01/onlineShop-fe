@@ -13,7 +13,7 @@ function RemoveItemButton({ product }) {
   };
 
   return (
-    <Button onClick={handleClick}>
+    <Button variant="outlined" onClick={handleClick}>
       <DeleteIcon />
     </Button>
   );

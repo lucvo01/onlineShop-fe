@@ -11,7 +11,11 @@ function AddToCartButton({ product, display }) {
     dispatch(getSubtotal());
   };
 
-  return <Button onClick={handleClick}>{display}</Button>;
+  return (
+    <Button variant="outlined" onClick={handleClick}>
+      {display}
+    </Button>
+  );
 }
 
 export default AddToCartButton;

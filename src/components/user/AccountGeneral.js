@@ -9,7 +9,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { FormProvider, FTextField, FUploadAvatar } from "../../components/form";
 import { fData } from "../../utils/numberFormat";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUserProfile } from "../slices/userSlice";
+import { updateUserProfile } from "../slices/usersSlice";
 import Cookies from "js-cookie";
 
 const UpdateUserSchema = yup.object().shape({

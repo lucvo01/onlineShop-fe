@@ -6,7 +6,8 @@ const initialState = {
   isLoading: false,
   error: null,
   updatedProfile: null,
-  selectedUser: null
+  selectedUser: null,
+  users: []
 };
 
 const slice = createSlice({
@@ -28,11 +29,15 @@ const slice = createSlice({
       const updatedUser = action.payload;
       state.updatedProfile = updatedUser;
     },
-
     getUserSuccess(state, action) {
       state.isLoading = false;
       state.error = null;
       state.selectedUser = action.payload;
+    },
+    getAllUsersSuccess(state, action) {
+      state.isLoading = false;
+      state.error = null;
+      state.users = action.payload;
     }
   }
 });
@@ -58,6 +63,18 @@ export const updateUserProfile =
       toast.error(error.message);
     }
   };
+
+export const getAllUsers = (id) => async (dispatch) => {
+  dispatch(slice.actions.startLoading());
+  try {
+    const response = await apiService.get(`/users`);
+    dispatch(slice.actions.getAllUsersSuccess(response.data.data.users));
+    // console.log(response.data.data);
+  } catch (error) {
+    dispatch(slice.actions.hasError(error));
+    toast.error(error.message);
+  }
+};
 
 export const getUser = (id) => async (dispatch) => {
   dispatch(slice.actions.startLoading());

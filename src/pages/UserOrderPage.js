@@ -16,7 +16,7 @@ import PaginationBar from "../components/PaginationBar";
 import styled from "styled-components";
 // import useAuth from "../hooks/useAuth";
 import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import LoadingScreen from "../components/LoadingScreen";
 
 const CenteredContainer = styled.div`
@@ -51,7 +51,7 @@ function UserOrderPage() {
       ) : (
         <>
           <Typography variant="h5" gutterBottom>
-            My Order
+            User Order
           </Typography>
           <TableContainer>
             <Table>

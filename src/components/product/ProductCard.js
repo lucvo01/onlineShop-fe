@@ -1,5 +1,5 @@
 import * as React from "react";
-import Card from "@mui/material/Card";
+import { Card, Grid } from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
@@ -37,9 +37,9 @@ function ProductCard({ product }) {
           </Stack>
         </CardContent>
       </CardActionArea>
-      <AddToCartButton product={product} display={"Add To Cart"} />
-      {/* <DeccreaseButton product={product} />
-      <RemoveItemButton product={product} /> */}
+      <Stack>
+        <AddToCartButton product={product} display={"Add To Cart"} />
+      </Stack>
     </Card>
   );
 }

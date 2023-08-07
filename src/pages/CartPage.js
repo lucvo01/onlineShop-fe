@@ -17,7 +17,9 @@ function CartPage() {
         <CartProductList />
       </Box>
       <Box sx={{ display: "flex", justifyContent: "center", mt: "1rem" }}>
-        <Button onClick={handleClick}>Checkout</Button>
+        <Button variant="contained" onClick={handleClick}>
+          Checkout
+        </Button>
       </Box>
     </Box>
   );

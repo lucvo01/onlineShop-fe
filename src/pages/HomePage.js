@@ -11,6 +11,8 @@ import LoadingScreen from "../components/LoadingScreen";
 import PaginationBar from "../components/PaginationBar";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../components/slices/productsSlice";
+import { Paper, Grid } from "@mui/material";
+import SearchInput from "../components/SearchInput";
 
 function HomePage() {
   const dispatch = useDispatch();
@@ -42,45 +44,48 @@ function HomePage() {
 
   return (
     <Container sx={{ display: "flex", minHeight: "100vh", mt: 3 }}>
-      <Stack>
-        <FormProvider methods={methods}>
-          <ProductFilter resetFilter={reset} />
-        </FormProvider>
-      </Stack>
-      <Stack sx={{ flexGrow: 1 }}>
-        <FormProvider methods={methods}>
-          <Stack
-            spacing={2}
-            direction={{ xs: "column", sm: "row" }}
-            alignItems={{ sm: "center" }}
-            justifyContent="space-between"
-            mb={2}
-          >
-            <ProductSearch />
-            <ProductSort />
-          </Stack>
-        </FormProvider>
-        <Box sx={{ position: "relative", height: 1 }}>
-          {isLoading ? (
-            <LoadingScreen />
-          ) : (
-            <>
-              {error ? (
-                <Alert severity="error">{error}</Alert>
-              ) : (
-                <ProductList products={filterProducts} />
-              )}
-            </>
-          )}
-        </Box>
-        <Box sx={{ display: "flex", justifyContent: "center", mt: "2rem" }}>
-          <PaginationBar
-            pageNum={pageNum}
-            setPageNum={setPageNum}
-            totalPages={totalPages}
-          />
-        </Box>
-      </Stack>
+      <Grid container spacing={2}>
+        <Grid item xs={12} md={3}>
+          {/* <SearchInput /> */}
+          <FormProvider methods={methods}>
+            <ProductFilter resetFilter={reset} />
+          </FormProvider>
+        </Grid>
+        <Grid item sx={{ flexGrow: 1 }} xs={12} md={9}>
+          <FormProvider methods={methods}>
+            <Stack
+              spacing={2}
+              direction={{ xs: "column", sm: "row" }}
+              alignItems={{ sm: "center" }}
+              justifyContent="space-between"
+              mb={2}
+            >
+              <ProductSearch />
+              <ProductSort />
+            </Stack>
+          </FormProvider>
+          <Grid item sx={{ position: "relative", height: 1 }}>
+            {isLoading ? (
+              <LoadingScreen />
+            ) : (
+              <>
+                {error ? (
+                  <Alert severity="error">{error}</Alert>
+                ) : (
+                  <ProductList products={filterProducts} />
+                )}
+              </>
+            )}
+          </Grid>
+          <Box sx={{ display: "flex", justifyContent: "center", mt: "2rem" }}>
+            <PaginationBar
+              pageNum={pageNum}
+              setPageNum={setPageNum}
+              totalPages={totalPages}
+            />
+          </Box>
+        </Grid>
+      </Grid>
     </Container>
   );
 }

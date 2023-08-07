@@ -11,7 +11,11 @@ function DecreaseButton({ product }) {
     dispatch(getSubtotal());
   };
 
-  return <Button onClick={handleClick}>-</Button>;
+  return (
+    <Button variant="outlined" onClick={handleClick}>
+      -
+    </Button>
+  );
 }
 
 export default DecreaseButton;

@@ -93,12 +93,27 @@ function Router() {
           <Route path=":productId/delete" element={<ProductDeleteModal />} />
         </Route>
 
-        <Route path="/manage_users" />
+        <Route
+          path="/manage_users"
+          element={
+            <AuthRequire>
+              <ManageUsersPage />
+            </AuthRequire>
+          }
+        />
         <Route
           index
           element={
             <AuthRequire>
               <ManageUsersPage />
+            </AuthRequire>
+          }
+        />
+        <Route
+          path=":userId/orders"
+          element={
+            <AuthRequire>
+              <OrderDetailPage />
             </AuthRequire>
           }
         />
