@@ -10,10 +10,9 @@ import {
   createOrder,
   getSingleUserOrders
 } from "../components/slices/ordersSlice";
-import useAuth from "../hooks/useAuth";
-
+// import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
-import { useUserState } from "../contexts/AuthContext";
+// import { useUserState } from "../contexts/AuthContext";
 import Cookies from "js-cookie";
 import PaypalButton from "../components/cart/PaypalButton";
 

@@ -63,13 +63,17 @@ const ordersSlice = createSlice({
 export default ordersSlice.reducer;
 
 export const getOrders =
-  ({ pageNum, limit = PRODUCTS_PER_PAGE }) =>
+  ({ pageNum, limit = PRODUCTS_PER_PAGE, shipping_status }) =>
   async (dispatch) => {
     dispatch(ordersSlice.actions.startLoading());
     try {
-      const response = await apiService.get(
-        `/orders?page=${pageNum}&limit=${limit}`
-      );
+      // const response = await apiService.get(
+      //   `/orders?page=${pageNum}&limit=${limit}`
+      // );
+      const params = { page: pageNum, limit };
+      if (shipping_status) params.name = shipping_status;
+      console.log("params", params);
+      const response = await apiService.get("/orders", { params });
       dispatch(ordersSlice.actions.getOrdersSuccess(response.data.data));
     } catch (error) {
       dispatch(ordersSlice.actions.hasError(error.message));

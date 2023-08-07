@@ -19,6 +19,7 @@ import styled from "styled-components";
 import LoadingScreen from "../../components/LoadingScreen";
 import { useNavigate } from "react-router-dom";
 import formatDate from "../../utils/formatDate";
+import { FormProvider } from "../../components/form";
 
 const CenteredContainer = styled.div`
   display: flex;
@@ -33,8 +34,8 @@ function ManageOrdersPage() {
 
   useEffect(() => {
     // console.log(pageNum);
-    dispatch(getOrders({ pageNum }));
-  }, [dispatch, pageNum]);
+    dispatch(getOrders({ pageNum, shipping_status }));
+  }, [dispatch, pageNum, shipping_status]);
 
   const { orders, isLoading, totalPages } = useSelector(
     (state) => state.orders
@@ -49,6 +50,9 @@ function ManageOrdersPage() {
           <Typography variant="h5" gutterBottom>
             Manage Orders
           </Typography>
+          <FormProvider methods={methods}>
+            <OrderSort />
+          </FormProvider>
           <TableContainer>
             <Table>
               <TableHead>
@@ -91,8 +95,7 @@ function ManageOrdersPage() {
                         <Button
                           onClick={() =>
                             navigate(`/manage_orders/${order._id}/edit`)
-                          }
-                        >
+                          }>
                           Edit
                         </Button>
                       </TableCell>
@@ -100,8 +103,7 @@ function ManageOrdersPage() {
                         <Button
                           onClick={() =>
                             navigate(`/manage_orders/${order._id}`)
-                          }
-                        >
+                          }>
                           Detail
                         </Button>
                       </TableCell>

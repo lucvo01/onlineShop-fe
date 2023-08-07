@@ -11,7 +11,7 @@ import LoadingScreen from "../components/LoadingScreen";
 import PaginationBar from "../components/PaginationBar";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../components/slices/productsSlice";
-import { Paper, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import SearchInput from "../components/SearchInput";
 
 function HomePage() {

@@ -1,5 +1,6 @@
 import React from "react";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import {useSelector } from "react-redux";
 
 const initialOptions = {
   clientId: "test",
@@ -8,6 +9,8 @@ const initialOptions = {
 };
 
 function PaypalButton() {
+  const { subtotal } = useSelector((state) => state.cart);
+
   return (
     <PayPalScriptProvider options={initialOptions}>
       <PayPalButtons
@@ -16,7 +19,7 @@ function PaypalButton() {
             purchase_units: [
               {
                 amount: {
-                  value: "13.99"
+                  value: `${subtotal}`
                 }
               }
             ]
