@@ -12,7 +12,7 @@ function AddToCartButton({ product, display }) {
   };
 
   return (
-    <Button variant="outlined" onClick={handleClick}>
+    <Button variant="outlined" onClick={handleClick} size="small">
       {display}
     </Button>
   );

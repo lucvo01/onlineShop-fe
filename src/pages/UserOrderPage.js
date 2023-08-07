@@ -1,4 +1,5 @@
 import {
+  Button,
   Box,
   Typography,
   Table,
@@ -60,7 +61,7 @@ function UserOrderPage() {
                 <TableRow>
                   <TableCell>OrderId</TableCell>
                   <TableCell>Date</TableCell>
-                  <TableCell>Product</TableCell>
+                  {/* <TableCell>Product</TableCell> */}
                   <TableCell>Amount</TableCell>
                   <TableCell>Payment Method</TableCell>
                   <TableCell>Payment Status</TableCell>
@@ -74,17 +75,17 @@ function UserOrderPage() {
                     <TableRow key={order._id || index} hover>
                       <TableCell>{order._id}</TableCell>
                       <TableCell>{formatDate(order.createdAt)}</TableCell>
-                      <TableCell>product</TableCell>
+                      {/* <TableCell>product</TableCell> */}
                       <TableCell>${order.subtotal}</TableCell>
                       <TableCell>{order.payment_method}</TableCell>
                       <TableCell>{order.payment_status}</TableCell>
                       <TableCell>{order.delivery_status}</TableCell>
                       <TableCell>
-                        <button
+                        <Button variant="contained"
                           onClick={() => navigate(`/my_order/${order._id}`)}
                         >
                           Detail
-                        </button>
+                        </Button>
                       </TableCell>
                     </TableRow>
                   );

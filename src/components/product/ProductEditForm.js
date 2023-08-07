@@ -14,16 +14,18 @@ const yupSchema = Yup.object().shape({
   // content: Yup.string().required("Content is required")
 });
 
+
+function ProductEditForm({ productId }) {
+  const navigate = useNavigate();
+  const { isLoading } = useSelector((state) => state.products);
+
+  
 const defaultValues = {
   name: "",
   description: "",
   price: "",
   image: null
 };
-
-function ProductEditForm({ productId }) {
-  const navigate = useNavigate();
-  const { isLoading } = useSelector((state) => state.products);
 
   const methods = useForm({
     resolver: yupResolver(yupSchema),

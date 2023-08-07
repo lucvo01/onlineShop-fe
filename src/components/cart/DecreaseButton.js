@@ -12,7 +12,7 @@ function DecreaseButton({ product }) {
   };
 
   return (
-    <Button variant="outlined" onClick={handleClick}>
+    <Button variant="outlined" onClick={handleClick} size="small">
       -
     </Button>
   );

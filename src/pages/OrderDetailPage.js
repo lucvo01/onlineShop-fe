@@ -70,14 +70,15 @@ function OrderDetailPage() {
                     return (
                       <TableRow key={item._id._id} hover>
                         <TableCell>
+                        <div style={{ display: "flex", alignItems: "center" }}>
                           <CardMedia
                             component="img"
                             image={item._id.image}
-                            height="50"
-                            width="100%"
+                            style={{ width: "50px", height: "50px" }}
                             sx={{ display: { xs: "none", md: "block" } }}
                           />
-                          <Typography>{item._id.name}</Typography>
+                          <Typography sx={{ marginLeft: "10px" }}>{item._id.name}</Typography>
+                           </div>
                         </TableCell>
                         <TableCell>{item.quantity}</TableCell>
                         <TableCell>${item._id.price}</TableCell>
@@ -117,7 +118,7 @@ function OrderDetailPage() {
               </Stack>
               <Stack spacing={1}>
                 <Typography style={{ fontWeight: "bold" }}>
-                  currentOrder Info
+                  Order Info
                 </Typography>
                 <Box>
                   Payment status: <Chip label={currentOrder.payment_status} />

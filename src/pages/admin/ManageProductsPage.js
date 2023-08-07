@@ -72,16 +72,16 @@ function ManageProductsPage() {
                     </TableCell>
                     <TableCell
                       // align="left"
-                      sx={{ display: { xs: "none", md: "table-cell" } }}
+                      sx={{ display: {  md: "table-cell" } }}
                     >
-                      <Button
+                      <Button 
                         onClick={() =>
                           navigate(`/manage_products/${item._id}/edit`)
                         }
                       >
                         Edit
                       </Button>
-                      <Button
+                      <Button color='error'
                         onClick={() =>
                           navigate(`/manage_products/${item._id}/delete`)
                         }
@@ -89,10 +89,7 @@ function ManageProductsPage() {
                         Delete
                       </Button>
                     </TableCell>
-                    <TableCell
-                      align="left"
-                      sx={{ display: { xs: "none", md: "table-cell" } }}
-                    ></TableCell>
+                
                   </TableRow>
                 );
               })}

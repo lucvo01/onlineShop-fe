@@ -36,14 +36,17 @@ function CartProductList() {
               return (
                 <TableRow key={item._id} hover>
                   <TableCell>
-                    <CardMedia
-                      component="img"
-                      image={item.image}
-                      height="50"
-                      width="100%"
-                      sx={{ display: { xs: "none", md: "block" } }}
-                    />
-                    <Typography>{item.name}</Typography>
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                      <CardMedia
+                        component="img"
+                        image={item.image}
+                        style={{ width: "50px", height: "50px" }}
+                        sx={{ display: { xs: "none", md: "block" } }}
+                      />
+                      <Typography sx={{ marginLeft: "10px" }}>
+                        {item.name}
+                      </Typography>
+                    </div>
                   </TableCell>
                   <TableCell>
                     <AddToCartButton product={item} display={"+"} />

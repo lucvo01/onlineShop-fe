@@ -3,12 +3,10 @@ import { Card, Grid } from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { CardActionArea, Stack } from "@mui/material";
+import { CardActionArea, Stack,CardActions } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { fCurrency } from "../../utils";
 import AddToCartButton from "../cart/AddToCartButton";
-// import DeccreaseButton from "./DeccreaseButton";
-// import RemoveItemButton from "./RemoveItemButton";
 
 function ProductCard({ product }) {
   const navigate = useNavigate();
@@ -37,9 +35,9 @@ function ProductCard({ product }) {
           </Stack>
         </CardContent>
       </CardActionArea>
-      <Stack>
+      <CardActions disableSpacing> 
         <AddToCartButton product={product} display={"Add To Cart"} />
-      </Stack>
+      </CardActions>
     </Card>
   );
 }

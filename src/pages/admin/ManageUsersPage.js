@@ -13,12 +13,10 @@ import {
 import { getAllUsers } from "../../components/slices/usersSlice";
 import { useNavigate } from "react-router-dom";
 import { updateUserProfile } from "../../components/slices/usersSlice";
-import { set } from "lodash";
 
 function ManageUsersPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [deleteStatus, setDeleteStatus] = useState();
 
   useEffect(() => {
     dispatch(getAllUsers());
@@ -27,6 +25,10 @@ function ManageUsersPage() {
   const { users } = useSelector((state) => state.users);
 
   console.log(users);
+
+  // const handleClick = () => {
+
+  // }
 
   return (
     <Container>
@@ -38,6 +40,7 @@ function ManageUsersPage() {
               <TableCell>User Email</TableCell>
               <TableCell>Name</TableCell>
               <TableCell>More</TableCell>
+              <TableCell></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -57,23 +60,36 @@ function ManageUsersPage() {
                     </Button>
                   </TableCell>
                   <TableCell>
-                    <Button
+                    {user.isDeleted ? (<Button variant="contained" color="success"
                       onClick={() => {
-                        if (user.isDeleted === true) {
-                          setDeleteStatus(false);
-                        } else {
-                          setDeleteStatus(true);
-                        }
+                        console.log(!user.isDeleted);
                         dispatch(
                           updateUserProfile({
                             userId: user._id,
-                            isDeleted: deleteStatus
+                            isDeleted: !user.isDeleted
                           })
                         );
+                        dispatch(getAllUsers());
                       }}
-                    >
-                      Deactivate
-                    </Button>
+                    > 
+                    activate
+                      
+                    </Button>)  : (<Button variant="contained" color="error"
+                      onClick={() => {
+                        console.log(!user.isDeleted);
+                        dispatch(
+                          updateUserProfile({
+                            userId: user._id,
+                            isDeleted: !user.isDeleted
+                          })
+                        );
+                        dispatch(getAllUsers());
+                      }}
+                    > 
+                    Deactivate
+                      
+                    </Button>)}
+                    
                   </TableCell>
                 </TableRow>
               );

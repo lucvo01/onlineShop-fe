@@ -55,9 +55,11 @@ export const getProducts =
   async (dispatch) => {
     dispatch(productSlice.actions.startLoading());
     try {
+       console.log("ger",gender)
       const params = { page: pageNum, limit };
       if (searchQuery) params.name = searchQuery;
       if (gender && gender.length === 1) params.gender = gender;
+        console.log("params",params)
       const response = await apiService.get("/products", { params });
       // let url = `/products?page=${pageNum}&limit=${limit}`;
       // if (searchQuery) {

@@ -39,11 +39,12 @@ function HomePage() {
 
   const { searchQuery, gender } = filters;
   useEffect(() => {
+    console.log("gender",gender)
     dispatch(getProducts({ pageNum, searchQuery, gender }));
   }, [dispatch, pageNum, searchQuery, gender]);
 
   return (
-    <Container sx={{ display: "flex", minHeight: "100vh", mt: 3 }}>
+    <Container >
       <Grid container spacing={2}>
         <Grid item xs={12} md={3}>
           {/* <SearchInput /> */}
