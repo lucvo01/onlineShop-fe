@@ -32,8 +32,18 @@ function ManageOrdersPage() {
   const dispatch = useDispatch();
   const [pageNum, setPageNum] = useState(1);
 
+  const defaultValues = {
+    shipping_status: ""
+  };
+  const methods = useForm({
+    defaultValues
+  });
+  const { watch, reset } = methods;
+  const filters = watch();
+
+  const { shipping_status } = filters;
+
   useEffect(() => {
-    // console.log(pageNum);
     dispatch(getOrders({ pageNum, shipping_status }));
   }, [dispatch, pageNum, shipping_status]);
 
