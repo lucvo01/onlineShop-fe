@@ -1,9 +1,10 @@
 import React from "react";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-import {useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const initialOptions = {
-  clientId: "test",
+  clientId:
+    "AWsb3366j3tNKfYdGWCag3PEhq9Og8p4HQklEeP0n4Fe8IYFtIBdSV9RJNgixgzHT29FOUBTEEdPs_o7",
   currency: "USD",
   intent: "capture"
 };

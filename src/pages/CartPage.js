@@ -8,7 +8,7 @@ function CartPage() {
   // const dispatch = useDispatch();
 
   const handleClick = () => {
-    navigate("/cart/checkout");
+    navigate("/shipping");
   };
 
   return (

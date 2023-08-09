@@ -143,7 +143,11 @@ function ProductDetailPage() {
                           />
                         </Box>
                         <Box>
-                          <AddToCartButton product={product} display={"Add"} />
+                          <AddToCartButton
+                            product={product}
+                            display={"Add To Cart"}
+                            size={"large"}
+                          />
                         </Box>
                       </Grid>
                     </Grid>

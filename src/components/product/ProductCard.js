@@ -3,15 +3,25 @@ import { Card, Grid } from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { CardActionArea, Stack,CardActions } from "@mui/material";
+import { CardActionArea, Stack, CardActions } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { fCurrency } from "../../utils";
 import AddToCartButton from "../cart/AddToCartButton";
+import { styled } from "@mui/material/styles";
+
+const StyledCard = styled(Card)({
+  position: "relative",
+  transition: "transition 0.2s",
+  "&:hover": {
+    transform: "scale(1.2)",
+    zIndex: 1
+  }
+});
 
 function ProductCard({ product }) {
   const navigate = useNavigate();
   return (
-    <Card>
+    <StyledCard>
       <CardActionArea onClick={() => navigate(`/product/${product._id}`)}>
         <CardMedia
           component="img"
@@ -35,10 +45,10 @@ function ProductCard({ product }) {
           </Stack>
         </CardContent>
       </CardActionArea>
-      <CardActions disableSpacing> 
+      <CardActions disableSpacing>
         <AddToCartButton product={product} display={"Add To Cart"} />
       </CardActions>
-    </Card>
+    </StyledCard>
   );
 }
 

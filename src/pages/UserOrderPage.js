@@ -53,15 +53,19 @@ function UserOrderPage() {
         <LoadingScreen />
       ) : (
         <>
-          <Typography variant="h5" gutterBottom>
-            User Order
+          <Typography variant="h4" gutterBottom>
+            MY ORDER
           </Typography>
           <TableContainer>
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell>OrderId</TableCell>
-                  <TableCell>Date</TableCell>
+                  <TableCell sx={{ display: { xs: "none", md: "table-cell" } }}>
+                    OrderId
+                  </TableCell>
+                  <TableCell sx={{ display: { xs: "none", md: "table-cell" } }}>
+                    Date
+                  </TableCell>
                   {/* <TableCell>Product</TableCell> */}
                   <TableCell>Amount</TableCell>
                   <TableCell>Payment Method</TableCell>
@@ -74,8 +78,16 @@ function UserOrderPage() {
                 {orders?.map((order, index) => {
                   return (
                     <TableRow key={order._id || index} hover>
-                      <TableCell>{order._id}</TableCell>
-                      <TableCell>{formatDate(order.createdAt)}</TableCell>
+                      <TableCell
+                        sx={{ display: { xs: "none", md: "table-cell" } }}
+                      >
+                        {order._id}
+                      </TableCell>
+                      <TableCell
+                        sx={{ display: { xs: "none", md: "table-cell" } }}
+                      >
+                        {formatDate(order.createdAt)}
+                      </TableCell>
                       {/* <TableCell>product</TableCell> */}
                       <TableCell>${order.subtotal}</TableCell>
                       <TableCell>{order.payment_method}</TableCell>
@@ -83,14 +95,14 @@ function UserOrderPage() {
                         {order.payment_status === "Paid" ? (
                           <Chip label={order.payment_status} color="success" />
                         ) : (
-                          <Chip label={order.payment_status} />
+                          <Chip label={order.payment_status} color="error" />
                         )}
                       </TableCell>
                       <TableCell>
                         {order.delivery_status === "Delivered" ? (
                           <Chip label={order.delivery_status} color="success" />
                         ) : (
-                          <Chip label={order.delivery_status} />
+                          <Chip label={order.delivery_status} color="error" />
                         )}
                       </TableCell>
                       <TableCell>

@@ -3,7 +3,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { addToCart, getSubtotal } from "../slices/cartSlice";
 
-function AddToCartButton({ product, display }) {
+function AddToCartButton({ product, display, size }) {
   const dispatch = useDispatch();
 
   const handleClick = () => {
@@ -12,7 +12,17 @@ function AddToCartButton({ product, display }) {
   };
 
   return (
-    <Button variant="outlined" onClick={handleClick} size="small">
+    <Button
+      user-select="none"
+      text-align="center"
+      vertical-align="middle"
+      text-decoration="none"
+      text-transform="uppercase"
+      border-radius="6px"
+      variant="contained"
+      onClick={handleClick}
+      size={size || "small"}
+    >
       {display}
     </Button>
   );

@@ -15,15 +15,13 @@ import { useNavigate } from "react-router-dom";
 // import { useUserState } from "../contexts/AuthContext";
 import Cookies from "js-cookie";
 import PaypalButton from "../components/cart/PaypalButton";
+import { addShippingAddress } from "../components/slices/cartSlice";
 
 const shippingSchema = Yup.object().shape({
-  email: Yup.string().email("Invalid email").required("Email is required"),
-  phone: Yup.number().required("Phone number is required"),
-  shipping: Yup.string().required("Shipping address is required"),
   payment_method: Yup.string().required("Payment method is required")
 });
 
-function CheckoutPage() {
+function PaymentPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isLoading } = useSelector((state) => {
@@ -42,11 +40,7 @@ function CheckoutPage() {
     console.log("storedUser", user);
   }
 
-  const defaultValues = {
-    email: user?.email || "",
-    phone: user?.phone || "",
-    shipping: user?.address || ""
-  };
+  const defaultValues = {};
 
   const methods = useForm({
     resolver: yupResolver(shippingSchema),
@@ -62,17 +56,19 @@ function CheckoutPage() {
 
   const onSubmit = async (data) => {
     try {
-      console.log(user);
-      dispatch(
-        createOrder({
-          ...data,
-          userId: user._id || null,
-          subtotal,
-          products
-        })
-      );
-      dispatch(getSingleUserOrders({ userId: user._id }));
-      navigate("/my_order");
+      // console.log(user);
+      // dispatch(
+      //   createOrder({
+      //     ...data,
+      //     userId: user._id || null,
+      //     subtotal,
+      //     products
+      //   })
+      // );
+      // dispatch(getSingleUserOrders({ userId: user._id }));
+      // navigate("/my_order");
+      dispatch(addShippingAddress({ ...data }));
+      navigate("/placeorder");
     } catch (error) {
       console.log(error);
     }
@@ -87,9 +83,9 @@ function CheckoutPage() {
       <Grid item xs={8} md={8}>
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
           <Stack spacing={3}>
-            <FTextField name="email" label="Email" />
+            {/* <FTextField name="email" label="Email" />
             <FTextField name="phone" label="Phone Number" />
-            <FTextField name="shipping" label="Shipping address" />
+            <FTextField name="shipping" label="Shipping address" /> */}
             <FSelect
               name="payment_method"
               label="Payment Method"
@@ -100,7 +96,7 @@ function CheckoutPage() {
               <option>Cash On Delivery</option>
               <option>Paypal</option>
             </FSelect>
-            <PaypalButton />
+            {/* <PaypalButton /> */}
           </Stack>
 
           <Stack spacing={3} alignItems="flex-end" sx={{ mt: 3 }}>
@@ -111,7 +107,7 @@ function CheckoutPage() {
               variant="contained"
               loading={isSubmitting || isLoading}
             >
-              Place Order
+              Continue
             </LoadingButton>
           </Stack>
         </FormProvider>
@@ -120,4 +116,4 @@ function CheckoutPage() {
   );
 }
 
-export default CheckoutPage;
+export default PaymentPage;

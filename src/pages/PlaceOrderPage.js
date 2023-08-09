@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
-  Box,
-  Chip,
+  Button,
   Stack,
   Container,
   Grid,
@@ -15,23 +14,45 @@ import {
   CardMedia
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import LoadingScreen from "../components/LoadingScreen";
-import { getAnOrder } from "../components/slices/ordersSlice";
-import PaypalButton from "../components/cart/PaypalButton";
+import Cookies from "js-cookie";
+import {
+  createOrder,
+  getSingleUserOrders
+} from "../components/slices/ordersSlice";
 
-function OrderDetailPage() {
+function PlaceOrderPage() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { orderId } = useParams();
 
-  useEffect(() => {
-    dispatch(getAnOrder({ orderId }));
-  }, [dispatch, orderId]);
+  const { products, subtotal, shipping, isLoading } = useSelector(
+    (state) => state.cart
+  );
 
-  const { currentOrder, isLoading } = useSelector((state) => state.orders);
+  const { orders } = useSelector((state) => state.orders);
 
-  const products = currentOrder.products;
+  const cookies = Cookies.get("user");
+  let user;
+  if (cookies) {
+    user = JSON.parse(cookies);
+    console.log("storedUser", user);
+  }
 
+  const handleClick = () => {
+    console.log("subtotal", subtotal);
+    dispatch(
+      createOrder({
+        userId: user._id,
+        ...shipping,
+        products,
+        subtotal
+      })
+    );
+    dispatch(getSingleUserOrders({ userId: user._id }));
+    const orderId = orders[orders.length - 1]._id;
+    navigate(`/my_order/${orderId}`);
+  };
   return (
     <Container>
       {isLoading ? (
@@ -65,14 +86,14 @@ function OrderDetailPage() {
                               sx={{ display: { xs: "none", md: "block" } }}
                             />
                             <Typography sx={{ marginLeft: "10px" }}>
-                              {item._id.name}
+                              {item.name}
                             </Typography>
                           </div>
                         </TableCell>
                         <TableCell>{item.quantity}</TableCell>
-                        <TableCell>${item._id.price}</TableCell>
-                        <TableCell>${item._id.price * item.quantity}</TableCell>
-                        <TableCell>{currentOrder.delivery_status}</TableCell>
+                        <TableCell>${item.price}</TableCell>
+                        <TableCell>${item.price * item.quantity}</TableCell>
+                        {/* <TableCell>{currentOrder.delivery_status}</TableCell> */}
                       </TableRow>
                     );
                   })}
@@ -80,7 +101,7 @@ function OrderDetailPage() {
                     <TableCell>Subtotal:</TableCell>
                     <TableCell></TableCell>
                     <TableCell></TableCell>
-                    <TableCell align="left">${currentOrder.subtotal}</TableCell>
+                    <TableCell align="left">${subtotal}</TableCell>
                   </TableRow>
                 </TableBody>
               </Table>
@@ -95,31 +116,22 @@ function OrderDetailPage() {
             <Stack spacing={3}>
               <Stack spacing={1}>
                 <Typography style={{ fontWeight: "bold" }}>Customer</Typography>
-                <Typography>{currentOrder.email}</Typography>
+                <Typography>{shipping.email}</Typography>
                 <Typography></Typography>
               </Stack>
               <Stack spacing={1}>
                 <Typography style={{ fontWeight: "bold" }}>
                   Dividery To
                 </Typography>
-                <Typography>Address: {currentOrder.address}</Typography>
-                <Typography>City: {currentOrder.city}</Typography>
-                <Typography>State: {currentOrder.state}</Typography>
-                <Typography>Phone: {currentOrder.phone}</Typography>
+                <Typography>Address: {shipping.address}</Typography>
+                <Typography>Phone: {shipping.phone}</Typography>
               </Stack>
               <Stack spacing={1}>
                 <Typography style={{ fontWeight: "bold" }}>
-                  Order Info
+                  Payment Method
                 </Typography>
-                <Box>
-                  Payment status:{" "}
-                  {currentOrder.payment_status === "Paid" ? (
-                    <Chip label={currentOrder.payment_status} color="success" />
-                  ) : (
-                    <Chip label={currentOrder.payment_status} color="error" />
-                  )}
-                </Box>
-                <Box>
+                <Typography> {shipping.payment_method}</Typography>
+                {/* <Box>
                   Deliverd status:{" "}
                   {currentOrder.delivery_status === "Delivered" ? (
                     <Chip
@@ -127,17 +139,13 @@ function OrderDetailPage() {
                       color="success"
                     />
                   ) : (
-                    <Chip label={currentOrder.delivery_status} color="error" />
+                    <Chip label={currentOrder.delivery_status} />
                   )}
-                </Box>
-                {currentOrder.payment_method === "Paypal" ? (
-                  <PaypalButton />
-                ) : (
-                  <Typography style={{ fontWeight: "bold" }}>
-                    {currentOrder.payment_method}
-                  </Typography>
-                )}
+                </Box> */}
               </Stack>
+              <Button variant="contained" onClick={handleClick}>
+                Place Order
+              </Button>
             </Stack>
           </Grid>
         </Grid>
@@ -146,4 +154,4 @@ function OrderDetailPage() {
   );
 }
 
-export default OrderDetailPage;
+export default PlaceOrderPage;

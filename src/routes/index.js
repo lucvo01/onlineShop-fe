@@ -13,12 +13,14 @@ import ManageProductsPage from "../pages/admin/ManageProductsPage";
 import ManageUsersPage from "../pages/admin/ManageUsersPage";
 import ProductEditModal from "../components/product/ProductEditModal";
 import ProductDeleteModal from "../components/product/ProductDeleteModal";
-import CheckoutPage from "../pages/CheckoutPage";
+import PaymentPage from "../pages/PaymentPage";
 import AuthRequire from "./AuthRequire";
 import UserOrderPage from "../pages/UserOrderPage";
 import UserProfilePage from "../pages/UserProfilePage";
 import OrderDetailPage from "../pages/OrderDetailPage";
 import OrderEditModal from "../components/order/OrderEditModal";
+import ShippingPage from "../pages/ShippingPage";
+import PlaceOrderPage from "../pages/PlaceOrderPage";
 
 function Router() {
   return (
@@ -27,7 +29,30 @@ function Router() {
         <Route index element={<HomePage />} />
         <Route path="product/:id" element={<ProductDetailPage />} />
         <Route path="/cart" element={<CartPage />} />
-        <Route path="/cart/checkout" element={<AuthRequire><CheckoutPage /> </AuthRequire>} />
+        <Route
+          path="/shipping"
+          element={
+            <AuthRequire>
+              <ShippingPage />{" "}
+            </AuthRequire>
+          }
+        />
+        <Route
+          path="/payment"
+          element={
+            <AuthRequire>
+              <PaymentPage />{" "}
+            </AuthRequire>
+          }
+        />
+        <Route
+          path="/placeorder"
+          element={
+            <AuthRequire>
+              <PlaceOrderPage />{" "}
+            </AuthRequire>
+          }
+        />
 
         <Route path="/my_order">
           <Route

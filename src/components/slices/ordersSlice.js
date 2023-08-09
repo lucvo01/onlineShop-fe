@@ -63,7 +63,7 @@ const ordersSlice = createSlice({
 export default ordersSlice.reducer;
 
 export const getOrders =
-  ({ pageNum, limit = PRODUCTS_PER_PAGE, shipping_status }) =>
+  ({ pageNum, limit = PRODUCTS_PER_PAGE, delivery_status }) =>
   async (dispatch) => {
     dispatch(ordersSlice.actions.startLoading());
     try {
@@ -71,7 +71,7 @@ export const getOrders =
       //   `/orders?page=${pageNum}&limit=${limit}`
       // );
       const params = { page: pageNum, limit };
-      if (shipping_status) params.name = shipping_status;
+      if (delivery_status) params.delivery_status = delivery_status;
       console.log("params", params);
       const response = await apiService.get("/orders", { params });
       dispatch(ordersSlice.actions.getOrdersSuccess(response.data.data));
@@ -110,13 +110,13 @@ export const getAnOrder =
   };
 
 export const createOrder =
-  ({ userId, products, subtotal, ...data }) =>
+  ({ userId, products, subtotal, ...shipping }) =>
   async (dispatch) => {
     dispatch(ordersSlice.actions.startLoading());
     try {
       console.log(userId);
       const response = await apiService.post("/orders", {
-        ...data,
+        ...shipping,
         userId,
         products,
         subtotal

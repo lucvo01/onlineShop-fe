@@ -8,6 +8,9 @@ const initialState = {
   subtotal: localStorage.getItem("subtotal")
     ? JSON.parse(localStorage.getItem("subtotal"))
     : 0
+  // shipping: localStorage.getItem("shipping")
+  //   ? JSON.parse(localStorage.getItem("shipping"))
+  //   : {}
 };
 
 const cartSlice = createSlice({
@@ -83,10 +86,21 @@ const cartSlice = createSlice({
       state.subtotal = subtotal.toFixed(2);
       localStorage.setItem("products", JSON.stringify(state.products));
       localStorage.setItem("subtotal", JSON.stringify(state.subtotal));
+    },
+
+    addShippingAddress: (state, action) => {
+      state.shipping = action.payload;
+      localStorage.setItem("shipping", JSON.stringify(state.products));
     }
   }
 });
-export const { addToCart, decreaseItem, removeItem, clearCart, getSubtotal } =
-  cartSlice.actions;
+export const {
+  addToCart,
+  decreaseItem,
+  removeItem,
+  clearCart,
+  getSubtotal,
+  addShippingAddress
+} = cartSlice.actions;
 
 export default cartSlice.reducer;
