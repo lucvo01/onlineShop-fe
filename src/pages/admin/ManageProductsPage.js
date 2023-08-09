@@ -46,9 +46,21 @@ function ManageProductsPage() {
       {isLoading ? (
         <LoadingScreen />
       ) : (
-        <Box sx={{ overflowX: "auto" }}>
-          <Box sx={{ display: "flex", justifyContent: "center", mt: "1rem" }}>
-            <SearchInput handleSubmit={handleSubmit} />
+        <Box>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: { xs: "column", md: "row" },
+              alignItems: { xs: "center", md: "space-between" },
+              justifyContent: { xs: "center", md: "space-between" },
+              mt: "1rem"
+              // gap: "1rem"
+            }}
+          >
+            <Box>
+              <SearchInput handleSubmit={handleSubmit} />
+            </Box>
+
             <Button
               variant="contained"
               onClick={() => navigate(`/manage_products/create`)}
