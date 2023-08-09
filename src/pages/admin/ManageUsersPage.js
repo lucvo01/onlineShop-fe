@@ -8,11 +8,13 @@ import {
   TableCell,
   TableContainer,
   TableHead,
-  TableRow
+  TableRow, Breadcrumbs, Link,Typography
 } from "@mui/material";
 import { getAllUsers } from "../../components/slices/usersSlice";
 import { useNavigate } from "react-router-dom";
 import { updateUserProfile } from "../../components/slices/usersSlice";
+import {  Link as RouterLink  } from "react-router-dom";
+import LoadingScreen from "../../components/LoadingScreen";
 
 function ManageUsersPage() {
   const navigate = useNavigate();
@@ -22,7 +24,7 @@ function ManageUsersPage() {
     dispatch(getAllUsers());
   }, [dispatch]);
 
-  const { users } = useSelector((state) => state.users);
+  const { users, isLoading } = useSelector((state) => state.users);
 
   console.log(users);
 
@@ -32,6 +34,16 @@ function ManageUsersPage() {
 
   return (
     <Container>
+       {isLoading ? (
+        <LoadingScreen />
+      ) : (
+      <>
+      < Breadcrumbs aria-label="breadcrumb" sx={{ mb: 4 }}>
+        <Link underline="hover" color="inherit" component={RouterLink} to="/">
+          Online Shop
+        </Link>
+        <Typography color="text.primary">Manage Orders</Typography>
+      </Breadcrumbs>
       <TableContainer>
         <Table>
           <TableHead>
@@ -102,7 +114,9 @@ function ManageUsersPage() {
           </TableBody>
         </Table>
       </TableContainer>
-    </Container>
+      </>
+   )}
+       </Container>
   );
 }
 

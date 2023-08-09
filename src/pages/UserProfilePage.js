@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Container, Tab, Tabs, Typography } from "@mui/material";
+import { Box, Container, Tab, Tabs, Typography, Breadcrumbs,Link } from "@mui/material";
 import useAuth from "../hooks/useAuth";
 import AccountGeneral from "../components/user/AccountGeneral";
 import ProfileUpdatePassword from "../components/user/ProfileUpdatePassword";
@@ -7,6 +7,7 @@ import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import PasswordIcon from "@mui/icons-material/Password";
 import { capitalCase } from "change-case";
 import styled from "styled-components";
+import { Link as RouterLink, useParams } from "react-router-dom";
 
 const CenteredContainer = styled.div`
   display: flex;
@@ -37,6 +38,12 @@ const UserProfilePage = () => {
 
   return (
     <Container>
+     < Breadcrumbs aria-label="breadcrumb" sx={{ mb: 4 }}>
+        <Link underline="hover" color="inherit" component={RouterLink} to="/">
+          Online Shop
+        </Link>
+        <Typography color="text.primary">My Profile</Typography>
+      </Breadcrumbs>
       <Typography variant="h5" gutterBottom>
         My Profile
       </Typography>

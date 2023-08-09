@@ -8,7 +8,7 @@ import {
   TableCell,
   TableContainer,
   TableHead,
-  TableRow
+  TableRow, Breadcrumbs, Link, Container
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,15 +18,15 @@ import PaginationBar from "../components/PaginationBar";
 import styled from "styled-components";
 // import useAuth from "../hooks/useAuth";
 import Cookies from "js-cookie";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link as RouterLink  } from "react-router-dom";
 import LoadingScreen from "../components/LoadingScreen";
 import formatDate from "../utils/formatDate";
 
-const CenteredContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
+// const CenteredContainer = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+// `;
 
 function UserOrderPage() {
   const navigate = useNavigate();
@@ -55,11 +55,18 @@ function UserOrderPage() {
   );
 
   return (
-    <CenteredContainer>
+    <Container>
+       
       {isLoading ? (
         <LoadingScreen />
       ) : (
         <>
+        < Breadcrumbs aria-label="breadcrumb" sx={{ mb: 4 }}>
+        <Link underline="hover" color="inherit" component={RouterLink} to="/">
+          Online Shop
+        </Link>
+        <Typography color="text.primary">My Order</Typography>
+      </Breadcrumbs>
           <Typography variant="h4" gutterBottom>
             USER ORDER
           </Typography>
@@ -135,7 +142,7 @@ function UserOrderPage() {
           </Box>
         </>
       )}
-    </CenteredContainer>
+    </Container>
   );
 }
 

@@ -7,7 +7,7 @@ import {
   TableCell,
   TableContainer,
   TableHead,
-  TableRow
+  TableRow, Breadcrumbs, Link, Typography
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 // import { useForm } from "react-hook-form";
@@ -17,6 +17,7 @@ import PaginationBar from "../../components/PaginationBar";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../components/slices/productsSlice";
 import SearchInput from "../../components/SearchInput";
+import {  Link as RouterLink  } from "react-router-dom";
 import LoadingScreen from "../../components/LoadingScreen";
 
 function ManageProductsPage() {
@@ -47,6 +48,12 @@ function ManageProductsPage() {
         <LoadingScreen />
       ) : (
         <Box>
+          < Breadcrumbs aria-label="breadcrumb" sx={{ mb: 4 }}>
+        <Link underline="hover" color="inherit" component={RouterLink} to="/">
+          Online Shop
+        </Link>
+        <Typography color="text.primary">Manage Orders</Typography>
+      </Breadcrumbs>
           <Box
             sx={{
               display: "flex",

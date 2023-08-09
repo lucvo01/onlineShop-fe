@@ -8,11 +8,10 @@ import {
   TableCell,
   TableContainer,
   TableHead,
-  TableRow
+  TableRow, Breadcrumbs, Link, Container
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { useLocation, useNavigate } from "react-router-dom";
 import { getOrders } from "../../components/slices/ordersSlice";
 import PaginationBar from "../../components/PaginationBar";
 import styled from "styled-components";
@@ -22,12 +21,13 @@ import formatDate from "../../utils/formatDate";
 import { FormProvider } from "../../components/form";
 import { useForm } from "react-hook-form";
 import OrderSort from "../../components/order/OrderSort";
+import {  Link as RouterLink  } from "react-router-dom";
 
-const CenteredContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
+// const CenteredContainer = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+// `;
 
 function ManageOrdersPage() {
   const navigate = useNavigate();
@@ -55,11 +55,17 @@ function ManageOrdersPage() {
   );
 
   return (
-    <CenteredContainer>
+    <Container>
       {isLoading ? (
         <LoadingScreen />
       ) : (
         <>
+        < Breadcrumbs aria-label="breadcrumb" sx={{ mb: 4 }}>
+        <Link underline="hover" color="inherit" component={RouterLink} to="/">
+          Online Shop
+        </Link>
+        <Typography color="text.primary">Manage Orders</Typography>
+      </Breadcrumbs>
           <Typography variant="h5" gutterBottom>
             Manage Orders
           </Typography>
@@ -137,7 +143,7 @@ function ManageOrdersPage() {
           </Box>
         </>
       )}
-    </CenteredContainer>
+    </Container>
   );
 }
 
