@@ -74,14 +74,14 @@ function PlaceOrderPage() {
                 <TableBody>
                   {products?.map((item) => {
                     return (
-                      <TableRow key={item._id._id} hover>
+                      <TableRow key={item._id} hover>
                         <TableCell>
                           <div
                             style={{ display: "flex", alignItems: "center" }}
                           >
                             <CardMedia
                               component="img"
-                              image={item._id.image}
+                              image={item.image}
                               style={{ width: "50px", height: "50px" }}
                               sx={{ display: { xs: "none", md: "block" } }}
                             />

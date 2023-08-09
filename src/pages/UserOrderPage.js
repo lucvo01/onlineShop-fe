@@ -31,12 +31,19 @@ const CenteredContainer = styled.div`
 function UserOrderPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { id } = useParams();
   const [pageNum, setPageNum] = useState(1);
   // const auth = useAuth();
   // console.log("auth", auth);
   // const userId = auth.user?.data._id;
-  const user = JSON.parse(Cookies.get("user"));
-  const userId = user._id;
+  let userId;
+
+  if (id) {
+    userId = id;
+  } else {
+    const user = JSON.parse(Cookies.get("user"));
+    userId = user._id;
+  }
 
   useEffect(() => {
     // console.log(user);
@@ -54,7 +61,7 @@ function UserOrderPage() {
       ) : (
         <>
           <Typography variant="h4" gutterBottom>
-            MY ORDER
+            USER ORDER
           </Typography>
           <TableContainer>
             <Table>
