@@ -22,9 +22,11 @@ function ProductsPage() {
     (state) => state.products
   );
 
+  const { category } = useSelector((state) => state.category);
+
   const defaultValues = {
     gender: [],
-    category: "",
+    category: category || "",
     priceRange: "",
     sortBy: "featured",
     searchQuery: ""
@@ -36,7 +38,7 @@ function ProductsPage() {
   const filters = watch();
   const filterProducts = applyFilter(products, filters);
 
-  const { searchQuery, gender, category } = filters;
+  const { searchQuery, gender } = filters;
 
   useEffect(() => {
     dispatch(getProducts({ pageNum, searchQuery, gender, category }));
@@ -58,8 +60,7 @@ function ProductsPage() {
               direction={{ xs: "column", sm: "row" }}
               alignItems={{ sm: "center" }}
               justifyContent="space-between"
-              mb={2}
-            >
+              mb={2}>
               <ProductSearch />
               <ProductSort />
             </Stack>

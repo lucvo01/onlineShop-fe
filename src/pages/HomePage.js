@@ -11,6 +11,7 @@ import LoadingScreen from "../components/LoadingScreen";
 import PaginationBar from "../components/PaginationBar";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../components/slices/productsSlice";
+import { setCategory } from "../components/slices/categorySlice";
 import { styled } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 // import SearchInput from "../components/SearchInput";
@@ -58,7 +59,8 @@ function HomePage() {
   }, [dispatch, pageNum, searchQuery, gender, category]);
 
   const handleClickMen = () => {
-    dispatch(getProducts({ pageNum, searchQuery, gender }));
+    dispatch(setCategory("male"))
+    // dispatch(getProducts({ pageNum, searchQuery, gender }));
     navigate("/shop");
   };
   return (

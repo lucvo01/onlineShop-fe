@@ -1,11 +1,9 @@
 import { Box, Button, Stack, Typography, Paper } from "@mui/material";
 import { FMultiCheckbox, FRadioGroup } from "../form";
 import ClearAllIcon from "@mui/icons-material/ClearAll";
-import SearchInput from "../SearchInput";
+// import SearchInput from "../SearchInput";
 
 export const SORT_BY_OPTIONS = [
-  // { value: "featured", label: "Featured" },
-  // { value: "newest", label: "Newest" },
   { value: "priceDesc", label: "Price: High-Low" },
   { value: "priceAsc", label: "Price: Low-High" }
 ];

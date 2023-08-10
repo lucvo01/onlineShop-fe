@@ -8,9 +8,6 @@ const initialState = {
   subtotal: localStorage.getItem("subtotal")
     ? JSON.parse(localStorage.getItem("subtotal"))
     : 0
-  // shipping: localStorage.getItem("shipping")
-  //   ? JSON.parse(localStorage.getItem("shipping"))
-  //   : {}
 };
 
 const cartSlice = createSlice({
