@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Alert, Box, Container, Stack } from "@mui/material";
+import { Box, Container, Button,Grid } from "@mui/material";
 import ProductFilter from "../components/product/ProductFilter";
 import ProductSearch from "../components/product/ProductSearch";
 import ProductSort from "../components/product/ProductSort";
@@ -11,8 +11,21 @@ import LoadingScreen from "../components/LoadingScreen";
 import PaginationBar from "../components/PaginationBar";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../components/slices/productsSlice";
-import { Grid } from "@mui/material";
+import { styled } from '@mui/material/styles';
 // import SearchInput from "../components/SearchInput";
+
+const Img = styled('img')({
+  margin: 'auto',
+  display: 'block',
+  maxWidth: '100%',
+  maxHeight: '100%',
+ [theme.breakpoints.down('xs')]:{
+  display: 'none'
+ },
+[theme.breakpoints.up('md')]:{
+  display: 'block'
+ }
+});
 
 function HomePage() {
   const dispatch = useDispatch();
@@ -45,46 +58,25 @@ function HomePage() {
   return (
     <Container>
       <Grid container>
-        <Grid item xs={12} md={3}>
-          {/* <SearchInput /> */}
-          <FormProvider methods={methods}>
-            <ProductFilter resetFilter={reset} />
-          </FormProvider>
-        </Grid>
-        <Grid item sx={{ flexGrow: 1 }} xs={12} md={9}>
-          <FormProvider methods={methods}>
-            <Stack
-              spacing={2}
-              direction={{ xs: "column", sm: "row" }}
-              alignItems={{ sm: "center" }}
-              justifyContent="space-between"
-              mb={2}
-            >
-              <ProductSearch />
-              <ProductSort />
-            </Stack>
-          </FormProvider>
-          <Grid item sx={{ position: "relative", height: 1 }}>
-            {isLoading ? (
-              <LoadingScreen />
-            ) : (
-              <>
-                {error ? (
-                  <Alert severity="error">{error}</Alert>
-                ) : (
-                  <ProductList products={filterProducts} />
-                )}
-              </>
-            )}
-          </Grid>
-          <Box sx={{ display: "flex", justifyContent: "center", mt: "2rem" }}>
-            <PaginationBar
-              pageNum={pageNum}
-              setPageNum={setPageNum}
-              totalPages={totalPages}
-            />
+        <Img src="https://content.asos-media.com/-/media/homepages/unisex/generic-hp/july-2023/julymonthly_12062023_womens_shot07_034_1440x698.jpg" />
+        {/* <source srcset="https://content.asos-media.com/-/media/homepages/unisex/generic-hp/july-2023/carly_asos_6_640x1070.jpg" media="(max-width: 768px)"/> */}
+        <Box      style={{
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: '1rem',
+        // backgroundColor: 'rgba(255, 255, 255, 0.7)',
+        padding: '1rem',
+        borderRadius: '8px',
+      }}>
+          <Button variant="contained" size="large">Shop Men</Button>
+        <Button variant="contained" size="large">Shop Women</Button>
           </Box>
-        </Grid>
+        
       </Grid>
     </Container>
   );

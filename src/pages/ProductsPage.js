@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, Container, Stack } from "@mui/material";
+import { Alert, Box, Container, Stack } from "@mui/material";
 import ProductFilter from "../components/product/ProductFilter";
 import ProductSearch from "../components/product/ProductSearch";
 import ProductSort from "../components/product/ProductSort";
@@ -14,7 +14,7 @@ import { getProducts } from "../components/slices/productsSlice";
 import { Grid } from "@mui/material";
 // import SearchInput from "../components/SearchInput";
 
-function HomePage1() {
+function ProductsPage() {
   const dispatch = useDispatch();
   const [pageNum, setPageNum] = useState(1);
 
@@ -45,12 +45,51 @@ function HomePage1() {
   return (
     <Container>
       <Grid container>
-        <img src="https://content.asos-media.com/-/media/homepages/unisex/generic-hp/july-2023/julymonthly_12062023_womens_shot07_034_1440x698.jpg" />
+        <Grid item xs={12} md={3}>
+          {/* <SearchInput /> */}
+          <FormProvider methods={methods}>
+            <ProductFilter resetFilter={reset} />
+          </FormProvider>
+        </Grid>
+        <Grid item sx={{ flexGrow: 1 }} xs={12} md={9}>
+          <FormProvider methods={methods}>
+            <Stack
+              spacing={2}
+              direction={{ xs: "column", sm: "row" }}
+              alignItems={{ sm: "center" }}
+              justifyContent="space-between"
+              mb={2}
+            >
+              <ProductSearch />
+              <ProductSort />
+            </Stack>
+          </FormProvider>
+          <Grid item sx={{ position: "relative", height: 1 }}>
+            {isLoading ? (
+              <LoadingScreen />
+            ) : (
+              <>
+                {error ? (
+                  <Alert severity="error">{error}</Alert>
+                ) : (
+                  <ProductList products={filterProducts} />
+                )}
+              </>
+            )}
+          </Grid>
+          <Box sx={{ display: "flex", justifyContent: "center", mt: "2rem" }}>
+            <PaginationBar
+              pageNum={pageNum}
+              setPageNum={setPageNum}
+              totalPages={totalPages}
+            />
+          </Box>
+        </Grid>
       </Grid>
     </Container>
   );
 }
-export default HomePage1;
+export default ProductsPage;
 
 function applyFilter(products, filters) {
   const { sortBy, gender, category, priceRange, searchQuery } = filters;

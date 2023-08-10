@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import BlankLayout from "../layouts/BlankLayout";
 import MainLayout from "../layouts/MainLayout";
 import ProductDetailPage from "../pages/ProductDetailPage";
-import HomePage1 from "../pages/HomePage1";
+import HomePage from "../pages/HomePage";
 import CartPage from "../pages/CartPage";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
@@ -26,7 +26,7 @@ function Router() {
   return (
     <Routes>
       <Route path="/" element={<MainLayout />}>
-        <Route index element={<HomePage1 />} />
+        <Route index element={<HomePage />} />
         <Route path="product/:id" element={<ProductDetailPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route
