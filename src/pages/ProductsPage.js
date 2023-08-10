@@ -22,11 +22,11 @@ function ProductsPage() {
     (state) => state.products
   );
 
-  const { category } = useSelector((state) => state.category);
+  const { gender } = useSelector((state) => state.gender);
 
   const defaultValues = {
     gender: [],
-    category: category || "",
+    category:  "",
     priceRange: "",
     sortBy: "featured",
     searchQuery: ""
@@ -38,7 +38,7 @@ function ProductsPage() {
   const filters = watch();
   const filterProducts = applyFilter(products, filters);
 
-  const { searchQuery, gender } = filters;
+  const { searchQuery, category } = filters;
 
   useEffect(() => {
     dispatch(getProducts({ pageNum, searchQuery, gender, category }));

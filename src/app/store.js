@@ -3,14 +3,14 @@ import cartReducer from "../components/slices/cartSlice";
 import productsReducer from "../components/slices/productsSlice";
 import ordersReducer from "../components/slices/ordersSlice";
 import usersReducer from "../components/slices/usersSlice";
-import categoryReducer from "../components/slices/categorySlice";
+import genderReducer from "../components/slices/genderSlice";
 
 const rootReducer = combineReducers({
   cart: cartReducer,
   products: productsReducer,
   orders: ordersReducer,
   users: usersReducer,
-  category: categoryReducer
+  gender: genderReducer
 });
 
 const store = configureStore({
