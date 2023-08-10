@@ -8,17 +8,18 @@ import {
   TableCell,
   TableContainer,
   TableHead,
-  TableRow, Breadcrumbs, Link, Container
+  TableRow,
+  Breadcrumbs,
+  Link,
+  Container
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { useLocation, useNavigate } from "react-router-dom";
 import { getSingleUserOrders } from "../components/slices/ordersSlice";
 import PaginationBar from "../components/PaginationBar";
-import styled from "styled-components";
-// import useAuth from "../hooks/useAuth";
+// import styled from "styled-components";
 import Cookies from "js-cookie";
-import { useNavigate, useParams, Link as RouterLink  } from "react-router-dom";
+import { useNavigate, useParams, Link as RouterLink } from "react-router-dom";
 import LoadingScreen from "../components/LoadingScreen";
 import formatDate from "../utils/formatDate";
 
@@ -56,17 +57,21 @@ function UserOrderPage() {
 
   return (
     <Container>
-       
       {isLoading ? (
         <LoadingScreen />
       ) : (
         <>
-        < Breadcrumbs aria-label="breadcrumb" sx={{ mb: 4 }}>
-        <Link underline="hover" color="inherit" component={RouterLink} to="/">
-          Online Shop
-        </Link>
-        <Typography color="text.primary">My Order</Typography>
-      </Breadcrumbs>
+          <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 4 }}>
+            <Link
+              underline="hover"
+              color="inherit"
+              component={RouterLink}
+              to="/"
+            >
+              Online Shop
+            </Link>
+            <Typography color="text.primary">My Order</Typography>
+          </Breadcrumbs>
           <Typography variant="h4" gutterBottom>
             USER ORDER
           </Typography>

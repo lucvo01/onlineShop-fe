@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import Logo from "../components/Logo";
 import useAuth from "../hooks/useAuth";
-import { useUserState } from "../contexts/AuthContext";
+// import { useUserState } from "../contexts/AuthContext";
 import Cart from "../components/cart/Cart";
 import { Avatar, Divider, Menu, MenuItem } from "@mui/material";
 import { useNavigate, Link as RouterLink } from "react-router-dom";
@@ -19,13 +19,6 @@ function MainHeader() {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
-  // const { user } = useUserState();
-  // console.log("useUserState", useUserState());
-
-  // React.useEffect(() => {
-  //   console.log(user);
-  //   console.log("user.name", user);
-  // }, [user]);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -54,7 +47,6 @@ function MainHeader() {
   if (cookie) {
     user = JSON.parse(Cookies.get("user"));
   }
-  // console.log("storedUser", user);
 
   const isAdmin = user && user.isAdmin;
 
@@ -143,7 +135,7 @@ function MainHeader() {
   );
   return (
     <Box sx={{ mb: 3 }}>
-      <AppBar position="static" color="transparent">
+      <AppBar position="sticky" enableColorOnDark>
         <Toolbar>
           <IconButton
             size="large"
@@ -171,7 +163,14 @@ function MainHeader() {
               onClick={handleProfileMenuOpen}
               // src={user.avatarUrl}
               // alt={user.name}
-              sx={{ width: 32, height: 32 }}
+              sx={{
+                width: 32,
+                height: 32,
+                transition: "transform 0.2s",
+                "&:hover": {
+                  transform: "scale(1.1)"
+                }
+              }}
             />
           </Box>
         </Toolbar>

@@ -8,20 +8,23 @@ import {
   TableCell,
   TableContainer,
   TableHead,
-  TableRow, Breadcrumbs, Link, Container
+  TableRow,
+  Breadcrumbs,
+  Link,
+  Container
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrders } from "../../components/slices/ordersSlice";
 import PaginationBar from "../../components/PaginationBar";
-import styled from "styled-components";
+// import styled from "styled-components";
 import LoadingScreen from "../../components/LoadingScreen";
 import { useNavigate } from "react-router-dom";
 import formatDate from "../../utils/formatDate";
 import { FormProvider } from "../../components/form";
 import { useForm } from "react-hook-form";
 import OrderSort from "../../components/order/OrderSort";
-import {  Link as RouterLink  } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 
 // const CenteredContainer = styled.div`
 //   display: flex;
@@ -40,7 +43,7 @@ function ManageOrdersPage() {
   const methods = useForm({
     defaultValues
   });
-  const { watch, reset } = methods;
+  const { watch } = methods;
   const filters = watch();
 
   const { delivery_status } = filters;
@@ -60,12 +63,17 @@ function ManageOrdersPage() {
         <LoadingScreen />
       ) : (
         <>
-        < Breadcrumbs aria-label="breadcrumb" sx={{ mb: 4 }}>
-        <Link underline="hover" color="inherit" component={RouterLink} to="/">
-          Online Shop
-        </Link>
-        <Typography color="text.primary">Manage Orders</Typography>
-      </Breadcrumbs>
+          <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 4 }}>
+            <Link
+              underline="hover"
+              color="inherit"
+              component={RouterLink}
+              to="/"
+            >
+              Online Shop
+            </Link>
+            <Typography color="text.primary">Manage Orders</Typography>
+          </Breadcrumbs>
           <Typography variant="h5" gutterBottom>
             Manage Orders
           </Typography>

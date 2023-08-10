@@ -7,17 +7,19 @@ import {
   TableCell,
   TableContainer,
   TableHead,
-  TableRow, Breadcrumbs, Link, Typography
+  TableRow,
+  Breadcrumbs,
+  Link,
+  Typography
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-// import { useForm } from "react-hook-form";
 import ProductCard from "../../components/product/ProductCard";
 import { useNavigate } from "react-router-dom";
 import PaginationBar from "../../components/PaginationBar";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../components/slices/productsSlice";
 import SearchInput from "../../components/SearchInput";
-import {  Link as RouterLink  } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 import LoadingScreen from "../../components/LoadingScreen";
 
 function ManageProductsPage() {
@@ -26,7 +28,7 @@ function ManageProductsPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [pageNum, setPageNum] = useState(1);
 
-  const { products, isLoading, totalPages, error } = useSelector(
+  const { products, isLoading, totalPages } = useSelector(
     (state) => state.products
   );
 
@@ -48,20 +50,25 @@ function ManageProductsPage() {
         <LoadingScreen />
       ) : (
         <Box>
-          < Breadcrumbs aria-label="breadcrumb" sx={{ mb: 4 }}>
-        <Link underline="hover" color="inherit" component={RouterLink} to="/">
-          Online Shop
-        </Link>
-        <Typography color="text.primary">Manage Orders</Typography>
-      </Breadcrumbs>
+          <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 4 }}>
+            <Link
+              underline="hover"
+              color="inherit"
+              component={RouterLink}
+              to="/"
+            >
+              Online Shop
+            </Link>
+            <Typography color="text.primary">Manage Orders</Typography>
+          </Breadcrumbs>
           <Box
             sx={{
               display: "flex",
               flexDirection: { xs: "column", md: "row" },
               alignItems: { xs: "center", md: "space-between" },
               justifyContent: { xs: "center", md: "space-between" },
-              mt: "1rem"
-              // gap: "1rem"
+              mt: "1rem",
+              gap: "1rem"
             }}
           >
             <Box>
@@ -69,6 +76,7 @@ function ManageProductsPage() {
             </Box>
 
             <Button
+              sx={{ mr: "1rem" }}
               variant="contained"
               onClick={() => navigate(`/manage_products/create`)}
             >
@@ -80,11 +88,13 @@ function ManageProductsPage() {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell sx={{ width: { xs: "20%", sm: "25%" } }}>
+                  <TableCell
+                    sx={{ width: { xs: "20%", sm: "25%" }, fontWeight: "bold" }}
+                  >
                     Product
                   </TableCell>
 
-                  <TableCell>Action</TableCell>
+                  <TableCell sx={{ fontWeight: "bold" }}>Action</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -98,14 +108,15 @@ function ManageProductsPage() {
                           cursor: "pointer"
                         }}
                       >
-                        <ProductCard product={item} />
+                        <ProductCard product={item} hideButton={"yes"} />
                       </TableCell>
                       <TableCell
                         // align="left"
                         sx={{ display: { md: "table-cell" } }}
                       >
                         <Button
-                          variant="outlined"
+                          variant="contained"
+                          sx={{ mr: "1rem" }}
                           onClick={() =>
                             navigate(`/manage_products/${item._id}/edit`)
                           }
@@ -113,7 +124,7 @@ function ManageProductsPage() {
                           Edit
                         </Button>
                         <Button
-                          variant="outlined"
+                          variant="contained"
                           color="error"
                           onClick={() =>
                             navigate(`/manage_products/${item._id}/delete`)

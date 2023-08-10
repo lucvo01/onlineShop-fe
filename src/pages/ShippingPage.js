@@ -6,15 +6,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  createOrder,
-  getSingleUserOrders
-} from "../components/slices/ordersSlice";
-// import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 // import { useUserState } from "../contexts/AuthContext";
 import Cookies from "js-cookie";
-import PaypalButton from "../components/cart/PaypalButton";
 import { addShippingAddress } from "../components/slices/cartSlice";
 
 const shippingSchema = Yup.object().shape({
@@ -22,8 +16,8 @@ const shippingSchema = Yup.object().shape({
   phone: Yup.number().required("Phone number is required"),
   address: Yup.string().required("Shipping address is required"),
   city: Yup.string().required("City is required"),
-  state: Yup.string().required("State is required")
-  // payment_method: Yup.string().required("Payment method is required")
+  state: Yup.string().required("State is required"),
+  payment_method: Yup.string().required("Payment method is required")
 });
 
 function ShippingPage() {
@@ -32,7 +26,7 @@ function ShippingPage() {
   const { isLoading } = useSelector((state) => {
     return state.orders;
   });
-  const { subtotal, products } = useSelector((state) => state.cart);
+  // const { subtotal, products } = useSelector((state) => state.cart);
 
   // const auth = useAuth();
   // const { user } = useUserState();
@@ -42,7 +36,6 @@ function ShippingPage() {
   let user;
   if (cookies) {
     user = JSON.parse(cookies);
-    // console.log("storedUser", user);
   }
 
   const defaultValues = {
@@ -60,9 +53,8 @@ function ShippingPage() {
 
   const {
     handleSubmit,
-    reset,
-    setError,
-    formState: { errors, isSubmitting }
+
+    formState: { isSubmitting }
   } = methods;
 
   const onSubmit = async (data) => {

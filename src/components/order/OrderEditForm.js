@@ -1,29 +1,26 @@
-import React, { useCallback, useEffect } from "react";
-import { Box, Card, alpha, Stack, InputAdornment } from "@mui/material";
-import { FCheckbox, FormProvider, FSelect, FTextField } from "../form";
+import React from "react";
+import { Box, Card, Stack } from "@mui/material";
+import { FormProvider, FSelect } from "../form";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
-import { createProduct, editProduct } from "../slices/productsSlice";
 import { LoadingButton } from "@mui/lab";
-import FUploadImage from "../form/FUploadImage";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { editOrder } from "../slices/ordersSlice";
 
 const yupSchema = Yup.object().shape({
   // content: Yup.string().required("Content is required")
 });
 
-const defaultValues = {
-  payment_status: "Unpaid",
-  delivery_status: "Pending"
-};
-
 function OrderEditForm({ orderId }) {
   const navigate = useNavigate();
   const { isLoading } = useSelector((state) => state.products);
-  // const { orderId } = useParams();
+
+  const defaultValues = {
+    payment_status: "Unpaid",
+    delivery_status: "Pending"
+  };
 
   const methods = useForm({
     resolver: yupResolver(yupSchema),
@@ -31,8 +28,8 @@ function OrderEditForm({ orderId }) {
   });
   const {
     handleSubmit,
-    setValue,
-    formState: { isSubmitting, errors }
+
+    formState: { isSubmitting }
   } = methods;
 
   const dispatch = useDispatch();

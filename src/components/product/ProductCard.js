@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Card, Grid } from "@mui/material";
+import { Card } from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
@@ -10,20 +10,28 @@ import AddToCartButton from "../cart/AddToCartButton";
 import { styled } from "@mui/material/styles";
 
 const StyledCard = styled(Card)({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
   position: "relative",
   transition: "transition 0.2s",
   "&:hover": {
     transform: "scale(1.2)",
     zIndex: 1
-  }
+  },
+  borderRadius: "10px"
 });
 
-function ProductCard({ product }) {
+function ProductCard({ product, hideButton }) {
   const navigate = useNavigate();
   return (
     <StyledCard>
-      <CardActionArea onClick={() => navigate(`/product/${product._id}`)}>
+      <CardActionArea
+        onClick={() => navigate(`/product/${product._id}`)}
+        sx={{ p: "1rem" }}
+      >
         <CardMedia
+          sx={{ borderRadius: "15px" }}
           component="img"
           height="200"
           image={product.image}
@@ -46,7 +54,11 @@ function ProductCard({ product }) {
         </CardContent>
       </CardActionArea>
       <CardActions disableSpacing>
-        <AddToCartButton product={product} display={"Add To Cart"} />
+        <AddToCartButton
+          product={product}
+          display={"Add to cart"}
+          hideButton={hideButton}
+        />
       </CardActions>
     </StyledCard>
   );

@@ -36,12 +36,11 @@ function PlaceOrderPage() {
   let user;
   if (cookies) {
     user = JSON.parse(cookies);
-    console.log("storedUser", user);
+    // console.log("storedUser", user);
   }
 
-  const handleClick = () => {
-    console.log("subtotal", subtotal);
-    dispatch(
+  const handleClick = async () => {
+    await dispatch(
       createOrder({
         userId: user._id,
         ...shipping,
@@ -49,7 +48,8 @@ function PlaceOrderPage() {
         subtotal
       })
     );
-    dispatch(getSingleUserOrders({ userId: user._id }));
+    await dispatch(getSingleUserOrders({ userId: user._id }));
+    console.log("orders", orders);
     const orderId = orders[orders.length - 1]._id;
     navigate(`/my_order/${orderId}`);
   };
@@ -124,6 +124,8 @@ function PlaceOrderPage() {
                   Dividery To
                 </Typography>
                 <Typography>Address: {shipping.address}</Typography>
+                <Typography>City: {shipping.city}</Typography>
+                <Typography>State: {shipping.state}</Typography>
                 <Typography>Phone: {shipping.phone}</Typography>
               </Stack>
               <Stack spacing={1}>

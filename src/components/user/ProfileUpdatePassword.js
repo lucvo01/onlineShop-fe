@@ -1,21 +1,12 @@
 import React, { useState } from "react";
-import {
-  Box,
-  Grid,
-  Card,
-  Stack,
-  Typography,
-  IconButton,
-  InputAdornment
-} from "@mui/material";
+import { Grid, Card, Stack, IconButton, InputAdornment } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import useAuth from "../../hooks/useAuth";
-
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormProvider, FTextField } from "../../components/form";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { updateUserProfile } from "../slices/usersSlice";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";

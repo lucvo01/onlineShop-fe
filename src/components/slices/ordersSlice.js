@@ -114,7 +114,7 @@ export const createOrder =
   async (dispatch) => {
     dispatch(ordersSlice.actions.startLoading());
     try {
-      console.log(userId);
+      // console.log(userId);
       const response = await apiService.post("/orders", {
         ...shipping,
         userId,

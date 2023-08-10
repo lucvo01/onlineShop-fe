@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback } from "react";
 import { Box, Card, alpha, Stack, InputAdornment } from "@mui/material";
 import { FormProvider, FTextField } from "../form";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,18 +14,18 @@ const yupSchema = Yup.object().shape({
   // content: Yup.string().required("Content is required")
 });
 
-
 function ProductEditForm({ productId }) {
   const navigate = useNavigate();
-  const { isLoading } = useSelector((state) => state.products);
+  const { products, isLoading } = useSelector((state) => state.products);
 
-  
-const defaultValues = {
-  name: "",
-  description: "",
-  price: "",
-  image: null
-};
+  const product = products.find((e) => e._id === productId);
+
+  const defaultValues = {
+    name: product.name || "",
+    description: product.description || "",
+    price: product.price || "",
+    image: product.image || null
+  };
 
   const methods = useForm({
     resolver: yupResolver(yupSchema),
@@ -34,7 +34,7 @@ const defaultValues = {
   const {
     handleSubmit,
     setValue,
-    formState: { isSubmitting, errors }
+    formState: { isSubmitting }
   } = methods;
 
   const dispatch = useDispatch();

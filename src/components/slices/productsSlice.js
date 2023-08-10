@@ -51,14 +51,15 @@ const productSlice = createSlice({
 export default productSlice.reducer;
 
 export const getProducts =
-  ({ pageNum = 1, limit = PRODUCTS_PER_PAGE, searchQuery, gender }) =>
+  ({ pageNum = 1, limit = PRODUCTS_PER_PAGE, searchQuery, gender, category }) =>
   async (dispatch) => {
     dispatch(productSlice.actions.startLoading());
     try {
       const params = { page: pageNum, limit };
       if (searchQuery) params.name = searchQuery;
       if (gender && gender.length === 1) params.gender = gender;
-        console.log("params",params)
+      if (category) params.category = category;
+      console.log("params", params);
       const response = await apiService.get("/products", { params });
       // let url = `/products?page=${pageNum}&limit=${limit}`;
       // if (searchQuery) {

@@ -12,7 +12,7 @@ import PaginationBar from "../components/PaginationBar";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../components/slices/productsSlice";
 import { Grid } from "@mui/material";
-import SearchInput from "../components/SearchInput";
+// import SearchInput from "../components/SearchInput";
 
 function HomePage() {
   const dispatch = useDispatch();
@@ -24,7 +24,7 @@ function HomePage() {
 
   const defaultValues = {
     gender: [],
-    category: "All",
+    category: "",
     priceRange: "",
     sortBy: "featured",
     searchQuery: ""
@@ -36,15 +36,15 @@ function HomePage() {
   const filters = watch();
   const filterProducts = applyFilter(products, filters);
 
-  const { searchQuery, gender } = filters;
-  
+  const { searchQuery, gender, category } = filters;
+
   useEffect(() => {
-    dispatch(getProducts({ pageNum, searchQuery, gender }));
-  }, [dispatch, pageNum, searchQuery, gender]);
+    dispatch(getProducts({ pageNum, searchQuery, gender, category }));
+  }, [dispatch, pageNum, searchQuery, gender, category]);
 
   return (
-    <Container >
-      <Grid container spacing={2}>
+    <Container>
+      <Grid container>
         <Grid item xs={12} md={3}>
           {/* <SearchInput /> */}
           <FormProvider methods={methods}>

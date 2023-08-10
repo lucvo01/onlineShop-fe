@@ -1,4 +1,4 @@
-import { Box, Button, Stack, Typography } from "@mui/material";
+import { Box, Button, Stack, Typography, Paper } from "@mui/material";
 import { FMultiCheckbox, FRadioGroup } from "../form";
 import ClearAllIcon from "@mui/icons-material/ClearAll";
 import SearchInput from "../SearchInput";
@@ -12,12 +12,7 @@ export const SORT_BY_OPTIONS = [
 
 export const FILTER_GENDER_OPTIONS = ["Male", "Female"];
 
-// export const FILTER_CATEGORY_OPTIONS = [
-//   "All",
-//   "Shoes",
-//   "Apparel",
-//   "Accessories"
-// ];
+export const FILTER_CATEGORY_OPTIONS = ["Shoes", "Shirt", "Pants"];
 
 // export const FILTER_PRICE_OPTIONS = [
 //   { value: "below", label: "Below $25" },
@@ -27,28 +22,32 @@ export const FILTER_GENDER_OPTIONS = ["Male", "Female"];
 
 function ProductFilter({ resetFilter }) {
   return (
-    <Stack spacing={3} sx={{ p: 3, width: 250 }}>
-      <Stack spacing={1}>
-        <Typography variant="h6" sx={{ fontWeight: 600 }}>
-          Gender
-        </Typography>
-        <FMultiCheckbox
-          name="gender"
-          options={FILTER_GENDER_OPTIONS}
-          sx={{ width: 1 }}
-        />
+    <Stack spacing={3} sx={{ width: 200 }}>
+      <Stack>
+        <Paper sx={{ p: "1rem", borderRadius: "10px" }}>
+          <Typography variant="h6" sx={{ fontWeight: 600 }}>
+            Gender
+          </Typography>
+          <FMultiCheckbox
+            name="gender"
+            options={FILTER_GENDER_OPTIONS}
+            sx={{ width: 1 }}
+          />
+        </Paper>
       </Stack>
 
-      {/* <Stack spacing={1}>
-        <Typography variant="h6" sx={{ fontWeight: 600 }}>
-          Category
-        </Typography>
-        <FRadioGroup
-          name="category"
-          options={FILTER_CATEGORY_OPTIONS}
-          row={false}
-        />
-      </Stack> */}
+      <Stack>
+        <Paper sx={{ p: "1rem", borderRadius: "10px" }}>
+          <Typography variant="h6" sx={{ fontWeight: 600 }}>
+            Category
+          </Typography>
+          <FRadioGroup
+            name="category"
+            options={FILTER_CATEGORY_OPTIONS}
+            row={false}
+          />
+        </Paper>
+      </Stack>
 
       {/* <Stack spacing={1}>
         <Typography variant="h6" sx={{ fontWeight: 600 }}>

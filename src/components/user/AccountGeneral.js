@@ -1,14 +1,11 @@
 import React from "react";
-import { Box, Grid, Card, Stack, Typography } from "@mui/material";
+import { Grid, Card, Stack } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
-import useAuth from "../../hooks/useAuth";
-
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { FormProvider, FTextField, FUploadAvatar } from "../../components/form";
-import { fData } from "../../utils/numberFormat";
-import { useDispatch, useSelector } from "react-redux";
+import { FormProvider, FTextField } from "../../components/form";
+import { useDispatch } from "react-redux";
 import { updateUserProfile } from "../slices/usersSlice";
 import Cookies from "js-cookie";
 

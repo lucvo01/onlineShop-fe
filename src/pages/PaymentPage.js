@@ -1,20 +1,13 @@
 import { Grid, Stack } from "@mui/material";
 import React from "react";
-import { FSelect, FTextField, FormProvider } from "../components/form";
+import { FSelect, FormProvider } from "../components/form";
 import { LoadingButton } from "@mui/lab";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  createOrder,
-  getSingleUserOrders
-} from "../components/slices/ordersSlice";
-// import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
-// import { useUserState } from "../contexts/AuthContext";
 import Cookies from "js-cookie";
-import PaypalButton from "../components/cart/PaypalButton";
 import { addShippingAddress } from "../components/slices/cartSlice";
 
 const shippingSchema = Yup.object().shape({
@@ -27,11 +20,7 @@ function PaymentPage() {
   const { isLoading } = useSelector((state) => {
     return state.orders;
   });
-  const { subtotal, products } = useSelector((state) => state.cart);
-
-  // const auth = useAuth();
-  // const { user } = useUserState();
-  // console.log(useAuth());
+  // const { subtotal, products } = useSelector((state) => state.cart);
 
   const cookies = Cookies.get("user");
   let user;
@@ -49,24 +38,12 @@ function PaymentPage() {
 
   const {
     handleSubmit,
-    reset,
-    setError,
-    formState: { errors, isSubmitting }
+
+    formState: { isSubmitting }
   } = methods;
 
   const onSubmit = async (data) => {
     try {
-      // console.log(user);
-      // dispatch(
-      //   createOrder({
-      //     ...data,
-      //     userId: user._id || null,
-      //     subtotal,
-      //     products
-      //   })
-      // );
-      // dispatch(getSingleUserOrders({ userId: user._id }));
-      // navigate("/my_order");
       dispatch(addShippingAddress({ ...data }));
       navigate("/placeorder");
     } catch (error) {
