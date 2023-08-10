@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Img, Box, Container, Stack } from "@mui/material";
+import { Box, Container, Stack } from "@mui/material";
 import ProductFilter from "../components/product/ProductFilter";
 import ProductSearch from "../components/product/ProductSearch";
 import ProductSort from "../components/product/ProductSort";
@@ -45,7 +45,7 @@ function HomePage1() {
   return (
     <Container>
       <Grid container>
-        <Img src="https://content.asos-media.com/-/media/homepages/unisex/generic-hp/july-2023/julymonthly_12062023_womens_shot07_034_1440x698.jpg" />
+        <img src="https://content.asos-media.com/-/media/homepages/unisex/generic-hp/july-2023/julymonthly_12062023_womens_shot07_034_1440x698.jpg" />
       </Grid>
     </Container>
   );
