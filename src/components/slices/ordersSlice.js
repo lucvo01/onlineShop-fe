@@ -100,7 +100,7 @@ export const getAnOrder =
     dispatch(ordersSlice.actions.startLoading());
     try {
       const response = await apiService.get(`/orders/${orderId}`);
-      // console.log("ordersSlice", response);
+      console.log("ordersSlice", response);
       dispatch(ordersSlice.actions.getCurrentOrder(response.data.data));
       // console.log("ordersSlice", state.orders);
     } catch (error) {
@@ -114,7 +114,7 @@ export const createOrder =
   async (dispatch) => {
     dispatch(ordersSlice.actions.startLoading());
     try {
-      // console.log(userId);
+      console.log("products", products);
       const response = await apiService.post("/orders", {
         ...shipping,
         userId,

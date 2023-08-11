@@ -41,6 +41,7 @@ function ManageProductsPage() {
   };
 
   useEffect(() => {
+    console.log("pageNum", pageNum);
     dispatch(getProducts({ pageNum, searchQuery }));
   }, [dispatch, pageNum, searchQuery]);
 

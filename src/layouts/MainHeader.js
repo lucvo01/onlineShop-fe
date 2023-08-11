@@ -134,7 +134,7 @@ function MainHeader() {
     </Menu>
   );
   return (
-    <Box sx={{ mb: 3 }}>
+    <Box>
       <AppBar position="sticky" enableColorOnDark>
         <Toolbar>
           <IconButton

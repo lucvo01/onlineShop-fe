@@ -3,7 +3,7 @@ import { FMultiCheckbox, FRadioGroup } from "../form";
 import ClearAllIcon from "@mui/icons-material/ClearAll";
 // import SearchInput from "../SearchInput";
 import { useDispatch, useSelector } from "react-redux";
-import { setGender } from "../components/slices/genderSlice";
+import { setGender } from "../slices/genderSlice";
 import { useNavigate } from "react-router-dom";
 
 export const SORT_BY_OPTIONS = [
@@ -21,20 +21,19 @@ export const FILTER_CATEGORY_OPTIONS = ["Shoes", "Shirt", "Pants"];
 //   { value: "above", label: "Above $75" }
 // ];
 
-
 function ProductFilter({ resetFilter }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-    const handleClickMen = () => {
-      dispatch(setGender("male"));
-      navigate("/shop");
-    };
+  const handleClickMen = () => {
+    dispatch(setGender("male"));
+    navigate("/shop");
+  };
 
-    const handleClickWonen = () => {
-      dispatch(setGender("female"));
-      navigate("/shop");
-    };
+  const handleClickWonen = () => {
+    dispatch(setGender("female"));
+    navigate("/shop");
+  };
   return (
     <Stack spacing={3} sx={{ width: 200 }}>
       <Stack>
@@ -87,7 +86,8 @@ function ProductFilter({ resetFilter }) {
           color="inherit"
           variant="outlined"
           onClick={resetFilter}
-          startIcon={<ClearAllIcon />}>
+          startIcon={<ClearAllIcon />}
+        >
           Clear All
         </Button>
       </Box>

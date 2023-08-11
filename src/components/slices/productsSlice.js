@@ -57,18 +57,11 @@ export const getProducts =
     try {
       const params = { page: pageNum, limit };
       if (searchQuery) params.name = searchQuery;
-      if (gender && gender.length === 1) params.gender = gender;
+      if (gender) params.gender = gender;
       if (category) params.category = category;
-      console.log("params", params);
+      // console.log("gender", gender);
+      // console.log("params", params);
       const response = await apiService.get("/products", { params });
-      // let url = `/products?page=${pageNum}&limit=${limit}`;
-      // if (searchQuery) {
-      //   url += `&name=${searchQuery}`;
-      // }
-      // if (gender && gender.length === 1) {
-      //   url += `&gender=${gender}`;
-      // }
-      // const response = await apiService.get(url);
       dispatch(productSlice.actions.getProductsSuccess(response.data.data));
     } catch (error) {
       dispatch(productSlice.actions.hasError(error.message));

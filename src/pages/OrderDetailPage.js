@@ -51,9 +51,9 @@ function OrderDetailPage() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {products?.map((item) => {
+                  {products?.map((item, index) => {
                     return (
-                      <TableRow key={item._id._id} hover>
+                      <TableRow key={item._id._id || index} hover>
                         <TableCell>
                           <div
                             style={{ display: "flex", alignItems: "center" }}
@@ -65,11 +65,11 @@ function OrderDetailPage() {
                               sx={{ display: { xs: "none", md: "block" } }}
                             />
                             <Typography sx={{ marginLeft: "10px" }}>
-                              {item._id.name}
+                              {item.name}
                             </Typography>
                           </div>
                         </TableCell>
-                        <TableCell>{item.quantity}</TableCell>
+                        <TableCell>{item._id.quantity}</TableCell>
                         <TableCell>${item._id.price}</TableCell>
                         <TableCell>${item._id.price * item.quantity}</TableCell>
                         <TableCell>{currentOrder.delivery_status}</TableCell>

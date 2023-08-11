@@ -40,7 +40,7 @@ function PlaceOrderPage() {
   }
 
   const handleClick = async () => {
-    await dispatch(
+    dispatch(
       createOrder({
         userId: user._id,
         ...shipping,
@@ -48,7 +48,8 @@ function PlaceOrderPage() {
         subtotal
       })
     );
-    await dispatch(getSingleUserOrders({ userId: user._id }));
+
+    dispatch(getSingleUserOrders({ userId: user._id }));
     console.log("orders", orders);
     const orderId = orders[orders.length - 1]._id;
     navigate(`/my_order/${orderId}`);

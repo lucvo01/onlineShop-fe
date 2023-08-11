@@ -11,7 +11,9 @@ import FUploadImage from "../form/FUploadImage";
 import { useNavigate } from "react-router-dom";
 
 const yupSchema = Yup.object().shape({
-  // content: Yup.string().required("Content is required")
+  name: Yup.string().required("Name is required"),
+  description: Yup.string().required("Description is required"),
+  price: Yup.string().required("Price is required")
 });
 
 function ProductEditForm({ productId }) {
@@ -21,10 +23,10 @@ function ProductEditForm({ productId }) {
   const product = products.find((e) => e._id === productId);
 
   const defaultValues = {
-    name: product.name || "",
-    description: product.description || "",
-    price: product.price || "",
-    image: product.image || null
+    name: product?.name || "",
+    description: product?.description || "",
+    price: product?.price || ""
+    // image: product?.image || null
   };
 
   const methods = useForm({
