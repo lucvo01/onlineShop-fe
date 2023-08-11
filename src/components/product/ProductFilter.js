@@ -56,7 +56,7 @@ function ProductFilter({ resetFilter, handleSubmit }) {
           <FButton name="gender" value="female">
             Women
           </FButton> */}
-          <FButton name="gender" options={FILTER_GENDER_OPTIONS} row={false} />
+          <FButton name="gender" options={FILTER_GENDER_OPTIONS} />
         </Paper>
       </Stack>
 
@@ -88,7 +88,10 @@ function ProductFilter({ resetFilter, handleSubmit }) {
           type="submit"
           color="inherit"
           variant="outlined"
-          onClick={resetFilter}
+          onClick={() => {
+          dispatch(setGender(""));
+          resetFilter
+          }}
           startIcon={<ClearAllIcon />}
         >
           Clear All
