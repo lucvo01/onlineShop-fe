@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Container, Button, Grid } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { setGender } from "../components/slices/genderSlice";
 import { styled } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 // import SearchInput from "../components/SearchInput";
+import { FormProvider } from "../components/form";
+import { useForm } from "react-hook-form";
+import { getProducts } from "../components/slices/productsSlice";
+import FButton from "../components/form/FButton";
 
 const Img = styled("img")(({ theme }) => ({
   margin: "auto",
@@ -35,6 +39,11 @@ const SmallScreenImg = styled(Img)(({ theme }) => ({
   }
 }));
 
+export const FILTER_GENDER_OPTIONS = [
+  { value: "male", label: "Men" },
+  { value: "female", label: "Women" }
+];
+
 function HomePage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -48,6 +57,34 @@ function HomePage() {
     dispatch(setGender("female"));
     navigate("/shop");
   };
+
+  // const defaultValues = {
+  //   // gender: gender || null,
+  //   gender: ""
+  // };
+  // const methods = useForm({
+  //   defaultValues
+  // });
+  // const {
+  //   handleSubmit,
+  //   watch,
+  //   reset,
+
+  //   formState: { isSubmitting }
+  // } = methods;
+  // const filters = watch();
+
+  // const { searchQuery, category, priceRange, gender } = filters;
+
+  // useEffect(() => {
+  //   dispatch(getProducts({ gender }));
+  //   navigate("/shop");
+  // }, [gender]);
+  // if (gender) {
+  //   dispatch(getProducts({ gender }));
+  //   navigate("/shop");
+  // }
+
   return (
     <Container>
       <Grid container>
@@ -55,7 +92,7 @@ function HomePage() {
           <LargeScreenImg src="https://content.asos-media.com/-/media/homepages/unisex/generic-hp/july-2023/julymonthly_12062023_womens_shot07_034_1440x698.jpg" />
 
           <SmallScreenImg src="https://content.asos-media.com/-/media/homepages/unisex/generic-hp/july-2023/carly_asos_6_640x1070.jpg" />
-
+          {/* <FormProvider methods={methods}> */}
           <Box
             sx={{
               position: "absolute",
@@ -71,6 +108,11 @@ function HomePage() {
               borderRadius: "8px"
             }}
           >
+            {/* <FButton
+                name="gender"
+                options={FILTER_GENDER_OPTIONS}
+                row={false}
+              /> */}
             <Button onClick={handleClickMen} variant="contained" size="large">
               Shop Men
             </Button>
@@ -78,6 +120,7 @@ function HomePage() {
               Shop Women
             </Button>
           </Box>
+          {/* </FormProvider> */}
         </Box>
       </Grid>
     </Container>

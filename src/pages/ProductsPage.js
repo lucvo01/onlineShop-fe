@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Alert, Box, Container, Stack } from "@mui/material";
+import { Alert, Box, Container, Stack, Button } from "@mui/material";
 import ProductFilter from "../components/product/ProductFilter";
 import ProductSearch from "../components/product/ProductSearch";
 import ProductSort from "../components/product/ProductSort";
@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../components/slices/productsSlice";
 import { Grid } from "@mui/material";
 // import SearchInput from "../components/SearchInput";
+import { LoadingButton } from "@mui/lab";
 
 function ProductsPage() {
   const dispatch = useDispatch();
@@ -22,36 +23,51 @@ function ProductsPage() {
     (state) => state.products
   );
 
-  const { gender } = useSelector((state) => state.gender);
+  const { selectedGender } = useSelector((state) => state.gender);
 
   const defaultValues = {
-    gender: gender || [],
+    // gender: gender || null,
+    gender: selectedGender || "",
     category: "",
-    priceRange: "",
+    priceRange: [],
     sortBy: "featured",
     searchQuery: ""
   };
   const methods = useForm({
     defaultValues
   });
-  const { watch, reset } = methods;
+  const {
+    handleSubmit,
+    watch,
+    reset,
+
+    formState: { isSubmitting }
+  } = methods;
   const filters = watch();
   const filterProducts = applyFilter(products, filters);
 
-  const { searchQuery, category } = filters;
+  const { searchQuery, category, priceRange, gender } = filters;
 
   useEffect(() => {
-    console.log("gender", gender);
-    dispatch(getProducts({ pageNum, searchQuery, gender, category }));
-  }, [dispatch, pageNum, searchQuery, gender, category]);
+    dispatch(
+      getProducts({ pageNum, searchQuery, gender, category, priceRange })
+    );
+  }, [dispatch, pageNum, searchQuery, gender, category, priceRange]);
+
+  const onSubmit = async (data) => {
+    dispatch(getProducts({ pageNum, ...data }));
+  };
 
   return (
-    <Container>
+    <Container sx={{ mt: "1rem" }}>
       <Grid container>
         <Grid item xs={12} md={3}>
           {/* <SearchInput /> */}
           <FormProvider methods={methods}>
-            <ProductFilter resetFilter={reset} />
+            <ProductFilter
+              resetFilter={reset}
+              onSubmit={handleSubmit(onSubmit)}
+            />
           </FormProvider>
         </Grid>
         <Grid item sx={{ flexGrow: 1 }} xs={12} md={9}>

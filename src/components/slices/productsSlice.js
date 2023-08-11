@@ -51,7 +51,14 @@ const productSlice = createSlice({
 export default productSlice.reducer;
 
 export const getProducts =
-  ({ pageNum = 1, limit = PRODUCTS_PER_PAGE, searchQuery, gender, category }) =>
+  ({
+    pageNum = 1,
+    limit = PRODUCTS_PER_PAGE,
+    searchQuery,
+    gender,
+    category,
+    priceRange
+  }) =>
   async (dispatch) => {
     dispatch(productSlice.actions.startLoading());
     try {
@@ -59,10 +66,12 @@ export const getProducts =
       if (searchQuery) params.name = searchQuery;
       if (gender) params.gender = gender;
       if (category) params.category = category;
+      if (priceRange) params.priceRange = priceRange;
       // console.log("gender", gender);
-      // console.log("params", params);
+      console.log("params", params);
       const response = await apiService.get("/products", { params });
       dispatch(productSlice.actions.getProductsSuccess(response.data.data));
+      // console.log("priceRange", response);
     } catch (error) {
       dispatch(productSlice.actions.hasError(error.message));
       toast.error(error.message);
