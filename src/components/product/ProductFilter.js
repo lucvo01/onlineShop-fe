@@ -21,7 +21,7 @@ export const FILTER_GENDER_OPTIONS = [
   { value: "female", label: "Women" }
 ];
 
-function ProductFilter({ resetFilter, handleSubmit }) {
+function ProductFilter({ resetFilter, handleSubmit, setValue }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -71,7 +71,7 @@ function ProductFilter({ resetFilter, handleSubmit }) {
             Price Range
           </Typography>
           {/* <ProductPriceSlider /> */}
-          <FSlider name="sliderValue" min={0} max={200} step={10} />
+          <FSlider name="sliderValue" min={0} max={200} step={10} onchange={setValue}/>
         </Paper>
       </Stack>
 

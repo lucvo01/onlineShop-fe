@@ -39,7 +39,7 @@ function ProductsPage() {
     handleSubmit,
     watch,
     reset,
-
+setValue,
     formState: { isSubmitting }
   } = methods;
   const filters = watch();
@@ -67,11 +67,11 @@ function ProductsPage() {
     <Container sx={{ mt: "1rem" }}>
       <Grid container>
         <Grid item xs={12} md={3}>
-          {/* <SearchInput /> */}
           <FormProvider methods={methods}>
             <ProductFilter
               resetFilter={reset}
               onSubmit={handleSubmit(onSubmit)}
+              setValue={setValue}
             />
           </FormProvider>
         </Grid>
