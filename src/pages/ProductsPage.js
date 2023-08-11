@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../components/slices/productsSlice";
 import { Grid } from "@mui/material";
 // import SearchInput from "../components/SearchInput";
-import { LoadingButton } from "@mui/lab";
+// import { LoadingButton } from "@mui/lab";
 
 function ProductsPage() {
   const dispatch = useDispatch();
@@ -23,11 +23,10 @@ function ProductsPage() {
     (state) => state.products
   );
 
-  const { selectedGender } = useSelector((state) => state.gender);
+  const { gender } = useSelector((state) => state.gender);
 
   const defaultValues = {
-    // gender: gender || null,
-    gender: selectedGender || "",
+    gender: gender || "",
     category: "",
     priceRange: [],
     sortBy: "featured",
@@ -46,11 +45,17 @@ function ProductsPage() {
   const filters = watch();
   const filterProducts = applyFilter(products, filters);
 
-  const { searchQuery, category, priceRange, gender } = filters;
+  const { searchQuery, category, priceRange } = filters;
 
   useEffect(() => {
     dispatch(
-      getProducts({ pageNum, searchQuery, gender, category, priceRange })
+      getProducts({
+        pageNum,
+        searchQuery,
+        gender,
+        category,
+        priceRange
+      })
     );
   }, [dispatch, pageNum, searchQuery, gender, category, priceRange]);
 
@@ -111,7 +116,7 @@ function ProductsPage() {
 export default ProductsPage;
 
 function applyFilter(products, filters) {
-  const { sortBy, gender, category, priceRange, searchQuery } = filters;
+  const { sortBy } = filters;
 
   let filteredProducts = [...products];
 
@@ -125,38 +130,6 @@ function applyFilter(products, filters) {
   } else if (sortBy === "priceAsc") {
     filteredProducts = orderBy(filteredProducts, ["price"], ["asc"]);
   }
-
-  // FILTER PRODUCTS
-  // if (gender && gender.length > 0) {
-  //   filteredProducts = filteredProducts.filter((product) =>
-  //     gender.includes(product.gender)
-  //   );
-  // }
-
-  // if (category !== "All") {
-  //   filteredProducts = filteredProducts.filter(
-  //     (product) => product.category === category
-  //   );
-  // }
-
-  // if (priceRange) {
-  //   filteredProducts = filteredProducts.filter((product) => {
-  //     if (priceRange === "below") {
-  //       return product.price < 25;
-  //     } else if (priceRange === "between") {
-  //       return product.price >= 25 && product.price <= 75;
-  //     } else if (priceRange === "above") {
-  //       return product.price > 75;
-  //     }
-  //     return true;
-  //   });
-  // }
-
-  // if (searchQuery) {
-  //   filteredProducts = filteredProducts.filter((product) =>
-  //     product.name.toLowerCase().includes(searchQuery.toLowerCase())
-  //   );
-  // }
 
   return filteredProducts;
 }

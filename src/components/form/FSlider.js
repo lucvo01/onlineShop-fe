@@ -6,9 +6,9 @@ function FSlider({ name, ...other }) {
 
   return (
     <Controller
-      name={name} // This should match the field name in the form data
+      name={name}
       control={control}
-      defaultValue={[0, 100]} // Initial value of the Slider
+      defaultValue={[0, 200]}
       render={({ field }) => (
         <Slider
           {...field}

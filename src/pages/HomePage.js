@@ -58,33 +58,6 @@ function HomePage() {
     navigate("/shop");
   };
 
-  // const defaultValues = {
-  //   // gender: gender || null,
-  //   gender: ""
-  // };
-  // const methods = useForm({
-  //   defaultValues
-  // });
-  // const {
-  //   handleSubmit,
-  //   watch,
-  //   reset,
-
-  //   formState: { isSubmitting }
-  // } = methods;
-  // const filters = watch();
-
-  // const { searchQuery, category, priceRange, gender } = filters;
-
-  // useEffect(() => {
-  //   dispatch(getProducts({ gender }));
-  //   navigate("/shop");
-  // }, [gender]);
-  // if (gender) {
-  //   dispatch(getProducts({ gender }));
-  //   navigate("/shop");
-  // }
-
   return (
     <Container>
       <Grid container>

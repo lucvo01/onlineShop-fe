@@ -44,19 +44,12 @@ function ProductFilter({ resetFilter, handleSubmit }) {
             display: "flex"
           }}
         >
-          {/* <Button onClick={handleClickMen} variant="contained" size="large">
+          <Button onClick={handleClickMen} variant="contained" size="large">
             Men
           </Button>
           <Button onClick={handleClickWonen} variant="contained" size="large">
             Women
-          </Button> */}
-          {/* <FButton name="gender" value="male">
-            Men
-          </FButton>
-          <FButton name="gender" value="female">
-            Women
-          </FButton> */}
-          <FButton name="gender" options={FILTER_GENDER_OPTIONS} />
+          </Button>
         </Paper>
       </Stack>
 
@@ -89,8 +82,8 @@ function ProductFilter({ resetFilter, handleSubmit }) {
           color="inherit"
           variant="outlined"
           onClick={() => {
-          dispatch(setGender(""));
-          resetFilter
+            dispatch(setGender(""));
+            resetFilter();
           }}
           startIcon={<ClearAllIcon />}
         >
