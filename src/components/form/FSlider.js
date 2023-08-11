@@ -1,8 +1,19 @@
 import { useFormContext, Controller } from "react-hook-form";
-import { Slider } from "@mui/material";
+import { Slider, Button } from "@mui/material";
+import * as React from "react";
 
 function FSlider({ name, ...other }) {
   const { control } = useFormContext();
+  const [value, setValue] = React.useState([0, 200]);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+    // console.log("value", value);
+  };
+
+  const handleClick = (event, newValue) => {
+    setValue(newValue);
+  };
 
   return (
     <Controller
@@ -10,14 +21,18 @@ function FSlider({ name, ...other }) {
       control={control}
       defaultValue={[0, 200]}
       render={({ field }) => (
-        <Slider
-          {...field}
-          getAriaLabel={() => name}
-          valueLabelDisplay="auto"
-          //   min={0}
-          //   max={100}
-          {...other}
-        />
+        <>
+          <Slider
+            {...field}
+            getAriaLabel={() => name}
+            valueLabelDisplay="auto"
+            // onChange={handleChange}
+            //   min={0}
+            //   max={100}
+            {...other}
+          />
+          <Button onClick={() => setValue}>Filter</Button>
+        </>
       )}
     />
   );

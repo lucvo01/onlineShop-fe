@@ -71,7 +71,13 @@ function ProductFilter({ resetFilter, handleSubmit, setValue }) {
             Price Range
           </Typography>
           {/* <ProductPriceSlider /> */}
-          <FSlider name="sliderValue" min={0} max={200} step={10} onchange={setValue}/>
+          <FSlider
+            name="sliderValue"
+            min={0}
+            max={200}
+            step={10}
+            onchange={setValue}
+          />
         </Paper>
       </Stack>
 
@@ -88,16 +94,6 @@ function ProductFilter({ resetFilter, handleSubmit, setValue }) {
           startIcon={<ClearAllIcon />}
         >
           Clear All
-        </Button>
-        <Button
-          size="large"
-          type="submit"
-          color="inherit"
-          variant="outlined"
-          onClick={handleSubmit}
-          startIcon={<ClearAllIcon />}
-        >
-          Filter
         </Button>
       </Box>
     </Stack>

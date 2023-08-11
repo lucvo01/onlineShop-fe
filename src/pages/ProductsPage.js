@@ -12,6 +12,7 @@ import PaginationBar from "../components/PaginationBar";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../components/slices/productsSlice";
 import { Grid } from "@mui/material";
+import ProductPriceSlider from "../components/product/ProductPriceSlider";
 // import SearchInput from "../components/SearchInput";
 // import { LoadingButton } from "@mui/lab";
 
@@ -39,7 +40,7 @@ function ProductsPage() {
     handleSubmit,
     watch,
     reset,
-setValue,
+    setValue,
     formState: { isSubmitting }
   } = methods;
   const filters = watch();
@@ -73,6 +74,7 @@ setValue,
               onSubmit={handleSubmit(onSubmit)}
               setValue={setValue}
             />
+            {/* <ProductPriceSlider /> */}
           </FormProvider>
         </Grid>
         <Grid item sx={{ flexGrow: 1 }} xs={12} md={9}>
