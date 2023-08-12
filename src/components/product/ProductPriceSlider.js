@@ -2,34 +2,36 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import { Slider, Button } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { getProducts } from "../slices/productsSlice";
+import { setPriceRange } from "../slices/filterSlice";
 
-export default function ProductPriceSlider() {
+export default function ProductPriceSlider({ sliderValue, setSliderValue }) {
   const dispatch = useDispatch();
-  const [value, setValue] = React.useState([0, 200]);
+  // const [value, setValue] = React.useState([]);
+  // const [sliderValue, setSliderValue] = React.useState([0, 200]);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-    // console.log("value", value);
+  const handleChange = (event, value) => {
+    setSliderValue(value);
   };
 
   const handleClick = () => {
-    dispatch(getProducts({ priceRange: value }));
+    dispatch(setPriceRange(sliderValue));
   };
 
   return (
     <Box>
       <Slider
         getAriaLabel={() => "Price range"}
-        value={value}
+        value={sliderValue}
+        // defaultValue={[0, 200]}
         step={10}
         onChange={handleChange}
         max={200}
         min={0}
         valueLabelDisplay="auto"
-        // getAriaValueText={valuetext}
       />
-      <Button onClick={handleClick}>Filter</Button>
+      <Button onClick={handleClick} variant="contained">
+        Filter
+      </Button>
     </Box>
   );
 }

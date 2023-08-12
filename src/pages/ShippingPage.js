@@ -42,8 +42,8 @@ function ShippingPage() {
     email: user?.email || "",
     phone: user?.phone || "",
     address: user?.address || "",
-    city: "",
-    state: ""
+    city: user?.city || "",
+    state: user?.state || ""
   };
 
   const methods = useForm({
@@ -59,7 +59,7 @@ function ShippingPage() {
 
   const onSubmit = async (data) => {
     try {
-      console.log(user);
+      // console.log(user);
       // dispatch(
       //   createOrder({
       //     ...data,
@@ -70,7 +70,7 @@ function ShippingPage() {
       // );
       // dispatch(getSingleUserOrders({ userId: user._id }));
       // navigate("/my_order");
-      console.log(data);
+
       dispatch(addShippingAddress({ ...data }));
       navigate("/placeorder");
     } catch (error) {

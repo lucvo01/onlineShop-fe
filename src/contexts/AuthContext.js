@@ -146,12 +146,16 @@ function AuthProvider({ children }) {
       password
     });
 
-    const { user, accessToken } = response.data;
+    const { user, accessToken } = response.data.data;
     setSession(accessToken);
     dispatch({
       type: REGISTER_SUCCESS,
       payload: { user }
     });
+
+    Cookies.set("user", JSON.stringify({ ...user, accessToken }), {
+      expires: 2
+    }); // Store the user object for 2 days
 
     callback();
   };

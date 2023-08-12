@@ -50,7 +50,7 @@ function PlaceOrderPage() {
     );
 
     dispatch(getSingleUserOrders({ userId: user._id }));
-    console.log("orders", orders);
+    // console.log("orders", orders);
     const orderId = orders[orders.length - 1]._id;
     navigate(`/my_order/${orderId}`);
   };
@@ -134,17 +134,6 @@ function PlaceOrderPage() {
                   Payment Method
                 </Typography>
                 <Typography> {shipping.payment_method}</Typography>
-                {/* <Box>
-                  Deliverd status:{" "}
-                  {currentOrder.delivery_status === "Delivered" ? (
-                    <Chip
-                      label={currentOrder.delivery_status}
-                      color="success"
-                    />
-                  ) : (
-                    <Chip label={currentOrder.delivery_status} />
-                  )}
-                </Box> */}
               </Stack>
               <Button variant="contained" onClick={handleClick}>
                 Place Order

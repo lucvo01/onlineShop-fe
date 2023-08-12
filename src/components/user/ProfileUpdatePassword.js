@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { updateUserProfile } from "../slices/usersSlice";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { useNavigate } from "react-router-dom";
 
 const UpdatePasswordSchema = Yup.object().shape({
   password: Yup.string().required("Password is required"),
@@ -19,6 +20,9 @@ const UpdatePasswordSchema = Yup.object().shape({
 });
 
 function ProfileUpdatePassword() {
+  const navigate = useNavigate();
+  // const location = useLocation();
+  const auth = useAuth();
   const { user } = useAuth();
   // const isLoading = useSelector((state) => state.user.isLoading);
   const isLoading = false;
@@ -40,9 +44,18 @@ function ProfileUpdatePassword() {
 
   const dispatch = useDispatch();
 
-  const onSubmit = (password) => {
+  const onSubmit = async (password) => {
+    // const from = location.state?.from?.pathname || "/";
     console.log("password", password);
     dispatch(updateUserProfile({ userId: user.data._id, ...password }));
+
+    try {
+      await auth.logout(() => {
+        navigate("/login");
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

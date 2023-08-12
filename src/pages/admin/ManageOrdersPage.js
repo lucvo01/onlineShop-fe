@@ -1,5 +1,6 @@
 import {
   Chip,
+  Paper,
   Box,
   Button,
   Typography,
@@ -49,7 +50,6 @@ function ManageOrdersPage() {
   const { delivery_status } = filters;
 
   useEffect(() => {
-    console.log("delivery_status", delivery_status);
     dispatch(getOrders({ pageNum, delivery_status }));
   }, [dispatch, pageNum, delivery_status]);
 
@@ -80,68 +80,78 @@ function ManageOrdersPage() {
           <FormProvider methods={methods}>
             <OrderSort />
           </FormProvider>
-          <TableContainer>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>OrderId</TableCell>
-                  <TableCell>Date</TableCell>
-                  {/* <TableCell>Product</TableCell> */}
-                  <TableCell>Amount</TableCell>
-                  <TableCell>Payment Method</TableCell>
-                  <TableCell>Payment Status</TableCell>
-                  <TableCell>Delivery Status</TableCell>
-                  <TableCell>Edit</TableCell>
-                  <TableCell>Detail</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {orders?.map((order, index) => {
-                  return (
-                    <TableRow key={order._id || index} hover>
-                      <TableCell>{order._id}</TableCell>
-                      <TableCell>{formatDate(order.createdAt)}</TableCell>
-                      {/* <TableCell>product</TableCell> */}
-                      <TableCell>${order.subtotal}</TableCell>
-                      <TableCell>{order.payment_method}</TableCell>
-                      <TableCell>
-                        {order.payment_status === "Paid" ? (
-                          <Chip label={order.payment_status} color="success" />
-                        ) : (
-                          <Chip label={order.payment_status} />
-                        )}
-                      </TableCell>
-                      <TableCell>
-                        {order.delivery_status === "Delivered" ? (
-                          <Chip label={order.delivery_status} color="success" />
-                        ) : (
-                          <Chip label={order.delivery_status} />
-                        )}
-                      </TableCell>
-                      <TableCell>
-                        <Button
-                          onClick={() =>
-                            navigate(`/manage_orders/${order._id}/edit`)
-                          }
-                        >
-                          Edit
-                        </Button>
-                      </TableCell>
-                      <TableCell>
-                        <Button
-                          onClick={() =>
-                            navigate(`/manage_orders/${order._id}`)
-                          }
-                        >
-                          Detail
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
-              </TableBody>
-            </Table>
-          </TableContainer>
+          <Paper sx={{ borderRadius: "10px", height: "100vh", mt: 3 }}>
+            <TableContainer>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>OrderId</TableCell>
+                    <TableCell>Date</TableCell>
+                    {/* <TableCell>Product</TableCell> */}
+                    <TableCell>Amount</TableCell>
+                    <TableCell>Payment Method</TableCell>
+                    <TableCell>Payment Status</TableCell>
+                    <TableCell>Delivery Status</TableCell>
+                    <TableCell>Edit</TableCell>
+                    <TableCell>Detail</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {orders?.map((order, index) => {
+                    return (
+                      <TableRow key={order._id || index} hover>
+                        <TableCell>{order._id}</TableCell>
+                        <TableCell>{formatDate(order.createdAt)}</TableCell>
+                        {/* <TableCell>product</TableCell> */}
+                        <TableCell>${order.subtotal}</TableCell>
+                        <TableCell>{order.payment_method}</TableCell>
+                        <TableCell>
+                          {order.payment_status === "Paid" ? (
+                            <Chip
+                              label={order.payment_status}
+                              color="success"
+                            />
+                          ) : (
+                            <Chip label={order.payment_status} />
+                          )}
+                        </TableCell>
+                        <TableCell>
+                          {order.delivery_status === "Delivered" ? (
+                            <Chip
+                              label={order.delivery_status}
+                              color="success"
+                            />
+                          ) : (
+                            <Chip label={order.delivery_status} />
+                          )}
+                        </TableCell>
+                        <TableCell>
+                          <Button
+                            variant="contained"
+                            onClick={() =>
+                              navigate(`/manage_orders/${order._id}/edit`)
+                            }
+                          >
+                            Edit
+                          </Button>
+                        </TableCell>
+                        <TableCell>
+                          <Button
+                            variant="contained"
+                            onClick={() =>
+                              navigate(`/manage_orders/${order._id}`)
+                            }
+                          >
+                            Detail
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Paper>
           <Box sx={{ display: "flex", justifyContent: "center", mt: "2rem" }}>
             <PaginationBar
               pageNum={pageNum}

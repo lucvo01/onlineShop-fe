@@ -7,7 +7,8 @@ const initialState = {
   error: null,
   updatedProfile: null,
   selectedUser: null,
-  users: []
+  users: [],
+  currentUser: null
 };
 
 const slice = createSlice({
@@ -38,33 +39,17 @@ const slice = createSlice({
       state.isLoading = false;
       state.error = null;
       state.users = action.payload;
+    },
+    getCurrentUserSuccess(state, action) {
+      state.isLoading = false;
+      state.error = null;
+      state.currentUser = action.payload;
+      console.log("currentUser", action.payload);
     }
   }
 });
 
 export default slice.reducer;
-
-export const updateUserProfile =
-  ({ userId, ...data }) =>
-  async (dispatch) => {
-    dispatch(slice.actions.startLoading());
-    try {
-      const info = {
-        ...data
-        // name,
-        // address,
-        // phone,
-        // password,
-        // isDeleted
-      };
-      const response = await apiService.put(`/users/${userId}`, info);
-      dispatch(slice.actions.updateUserProfileSuccess(response.data));
-      toast.success("Update Profile successfully");
-    } catch (error) {
-      dispatch(slice.actions.hasError(error.message));
-      toast.error(error.message);
-    }
-  };
 
 export const getAllUsers = (id) => async (dispatch) => {
   dispatch(slice.actions.startLoading());
@@ -93,11 +78,34 @@ export const getCurrentUserProfile = () => async (dispatch) => {
   dispatch(slice.actions.startLoading());
   try {
     const response = await apiService.get("/users/me");
-    dispatch(slice.actions.updateUserProfileSuccess(response.data));
+    dispatch(slice.actions.getCurrentUserSuccess(response.data.data));
   } catch (error) {
     dispatch(slice.actions.hasError(error));
   }
 };
+
+export const updateUserProfile =
+  ({ userId, ...data }) =>
+  async (dispatch) => {
+    dispatch(slice.actions.startLoading());
+    try {
+      const info = {
+        ...data
+        // name,
+        // address,
+        // phone,
+        // password,
+        // isDeleted
+      };
+      const response = await apiService.put(`/users/${userId}`, info);
+      dispatch(slice.actions.updateUserProfileSuccess(response.data));
+      dispatch(getCurrentUserProfile());
+      toast.success("Update Profile successfully");
+    } catch (error) {
+      dispatch(slice.actions.hasError(error.message));
+      toast.error(error.message);
+    }
+  };
 
 // export const deleteUser = () => async (dispatch) => {
 //   dispatch(slice.actions.startLoading())
@@ -108,5 +116,3 @@ export const getCurrentUserProfile = () => async (dispatch) => {
 //     dispatch(slice.actions.hasError(error));
 //   }
 // }
-
-

@@ -27,8 +27,6 @@ function FSlider({ name, ...other }) {
             getAriaLabel={() => name}
             valueLabelDisplay="auto"
             // onChange={handleChange}
-            //   min={0}
-            //   max={100}
             {...other}
           />
           <Button onClick={() => setValue}>Filter</Button>

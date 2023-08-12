@@ -41,7 +41,6 @@ const ordersSlice = createSlice({
       state.isLoading = false;
       state.error = null;
       state.currentOrder = action.payload;
-      console.log("action.payload", action.payload);
     },
     createOrderSuccess(state, action) {
       state.isLoading = false;
@@ -100,7 +99,7 @@ export const getAnOrder =
     dispatch(ordersSlice.actions.startLoading());
     try {
       const response = await apiService.get(`/orders/${orderId}`);
-      console.log("ordersSlice", response);
+      // console.log("ordersSlice", response);
       dispatch(ordersSlice.actions.getCurrentOrder(response.data.data));
       // console.log("ordersSlice", state.orders);
     } catch (error) {
@@ -114,7 +113,7 @@ export const createOrder =
   async (dispatch) => {
     dispatch(ordersSlice.actions.startLoading());
     try {
-      console.log("products", products);
+      // console.log("products", products);
       const response = await apiService.post("/orders", {
         ...shipping,
         userId,

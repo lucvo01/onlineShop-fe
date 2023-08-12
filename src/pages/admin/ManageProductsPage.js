@@ -1,5 +1,6 @@
 import {
   Box,
+  Paper,
   Button,
   Container,
   Table,
@@ -10,7 +11,8 @@ import {
   TableRow,
   Breadcrumbs,
   Link,
-  Typography
+  Typography,
+  Grid
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import ProductCard from "../../components/product/ProductCard";
@@ -50,7 +52,8 @@ function ManageProductsPage() {
       {isLoading ? (
         <LoadingScreen />
       ) : (
-        <Box>
+        <>
+          {/* <Grid container> */}
           <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 4 }}>
             <Link
               underline="hover"
@@ -60,15 +63,20 @@ function ManageProductsPage() {
             >
               Online Shop
             </Link>
-            <Typography color="text.primary">Manage Orders</Typography>
+            <Typography color="text.primary">Manage Products</Typography>
           </Breadcrumbs>
+
+          <Typography variant="h5" gutterBottom>
+            Manage Poducts
+          </Typography>
+
           <Box
             sx={{
               display: "flex",
               flexDirection: { xs: "column", md: "row" },
               alignItems: { xs: "center", md: "space-between" },
-              justifyContent: { xs: "center", md: "space-between" },
-              mt: "1rem",
+              justifyContent: { xs: "center", md: "center" },
+              mt: "2rem",
               gap: "1rem"
             }}
           >
@@ -84,70 +92,90 @@ function ManageProductsPage() {
               Create New Product
             </Button>
           </Box>
-
-          <TableContainer sx={{ minWidth: 800 }}>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell
-                    sx={{ width: { xs: "20%", sm: "25%" }, fontWeight: "bold" }}
-                  >
-                    Product
-                  </TableCell>
-
-                  <TableCell sx={{ fontWeight: "bold" }}>Action</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {products.map((item, index) => {
-                  return (
-                    <TableRow key={item._id || index} hover>
+          <Grid item xs={12}>
+            <Paper sx={{ borderRadius: "10px", mt: 3 }}>
+              <TableContainer>
+                <Table>
+                  <TableHead>
+                    <TableRow>
                       <TableCell
                         sx={{
-                          display: "flex",
-                          alignItems: "center",
-                          cursor: "pointer"
+                          fontWeight: "bold"
                         }}
                       >
-                        <ProductCard product={item} hideButton={"yes"} />
+                        Product
                       </TableCell>
-                      <TableCell
-                        // align="left"
-                        sx={{ display: { md: "table-cell" } }}
-                      >
-                        <Button
-                          variant="contained"
-                          sx={{ mr: "1rem" }}
-                          onClick={() =>
-                            navigate(`/manage_products/${item._id}/edit`)
-                          }
-                        >
-                          Edit
-                        </Button>
-                        <Button
-                          variant="contained"
-                          color="error"
-                          onClick={() =>
-                            navigate(`/manage_products/${item._id}/delete`)
-                          }
-                        >
-                          Delete
-                        </Button>
-                      </TableCell>
+
+                      <TableCell sx={{ fontWeight: "bold" }}>Action</TableCell>
                     </TableRow>
-                  );
-                })}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <Box sx={{ display: "flex", justifyContent: "center", mt: "2rem" }}>
-            <PaginationBar
-              pageNum={pageNum}
-              setPageNum={setPageNum}
-              totalPages={totalPages}
-            />
-          </Box>
-        </Box>
+                  </TableHead>
+                  <TableBody>
+                    {products.map((item, index) => {
+                      return (
+                        <TableRow key={item._id || index} hover>
+                          <TableCell
+                            sx={{
+                              display: "flex",
+                              // alignItems: "center",
+                              // justifyContent: "center",
+                              cursor: "pointer"
+                            }}
+                          >
+                            <ProductCard product={item} hideButton={"yes"} />
+                          </TableCell>
+                          <TableCell>
+                            <Box
+                              sx={{
+                                display: "flex",
+                                flexDirection: {
+                                  xs: "column",
+                                  md: "row",
+                                  gap: 3,
+                                  alignItems: "center",
+                                  justifyContent: "center"
+                                }
+                              }}
+                            >
+                              <Button
+                                variant="contained"
+                                sx={{ flex: 1 }}
+                                onClick={() =>
+                                  navigate(`/manage_products/${item._id}/edit`)
+                                }
+                              >
+                                Edit
+                              </Button>
+                              <Button
+                                sx={{ flex: 1 }}
+                                variant="contained"
+                                color="error"
+                                onClick={() =>
+                                  navigate(
+                                    `/manage_products/${item._id}/delete`
+                                  )
+                                }
+                              >
+                                Delete
+                              </Button>
+                            </Box>
+                          </TableCell>
+                        </TableRow>
+                      );
+                    })}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Paper>
+            <Box sx={{ display: "flex", justifyContent: "center", mt: "2rem" }}>
+              <PaginationBar
+                pageNum={pageNum}
+                setPageNum={setPageNum}
+                totalPages={totalPages}
+              />
+            </Box>
+          </Grid>
+          {/* </Grid> */}
+        </>
       )}
     </Container>
   );

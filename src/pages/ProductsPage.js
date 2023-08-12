@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Alert, Box, Container, Stack, Button } from "@mui/material";
+import { Alert, Box, Container, Stack } from "@mui/material";
 import ProductFilter from "../components/product/ProductFilter";
-import ProductSearch from "../components/product/ProductSearch";
 import ProductSort from "../components/product/ProductSort";
 import ProductList from "../components/product/ProductList";
 import { FormProvider } from "../components/form";
@@ -12,19 +11,17 @@ import PaginationBar from "../components/PaginationBar";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../components/slices/productsSlice";
 import { Grid } from "@mui/material";
-import ProductPriceSlider from "../components/product/ProductPriceSlider";
-// import SearchInput from "../components/SearchInput";
-// import { LoadingButton } from "@mui/lab";
 
 function ProductsPage() {
   const dispatch = useDispatch();
   const [pageNum, setPageNum] = useState(1);
+  const [sliderValue, setSliderValue] = useState([0, 200]);
 
   const { products, isLoading, totalPages, error } = useSelector(
     (state) => state.products
   );
 
-  const { gender } = useSelector((state) => state.gender);
+  const { gender, priceRange } = useSelector((state) => state.filter);
 
   const defaultValues = {
     gender: gender || "",
@@ -36,17 +33,11 @@ function ProductsPage() {
   const methods = useForm({
     defaultValues
   });
-  const {
-    handleSubmit,
-    watch,
-    reset,
-    setValue,
-    formState: { isSubmitting }
-  } = methods;
+  const { handleSubmit, watch, reset } = methods;
   const filters = watch();
   const filterProducts = applyFilter(products, filters);
 
-  const { searchQuery, category, priceRange } = filters;
+  const { searchQuery, category } = filters;
 
   useEffect(() => {
     dispatch(
@@ -66,15 +57,16 @@ function ProductsPage() {
 
   return (
     <Container sx={{ mt: "1rem" }}>
-      <Grid container>
-        <Grid item xs={12} md={3}>
+      <Grid container spacing={3}>
+        <Grid item sx={{ flexGrow: 1 }} xs={12} md={3}>
           <FormProvider methods={methods}>
             <ProductFilter
               resetFilter={reset}
               onSubmit={handleSubmit(onSubmit)}
-              setValue={setValue}
+              sliderValue={sliderValue}
+              setSliderValue={setSliderValue}
+              gender={gender}
             />
-            {/* <ProductPriceSlider /> */}
           </FormProvider>
         </Grid>
         <Grid item sx={{ flexGrow: 1 }} xs={12} md={9}>
@@ -82,15 +74,12 @@ function ProductsPage() {
             <Stack
               spacing={2}
               direction={{ xs: "column", sm: "row" }}
-              alignItems={{ sm: "center" }}
-              justifyContent="space-between"
-              mb={2}
+              justifyContent={{ sx: "center", md: "flex-end" }}
             >
-              <ProductSearch />
               <ProductSort />
             </Stack>
           </FormProvider>
-          <Grid item sx={{ position: "relative", height: 1 }}>
+          <Grid item>
             {isLoading ? (
               <LoadingScreen />
             ) : (
@@ -102,14 +91,14 @@ function ProductsPage() {
                 )}
               </>
             )}
+            <Box sx={{ display: "flex", justifyContent: "center", mt: "2rem" }}>
+              <PaginationBar
+                pageNum={pageNum}
+                setPageNum={setPageNum}
+                totalPages={totalPages}
+              />
+            </Box>
           </Grid>
-          <Box sx={{ display: "flex", justifyContent: "center", mt: "2rem" }}>
-            <PaginationBar
-              pageNum={pageNum}
-              setPageNum={setPageNum}
-              totalPages={totalPages}
-            />
-          </Box>
         </Grid>
       </Grid>
     </Container>

@@ -12,6 +12,7 @@ import { Avatar, Divider, Menu, MenuItem } from "@mui/material";
 import { useNavigate, Link as RouterLink } from "react-router-dom";
 import ColorModeButton from "../components/ColorModeButton";
 import Cookies from "js-cookie";
+// import SearchInput from "../components/SearchInput";
 
 function MainHeader() {
   const { logout } = useAuth();
@@ -156,6 +157,15 @@ function MainHeader() {
           </Typography>
 
           <Box sx={{ flexGrow: 1 }} />
+          {/* <SearchInput /> */}
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{ display: { xs: "none", sm: "block" } }}
+          >
+            Hi {user?.name}!
+          </Typography>
           <ColorModeButton />
           <Cart />
           <Box>

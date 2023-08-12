@@ -1,20 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Box, Container, Button, Grid } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { setGender } from "../components/slices/genderSlice";
+import { setGender } from "../components/slices/filterSlice";
 import { styled } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 // import SearchInput from "../components/SearchInput";
-import { FormProvider } from "../components/form";
-import { useForm } from "react-hook-form";
-import { getProducts } from "../components/slices/productsSlice";
-import FButton from "../components/form/FButton";
 
 const Img = styled("img")(({ theme }) => ({
   margin: "auto",
-  // display: "block",
-  // maxWidth: "100%",
-  // maxHeight: "100%",
   position: "fixed",
   top: 0,
   left: 0,
@@ -65,7 +58,6 @@ function HomePage() {
           <LargeScreenImg src="https://content.asos-media.com/-/media/homepages/unisex/generic-hp/july-2023/julymonthly_12062023_womens_shot07_034_1440x698.jpg" />
 
           <SmallScreenImg src="https://content.asos-media.com/-/media/homepages/unisex/generic-hp/july-2023/carly_asos_6_640x1070.jpg" />
-          {/* <FormProvider methods={methods}> */}
           <Box
             sx={{
               position: "absolute",
@@ -75,25 +67,36 @@ function HomePage() {
               display: "flex",
               flexDirection: "row",
               alignItems: "center",
+              justifyContent: "center",
               gap: "1rem",
-              // backgroundColor: 'rgba(255, 255, 255, 0.7)',
               padding: "1rem",
               borderRadius: "8px"
+              // width: "100%"
             }}
           >
-            {/* <FButton
-                name="gender"
-                options={FILTER_GENDER_OPTIONS}
-                row={false}
-              /> */}
-            <Button onClick={handleClickMen} variant="contained" size="large">
+            <Button
+              onClick={handleClickMen}
+              variant="contained"
+              size="large"
+              sx={{
+                flex: 1,
+                height: "4rem"
+              }}
+            >
               Shop Men
             </Button>
-            <Button onClick={handleClickWonen} variant="contained" size="large">
+            <Button
+              onClick={handleClickWonen}
+              variant="contained"
+              size="large"
+              sx={{
+                flex: 1,
+                height: "4rem"
+              }}
+            >
               Shop Women
             </Button>
           </Box>
-          {/* </FormProvider> */}
         </Box>
       </Grid>
     </Container>

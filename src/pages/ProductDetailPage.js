@@ -9,7 +9,8 @@ import {
   Rating,
   Divider,
   Breadcrumbs,
-  Link
+  Link,
+  Chip
 } from "@mui/material";
 import { Link as RouterLink, useParams } from "react-router-dom";
 import { fCurrency } from "../utils";
@@ -141,8 +142,10 @@ function ProductDetailPage() {
                             rehypePlugins={[rehypeRaw]}
                             children={product.description}
                           />
+                          <Chip label={product.gender} />
+                          <Chip label={product.category} />
                         </Box>
-                        <Box>
+                        <Box mt={3}>
                           <AddToCartButton
                             product={product}
                             display={"Add To Cart"}

@@ -1,13 +1,13 @@
-import { Box, Button, Stack, Typography, Paper } from "@mui/material";
+import { Button, Stack, Typography, Paper } from "@mui/material";
 import { FRadioGroup } from "../form";
 import ClearAllIcon from "@mui/icons-material/ClearAll";
 // import SearchInput from "../SearchInput";
-import { useDispatch, useSelector } from "react-redux";
-import { setGender } from "../slices/genderSlice";
+import { useDispatch } from "react-redux";
+import { setGender } from "../slices/filterSlice";
 import { useNavigate } from "react-router-dom";
 import ProductPriceSlider from "./ProductPriceSlider";
-import FSlider from "../form/FSlider";
-import FButton from "../form/FButton";
+// import SearchInput from "../SearchInput";
+import ProductSearch from "./ProductSearch";
 
 export const SORT_BY_OPTIONS = [
   { value: "priceDesc", label: "Price: High-Low" },
@@ -16,12 +16,28 @@ export const SORT_BY_OPTIONS = [
 
 export const FILTER_CATEGORY_OPTIONS = ["Shoes", "Shirt", "Pants"];
 
-export const FILTER_GENDER_OPTIONS = [
-  { value: "male", label: "Men" },
-  { value: "female", label: "Women" }
-];
+// export const FILTER_GENDER_OPTIONS = [
+//   { value: "male", label: "Men" },
+//   { value: "female", label: "Women" }
+// ];
 
-function ProductFilter({ resetFilter, handleSubmit, setValue }) {
+const buttonStyle = {
+  common: {
+    size: "large",
+    variant: "contained",
+    width: "100%"
+  },
+  male: {
+    backgroundColor: "#e0e0eb",
+    color: "white"
+  },
+  female: {
+    backgroundColor: "#e0e0eb",
+    color: "white"
+  }
+};
+
+function ProductFilter({ resetFilter, sliderValue, setSliderValue, gender }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -35,26 +51,60 @@ function ProductFilter({ resetFilter, handleSubmit, setValue }) {
     navigate("/shop");
   };
   return (
-    <Stack spacing={3} sx={{ width: 200 }}>
+    <Stack spacing={3}>
       <Stack spacing={3}>
+        <Paper>
+          <ProductSearch />
+        </Paper>
+
         <Paper
           sx={{
             p: "1rem",
             borderRadius: "10px",
-            display: "flex"
+            display: "flex",
+            flexDirection: { xs: "row", md: "column" },
+            gap: 3
           }}
         >
-          <Button onClick={handleClickMen} variant="contained" size="large">
+          <Button
+            onClick={handleClickMen}
+            variant="contained"
+            size="large"
+            sx={{
+              ...buttonStyle.common,
+              ...(gender === "male" ? buttonStyle.male : {})
+            }}
+          >
             Men
           </Button>
-          <Button onClick={handleClickWonen} variant="contained" size="large">
+          <Button
+            onClick={handleClickWonen}
+            variant="contained"
+            size="large"
+            sx={{
+              ...buttonStyle.common,
+              ...(gender === "female" ? buttonStyle.male : {})
+            }}
+          >
             Women
           </Button>
         </Paper>
       </Stack>
 
-      <Stack>
-        <Paper sx={{ p: "1rem", borderRadius: "10px" }}>
+      <Stack
+        sx={{
+          display: "flex",
+          gap: 3,
+          flexDirection: { xs: "row", md: "column" },
+          justifyContent: "center"
+        }}
+      >
+        <Paper
+          sx={{
+            p: "1rem",
+            borderRadius: "10px"
+          }}
+        >
           <Typography variant="h6" sx={{ fontWeight: 600 }}>
             Category
           </Typography>
@@ -64,38 +114,36 @@ function ProductFilter({ resetFilter, handleSubmit, setValue }) {
             row={false}
           />
         </Paper>
-      </Stack>
-      <Stack>
-        <Paper sx={{ p: "1rem", borderRadius: "10px" }}>
+
+        <Paper
+          sx={{
+            p: "1rem",
+            borderRadius: "10px"
+          }}
+        >
           <Typography variant="h6" sx={{ fontWeight: 600 }}>
             Price Range
           </Typography>
-          {/* <ProductPriceSlider /> */}
-          <FSlider
-            name="sliderValue"
-            min={0}
-            max={200}
-            step={10}
-            onchange={setValue}
+          <ProductPriceSlider
+            sliderValue={sliderValue}
+            setSliderValue={setSliderValue}
           />
         </Paper>
       </Stack>
 
-      <Box>
-        <Button
-          size="large"
-          type="submit"
-          color="inherit"
-          variant="outlined"
-          onClick={() => {
-            dispatch(setGender(""));
-            resetFilter();
-          }}
-          startIcon={<ClearAllIcon />}
-        >
-          Clear All
-        </Button>
-      </Box>
+      <Button
+        size="large"
+        type="submit"
+        color="inherit"
+        variant="outlined"
+        onClick={() => {
+          dispatch(setGender(""));
+          resetFilter();
+        }}
+        startIcon={<ClearAllIcon />}
+      >
+        Clear All
+      </Button>
     </Stack>
   );
 }

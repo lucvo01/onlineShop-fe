@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Button,
+  Paper,
   Container,
   Table,
   TableBody,
@@ -50,78 +51,85 @@ function ManageUsersPage() {
             >
               Online Shop
             </Link>
-            <Typography color="text.primary">Manage Orders</Typography>
+            <Typography color="text.primary">Manage Users</Typography>
           </Breadcrumbs>
-          <TableContainer>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>User Email</TableCell>
-                  <TableCell>Name</TableCell>
-                  <TableCell>More</TableCell>
-                  <TableCell></TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {users?.map((user, index) => {
-                  return (
-                    <TableRow key={user._id || index} hover>
-                      <TableCell>{user.email}</TableCell>
-                      <TableCell>{user.name}</TableCell>
 
-                      <TableCell>
-                        <Button
-                          variant="outlined"
-                          onClick={() =>
-                            navigate(`/manage_users/${user._id}/orders`)
-                          }
-                        >
-                          See Orders
-                        </Button>
-                      </TableCell>
-                      <TableCell>
-                        {user.isDeleted ? (
+          <Typography variant="h5" gutterBottom>
+            Manage Users
+          </Typography>
+
+          <Paper sx={{ borderRadius: "10px", height: "100vh", mt: 3 }}>
+            <TableContainer>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>User Email</TableCell>
+                    <TableCell>Name</TableCell>
+                    <TableCell>More</TableCell>
+                    <TableCell></TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {users?.map((user, index) => {
+                    return (
+                      <TableRow key={user._id || index} hover>
+                        <TableCell>{user.email}</TableCell>
+                        <TableCell>{user.name}</TableCell>
+
+                        <TableCell>
                           <Button
                             variant="contained"
-                            color="success"
-                            onClick={() => {
-                              console.log(!user.isDeleted);
-                              dispatch(
-                                updateUserProfile({
-                                  userId: user._id,
-                                  isDeleted: !user.isDeleted
-                                })
-                              );
-                              dispatch(getAllUsers());
-                            }}
+                            onClick={() =>
+                              navigate(`/manage_users/${user._id}/orders`)
+                            }
                           >
-                            activate
+                            See Orders
                           </Button>
-                        ) : (
-                          <Button
-                            variant="contained"
-                            color="error"
-                            onClick={() => {
-                              console.log(!user.isDeleted);
-                              dispatch(
-                                updateUserProfile({
-                                  userId: user._id,
-                                  isDeleted: !user.isDeleted
-                                })
-                              );
-                              dispatch(getAllUsers());
-                            }}
-                          >
-                            Deactivate
-                          </Button>
-                        )}
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
-              </TableBody>
-            </Table>
-          </TableContainer>
+                        </TableCell>
+                        <TableCell>
+                          {user.isDeleted ? (
+                            <Button
+                              variant="contained"
+                              color="success"
+                              onClick={() => {
+                                console.log(!user.isDeleted);
+                                dispatch(
+                                  updateUserProfile({
+                                    userId: user._id,
+                                    isDeleted: !user.isDeleted
+                                  })
+                                );
+                                dispatch(getAllUsers());
+                              }}
+                            >
+                              activate
+                            </Button>
+                          ) : (
+                            <Button
+                              variant="contained"
+                              color="error"
+                              onClick={() => {
+                                console.log(!user.isDeleted);
+                                dispatch(
+                                  updateUserProfile({
+                                    userId: user._id,
+                                    isDeleted: !user.isDeleted
+                                  })
+                                );
+                                dispatch(getAllUsers());
+                              }}
+                            >
+                              Deactivate
+                            </Button>
+                          )}
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Paper>
         </>
       )}
     </Container>
