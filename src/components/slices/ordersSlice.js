@@ -14,7 +14,8 @@ const initialState = {
     }
   ],
   totalPages: 1,
-  currentOrder: {}
+  currentOrder: {},
+  pageNum: 1
 };
 
 const ordersSlice = createSlice({
@@ -109,17 +110,12 @@ export const getAnOrder =
   };
 
 export const createOrder =
-  ({ userId, products, subtotal, ...shipping }) =>
+  ({ response }) =>
   async (dispatch) => {
     dispatch(ordersSlice.actions.startLoading());
     try {
       // console.log("products", products);
-      const response = await apiService.post("/orders", {
-        ...shipping,
-        userId,
-        products,
-        subtotal
-      });
+
       dispatch(ordersSlice.actions.createOrderSuccess(response.data.data));
       dispatch(clearCart());
       toast.success("Create Order successfully");
@@ -143,7 +139,7 @@ export const deleteOrder = (orderId) => async (dispatch) => {
 };
 
 export const editOrder =
-  ({ orderId, ...data }) =>
+  ({ orderId, pageNum, ...data }) =>
   async (dispatch) => {
     dispatch(ordersSlice.actions.startLoading());
     try {
@@ -151,8 +147,9 @@ export const editOrder =
         ...data
       });
       toast.success("Edit Order successfully");
-      dispatch(getOrders());
+      dispatch(getOrders({ pageNum }));
     } catch (error) {
+      console.log("editOrder", error);
       dispatch(ordersSlice.actions.hasError(error.message));
       toast.error(error.message);
     }

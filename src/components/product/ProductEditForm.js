@@ -68,6 +68,7 @@ function ProductEditForm({ productId }) {
       handleClose();
     } else {
       console.log(`Create Product`);
+      console.log("data", data);
       dispatch(createProduct({ ...data }));
       handleClose();
     }

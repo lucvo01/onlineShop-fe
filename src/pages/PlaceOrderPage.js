@@ -21,6 +21,7 @@ import {
   createOrder,
   getSingleUserOrders
 } from "../components/slices/ordersSlice";
+import apiService from "../app/apiService";
 
 function PlaceOrderPage() {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ function PlaceOrderPage() {
     (state) => state.cart
   );
 
-  const { orders } = useSelector((state) => state.orders);
+  // const { orders } = useSelector((state) => state.orders);
 
   const cookies = Cookies.get("user");
   let user;
@@ -40,19 +41,26 @@ function PlaceOrderPage() {
   }
 
   const handleClick = async () => {
-    dispatch(
-      createOrder({
-        userId: user._id,
+    try {
+      const response = await apiService.post("/orders", {
         ...shipping,
+        userId: user._id,
         products,
         subtotal
-      })
-    );
-
-    dispatch(getSingleUserOrders({ userId: user._id }));
-    // console.log("orders", orders);
-    const orderId = orders[orders.length - 1]._id;
-    navigate(`/my_order/${orderId}`);
+      });
+      dispatch(
+        createOrder({
+          response
+        })
+      );
+      // dispatch(getSingleUserOrders({ userId: user._id }));
+      // // console.log("orders", orders);
+      // const orderId = orders[orders.length - 1]._id;
+      const orderId = response.data.data._id;
+      navigate(`/my_order/${orderId}`);
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <Container>

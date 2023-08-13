@@ -56,6 +56,7 @@ function ManageOrdersPage() {
   const { orders, isLoading, totalPages } = useSelector(
     (state) => state.orders
   );
+  console.log("pageNum", pageNum);
 
   return (
     <Container>

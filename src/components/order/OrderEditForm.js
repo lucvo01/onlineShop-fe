@@ -16,6 +16,7 @@ const yupSchema = Yup.object().shape({
 function OrderEditForm({ orderId }) {
   const navigate = useNavigate();
   const { isLoading } = useSelector((state) => state.products);
+  const { pageNum } = useSelector((state) => state.orders);
 
   const defaultValues = {
     payment_status: "Unpaid",
@@ -40,7 +41,7 @@ function OrderEditForm({ orderId }) {
 
   const onSubmit = (data) => {
     // console.log(data);
-    dispatch(editOrder({ orderId, ...data }));
+    dispatch(editOrder({ orderId, pageNum, ...data }));
     handleClose();
   };
 
