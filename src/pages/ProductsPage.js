@@ -26,9 +26,8 @@ function ProductsPage() {
   const defaultValues = {
     gender: gender || "",
     category: "",
-    priceRange: [],
-    sortBy: "featured",
-    searchQuery: ""
+    priceRange: []
+    // searchQuery: ""
   };
   const methods = useForm({
     defaultValues

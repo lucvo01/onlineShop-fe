@@ -81,7 +81,7 @@ function ManageOrdersPage() {
           <FormProvider methods={methods}>
             <OrderSort />
           </FormProvider>
-          <Paper sx={{ borderRadius: "10px", height: "100vh", mt: 3 }}>
+          <Paper sx={{ borderRadius: "10px", mt: 3 }}>
             <TableContainer>
               <Table>
                 <TableHead>

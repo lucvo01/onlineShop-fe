@@ -2,12 +2,13 @@ import { Button, Stack, Typography, Paper } from "@mui/material";
 import { FRadioGroup } from "../form";
 import ClearAllIcon from "@mui/icons-material/ClearAll";
 // import SearchInput from "../SearchInput";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setGender } from "../slices/filterSlice";
 import { useNavigate } from "react-router-dom";
 import ProductPriceSlider from "./ProductPriceSlider";
 // import SearchInput from "../SearchInput";
 import ProductSearch from "./ProductSearch";
+import { getProducts } from "../slices/productsSlice";
 
 export const SORT_BY_OPTIONS = [
   { value: "priceDesc", label: "Price: High-Low" },
@@ -40,6 +41,7 @@ const buttonStyle = {
 function ProductFilter({ resetFilter, sliderValue, setSliderValue, gender }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { page } = useSelector((state) => state.products);
 
   const handleClickMen = () => {
     dispatch(setGender("male"));
@@ -53,9 +55,7 @@ function ProductFilter({ resetFilter, sliderValue, setSliderValue, gender }) {
   return (
     <Stack spacing={3}>
       <Stack spacing={3}>
-        <Paper>
-          <ProductSearch />
-        </Paper>
+        <Paper>{/* <ProductSearch /> */}</Paper>
 
         <Paper
           sx={{
@@ -129,21 +129,22 @@ function ProductFilter({ resetFilter, sliderValue, setSliderValue, gender }) {
             setSliderValue={setSliderValue}
           />
         </Paper>
-      </Stack>
 
-      <Button
-        size="large"
-        type="submit"
-        color="inherit"
-        variant="outlined"
-        onClick={() => {
-          dispatch(setGender(""));
-          resetFilter();
-        }}
-        startIcon={<ClearAllIcon />}
-      >
-        Clear All
-      </Button>
+        <Button
+          size="large"
+          type="submit"
+          color="inherit"
+          variant="outlined"
+          onClick={() => {
+            dispatch(setGender(""));
+            // resetFilter();
+            dispatch(getProducts(page));
+          }}
+          startIcon={<ClearAllIcon />}
+        >
+          Clear All
+        </Button>
+      </Stack>
     </Stack>
   );
 }
