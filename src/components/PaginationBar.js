@@ -6,7 +6,7 @@ const PaginationBar = ({ pageNum, setPageNum, totalPages }) => {
   const handleChange = (event, value) => {
     setPageNum(value);
   };
-  console.log("page barr", pageNum);
+
   return (
     <Stack spacing={2}>
       <Pagination

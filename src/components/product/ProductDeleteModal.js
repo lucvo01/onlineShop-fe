@@ -5,12 +5,13 @@ import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import { useParams } from "react-router-dom";
 import { Button, Card, CardContent, Typography } from "@mui/material";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct } from "../slices/productsSlice";
 
 function ProductDeleteModal() {
   const { productId } = useParams();
-
+  const { page } = useSelector((state) => state.products);
+  console.log("delete page", page);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -18,7 +19,7 @@ function ProductDeleteModal() {
     navigate(-1);
   };
   const handleClick = () => {
-    dispatch(deleteProduct(productId));
+    dispatch(deleteProduct(productId, page));
     handleClose();
   };
   return (

@@ -8,7 +8,8 @@ const initialState = {
   isLoading: false,
   error: null,
   products: [],
-  totalPages: 1
+  totalPages: 1,
+  page: 1
 };
 
 const productSlice = createSlice({
@@ -30,6 +31,7 @@ const productSlice = createSlice({
       state.error = null;
       state.products = action.payload.products;
       state.totalPages = action.payload.totalPages;
+      state.page = action.payload.page;
     },
     createProductSuccess(state, action) {
       state.isLoading = false;
@@ -52,7 +54,7 @@ export default productSlice.reducer;
 
 export const getProducts =
   ({
-    pageNum = 1,
+    pageNum,
     limit = PRODUCTS_PER_PAGE,
     searchQuery,
     gender,
@@ -67,11 +69,9 @@ export const getProducts =
       if (gender) params.gender = gender;
       if (category) params.category = category;
       if (priceRange) params.priceRange = priceRange;
-      // console.log("gender", gender);
       console.log("params", params);
       const response = await apiService.get("/products", { params });
       dispatch(productSlice.actions.getProductsSuccess(response.data.data));
-      // console.log("priceRange", response);
     } catch (error) {
       dispatch(productSlice.actions.hasError(error.message));
       toast.error(error.message);
@@ -79,7 +79,7 @@ export const getProducts =
   };
 
 export const createProduct =
-  ({ name, description, price, image }) =>
+  ({ page, name, description, price, image }) =>
   async (dispatch) => {
     dispatch(productSlice.actions.startLoading());
     try {
@@ -102,20 +102,19 @@ export const createProduct =
       // });
       dispatch(productSlice.actions.createProductSuccess(response.data));
       toast.success("Create Product Success");
-      dispatch(getProducts());
+      dispatch(getProducts(page));
     } catch (error) {
       dispatch(productSlice.actions.hasError(error.message));
       toast.error(error.message);
     }
   };
 
-export const deleteProduct = (productId) => async (dispatch) => {
+export const deleteProduct = (productId, page) => async (dispatch) => {
   dispatch(productSlice.actions.startLoading());
   try {
-    console.log("id", productId);
     await apiService.put(`/products/${productId}/delete`);
     toast.success("Delete product successful");
-    dispatch(getProducts());
+    dispatch(getProducts(page));
   } catch (error) {
     dispatch(productSlice.actions.hasError(error.message));
     toast.error(error.message);
@@ -123,10 +122,11 @@ export const deleteProduct = (productId) => async (dispatch) => {
 };
 
 export const editProduct =
-  ({ productId, name, description, price, image }) =>
+  ({ productId, name, description, price, image, page }) =>
   async (dispatch) => {
     dispatch(productSlice.actions.startLoading());
     try {
+      console.log("edit page", page);
       const imageUrl = await cloudinaryUpload(image);
       await apiService.put(`/products/${productId}/edit`, {
         name,
@@ -135,7 +135,7 @@ export const editProduct =
         image: imageUrl
       });
       toast.success("Edit successfully");
-      dispatch(getProducts());
+      dispatch(getProducts(page));
     } catch (error) {
       dispatch(productSlice.actions.hasError(error.message));
       toast.error(error.message);

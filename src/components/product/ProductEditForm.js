@@ -18,15 +18,15 @@ const yupSchema = Yup.object().shape({
 
 function ProductEditForm({ productId }) {
   const navigate = useNavigate();
-  const { products, isLoading } = useSelector((state) => state.products);
+  const { products, isLoading, page } = useSelector((state) => state.products);
 
   const product = products.find((e) => e._id === productId);
 
   const defaultValues = {
     name: product?.name || "",
     description: product?.description || "",
-    price: product?.price || ""
-    // image: product?.image || null
+    price: product?.price || "",
+    image: product?.image || null
   };
 
   const methods = useForm({
@@ -63,13 +63,12 @@ function ProductEditForm({ productId }) {
   const onSubmit = (data) => {
     console.log(data);
     if (productId) {
-      console.log(`Update Product ${productId}`);
-      dispatch(editProduct({ ...data, productId }));
+      // console.log(`Update Product ${productId}`);
+      dispatch(editProduct({ ...data, productId, page }));
       handleClose();
     } else {
-      console.log(`Create Product`);
-      console.log("data", data);
-      dispatch(createProduct({ ...data }));
+      // console.log(`Create Product`);
+      dispatch(createProduct({ ...data, page }));
       handleClose();
     }
   };

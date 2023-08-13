@@ -28,7 +28,9 @@ function ManageProductsPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
-  const [pageNum, setPageNum] = useState(1);
+  const [pageNum, setPageNum] = useState(
+    useSelector((state) => state.products.page)
+  );
 
   const { products, isLoading, totalPages } = useSelector(
     (state) => state.products
