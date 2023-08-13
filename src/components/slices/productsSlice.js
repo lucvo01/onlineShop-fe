@@ -83,17 +83,23 @@ export const createProduct =
   async (dispatch) => {
     dispatch(productSlice.actions.startLoading());
     try {
-      // const imageUrl = await cloudinaryUpload(image);
-      let formData = new FormData();
-      formData.append("file", image);
-      formData.append("description", description);
-      formData.append("name", name);
-      formData.append("price", price);
-      const response = await apiService.post("/products", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data"
-        }
+      const imageUrl = await cloudinaryUpload(image);
+      const response = await apiService.post("/products", {
+        name,
+        description,
+        price,
+        image: imageUrl
       });
+      // let formData = new FormData();
+      // formData.append("file", image);
+      // formData.append("description", description);
+      // formData.append("name", name);
+      // formData.append("price", price);
+      // const response = await apiService.post("/products", formData, {
+      //   headers: {
+      //     "Content-Type": "multipart/form-data"
+      //   }
+      // });
       dispatch(productSlice.actions.createProductSuccess(response.data));
       toast.success("Create Product Success");
       dispatch(getProducts());
@@ -128,16 +134,6 @@ export const editProduct =
         price,
         image: imageUrl
       });
-      // let formData = new FormData();
-      // formData.append("file", image);
-      // formData.append("description", description);
-      // formData.append("name", name);
-      // formData.append("price", price);
-      // await apiService.put(`/products/${productId}/edit`, formData, {
-      //   headers: {
-      //     "Content-Type": "multipart/form-data"
-      //   }
-      // });
       toast.success("Edit successfully");
       dispatch(getProducts());
     } catch (error) {
