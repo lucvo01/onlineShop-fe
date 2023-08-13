@@ -30,8 +30,6 @@ function ManageUsersPage() {
 
   const { users, isLoading } = useSelector((state) => state.users);
 
-  console.log(users);
-
   // const handleClick = () => {
 
   // }

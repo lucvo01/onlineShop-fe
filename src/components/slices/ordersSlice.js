@@ -67,12 +67,9 @@ export const getOrders =
   async (dispatch) => {
     dispatch(ordersSlice.actions.startLoading());
     try {
-      // const response = await apiService.get(
-      //   `/orders?page=${pageNum}&limit=${limit}`
-      // );
       const params = { page: pageNum, limit };
       if (delivery_status) params.delivery_status = delivery_status;
-      console.log("params", params);
+      // console.log("params", params);
       const response = await apiService.get("/orders", { params });
       dispatch(ordersSlice.actions.getOrdersSuccess(response.data.data));
     } catch (error) {
