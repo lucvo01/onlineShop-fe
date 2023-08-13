@@ -78,7 +78,7 @@ function ProductsPage() {
 
           <FormProvider methods={methods}>
             <ProductFilter
-              resetFilter={resetFilter}
+              resetFilter={reset}
               onSubmit={handleSubmit(onSubmit)}
               sliderValue={sliderValue}
               setSliderValue={setSliderValue}

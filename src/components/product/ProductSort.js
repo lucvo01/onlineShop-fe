@@ -3,7 +3,12 @@ import { FSelect } from "../form";
 
 function ProductSort() {
   return (
-    <FSelect name="sortBy" label="Sort By" size="small" sx={{ width: 300 }}>
+    <FSelect
+      name="sortBy"
+      label="Sort By"
+      size="small"
+      sx={{ display: "flex" }}
+    >
       {[
         // { value: "featured", label: "Featured" },
         // { value: "newest", label: "Newest" },

@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { Box, Card, alpha, Stack, InputAdornment } from "@mui/material";
-import { FormProvider, FTextField } from "../form";
+import { FormProvider, FSelect, FTextField } from "../form";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -13,6 +13,8 @@ import { useNavigate } from "react-router-dom";
 const yupSchema = Yup.object().shape({
   name: Yup.string().required("Name is required"),
   description: Yup.string().required("Description is required"),
+  category: Yup.string().required("category is required"),
+  gender: Yup.string().required("gender is required"),
   price: Yup.string().required("Price is required")
 });
 
@@ -25,6 +27,8 @@ function ProductEditForm({ productId }) {
   const defaultValues = {
     name: product?.name || "",
     description: product?.description || "",
+    category: product?.category || "",
+    gender: product?.gender || "",
     price: product?.price || "",
     image: product?.image || null
   };
@@ -82,7 +86,6 @@ function ProductEditForm({ productId }) {
             label="Name"
             fullWidth
             rows={4}
-            // placeholder={product.name}
             sx={{
               "& fieldset": {
                 borderWidth: `1px !important`,
@@ -96,7 +99,6 @@ function ProductEditForm({ productId }) {
             multiline
             fullWidth
             rows={4}
-            // placeholder={product.name}
             sx={{
               "& fieldset": {
                 borderWidth: `1px !important`,
@@ -104,6 +106,28 @@ function ProductEditForm({ productId }) {
               }
             }}
           />
+          <FSelect
+            name="category"
+            label="Category"
+            fullWidth
+            defaultValues={"Select Category"}
+          >
+            <option disabled>Select Category</option>
+            <option>shirt</option>
+            <option>pants</option>
+            <option>shoes</option>
+          </FSelect>
+          <FSelect
+            name="gender"
+            label="Gender"
+            fullWidth
+            defaultValues={"Select Gender"}
+          >
+            <option disabled>Select Gender</option>
+            <option>male</option>
+            <option>female</option>
+          </FSelect>
+
           <FTextField
             name="price"
             label="Price"

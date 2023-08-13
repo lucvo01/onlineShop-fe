@@ -2,13 +2,13 @@ import { Button, Stack, Typography, Paper } from "@mui/material";
 import { FRadioGroup } from "../form";
 import ClearAllIcon from "@mui/icons-material/ClearAll";
 // import SearchInput from "../SearchInput";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setGender } from "../slices/filterSlice";
 import { useNavigate } from "react-router-dom";
 import ProductPriceSlider from "./ProductPriceSlider";
 // import SearchInput from "../SearchInput";
 // import ProductSearch from "./ProductSearch";
-import { getProducts } from "../slices/productsSlice";
+// import { getProducts } from "../slices/productsSlice";
 // import SearchInput from "../SearchInput";
 
 export const SORT_BY_OPTIONS = [
@@ -42,7 +42,7 @@ const buttonStyle = {
 function ProductFilter({ resetFilter, sliderValue, setSliderValue, gender }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { page } = useSelector((state) => state.products);
+  // const { page } = useSelector((state) => state.products);
 
   const handleClickMen = () => {
     dispatch(setGender("male"));
