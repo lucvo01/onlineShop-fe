@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../components/slices/productsSlice";
 import { Grid } from "@mui/material";
 import SearchInput from "../components/SearchInput";
-import { setGender } from "../components/slices/filterSlice";
+// import { setGender } from "../components/slices/filterSlice";
 
 function ProductsPage() {
   const dispatch = useDispatch();
@@ -63,12 +63,12 @@ function ProductsPage() {
     dispatch(getProducts({ pageNum, ...data }));
   };
 
-  const resetFilter = () => {
-    setPageNum(1);
-    setSearchQuery("");
-    setGender("");
-    reset();
-  };
+  // const resetFilter = () => {
+  //   setPageNum(1);
+  //   setSearchQuery("");
+  //   setGender("");
+  //   reset();
+  // };
 
   return (
     <Container sx={{ mt: "1rem" }}>
