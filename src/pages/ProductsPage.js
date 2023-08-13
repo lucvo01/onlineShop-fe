@@ -11,17 +11,24 @@ import PaginationBar from "../components/PaginationBar";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../components/slices/productsSlice";
 import { Grid } from "@mui/material";
+import SearchInput from "../components/SearchInput";
+import { setGender } from "../components/slices/filterSlice";
 
 function ProductsPage() {
   const dispatch = useDispatch();
   const [pageNum, setPageNum] = useState(1);
   const [sliderValue, setSliderValue] = useState([0, 200]);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+  };
 
   const { products, isLoading, totalPages, error } = useSelector(
     (state) => state.products
   );
 
-  const { gender, priceRange } = useSelector((state) => state.filter);
+  let { gender, priceRange } = useSelector((state) => state.filter);
 
   const defaultValues = {
     gender: gender || "",
@@ -29,14 +36,16 @@ function ProductsPage() {
     priceRange: []
     // searchQuery: ""
   };
+
   const methods = useForm({
     defaultValues
   });
+
   const { handleSubmit, watch, reset } = methods;
   const filters = watch();
   const filterProducts = applyFilter(products, filters);
 
-  const { searchQuery, category } = filters;
+  const { category } = filters;
 
   useEffect(() => {
     dispatch(
@@ -54,13 +63,22 @@ function ProductsPage() {
     dispatch(getProducts({ pageNum, ...data }));
   };
 
+  const resetFilter = () => {
+    setPageNum(1);
+    setSearchQuery("");
+    setGender("");
+    reset();
+  };
+
   return (
     <Container sx={{ mt: "1rem" }}>
       <Grid container spacing={3}>
         <Grid item sx={{ flexGrow: 1 }} xs={12} md={3}>
+          <SearchInput handleSubmit={handleSearch} />
+
           <FormProvider methods={methods}>
             <ProductFilter
-              resetFilter={reset}
+              resetFilter={resetFilter}
               onSubmit={handleSubmit(onSubmit)}
               sliderValue={sliderValue}
               setSliderValue={setSliderValue}

@@ -7,8 +7,9 @@ import { setGender } from "../slices/filterSlice";
 import { useNavigate } from "react-router-dom";
 import ProductPriceSlider from "./ProductPriceSlider";
 // import SearchInput from "../SearchInput";
-import ProductSearch from "./ProductSearch";
+// import ProductSearch from "./ProductSearch";
 import { getProducts } from "../slices/productsSlice";
+// import SearchInput from "../SearchInput";
 
 export const SORT_BY_OPTIONS = [
   { value: "priceDesc", label: "Price: High-Low" },
@@ -56,7 +57,8 @@ function ProductFilter({ resetFilter, sliderValue, setSliderValue, gender }) {
     <Stack spacing={3}>
       <Stack spacing={3}>
         <Paper>
-          <ProductSearch />
+          {/* <ProductSearch /> */}
+          {/* <SearchInput /> */}
         </Paper>
 
         <Paper
@@ -131,22 +133,22 @@ function ProductFilter({ resetFilter, sliderValue, setSliderValue, gender }) {
             setSliderValue={setSliderValue}
           />
         </Paper>
-
-        <Button
-          size="large"
-          type="submit"
-          color="inherit"
-          variant="outlined"
-          onClick={() => {
-            dispatch(setGender(""));
-            // resetFilter();
-            dispatch(getProducts(page));
-          }}
-          startIcon={<ClearAllIcon />}
-        >
-          Clear All
-        </Button>
       </Stack>
+      <Button
+        size="large"
+        type="submit"
+        color="inherit"
+        variant="outlined"
+        onClick={() => {
+          // dispatch(setGender(""));
+          resetFilter();
+          // dispatch(getProducts(page));
+          console.log("test");
+        }}
+        startIcon={<ClearAllIcon />}
+      >
+        Clear All
+      </Button>
     </Stack>
   );
 }

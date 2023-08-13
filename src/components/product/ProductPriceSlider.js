@@ -6,8 +6,6 @@ import { setPriceRange } from "../slices/filterSlice";
 
 export default function ProductPriceSlider({ sliderValue, setSliderValue }) {
   const dispatch = useDispatch();
-  // const [value, setValue] = React.useState([]);
-  // const [sliderValue, setSliderValue] = React.useState([0, 200]);
 
   const handleChange = (event, value) => {
     setSliderValue(value);
