@@ -55,7 +55,9 @@ function ProductFilter({ resetFilter, sliderValue, setSliderValue, gender }) {
   return (
     <Stack spacing={3}>
       <Stack spacing={3}>
-        <Paper>{/* <ProductSearch /> */}</Paper>
+        <Paper>
+          <ProductSearch />
+        </Paper>
 
         <Paper
           sx={{

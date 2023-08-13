@@ -17,10 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import LoadingScreen from "../components/LoadingScreen";
 import Cookies from "js-cookie";
-import {
-  createOrder,
-  getSingleUserOrders
-} from "../components/slices/ordersSlice";
+import { createOrder } from "../components/slices/ordersSlice";
 import apiService from "../app/apiService";
 
 function PlaceOrderPage() {
