@@ -22,6 +22,7 @@ import OrderDetailPage from "../pages/OrderDetailPage";
 import OrderEditModal from "../components/order/OrderEditModal";
 import ShippingPage from "../pages/ShippingPage";
 import PlaceOrderPage from "../pages/PlaceOrderPage";
+import AdminSummaryPage from "../pages/admin/AdminSummaryPage";
 
 function Router() {
   return (
@@ -138,6 +139,7 @@ function Router() {
             }
           />
         </Route>
+        <Route path="/admin" element={<AdminSummaryPage />} />
       </Route>
 
       <Route element={<BlankLayout />}>

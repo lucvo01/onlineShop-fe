@@ -8,7 +8,7 @@ import Logo from "../components/Logo";
 import useAuth from "../hooks/useAuth";
 // import { useUserState } from "../contexts/AuthContext";
 import Cart from "../components/cart/Cart";
-import { Avatar, Divider, Menu, MenuItem } from "@mui/material";
+import { Avatar, Divider, Menu, MenuItem, Button } from "@mui/material";
 import { useNavigate, Link as RouterLink } from "react-router-dom";
 import ColorModeButton from "../components/ColorModeButton";
 import Cookies from "js-cookie";
@@ -168,6 +168,13 @@ function MainHeader() {
           >
             Hi {user?.name}!
           </Typography>
+          <Button
+            onClick={() => {
+              navigate("/admin");
+            }}
+          >
+            Admin
+          </Button>
           <ColorModeButton />
           <Cart />
           <Box>

@@ -16,7 +16,14 @@ export const SORT_BY_OPTIONS = [
   { value: "priceAsc", label: "Price: Low-High" }
 ];
 
-export const FILTER_CATEGORY_OPTIONS = ["Shoes", "Shirt", "Pants"];
+export const FILTER_CATEGORY_OPTIONS = [
+  "Shirts",
+  "Tshirts",
+  "Jeans",
+  "Shorts",
+  "Sandals",
+  "Sunglasses"
+];
 
 // export const FILTER_GENDER_OPTIONS = [
 //   { value: "male", label: "Men" },
@@ -45,12 +52,12 @@ function ProductFilter({ resetFilter, sliderValue, setSliderValue, gender }) {
   // const { page } = useSelector((state) => state.products);
 
   const handleClickMen = () => {
-    dispatch(setGender("male"));
+    dispatch(setGender("men"));
     navigate("/shop");
   };
 
   const handleClickWonen = () => {
-    dispatch(setGender("female"));
+    dispatch(setGender("women"));
     navigate("/shop");
   };
   return (
