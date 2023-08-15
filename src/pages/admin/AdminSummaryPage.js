@@ -1,8 +1,22 @@
 import React from "react";
-import { Container } from "@mui/material";
+import { useSelector } from 'react-redux'
+import { Container,Paper,Typography } from "@mui/material";
 
 function AdminSummaryPage() {
-  return <Container>AdminSummaryPage</Container>;
+  const {users} = useSelector((state) => state.users)
+  const {products} = useSelector((state) => state.products)
+  const {orders} = useSelector((state) => state.orders)
+
+  return (<Container>
+    <Paper>
+      <Typography>Orders</Typography>
+      <Typography>{orders.length}</Typography>
+      <Typography>Prtoducts</Typography>
+      <Typography>{products.length}</Typography>
+      <Typography>Users</Typography>
+      <Typography>{users.length}</Typography>
+    </Paper>
+  </Container>);
 }
 
 export default AdminSummaryPage;

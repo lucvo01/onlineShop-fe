@@ -1,3 +1,8 @@
+import React from "react";
+import { useSelector } from "react-redux";
+import RemoveItemButton from "./RemoveItemButton";
+import DecreaseButton from "./DecreaseButton";
+import AddToCartButton from "./AddToCartButton";
 import {
   Paper,
   Typography,
@@ -7,14 +12,9 @@ import {
   TableCell,
   TableContainer,
   TableHead,
-  TableRow
+  TableRow,
+  CardMedia
 } from "@mui/material";
-import React from "react";
-import { useSelector } from "react-redux";
-import RemoveItemButton from "./RemoveItemButton";
-import DecreaseButton from "./DecreaseButton";
-import AddToCartButton from "./AddToCartButton";
-import CardMedia from "@mui/material/CardMedia";
 
 function CartProductList() {
   const { products, subtotal } = useSelector((state) => state.cart);
@@ -82,7 +82,7 @@ function CartProductList() {
                 <TableCell align="center">Subtotal:</TableCell>
                 <TableCell align="center"></TableCell>
                 <TableCell align="center"></TableCell>
-                <TableCell align="left">${subtotal}</TableCell>
+                <TableCell align="center">${subtotal}</TableCell>
               </TableRow>
             </TableBody>
           </Table>
