@@ -79,7 +79,7 @@ export const getProducts =
   };
 
 export const createProduct =
-  ({ page, name, description, price, image }) =>
+  ({ page, image, name, description, category, gender, price }) =>
   async (dispatch) => {
     dispatch(productSlice.actions.startLoading());
     try {
@@ -87,6 +87,8 @@ export const createProduct =
       const response = await apiService.post("/products", {
         name,
         description,
+        category,
+        gender,
         price,
         image: imageUrl
       });
@@ -122,7 +124,7 @@ export const deleteProduct = (productId, page) => async (dispatch) => {
 };
 
 export const editProduct =
-  ({ productId, name, description, price, image, page }) =>
+  ({ productId, name, description, category, gender, price, image, page }) =>
   async (dispatch) => {
     dispatch(productSlice.actions.startLoading());
     try {
@@ -131,6 +133,8 @@ export const editProduct =
       await apiService.put(`/products/${productId}/edit`, {
         name,
         description,
+        category,
+        gender,
         price,
         image: imageUrl
       });

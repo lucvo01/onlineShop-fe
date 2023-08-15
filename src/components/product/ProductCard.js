@@ -49,7 +49,7 @@ function ProductCard({ product, hideButton }) {
             alignItems: "center"
           }}
         >
-          <Typography gutterBottom variant="body1" component="div" Wrap>
+          <Typography gutterBottom variant="body1" component="div">
             {product.name}
           </Typography>
           <Typography variant="subtitle1">

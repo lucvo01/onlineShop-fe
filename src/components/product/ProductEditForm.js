@@ -13,8 +13,8 @@ import { useNavigate } from "react-router-dom";
 const yupSchema = Yup.object().shape({
   name: Yup.string().required("Name is required"),
   description: Yup.string().required("Description is required"),
-  category: Yup.string().required("category is required"),
-  gender: Yup.string().required("gender is required"),
+  category: Yup.string().required("Category is required"),
+  gender: Yup.string().required("Gender is required"),
   price: Yup.string().required("Price is required")
 });
 
@@ -109,10 +109,11 @@ function ProductEditForm({ productId }) {
           <FSelect
             name="category"
             label="Category"
+            required
             fullWidth
             defaultValues={"Select Category"}
           >
-            <option disabled>Select Category</option>
+            <option>Select Category</option>
             <option>Shirts</option>
             <option>Tshirts</option>
             <option>Jeans</option>
@@ -123,10 +124,11 @@ function ProductEditForm({ productId }) {
           <FSelect
             name="gender"
             label="Gender"
+            required
             fullWidth
             defaultValues={"Select Gender"}
           >
-            <option disabled>Select Gender</option>
+            <option>Select Gender</option>
             <option>men</option>
             <option>women</option>
           </FSelect>

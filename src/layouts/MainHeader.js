@@ -168,13 +168,13 @@ function MainHeader() {
           >
             Hi {user?.name}!
           </Typography>
-          <Button
+          {/* <Button
             onClick={() => {
               navigate("/admin");
             }}
           >
             Admin
-          </Button>
+          </Button> */}
           <ColorModeButton />
           <Cart />
           <Box>
