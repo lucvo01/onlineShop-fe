@@ -15,7 +15,7 @@ import Cookies from "js-cookie";
 // import SearchInput from "../components/SearchInput";
 
 function MainHeader() {
-  const { logout } = useAuth();
+  const auth = useAuth();
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -23,6 +23,7 @@ function MainHeader() {
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
+    console.log("auth", auth);
   };
 
   const handleMenuClose = () => {
@@ -32,7 +33,7 @@ function MainHeader() {
   const handleLogout = async () => {
     try {
       handleMenuClose();
-      await logout(() => {
+      await auth.logout(() => {
         navigate("/login");
       });
     } catch (error) {
@@ -129,8 +130,9 @@ function MainHeader() {
 
       {/* {user && user.isAdmin ? adminMenu : <Box></Box>} */}
       {adminMenu}
+
       <MenuItem onClick={handleLogout} sx={{ m: 1 }}>
-        Logout
+        {auth.isAuthenticated ? "Logout" : "Login"}
       </MenuItem>
     </Menu>
   );
