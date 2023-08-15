@@ -59,28 +59,23 @@ function ManageOrdersPage() {
 
   return (
     <Container>
-      {isLoading ? (
-        <LoadingScreen />
-      ) : (
-        <>
-          <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 4 }}>
-            <Link
-              underline="hover"
-              color="inherit"
-              component={RouterLink}
-              to="/"
-            >
-              Online Shop
-            </Link>
-            <Typography color="text.primary">Manage Orders</Typography>
-          </Breadcrumbs>
-          <Typography variant="h5" gutterBottom>
-            Manage Orders
-          </Typography>
-          <FormProvider methods={methods}>
-            <OrderSort />
-          </FormProvider>
-          <Paper sx={{ borderRadius: "10px", mt: 3 }}>
+      <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 4 }}>
+        <Link underline="hover" color="inherit" component={RouterLink} to="/">
+          Online Shop
+        </Link>
+        <Typography color="text.primary">Manage Orders</Typography>
+      </Breadcrumbs>
+      <Typography variant="h5" gutterBottom>
+        Manage Orders
+      </Typography>
+      <FormProvider methods={methods}>
+        <OrderSort />
+      </FormProvider>
+      <Paper sx={{ borderRadius: "10px", mt: 3,  position: "relative", height: 1 }}>
+        {isLoading ? (
+            <LoadingScreen />
+        ) : (
+          <>
             <TableContainer>
               <Table>
                 <TableHead>
@@ -130,8 +125,7 @@ function ManageOrdersPage() {
                             variant="contained"
                             onClick={() =>
                               navigate(`/manage_orders/${order._id}/edit`)
-                            }
-                          >
+                            }>
                             Edit
                           </Button>
                         </TableCell>
@@ -140,8 +134,7 @@ function ManageOrdersPage() {
                             variant="contained"
                             onClick={() =>
                               navigate(`/manage_orders/${order._id}`)
-                            }
-                          >
+                            }>
                             Detail
                           </Button>
                         </TableCell>
@@ -151,16 +144,16 @@ function ManageOrdersPage() {
                 </TableBody>
               </Table>
             </TableContainer>
-          </Paper>
-          <Box sx={{ display: "flex", justifyContent: "center", mt: "2rem" }}>
-            <PaginationBar
-              pageNum={pageNum}
-              setPageNum={setPageNum}
-              totalPages={totalPages}
-            />
-          </Box>
-        </>
-      )}
+          </>
+        )}
+      </Paper>
+      <Box sx={{ display: "flex", justifyContent: "center", mt: "2rem" }}>
+        <PaginationBar
+          pageNum={pageNum}
+          setPageNum={setPageNum}
+          totalPages={totalPages}
+        />
+      </Box>
     </Container>
   );
 }

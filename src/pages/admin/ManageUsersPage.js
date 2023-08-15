@@ -35,12 +35,8 @@ function ManageUsersPage() {
   // }
 
   return (
-    <Container>
-      {isLoading ? (
-        <LoadingScreen />
-      ) : (
-        <>
-          <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 4 }}>
+    <Container  sx={{ position: "relative", height: 1 }}>
+      <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 4 }}>
             <Link
               underline="hover"
               color="inherit"
@@ -55,8 +51,12 @@ function ManageUsersPage() {
           <Typography variant="h5" gutterBottom>
             Manage Users
           </Typography>
-
-          <Paper sx={{ borderRadius: "10px", height: "100vh", mt: 3 }}>
+          
+          <Paper sx={{ borderRadius: "10px", mt: 3,  position: "relative", height: 1  }}>
+      {isLoading ? (
+        <LoadingScreen />
+      ) : (
+        <>
             <TableContainer>
               <Table>
                 <TableHead>
@@ -127,9 +127,10 @@ function ManageUsersPage() {
                 </TableBody>
               </Table>
             </TableContainer>
-          </Paper>
+       
         </>
       )}
+         </Paper>
     </Container>
   );
 }

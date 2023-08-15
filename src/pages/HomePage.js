@@ -32,22 +32,22 @@ const SmallScreenImg = styled(Img)(({ theme }) => ({
   }
 }));
 
-export const FILTER_GENDER_OPTIONS = [
-  { value: "male", label: "Men" },
-  { value: "female", label: "Women" }
-];
+// export const FILTER_GENDER_OPTIONS = [
+//   { value: "Men", label: "Men" },
+//   { value: "Women", label: "Women" }
+// ];
 
 function HomePage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleClickMen = () => {
-    dispatch(setGender("male"));
+    dispatch(setGender("Men"));
     navigate("/shop");
   };
 
   const handleClickWonen = () => {
-    dispatch(setGender("female"));
+    dispatch(setGender("Women"));
     navigate("/shop");
   };
 

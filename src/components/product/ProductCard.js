@@ -20,7 +20,7 @@ function ProductCard({ product, hideButton }) {
     position: "relative",
     transition: "transition 0.2s",
     "&:hover": {
-      transform: "scale(1.2)",
+      transform: "scale(1.1)",
       zIndex: 1
     },
     borderRadius: "10px",
@@ -49,7 +49,7 @@ function ProductCard({ product, hideButton }) {
             alignItems: "center"
           }}
         >
-          <Typography gutterBottom variant="body1" component="div" noWrap>
+          <Typography gutterBottom variant="body1" component="div" Wrap>
             {product.name}
           </Typography>
           <Typography variant="subtitle1">

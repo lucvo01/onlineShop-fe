@@ -56,7 +56,7 @@ function UserOrderPage() {
   );
 
   return (
-    <Container>
+    <Container  sx={{ position: "relative", height: 1 }}>
       {isLoading ? (
         <LoadingScreen />
       ) : (

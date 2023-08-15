@@ -50,13 +50,8 @@ function ManageProductsPage() {
   }, [dispatch, pageNum, searchQuery]);
 
   return (
-    <Container>
-      {isLoading ? (
-        <LoadingScreen />
-      ) : (
-        <>
-          {/* <Grid container> */}
-          <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 4 }}>
+    <Container  sx={{ position: "relative", height: 1 }}>
+      <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 4 }}>
             <Link
               underline="hover"
               color="inherit"
@@ -95,7 +90,11 @@ function ManageProductsPage() {
             </Button>
           </Box>
           <Grid item xs={12}>
-            <Paper sx={{ borderRadius: "10px", mt: 3 }}>
+            <Paper sx={{ borderRadius: "10px", mt: 3,  position: "relative", height: 1 }}>
+      {isLoading ? (
+        <LoadingScreen />
+      ) : (
+        <>
               <TableContainer>
                 <Table>
                   <TableHead>
@@ -167,7 +166,10 @@ function ManageProductsPage() {
                   </TableBody>
                 </Table>
               </TableContainer>
-            </Paper>
+           
+        </>
+         )}
+       </Paper>
             <Box sx={{ display: "flex", justifyContent: "center", mt: "2rem" }}>
               <PaginationBar
                 pageNum={pageNum}
@@ -176,9 +178,6 @@ function ManageProductsPage() {
               />
             </Box>
           </Grid>
-          {/* </Grid> */}
-        </>
-      )}
     </Container>
   );
 }

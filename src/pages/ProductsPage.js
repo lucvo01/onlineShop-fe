@@ -96,7 +96,7 @@ function ProductsPage() {
               <ProductSort />
             </Stack>
           </FormProvider>
-          <Grid item>
+          <Grid item  sx={{ position: "relative", height: 1 }}>
             {isLoading ? (
               <LoadingScreen />
             ) : (

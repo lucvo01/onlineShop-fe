@@ -33,7 +33,7 @@ function OrderDetailPage() {
   const products = currentOrder.products;
 
   return (
-    <Container>
+    <Container  sx={{ position: "relative", height: 1 }}>
       {isLoading ? (
         <LoadingScreen />
       ) : (
