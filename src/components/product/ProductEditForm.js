@@ -113,9 +113,12 @@ function ProductEditForm({ productId }) {
             defaultValues={"Select Category"}
           >
             <option disabled>Select Category</option>
-            <option>shirt</option>
-            <option>pants</option>
-            <option>shoes</option>
+            <option>Shirts</option>
+            <option>Tshirts</option>
+            <option>Jeans</option>
+            <option>Shorts</option>
+            <option>Sandals</option>
+            <option>Sunglasses</option>
           </FSelect>
           <FSelect
             name="gender"
@@ -124,8 +127,8 @@ function ProductEditForm({ productId }) {
             defaultValues={"Select Gender"}
           >
             <option disabled>Select Gender</option>
-            <option>male</option>
-            <option>female</option>
+            <option>men</option>
+            <option>women</option>
           </FSelect>
 
           <FTextField
