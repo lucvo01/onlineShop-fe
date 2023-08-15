@@ -1,4 +1,5 @@
-import {Box, Paper,
+import {
+  Paper,
   Typography,
   Container,
   Table,
@@ -19,25 +20,29 @@ function CartProductList() {
   const { products, subtotal } = useSelector((state) => state.cart);
 
   return (
-    <Container sx={{ display: "flex", alignItems: "center", flexDirection: 'column' }}>
-        <Typography variant="h4">Your Cart</Typography>
-        <Paper sx={{ borderRadius: "10px", mt: 3,  position: "relative", height: 1 }}>
-            <TableContainer>
-          <Table >
+    <Container sx={{ alignItems: "center", direction: "column" }}>
+      <Typography variant="h4" align="center">
+        Your Cart
+      </Typography>
+      <Paper
+        sx={{ borderRadius: "10px", mt: 3, position: "relative", height: 1 }}
+      >
+        <TableContainer>
+          <Table>
             <TableHead>
-              <TableRow >
-                <TableCell>Item</TableCell>
-                <TableCell>Quantity</TableCell>
-                <TableCell>Unit Price</TableCell>
-                <TableCell>Total</TableCell>
-                <TableCell></TableCell>
+              <TableRow>
+                <TableCell align="center">Item</TableCell>
+                <TableCell align="center">Quantity</TableCell>
+                <TableCell align="center">Unit Price</TableCell>
+                <TableCell align="center">Total</TableCell>
+                <TableCell align="center"></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {products?.map((item) => {
                 return (
                   <TableRow key={item._id} hover>
-                    <TableCell>
+                    <TableCell align="center">
                       <div style={{ display: "flex", alignItems: "center" }}>
                         <CardMedia
                           component="img"
@@ -50,31 +55,39 @@ function CartProductList() {
                         </Typography>
                       </div>
                     </TableCell>
-                    <TableCell>
-                      <Box direction="row">
-                        <AddToCartButton product={item} display={"+"} />
-                        <Typography>{item.quantity}</Typography>
-                        <DecreaseButton product={item} />
-                      </Box>
+                    <TableCell align="center">
+                      {/* <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 4
+                        }}
+                      > */}
+                      <AddToCartButton product={item} display={"+"} />
+                      <Typography>{item.quantity}</Typography>
+                      <DecreaseButton product={item} />
+                      {/* </div> */}
                     </TableCell>
-                    <TableCell>${item.price}</TableCell>
-                    <TableCell>${item.itemTotal.toFixed(2)}</TableCell>
-                    <TableCell>
+                    <TableCell align="center">${item.price}</TableCell>
+                    <TableCell align="center">
+                      ${item.itemTotal.toFixed(2)}
+                    </TableCell>
+                    <TableCell align="center">
                       <RemoveItemButton product={item} />
                     </TableCell>
                   </TableRow>
                 );
               })}
               <TableRow hover>
-                <TableCell>Subtotal:</TableCell>
-                <TableCell></TableCell>
-                <TableCell></TableCell>
+                <TableCell align="center">Subtotal:</TableCell>
+                <TableCell align="center"></TableCell>
+                <TableCell align="center"></TableCell>
                 <TableCell align="left">${subtotal}</TableCell>
               </TableRow>
             </TableBody>
           </Table>
         </TableContainer>
-        </Paper>
+      </Paper>
     </Container>
   );
 }
