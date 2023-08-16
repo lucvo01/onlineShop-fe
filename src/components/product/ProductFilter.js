@@ -52,12 +52,12 @@ function ProductFilter({ resetFilter, sliderValue, setSliderValue, gender }) {
   // const { page } = useSelector((state) => state.products);
 
   const handleClickMen = () => {
-    dispatch(setGender("men"));
+    dispatch(setGender("Men"));
     navigate("/shop");
   };
 
   const handleClickWonen = () => {
-    dispatch(setGender("women"));
+    dispatch(setGender("Women"));
     navigate("/shop");
   };
   return (
@@ -83,7 +83,7 @@ function ProductFilter({ resetFilter, sliderValue, setSliderValue, gender }) {
             size="large"
             sx={{
               ...buttonStyle.common,
-              ...(gender === "male" ? buttonStyle.male : {})
+              ...(gender === "Men" ? buttonStyle.male : {})
             }}
           >
             Men
@@ -94,7 +94,7 @@ function ProductFilter({ resetFilter, sliderValue, setSliderValue, gender }) {
             size="large"
             sx={{
               ...buttonStyle.common,
-              ...(gender === "female" ? buttonStyle.male : {})
+              ...(gender === "Women" ? buttonStyle.male : {})
             }}
           >
             Women
