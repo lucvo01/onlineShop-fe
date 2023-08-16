@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { Box, Card, alpha, Stack, InputAdornment } from "@mui/material";
+import { Box, Card, alpha, Stack, InputAdornment, Paper } from "@mui/material";
 import { FormProvider, FSelect, FTextField } from "../form";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
@@ -78,105 +78,107 @@ function ProductEditForm({ productId }) {
   };
 
   return (
-    <Card sx={{ p: 3 }}>
-      <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-        <Stack spacing={2}>
-          <FTextField
-            name="name"
-            label="Name"
-            fullWidth
-            rows={4}
-            sx={{
-              "& fieldset": {
-                borderWidth: `1px !important`,
-                borderColor: alpha("#919EAB", 0.32)
-              }
-            }}
-          />
-          <FTextField
-            name="description"
-            label="Description"
-            multiline
-            fullWidth
-            rows={4}
-            sx={{
-              "& fieldset": {
-                borderWidth: `1px !important`,
-                borderColor: alpha("#919EAB", 0.32)
-              }
-            }}
-          />
-          <FSelect
-            name="category"
-            label="Category"
-            required
-            fullWidth
-            defaultValues={"Select Category"}
-          >
-            <option>Select Category</option>
-            <option>Shirts</option>
-            <option>Tshirts</option>
-            <option>Jeans</option>
-            <option>Shorts</option>
-            <option>Sandals</option>
-            <option>Sunglasses</option>
-          </FSelect>
-          <FSelect
-            name="gender"
-            label="Gender"
-            required
-            fullWidth
-            defaultValues={"Select Gender"}
-          >
-            <option>Select Gender</option>
-            <option>Men</option>
-            <option>Women</option>
-          </FSelect>
-
-          <FTextField
-            name="price"
-            label="Price"
-            fullWidth
-            rows={4}
-            // placeholder={product.name}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">$</InputAdornment>
-              )
-            }}
-            sx={{
-              "& fieldset": {
-                borderWidth: `1px !important`,
-                borderColor: alpha("#919EAB", 0.32)
-              }
-            }}
-          />
-          <FUploadImage
-            name="image"
-            accept="image/*"
-            maxSize={3145728}
-            onDrop={handleDrop}
-          />
-
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "flex-end"
-            }}
-          >
-            <LoadingButton
-              type="submit"
-              variant="contained"
-              size="small"
-              loading={isSubmitting || isLoading}
+    <Paper sx={{ overflowY: "auto", maxHeight: "100vh", padding: 2 }}>
+      <Card sx={{ p: 3 }}>
+        <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
+          <Stack spacing={2}>
+            <FTextField
+              name="name"
+              label="Name"
+              fullWidth
+              rows={4}
+              sx={{
+                "& fieldset": {
+                  borderWidth: `1px !important`,
+                  borderColor: alpha("#919EAB", 0.32)
+                }
+              }}
+            />
+            <FTextField
+              name="description"
+              label="Description"
+              multiline
+              fullWidth
+              rows={4}
+              sx={{
+                "& fieldset": {
+                  borderWidth: `1px !important`,
+                  borderColor: alpha("#919EAB", 0.32)
+                }
+              }}
+            />
+            <FSelect
+              name="category"
+              label="Category"
+              required
+              fullWidth
+              defaultValues={"Select Category"}
             >
-              Submit
-            </LoadingButton>
-          </Box>
-        </Stack>
-      </FormProvider>
-    </Card>
+              <option>Select Category</option>
+              <option>Shirts</option>
+              <option>Tshirts</option>
+              <option>Jeans</option>
+              <option>Shorts</option>
+              <option>Sandals</option>
+              <option>Sunglasses</option>
+            </FSelect>
+            <FSelect
+              name="gender"
+              label="Gender"
+              required
+              fullWidth
+              defaultValues={"Select Gender"}
+            >
+              <option>Select Gender</option>
+              <option>Men</option>
+              <option>Women</option>
+            </FSelect>
+
+            <FTextField
+              name="price"
+              label="Price"
+              fullWidth
+              rows={4}
+              // placeholder={product.name}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">$</InputAdornment>
+                )
+              }}
+              sx={{
+                "& fieldset": {
+                  borderWidth: `1px !important`,
+                  borderColor: alpha("#919EAB", 0.32)
+                }
+              }}
+            />
+            <FUploadImage
+              name="image"
+              accept="image/*"
+              maxSize={3145728}
+              onDrop={handleDrop}
+            />
+
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "flex-end"
+              }}
+            >
+              <LoadingButton
+                type="submit"
+                variant="contained"
+                size="small"
+                loading={isSubmitting || isLoading}
+              >
+                Submit
+              </LoadingButton>
+            </Box>
+          </Stack>
+        </FormProvider>
+      </Card>
+    </Paper>
   );
 }
 

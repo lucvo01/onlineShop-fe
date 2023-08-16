@@ -11,7 +11,7 @@ const initialOptions = {
 
 function PaypalButton({ total }) {
   // const { subtotal } = useSelector((state) => state.cart);
-  console.log("total", total);
+  // console.log("total", total);
 
   return (
     <PayPalScriptProvider options={initialOptions}>

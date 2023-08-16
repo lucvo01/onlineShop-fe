@@ -29,7 +29,7 @@ function OrderDetailPage() {
   }, [dispatch, orderId]);
 
   const { currentOrder, isLoading } = useSelector((state) => state.orders);
-  console.log("currentOrder", currentOrder);
+  // console.log("currentOrder", currentOrder);
   const products = currentOrder.products;
 
   return (
