@@ -131,7 +131,7 @@ function OrderDetailPage() {
                   )}
                 </Box>
                 {currentOrder.payment_method === "Paypal" ? (
-                  <PaypalButton />
+                  <PaypalButton total={currentOrder.subtotal} />
                 ) : (
                   <Typography style={{ fontWeight: "bold" }}>
                     {currentOrder.payment_method}
