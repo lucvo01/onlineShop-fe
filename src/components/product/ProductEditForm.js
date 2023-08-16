@@ -129,8 +129,8 @@ function ProductEditForm({ productId }) {
             defaultValues={"Select Gender"}
           >
             <option>Select Gender</option>
-            <option>men</option>
-            <option>women</option>
+            <option>Men</option>
+            <option>Women</option>
           </FSelect>
 
           <FTextField
