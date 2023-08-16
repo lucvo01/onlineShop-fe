@@ -52,7 +52,7 @@ function MainHeader() {
 
   const isAdmin = user && user.isAdmin;
 
-  const adminMenu = isAdmin ? (
+  const adminMenu = (
     <Box>
       <MenuItem
         onClick={handleMenuClose}
@@ -80,7 +80,7 @@ function MainHeader() {
       </MenuItem>
       <Divider sx={{ borderStyle: "dashed" }} />
     </Box>
-  ) : null;
+  );
 
   const renderMenu = (
     <Menu
@@ -109,27 +109,33 @@ function MainHeader() {
 
       <Divider sx={{ borderStyle: "dashed" }} />
 
-      <MenuItem
-        onClick={handleMenuClose}
-        to="/my_profile"
-        component={RouterLink}
-        sx={{ mx: 1 }}
-      >
-        My Profile
-      </MenuItem>
-      <MenuItem
-        onClick={handleMenuClose}
-        to="/my_order"
-        component={RouterLink}
-        sx={{ mx: 1 }}
-      >
-        My Order
-      </MenuItem>
+      {isAdmin ? (
+        adminMenu
+      ) : (
+        <>
+          <MenuItem
+            onClick={handleMenuClose}
+            to="/my_profile"
+            component={RouterLink}
+            sx={{ mx: 1 }}
+          >
+            My Profile
+          </MenuItem>
+          <MenuItem
+            onClick={handleMenuClose}
+            to="/my_order"
+            component={RouterLink}
+            sx={{ mx: 1 }}
+          >
+            My Order
+          </MenuItem>
 
-      <Divider sx={{ borderStyle: "dashed" }} />
+          <Divider sx={{ borderStyle: "dashed" }} />
+        </>
+      )}
 
       {/* {user && user.isAdmin ? adminMenu : <Box></Box>} */}
-      {adminMenu}
+      {/* {adminMenu} */}
 
       <MenuItem onClick={handleLogout} sx={{ m: 1 }}>
         {auth.isAuthenticated ? "Logout" : "Login"}
@@ -176,7 +182,7 @@ function MainHeader() {
             Admin
           </Button> */}
           <ColorModeButton />
-          <Cart />
+          {isAdmin ? null : <Cart />}
           <Box>
             <Avatar
               onClick={handleProfileMenuOpen}
