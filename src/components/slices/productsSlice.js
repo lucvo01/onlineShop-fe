@@ -69,7 +69,7 @@ export const getProducts =
       if (gender) params.gender = gender;
       if (category) params.category = category;
       if (priceRange) params.priceRange = priceRange;
-      console.log("params", params);
+      // console.log("params", params);
       const response = await apiService.get("/products", { params });
       dispatch(productSlice.actions.getProductsSuccess(response.data.data));
     } catch (error) {
@@ -128,7 +128,6 @@ export const editProduct =
   async (dispatch) => {
     dispatch(productSlice.actions.startLoading());
     try {
-      console.log("edit page", page);
       const imageUrl = await cloudinaryUpload(image);
       await apiService.put(`/products/${productId}/edit`, {
         name,

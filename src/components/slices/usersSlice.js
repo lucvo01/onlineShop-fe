@@ -44,7 +44,7 @@ const slice = createSlice({
       state.isLoading = false;
       state.error = null;
       state.currentUser = action.payload;
-      console.log("currentUser", action.payload);
+      // console.log("currentUser", action.payload);
     }
   }
 });

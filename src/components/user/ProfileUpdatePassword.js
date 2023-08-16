@@ -46,7 +46,6 @@ function ProfileUpdatePassword() {
 
   const onSubmit = async (password) => {
     // const from = location.state?.from?.pathname || "/";
-    console.log("password", password);
     dispatch(updateUserProfile({ userId: user.data._id, ...password }));
 
     try {

@@ -20,12 +20,20 @@ import apiService from "../app/apiService";
 import LoadingScreen from "../components/LoadingScreen";
 import { Alert } from "@mui/material";
 import AddToCartButton from "../components/cart/AddToCartButton";
+import Cookies from "js-cookie";
 
 function ProductDetailPage() {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const params = useParams();
+
+  const cookie = Cookies.get("user");
+  let user;
+  if (cookie) {
+    user = JSON.parse(Cookies.get("user"));
+  }
+  const isAdmin = user && user.isAdmin;
 
   useEffect(() => {
     if (params.id) {
@@ -145,13 +153,15 @@ function ProductDetailPage() {
                           <Chip label={product.gender} />
                           <Chip label={product.category} />
                         </Box>
-                        <Box mt={3}>
-                          <AddToCartButton
-                            product={product}
-                            display={"Add To Cart"}
-                            size={"large"}
-                          />
-                        </Box>
+                        {isAdmin ? null : (
+                          <Box mt={3}>
+                            <AddToCartButton
+                              product={product}
+                              display={"Add To Cart"}
+                              size={"large"}
+                            />
+                          </Box>
+                        )}
                       </Grid>
                     </Grid>
                   </Card>

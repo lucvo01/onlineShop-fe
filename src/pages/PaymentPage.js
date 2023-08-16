@@ -22,12 +22,12 @@ function PaymentPage() {
   });
   // const { subtotal, products } = useSelector((state) => state.cart);
 
-  const cookies = Cookies.get("user");
-  let user;
-  if (cookies) {
-    user = JSON.parse(cookies);
-    console.log("storedUser", user);
-  }
+  // const cookies = Cookies.get("user");
+  // let user;
+  // if (cookies) {
+  //   user = JSON.parse(cookies);
+  //   // console.log("storedUser", user);
+  // }
 
   const defaultValues = {};
 
@@ -60,9 +60,6 @@ function PaymentPage() {
       <Grid item xs={8} md={8}>
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
           <Stack spacing={3}>
-            {/* <FTextField name="email" label="Email" />
-            <FTextField name="phone" label="Phone Number" />
-            <FTextField name="shipping" label="Shipping address" /> */}
             <FSelect
               name="payment_method"
               label="Payment Method"
@@ -73,7 +70,6 @@ function PaymentPage() {
               <option>Cash On Delivery</option>
               <option>Paypal</option>
             </FSelect>
-            {/* <PaypalButton /> */}
           </Stack>
 
           <Stack spacing={3} alignItems="flex-end" sx={{ mt: 3 }}>

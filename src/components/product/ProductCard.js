@@ -9,6 +9,7 @@ import { fCurrency } from "../../utils";
 import AddToCartButton from "../cart/AddToCartButton";
 import { styled } from "@mui/material/styles";
 import { useTheme } from "@mui/material/styles";
+import Cookies from "js-cookie";
 
 function ProductCard({ product, hideButton }) {
   const theme = useTheme();
@@ -26,6 +27,13 @@ function ProductCard({ product, hideButton }) {
     borderRadius: "10px",
     border: `1px solid ${theme.palette.primary.light}`
   });
+
+  const cookie = Cookies.get("user");
+  let user;
+  if (cookie) {
+    user = JSON.parse(Cookies.get("user"));
+  }
+  const isAdmin = user && user.isAdmin;
 
   const navigate = useNavigate();
   return (
@@ -65,13 +73,15 @@ function ProductCard({ product, hideButton }) {
           <Stack></Stack>
         </CardContent>
       </CardActionArea>
-      <CardActions>
-        <AddToCartButton
-          product={product}
-          display={"Add to cart"}
-          hideButton={hideButton}
-        />
-      </CardActions>
+      {isAdmin ? null : (
+        <CardActions>
+          <AddToCartButton
+            product={product}
+            display={"Add to cart"}
+            hideButton={hideButton}
+          />
+        </CardActions>
+      )}
     </StyledCard>
   );
 }
