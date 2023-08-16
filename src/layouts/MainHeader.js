@@ -112,7 +112,7 @@ function MainHeader() {
       {isAdmin ? (
         adminMenu
       ) : (
-        <>
+        <Box>
           <MenuItem
             onClick={handleMenuClose}
             to="/my_profile"
@@ -131,11 +131,8 @@ function MainHeader() {
           </MenuItem>
 
           <Divider sx={{ borderStyle: "dashed" }} />
-        </>
+        </Box>
       )}
-
-      {/* {user && user.isAdmin ? adminMenu : <Box></Box>} */}
-      {/* {adminMenu} */}
 
       <MenuItem onClick={handleLogout} sx={{ m: 1 }}>
         {auth.isAuthenticated ? "Logout" : "Login"}

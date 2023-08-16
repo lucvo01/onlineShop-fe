@@ -29,7 +29,7 @@ function OrderDetailPage() {
   }, [dispatch, orderId]);
 
   const { currentOrder, isLoading } = useSelector((state) => state.orders);
-
+  console.log("currentOrder", currentOrder);
   const products = currentOrder.products;
 
   return (
@@ -53,25 +53,25 @@ function OrderDetailPage() {
                 <TableBody>
                   {products?.map((item, index) => {
                     return (
-                      <TableRow key={item._id || index} hover>
+                      <TableRow key={item._id._id || index} hover>
                         <TableCell>
                           <div
                             style={{ display: "flex", alignItems: "center" }}
                           >
                             <CardMedia
                               component="img"
-                              image={item.image}
+                              image={item._id.image}
                               style={{ width: "50px", height: "50px" }}
                               sx={{ display: { xs: "none", md: "block" } }}
                             />
                             <Typography sx={{ marginLeft: "10px" }}>
-                              {item.name}
+                              {item._id.name}
                             </Typography>
                           </div>
                         </TableCell>
-                        <TableCell>{item.quantity}</TableCell>
-                        <TableCell>${item.price}</TableCell>
-                        <TableCell>${item.price * item.quantity}</TableCell>
+                        <TableCell>{item._id.quantity}</TableCell>
+                        <TableCell>${item._id.price}</TableCell>
+                        <TableCell>${item._id.price * item.quantity}</TableCell>
                         <TableCell>{currentOrder.delivery_status}</TableCell>
                       </TableRow>
                     );
