@@ -114,12 +114,15 @@ function ManageProductsPage() {
                           <TableCell
                             sx={{
                               display: "flex",
+                              // maxWidth: "300px",
                               // alignItems: "center",
                               // justifyContent: "center",
                               cursor: "pointer"
                             }}
                           >
-                            <ProductCard product={item} hideButton={"yes"} />
+                            <Box sx={{ width: "250px" }}>
+                              <ProductCard product={item} hideButton={"yes"} />
+                            </Box>
                           </TableCell>
                           <TableCell>
                             <Box

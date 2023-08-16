@@ -46,6 +46,7 @@ function ProductCard({ product, hideButton }) {
           sx={{ borderRadius: "15px" }}
           component="img"
           height="200"
+          // width="300"
           image={product.image}
           alt="green iguana"
         />
