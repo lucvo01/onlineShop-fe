@@ -41,18 +41,21 @@ function ProductCard({ product, hideButton }) {
           image={product.image}
           alt="green iguana"
         />
-        <CardContent
-          sx={{
-            padding: 0,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center"
-          }}
-        >
-          <Typography gutterBottom variant="body1" component="div">
+        <CardContent>
+          <Typography
+            gutterBottom
+            variant="body1"
+            component="div"
+            noWrap
+            // sx={{
+            //   textOverflow: "ellipsis",
+            //   overflow: "hidden",
+            //   whiteSpace: "nowrap"
+            // }}
+          >
             {product.name}
           </Typography>
-          <Typography variant="subtitle1">
+          <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
             {fCurrency(product.price)}
           </Typography>
           <Stack direction="row" spacing={0.5}>

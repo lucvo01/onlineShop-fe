@@ -33,7 +33,7 @@ function OrderDetailPage() {
   const products = currentOrder.products;
 
   return (
-    <Container  sx={{ position: "relative", height: 1 }}>
+    <Container sx={{ position: "relative", height: 1 }}>
       {isLoading ? (
         <LoadingScreen />
       ) : (
@@ -53,14 +53,14 @@ function OrderDetailPage() {
                 <TableBody>
                   {products?.map((item, index) => {
                     return (
-                      <TableRow key={item._id._id || index} hover>
+                      <TableRow key={item._id || index} hover>
                         <TableCell>
                           <div
                             style={{ display: "flex", alignItems: "center" }}
                           >
                             <CardMedia
                               component="img"
-                              image={item._id.image}
+                              image={item.image}
                               style={{ width: "50px", height: "50px" }}
                               sx={{ display: { xs: "none", md: "block" } }}
                             />
@@ -69,9 +69,9 @@ function OrderDetailPage() {
                             </Typography>
                           </div>
                         </TableCell>
-                        <TableCell>{item._id.quantity}</TableCell>
-                        <TableCell>${item._id.price}</TableCell>
-                        <TableCell>${item._id.price * item.quantity}</TableCell>
+                        <TableCell>{item.quantity}</TableCell>
+                        <TableCell>${item.price}</TableCell>
+                        <TableCell>${item.price * item.quantity}</TableCell>
                         <TableCell>{currentOrder.delivery_status}</TableCell>
                       </TableRow>
                     );
