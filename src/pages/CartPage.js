@@ -1,6 +1,13 @@
 import React from "react";
-import { Box, Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import {
+  Box,
+  Button,
+  Container,
+  Breadcrumbs,
+  Link,
+  Typography
+} from "@mui/material";
+import { useNavigate, Link as RouterLink } from "react-router-dom";
 import CartProductList from "../components/cart/CartProductList";
 
 function CartPage() {
@@ -12,7 +19,13 @@ function CartPage() {
   };
 
   return (
-    <Box>
+    <Container>
+      <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 4 }}>
+        <Link underline="hover" color="inherit" component={RouterLink} to="/">
+          Online Shop
+        </Link>
+        <Typography color="text.primary">Cart</Typography>
+      </Breadcrumbs>
       <Box sx={{ flex: "2", padding: "10px" }} md={8} xs={12}>
         <CartProductList />
       </Box>
@@ -21,7 +34,7 @@ function CartPage() {
           Checkout
         </Button>
       </Box>
-    </Box>
+    </Container>
   );
 }
 

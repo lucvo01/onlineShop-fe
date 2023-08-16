@@ -5,6 +5,7 @@ import DecreaseButton from "./DecreaseButton";
 import AddToCartButton from "./AddToCartButton";
 import {
   Paper,
+  Box,
   Typography,
   Container,
   Table,
@@ -55,18 +56,19 @@ function CartProductList() {
                         </Typography>
                       </div>
                     </TableCell>
-                    <TableCell align="center">
-                      {/* <div
-                        style={{
+                    <TableCell align="center" sx={{}}>
+                      <Box
+                        sx={{
                           display: "flex",
-                          alignItems: "center",
-                          gap: 4
+                          // alignItems: "center",
+                          justifyContent: "center",
+                          gap: 2
                         }}
-                      > */}
-                      <AddToCartButton product={item} display={"+"} />
-                      <Typography>{item.quantity}</Typography>
-                      <DecreaseButton product={item} />
-                      {/* </div> */}
+                      >
+                        <AddToCartButton product={item} display={"+"} />
+                        <Typography>{item.quantity}</Typography>
+                        <DecreaseButton product={item} />
+                      </Box>
                     </TableCell>
                     <TableCell align="center">${item.price}</TableCell>
                     <TableCell align="center">

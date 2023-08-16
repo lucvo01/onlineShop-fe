@@ -50,51 +50,48 @@ function ManageProductsPage() {
   }, [dispatch, pageNum, searchQuery]);
 
   return (
-    <Container  sx={{ position: "relative", height: 1 }}>
+    <Container sx={{ position: "relative", height: 1 }}>
       <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 4 }}>
-            <Link
-              underline="hover"
-              color="inherit"
-              component={RouterLink}
-              to="/"
-            >
-              Online Shop
-            </Link>
-            <Typography color="text.primary">Manage Products</Typography>
-          </Breadcrumbs>
+        <Link underline="hover" color="inherit" component={RouterLink} to="/">
+          Online Shop
+        </Link>
+        <Typography color="text.primary">Manage Products</Typography>
+      </Breadcrumbs>
 
-          <Typography variant="h5" gutterBottom>
-            Manage Poducts
-          </Typography>
+      <Typography variant="h4" align="center">
+        Manage Poducts
+      </Typography>
 
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: { xs: "column", md: "row" },
-              alignItems: { xs: "center", md: "space-between" },
-              justifyContent: { xs: "center", md: "center" },
-              mt: "2rem",
-              gap: "1rem"
-            }}
-          >
-            <Box>
-              <SearchInput handleSubmit={handleSubmit} />
-            </Box>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: { xs: "column", md: "row" },
+          alignItems: { xs: "center", md: "space-between" },
+          justifyContent: { xs: "center", md: "center" },
+          mt: "2rem",
+          gap: "1rem"
+        }}
+      >
+        <Box>
+          <SearchInput handleSubmit={handleSubmit} />
+        </Box>
 
-            <Button
-              sx={{ mr: "1rem" }}
-              variant="contained"
-              onClick={() => navigate(`/manage_products/create`)}
-            >
-              Create New Product
-            </Button>
-          </Box>
-          <Grid item xs={12}>
-            <Paper sx={{ borderRadius: "10px", mt: 3,  position: "relative", height: 1 }}>
-      {isLoading ? (
-        <LoadingScreen />
-      ) : (
-        <>
+        <Button
+          sx={{ mr: "1rem" }}
+          variant="contained"
+          onClick={() => navigate(`/manage_products/create`)}
+        >
+          Create New Product
+        </Button>
+      </Box>
+      <Grid item xs={12}>
+        <Paper
+          sx={{ borderRadius: "10px", mt: 3, position: "relative", height: 1 }}
+        >
+          {isLoading ? (
+            <LoadingScreen />
+          ) : (
+            <>
               <TableContainer>
                 <Table>
                   <TableHead>
@@ -166,18 +163,17 @@ function ManageProductsPage() {
                   </TableBody>
                 </Table>
               </TableContainer>
-           
-        </>
-         )}
-       </Paper>
-            <Box sx={{ display: "flex", justifyContent: "center", mt: "2rem" }}>
-              <PaginationBar
-                pageNum={pageNum}
-                setPageNum={setPageNum}
-                totalPages={totalPages}
-              />
-            </Box>
-          </Grid>
+            </>
+          )}
+        </Paper>
+        <Box sx={{ display: "flex", justifyContent: "center", mt: "2rem" }}>
+          <PaginationBar
+            pageNum={pageNum}
+            setPageNum={setPageNum}
+            totalPages={totalPages}
+          />
+        </Box>
+      </Grid>
     </Container>
   );
 }

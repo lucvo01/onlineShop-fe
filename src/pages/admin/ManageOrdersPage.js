@@ -65,15 +65,17 @@ function ManageOrdersPage() {
         </Link>
         <Typography color="text.primary">Manage Orders</Typography>
       </Breadcrumbs>
-      <Typography variant="h5" gutterBottom>
+      <Typography variant="h4" align="center">
         Manage Orders
       </Typography>
       <FormProvider methods={methods}>
         <OrderSort />
       </FormProvider>
-      <Paper sx={{ borderRadius: "10px", mt: 3,  position: "relative", height: 1 }}>
+      <Paper
+        sx={{ borderRadius: "10px", mt: 3, position: "relative", height: 1 }}
+      >
         {isLoading ? (
-            <LoadingScreen />
+          <LoadingScreen />
         ) : (
           <>
             <TableContainer>
@@ -125,7 +127,8 @@ function ManageOrdersPage() {
                             variant="contained"
                             onClick={() =>
                               navigate(`/manage_orders/${order._id}/edit`)
-                            }>
+                            }
+                          >
                             Edit
                           </Button>
                         </TableCell>
@@ -134,7 +137,8 @@ function ManageOrdersPage() {
                             variant="contained"
                             onClick={() =>
                               navigate(`/manage_orders/${order._id}`)
-                            }>
+                            }
+                          >
                             Detail
                           </Button>
                         </TableCell>

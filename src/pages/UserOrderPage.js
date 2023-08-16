@@ -56,7 +56,7 @@ function UserOrderPage() {
   );
 
   return (
-    <Container  sx={{ position: "relative", height: 1 }}>
+    <Container sx={{ position: "relative", height: 1 }}>
       {isLoading ? (
         <LoadingScreen />
       ) : (
@@ -72,8 +72,8 @@ function UserOrderPage() {
             </Link>
             <Typography color="text.primary">My Order</Typography>
           </Breadcrumbs>
-          <Typography variant="h4" gutterBottom>
-            USER ORDER
+          <Typography variant="h4" align="center">
+            Order
           </Typography>
           <TableContainer>
             <Table>

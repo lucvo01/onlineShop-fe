@@ -51,7 +51,7 @@ const UserProfilePage = () => {
         </Link>
         <Typography color="text.primary">My Profile</Typography>
       </Breadcrumbs>
-      <Typography variant="h5" gutterBottom>
+      <Typography variant="h4" align="center">
         My Profile
       </Typography>
       <Tabs

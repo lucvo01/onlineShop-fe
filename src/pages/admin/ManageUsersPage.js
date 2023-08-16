@@ -35,28 +35,25 @@ function ManageUsersPage() {
   // }
 
   return (
-    <Container  sx={{ position: "relative", height: 1 }}>
+    <Container sx={{ position: "relative", height: 1 }}>
       <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 4 }}>
-            <Link
-              underline="hover"
-              color="inherit"
-              component={RouterLink}
-              to="/"
-            >
-              Online Shop
-            </Link>
-            <Typography color="text.primary">Manage Users</Typography>
-          </Breadcrumbs>
+        <Link underline="hover" color="inherit" component={RouterLink} to="/">
+          Online Shop
+        </Link>
+        <Typography color="text.primary">Manage Users</Typography>
+      </Breadcrumbs>
 
-          <Typography variant="h5" gutterBottom>
-            Manage Users
-          </Typography>
-          
-          <Paper sx={{ borderRadius: "10px", mt: 3,  position: "relative", height: 1  }}>
-      {isLoading ? (
-        <LoadingScreen />
-      ) : (
-        <>
+      <Typography variant="h4" align="center">
+        Manage Users
+      </Typography>
+
+      <Paper
+        sx={{ borderRadius: "10px", mt: 3, position: "relative", height: 1 }}
+      >
+        {isLoading ? (
+          <LoadingScreen />
+        ) : (
+          <>
             <TableContainer>
               <Table>
                 <TableHead>
@@ -127,10 +124,9 @@ function ManageUsersPage() {
                 </TableBody>
               </Table>
             </TableContainer>
-       
-        </>
-      )}
-         </Paper>
+          </>
+        )}
+      </Paper>
     </Container>
   );
 }
