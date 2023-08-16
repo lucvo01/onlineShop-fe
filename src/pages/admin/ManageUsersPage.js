@@ -19,7 +19,6 @@ import { useNavigate } from "react-router-dom";
 import { updateUserProfile } from "../../components/slices/usersSlice";
 import { Link as RouterLink } from "react-router-dom";
 import LoadingScreen from "../../components/LoadingScreen";
-import Cookies from "js-cookie";
 
 function ManageUsersPage() {
   const navigate = useNavigate();
@@ -31,11 +30,6 @@ function ManageUsersPage() {
 
   const { users, isLoading } = useSelector((state) => state.users);
 
-  const cookie = Cookies.get("user");
-  let user;
-  if (cookie) {
-    user = JSON.parse(Cookies.get("user"));
-  }
   // const handleClick = () => {
 
   // }

@@ -150,7 +150,6 @@ function ProductFilter({ resetFilter, sliderValue, setSliderValue, gender }) {
           // dispatch(setGender(""));
           resetFilter();
           // dispatch(getProducts(page));
-          console.log("test");
         }}
         startIcon={<ClearAllIcon />}
       >

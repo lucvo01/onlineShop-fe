@@ -12,7 +12,6 @@ import { Avatar, Divider, Menu, MenuItem } from "@mui/material";
 import { useNavigate, Link as RouterLink } from "react-router-dom";
 import ColorModeButton from "../components/ColorModeButton";
 import Cookies from "js-cookie";
-// import SearchInput from "../components/SearchInput";
 
 function MainHeader() {
   const auth = useAuth();
@@ -23,7 +22,7 @@ function MainHeader() {
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
-    console.log("auth", auth);
+    // console.log("auth", auth);
   };
 
   const handleMenuClose = () => {
