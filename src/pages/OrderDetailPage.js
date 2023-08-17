@@ -19,6 +19,7 @@ import { useParams } from "react-router-dom";
 import LoadingScreen from "../components/LoadingScreen";
 import { getAnOrder } from "../components/slices/ordersSlice";
 import PaypalButton from "../components/cart/PaypalButton";
+import Cookies from "js-cookie";
 
 function OrderDetailPage() {
   const dispatch = useDispatch();
@@ -32,6 +33,14 @@ function OrderDetailPage() {
   // console.log("currentOrder", currentOrder);
   const products = currentOrder.products;
 
+  // Retrieve user information from cookies
+  const cookie = Cookies.get("user");
+  let user;
+  if (cookie) {
+    user = JSON.parse(Cookies.get("user"));
+  }
+
+  const isAdmin = user && user.isAdmin;
   return (
     <Container sx={{ position: "relative", height: 1 }}>
       {isLoading ? (
@@ -130,7 +139,7 @@ function OrderDetailPage() {
                     <Chip label={currentOrder.delivery_status} color="error" />
                   )}
                 </Box>
-                {currentOrder.payment_method === "Paypal" ? (
+                {currentOrder.payment_method === "Paypal" && !isAdmin ? (
                   <PaypalButton total={currentOrder.subtotal} />
                 ) : (
                   <Typography style={{ fontWeight: "bold" }}>
