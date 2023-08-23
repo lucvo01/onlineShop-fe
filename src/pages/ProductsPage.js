@@ -12,7 +12,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../components/slices/productsSlice";
 import { Grid } from "@mui/material";
 import SearchInput from "../components/SearchInput";
-// import { setGender } from "../components/slices/filterSlice";
 
 function ProductsPage() {
   const dispatch = useDispatch();
@@ -63,13 +62,6 @@ function ProductsPage() {
     dispatch(getProducts({ pageNum, ...data }));
   };
 
-  // const resetFilter = () => {
-  //   setPageNum(1);
-  //   setSearchQuery("");
-  //   setGender("");
-  //   reset();
-  // };
-
   return (
     <Container sx={{ mt: "1rem" }}>
       <Grid container spacing={3}>
@@ -96,7 +88,7 @@ function ProductsPage() {
               <ProductSort />
             </Stack>
           </FormProvider>
-          <Grid item  sx={{ position: "relative", height: 1 }}>
+          <Grid item sx={{ position: "relative", height: 1 }}>
             {isLoading ? (
               <LoadingScreen />
             ) : (

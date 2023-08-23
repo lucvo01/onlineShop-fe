@@ -1,14 +1,19 @@
 import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
 import Logo from "../components/Logo";
 import useAuth from "../hooks/useAuth";
 // import { useUserState } from "../contexts/AuthContext";
 import Cart from "../components/cart/Cart";
-import { Avatar, Divider, Menu, MenuItem } from "@mui/material";
+import {
+  AppBar,
+  Avatar,
+  Divider,
+  Menu,
+  MenuItem,
+  Box,
+  Toolbar,
+  Typography,
+  IconButton
+} from "@mui/material";
 import { useNavigate, Link as RouterLink } from "react-router-dom";
 import ColorModeButton from "../components/ColorModeButton";
 import Cookies from "js-cookie";
@@ -53,6 +58,14 @@ function MainHeader() {
 
   const adminMenu = (
     <Box>
+      <MenuItem
+        onClick={handleMenuClose}
+        to="/admin"
+        component={RouterLink}
+        sx={{ mx: 1 }}
+      >
+        Admin Dashboard
+      </MenuItem>
       <MenuItem
         onClick={handleMenuClose}
         to="/manage_orders"
