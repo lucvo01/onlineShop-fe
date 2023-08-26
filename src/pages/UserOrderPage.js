@@ -18,7 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getSingleUserOrders } from "../components/slices/ordersSlice";
 import PaginationBar from "../components/PaginationBar";
 // import styled from "styled-components";
-import Cookies from "js-cookie";
+// import Cookies from "js-cookie";
 import { useNavigate, useParams, Link as RouterLink } from "react-router-dom";
 import LoadingScreen from "../components/LoadingScreen";
 import formatDate from "../utils/formatDate";
@@ -32,19 +32,19 @@ import formatDate from "../utils/formatDate";
 function UserOrderPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { id } = useParams();
+  const { userId } = useParams();
   const [pageNum, setPageNum] = useState(1);
   // const auth = useAuth();
   // console.log("auth", auth);
   // const userId = auth.user?.data._id;
-  let userId;
+  // let userId = id;
 
-  if (id) {
-    userId = id;
-  } else {
-    const user = JSON.parse(Cookies.get("user"));
-    userId = user._id;
-  }
+  // if (id) {
+  //   userId = id;
+  // } else {
+  //   const user = JSON.parse(Cookies.get("user"));
+  //   userId = user._id;
+  // }
 
   useEffect(() => {
     // console.log(user);
