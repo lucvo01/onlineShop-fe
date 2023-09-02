@@ -20,12 +20,18 @@ import PaginationBar from "../components/PaginationBar";
 import { useNavigate, useParams, Link as RouterLink } from "react-router-dom";
 import LoadingScreen from "../components/LoadingScreen";
 import formatDate from "../utils/formatDate";
+import Cookies from "js-cookie";
 
 function UserOrderPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { userId } = useParams();
   const [pageNum, setPageNum] = useState(1);
+  let { userId } = useParams();
+
+  if (!userId) {
+    const user = JSON.parse(Cookies.get("user"));
+    userId = user._id;
+  }
 
   useEffect(() => {
     dispatch(getSingleUserOrders({ userId }));
