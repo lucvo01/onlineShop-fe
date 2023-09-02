@@ -21,10 +21,9 @@ const UpdatePasswordSchema = Yup.object().shape({
 
 function ProfileUpdatePassword() {
   const navigate = useNavigate();
-  // const location = useLocation();
+
   const auth = useAuth();
   const { user } = useAuth();
-  // const isLoading = useSelector((state) => state.user.isLoading);
   const isLoading = false;
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -45,7 +44,6 @@ function ProfileUpdatePassword() {
   const dispatch = useDispatch();
 
   const onSubmit = async (password) => {
-    // const from = location.state?.from?.pathname || "/";
     dispatch(updateUserProfile({ userId: user.data._id, ...password }));
 
     try {

@@ -30,7 +30,6 @@ function OrderDetailPage() {
   }, [dispatch, orderId]);
 
   const { currentOrder, isLoading } = useSelector((state) => state.orders);
-  // console.log("currentOrder", currentOrder);
   const products = currentOrder.products;
 
   // Retrieve user information from cookies
@@ -95,12 +94,7 @@ function OrderDetailPage() {
               </Table>
             </TableContainer>
           </Grid>
-          <Grid
-            item
-            xs={12}
-            md={4}
-            // sx={{ backgroundColor: "#5a5d63", borderRadius: "15px" }}
-          >
+          <Grid item xs={12} md={4}>
             <Stack spacing={3}>
               <Stack spacing={1}>
                 <Typography style={{ fontWeight: "bold" }}>Customer</Typography>

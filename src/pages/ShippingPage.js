@@ -59,18 +59,6 @@ function ShippingPage() {
 
   const onSubmit = async (data) => {
     try {
-      // console.log(user);
-      // dispatch(
-      //   createOrder({
-      //     ...data,
-      //     userId: user._id || null,
-      //     subtotal,
-      //     products
-      //   })
-      // );
-      // dispatch(getSingleUserOrders({ userId: user._id }));
-      // navigate("/my_order");
-
       dispatch(addShippingAddress({ ...data }));
       navigate("/placeorder");
     } catch (error) {
@@ -102,7 +90,6 @@ function ShippingPage() {
               <option>Cash On Delivery</option>
               <option>Paypal</option>
             </FSelect>
-            {/* <PaypalButton /> */}
           </Stack>
 
           <Stack spacing={3} alignItems="flex-end" sx={{ mt: 3 }}>

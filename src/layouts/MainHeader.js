@@ -1,7 +1,6 @@
 import * as React from "react";
 import Logo from "../components/Logo";
 import useAuth from "../hooks/useAuth";
-// import { useUserState } from "../contexts/AuthContext";
 import Cart from "../components/cart/Cart";
 import {
   AppBar,
@@ -27,7 +26,6 @@ function MainHeader() {
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
-    // console.log("auth", auth);
   };
 
   const handleMenuClose = () => {
@@ -174,7 +172,7 @@ function MainHeader() {
           </Typography>
 
           <Box sx={{ flexGrow: 1 }} />
-          {/* <SearchInput /> */}
+
           <Typography
             variant="h6"
             noWrap
@@ -183,13 +181,7 @@ function MainHeader() {
           >
             Hi {user?.name}!
           </Typography>
-          {/* <Button
-            onClick={() => {
-              navigate("/admin");
-            }}
-          >
-            Admin
-          </Button> */}
+
           <ColorModeButton />
           {isAdmin ? null : <Cart />}
           <Box>

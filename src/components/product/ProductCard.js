@@ -46,22 +46,11 @@ function ProductCard({ product, hideButton }) {
           sx={{ borderRadius: "15px" }}
           component="img"
           height="200"
-          // width="300"
           image={product.image}
           alt="green iguana"
         />
         <CardContent>
-          <Typography
-            gutterBottom
-            variant="body1"
-            component="div"
-            noWrap
-            // sx={{
-            //   textOverflow: "ellipsis",
-            //   overflow: "hidden",
-            //   whiteSpace: "nowrap"
-            // }}
-          >
+          <Typography gutterBottom variant="body1" component="div" noWrap>
             {product.name}
           </Typography>
           <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>

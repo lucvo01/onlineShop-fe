@@ -67,11 +67,9 @@ function ProductEditForm({ productId }) {
   const onSubmit = (data) => {
     console.log(data);
     if (productId) {
-      // console.log(`Update Product ${productId}`);
       dispatch(editProduct({ ...data, productId, page }));
       handleClose();
     } else {
-      // console.log(`Create Product`);
       dispatch(createProduct({ ...data, page }));
       handleClose();
     }
@@ -139,7 +137,6 @@ function ProductEditForm({ productId }) {
               label="Price"
               fullWidth
               rows={4}
-              // placeholder={product.name}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">$</InputAdornment>

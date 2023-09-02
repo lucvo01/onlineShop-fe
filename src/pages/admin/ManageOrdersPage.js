@@ -18,7 +18,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrders } from "../../components/slices/ordersSlice";
 import PaginationBar from "../../components/PaginationBar";
-// import styled from "styled-components";
 import LoadingScreen from "../../components/LoadingScreen";
 import { useNavigate } from "react-router-dom";
 import formatDate from "../../utils/formatDate";
@@ -26,12 +25,6 @@ import { FormProvider } from "../../components/form";
 import { useForm } from "react-hook-form";
 import OrderSort from "../../components/order/OrderSort";
 import { Link as RouterLink } from "react-router-dom";
-
-// const CenteredContainer = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-// `;
 
 function ManageOrdersPage() {
   const navigate = useNavigate();
@@ -99,7 +92,6 @@ function ManageOrdersPage() {
                       <TableRow key={order._id || index} hover>
                         <TableCell>{order._id}</TableCell>
                         <TableCell>{formatDate(order.createdAt)}</TableCell>
-                        {/* <TableCell>product</TableCell> */}
                         <TableCell>${order.subtotal}</TableCell>
                         <TableCell>{order.payment_method}</TableCell>
                         <TableCell>

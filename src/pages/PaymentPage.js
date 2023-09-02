@@ -7,7 +7,6 @@ import * as Yup from "yup";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-// import Cookies from "js-cookie";
 import { addShippingAddress } from "../components/slices/cartSlice";
 
 const shippingSchema = Yup.object().shape({
@@ -20,14 +19,6 @@ function PaymentPage() {
   const { isLoading } = useSelector((state) => {
     return state.orders;
   });
-  // const { subtotal, products } = useSelector((state) => state.cart);
-
-  // const cookies = Cookies.get("user");
-  // let user;
-  // if (cookies) {
-  //   user = JSON.parse(cookies);
-  //   // console.log("storedUser", user);
-  // }
 
   const defaultValues = {};
 

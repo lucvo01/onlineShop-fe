@@ -44,7 +44,6 @@ const slice = createSlice({
       state.isLoading = false;
       state.error = null;
       state.currentUser = action.payload;
-      // console.log("currentUser", action.payload);
     }
   }
 });
@@ -91,11 +90,6 @@ export const updateUserProfile =
     try {
       const info = {
         ...data
-        // name,
-        // address,
-        // phone,
-        // password,
-        // isDeleted
       };
       const response = await apiService.put(`/users/${userId}`, info);
       dispatch(slice.actions.updateUserProfileSuccess(response.data));
@@ -106,13 +100,3 @@ export const updateUserProfile =
       toast.error(error.message);
     }
   };
-
-// export const deleteUser = () => async (dispatch) => {
-//   dispatch(slice.actions.startLoading())
-//    try {
-//      const response = await apiService.put(`/users/${userId}`, data);
-//     dispatch(slice.actions.updateUserProfileSuccess(response.data));
-//   } catch (error) {
-//     dispatch(slice.actions.hasError(error));
-//   }
-// }

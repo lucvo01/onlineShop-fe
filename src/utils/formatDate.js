@@ -1,7 +1,4 @@
-// import React from "react";
-
 function formatDate(isoDateString) {
-  // const isoDateString = "2023-08-05T21:23:52.134Z";
   const date = new Date(isoDateString);
 
   // Options for formatting the date
@@ -18,10 +15,7 @@ function formatDate(isoDateString) {
   // Convert the ISO date to the desired format
   const formattedDate = date.toLocaleDateString(undefined, options);
 
-  return (
-     formattedDate
-    
-  );
+  return formattedDate;
 }
 
 export default formatDate;

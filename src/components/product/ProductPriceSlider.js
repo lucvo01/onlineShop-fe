@@ -20,7 +20,6 @@ export default function ProductPriceSlider({ sliderValue, setSliderValue }) {
       <Slider
         getAriaLabel={() => "Price range"}
         value={sliderValue}
-        // defaultValue={[0, 200]}
         step={10}
         onChange={handleChange}
         max={200}

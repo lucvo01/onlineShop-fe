@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { setGender } from "../components/slices/filterSlice";
 import { styled } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
-// import SearchInput from "../components/SearchInput";
 
 const Img = styled("img")(({ theme }) => ({
   margin: "auto",
@@ -31,11 +30,6 @@ const SmallScreenImg = styled(Img)(({ theme }) => ({
     display: "none"
   }
 }));
-
-// export const FILTER_GENDER_OPTIONS = [
-//   { value: "Men", label: "Men" },
-//   { value: "Women", label: "Women" }
-// ];
 
 function HomePage() {
   const navigate = useNavigate();
@@ -71,7 +65,6 @@ function HomePage() {
               gap: "1rem",
               padding: "1rem",
               borderRadius: "8px"
-              // width: "100%"
             }}
           >
             <Button

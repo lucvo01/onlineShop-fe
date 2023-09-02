@@ -12,7 +12,6 @@ import CartProductList from "../components/cart/CartProductList";
 
 function CartPage() {
   const navigate = useNavigate();
-  // const dispatch = useDispatch();
 
   const handleClick = () => {
     navigate("/shipping");

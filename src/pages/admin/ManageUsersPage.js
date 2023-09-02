@@ -30,10 +30,6 @@ function ManageUsersPage() {
 
   const { users, isLoading } = useSelector((state) => state.users);
 
-  // const handleClick = () => {
-
-  // }
-
   return (
     <Container sx={{ position: "relative", height: 1 }}>
       <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 4 }}>

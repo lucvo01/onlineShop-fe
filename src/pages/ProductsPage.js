@@ -33,7 +33,6 @@ function ProductsPage() {
     gender: gender || "",
     category: "",
     priceRange: []
-    // searchQuery: ""
   };
 
   const methods = useForm({

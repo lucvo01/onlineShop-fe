@@ -77,16 +77,12 @@ function AuthProvider({ children }) {
   useEffect(() => {
     const initialize = async () => {
       try {
-        // const accessToken = window.localStorage.getItem("accessToken");
         if (Cookies.get("user")) {
           const { accessToken } = JSON.parse(Cookies.get("user"));
 
           if (accessToken && isValidToken(accessToken)) {
             setSession(accessToken);
-            // const response = await apiService.get("/users/me");
-            // const user = response.data;
             const user = JSON.parse(Cookies.get("user"));
-            // console.log("user", user);
 
             dispatch({
               type: INITIALIZE,

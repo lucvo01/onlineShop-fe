@@ -69,7 +69,7 @@ export const getOrders =
     try {
       const params = { page: pageNum, limit };
       if (delivery_status) params.delivery_status = delivery_status;
-      // console.log("params", params);
+
       const response = await apiService.get("/orders", { params });
       dispatch(ordersSlice.actions.getOrdersSuccess(response.data.data));
     } catch (error) {
@@ -97,9 +97,8 @@ export const getAnOrder =
     dispatch(ordersSlice.actions.startLoading());
     try {
       const response = await apiService.get(`/orders/${orderId}`);
-      // console.log("ordersSlice", response);
+
       dispatch(ordersSlice.actions.getCurrentOrder(response.data.data));
-      // console.log("ordersSlice", state.orders);
     } catch (error) {
       dispatch(ordersSlice.actions.hasError(error.message));
       toast.error(error.message);
@@ -111,8 +110,6 @@ export const createOrder =
   async (dispatch) => {
     dispatch(ordersSlice.actions.startLoading());
     try {
-      // console.log("products", products);
-
       dispatch(ordersSlice.actions.createOrderSuccess(response.data.data));
       dispatch(clearCart());
       toast.success("Create Order successfully");

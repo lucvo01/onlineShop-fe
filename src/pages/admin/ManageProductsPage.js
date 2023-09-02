@@ -36,16 +36,11 @@ function ManageProductsPage() {
     (state) => state.products
   );
 
-  // const methods = useForm({});
-  // const { watch, reset } = methods;
-  // const filters = watch();
-
   const handleSubmit = (query) => {
     setSearchQuery(query);
   };
 
   useEffect(() => {
-    // console.log("pageNum", pageNum);
     dispatch(getProducts({ pageNum, searchQuery }));
   }, [dispatch, pageNum, searchQuery]);
 
@@ -114,9 +109,6 @@ function ManageProductsPage() {
                           <TableCell
                             sx={{
                               display: "flex",
-                              // maxWidth: "300px",
-                              // alignItems: "center",
-                              // justifyContent: "center",
                               cursor: "pointer"
                             }}
                           >

@@ -40,7 +40,6 @@ function OrderEditForm({ orderId }) {
   };
 
   const onSubmit = (data) => {
-    // console.log(data);
     dispatch(editOrder({ orderId, pageNum, ...data }));
     handleClose();
   };

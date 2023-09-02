@@ -33,7 +33,6 @@ const SUCCESS = {
 const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
 const ThemeProvider = ({ children }) => {
-  // const [mode, setMode] = React.useState("light");
   const [mode, setMode] = React.useState(
     window.localStorage.getItem("colorMode") || "light"
   );
@@ -58,23 +57,11 @@ const ThemeProvider = ({ children }) => {
           primary: PRIMARY,
           secondary: SECONDARY,
           success: SUCCESS,
-          // mode: `${mode}`
           mode: `${mode}`
         }
       }),
     [mode]
   );
-
-  // const themeOptions = {
-  //   palette: {
-  //     primary: PRIMARY,
-  //     secondary: SECONDARY,
-  //     success: SUCCESS,
-  //     mode
-  //   },
-  //   shape: { borderRadius: 8 },
-  // };
-  // const theme = createTheme(themeOptions);
 
   return (
     <ColorModeContext.Provider value={colorMode}>

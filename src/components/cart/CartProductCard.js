@@ -9,9 +9,6 @@ import { fCurrency } from "../../utils";
 import AddToCartButton from "./AddToCartButton";
 import DeccreaseButton from "./DeccreaseButton";
 import RemoveItemButton from "./RemoveItemButton";
-// import AddToCartButton from "./AddToCartButton";
-// import DeccreaseButton from "./DeccreaseButton";
-// import RemoveItemButton from "./RemoveItemButton";
 
 function CartProductCard({ product }) {
   const navigate = useNavigate();

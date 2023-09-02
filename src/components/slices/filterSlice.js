@@ -13,11 +13,9 @@ const filterSlice = createSlice({
   reducers: {
     setGender: (state, action) => {
       state.gender = action.payload;
-      // console.log(action.payload);
     },
     setPriceRange: (state, action) => {
       state.priceRange = action.payload;
-      // console.log(action.payload);
     }
   }
 });

@@ -49,7 +49,6 @@ const buttonStyle = {
 function ProductFilter({ resetFilter, sliderValue, setSliderValue, gender }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // const { page } = useSelector((state) => state.products);
 
   const handleClickMen = () => {
     dispatch(setGender("Men"));
@@ -63,11 +62,6 @@ function ProductFilter({ resetFilter, sliderValue, setSliderValue, gender }) {
   return (
     <Stack spacing={3}>
       <Stack spacing={3}>
-        <Paper>
-          {/* <ProductSearch /> */}
-          {/* <SearchInput /> */}
-        </Paper>
-
         <Paper
           sx={{
             p: "1rem",
@@ -147,9 +141,7 @@ function ProductFilter({ resetFilter, sliderValue, setSliderValue, gender }) {
         color="inherit"
         variant="outlined"
         onClick={() => {
-          // dispatch(setGender(""));
           resetFilter();
-          // dispatch(getProducts(page));
         }}
         startIcon={<ClearAllIcon />}
       >

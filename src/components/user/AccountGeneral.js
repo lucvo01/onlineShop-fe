@@ -19,11 +19,9 @@ const UpdateUserSchema = yup.object().shape({
 });
 
 function AccountGeneral() {
-  // const { user } = useAuth();
   const user = JSON.parse(Cookies.get("user"));
-  // const { isLoading, currentUser } = useSelector((state) => state.users);
+
   const isLoading = false;
-  // const user = currentUser;
 
   const defaultValues = {
     name: user?.name || "",
@@ -44,10 +42,6 @@ function AccountGeneral() {
   } = methods;
 
   const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(getCurrentUserProfile());
-  // }, [dispatch]);
 
   const onSubmit = (data) => {
     dispatch(updateUserProfile({ userId: user._id, ...data }));

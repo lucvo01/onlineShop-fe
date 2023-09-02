@@ -8,7 +8,6 @@ function FSlider({ name, ...other }) {
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-    // console.log("value", value);
   };
 
   const handleClick = (event, newValue) => {
@@ -26,7 +25,6 @@ function FSlider({ name, ...other }) {
             {...field}
             getAriaLabel={() => name}
             valueLabelDisplay="auto"
-            // onChange={handleChange}
             {...other}
           />
           <Button onClick={() => setValue}>Filter</Button>

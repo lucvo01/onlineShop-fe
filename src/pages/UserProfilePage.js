@@ -13,17 +13,10 @@ import ProfileUpdatePassword from "../components/user/ProfileUpdatePassword";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import PasswordIcon from "@mui/icons-material/Password";
 import { capitalCase } from "change-case";
-// import styled from "styled-components";
+
 import { Link as RouterLink } from "react-router-dom";
 
-// const CenteredContainer = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-// `;
-
 const UserProfilePage = () => {
-  // const { user } = useAuth();
   const [currentTab, setCurrentTab] = useState("profile");
 
   const handleChangeTab = (event, newValue) => {
@@ -63,7 +56,6 @@ const UserProfilePage = () => {
       >
         {PROFILE_TABS.map((tab) => (
           <Tab
-            // disableRipple
             key={tab.value}
             value={tab.value}
             icon={tab.icon}

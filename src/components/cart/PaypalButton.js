@@ -10,9 +10,6 @@ const initialOptions = {
 };
 
 function PaypalButton({ total }) {
-  // const { subtotal } = useSelector((state) => state.cart);
-  // console.log("total", total);
-
   return (
     <PayPalScriptProvider options={initialOptions}>
       <PayPalButtons
@@ -21,7 +18,6 @@ function PaypalButton({ total }) {
             purchase_units: [
               {
                 amount: {
-                  // value: `${subtotal}`
                   value: total
                 }
               }

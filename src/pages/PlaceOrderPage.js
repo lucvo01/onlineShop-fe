@@ -28,13 +28,10 @@ function PlaceOrderPage() {
     (state) => state.cart
   );
 
-  // const { orders } = useSelector((state) => state.orders);
-
   const cookies = Cookies.get("user");
   let user;
   if (cookies) {
     user = JSON.parse(cookies);
-    // console.log("storedUser", user);
   }
 
   const handleClick = async () => {
@@ -50,9 +47,7 @@ function PlaceOrderPage() {
           response
         })
       );
-      // dispatch(getSingleUserOrders({ userId: user._id }));
-      // // console.log("orders", orders);
-      // const orderId = orders[orders.length - 1]._id;
+
       const orderId = response.data.data._id;
       navigate(`/my_order/${orderId}`);
     } catch (error) {
@@ -113,12 +108,7 @@ function PlaceOrderPage() {
               </Table>
             </TableContainer>
           </Grid>
-          <Grid
-            item
-            xs={12}
-            md={4}
-            // sx={{ backgroundColor: "#5a5d63", borderRadius: "15px" }}
-          >
+          <Grid item xs={12} md={4}>
             <Stack spacing={3}>
               <Stack spacing={1}>
                 <Typography style={{ fontWeight: "bold" }}>Customer</Typography>
