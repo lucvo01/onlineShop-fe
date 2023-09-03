@@ -52,6 +52,7 @@ function OrderDetailPage() {
                 <TableHead>
                   <TableRow>
                     <TableCell>Item</TableCell>
+                    <TableCell>Size</TableCell>
                     <TableCell>Quantity</TableCell>
                     <TableCell>Unit Price</TableCell>
                     <TableCell>Total</TableCell>
@@ -77,7 +78,8 @@ function OrderDetailPage() {
                             </Typography>
                           </div>
                         </TableCell>
-                        <TableCell>{item._id.quantity}</TableCell>
+                        <TableCell>{item.size}</TableCell>
+                        <TableCell>{item.quantity}</TableCell>
                         <TableCell>${item._id.price}</TableCell>
                         <TableCell>${item._id.price * item.quantity}</TableCell>
                         <TableCell>{currentOrder.delivery_status}</TableCell>

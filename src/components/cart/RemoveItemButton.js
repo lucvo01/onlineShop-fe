@@ -4,11 +4,11 @@ import { useDispatch } from "react-redux";
 import { removeItem, getSubtotal } from "../slices/cartSlice";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-function RemoveItemButton({ product }) {
+function RemoveItemButton({ product, size }) {
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    dispatch(removeItem(product));
+    dispatch(removeItem({ ...product, size }));
     dispatch(getSubtotal());
   };
 

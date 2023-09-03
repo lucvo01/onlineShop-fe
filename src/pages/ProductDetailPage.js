@@ -21,6 +21,9 @@ import LoadingScreen from "../components/LoadingScreen";
 import { Alert } from "@mui/material";
 import AddToCartButton from "../components/cart/AddToCartButton";
 import Cookies from "js-cookie";
+import ProductSizeSelection from "../components/product/ProductSizeSelection";
+import { FormProvider } from "../components/form";
+import { useForm } from "react-hook-form";
 
 function ProductDetailPage() {
   const [product, setProduct] = useState(null);
@@ -52,6 +55,16 @@ function ProductDetailPage() {
       getProduct();
     }
   }, [params]);
+
+  const defaultValues = { size: "S" };
+
+  const methods = useForm({
+    defaultValues
+  });
+
+  const { watch } = methods;
+  const filters = watch();
+  const { size } = filters;
 
   return (
     <Container sx={{ my: 3 }}>
@@ -154,13 +167,21 @@ function ProductDetailPage() {
                           <Chip label={product.category} />
                         </Box>
                         {isAdmin ? null : (
-                          <Box mt={3}>
-                            <AddToCartButton
-                              product={product}
-                              display={"Add To Cart"}
-                              size={"large"}
-                            />
-                          </Box>
+                          <>
+                            <Box mt={3}>
+                              <FormProvider methods={methods}>
+                                <ProductSizeSelection />
+                              </FormProvider>
+                            </Box>
+                            <Box mt={3}>
+                              <AddToCartButton
+                                product={product}
+                                size={size}
+                                display={"Add To Cart"}
+                                // size={"large"}
+                              />
+                            </Box>
+                          </>
                         )}
                       </Grid>
                     </Grid>

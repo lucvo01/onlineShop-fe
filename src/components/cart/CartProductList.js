@@ -33,16 +33,16 @@ function CartProductList() {
             <TableHead>
               <TableRow>
                 <TableCell align="center">Item</TableCell>
+                <TableCell align="center">Size</TableCell>
                 <TableCell align="center">Quantity</TableCell>
                 <TableCell align="center">Unit Price</TableCell>
                 <TableCell align="center">Total</TableCell>
-                <TableCell align="center"></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {products?.map((item) => {
                 return (
-                  <TableRow key={item._id} hover>
+                  <TableRow key={item._id + item.size} hover>
                     <TableCell align="center">
                       <div style={{ display: "flex", alignItems: "center" }}>
                         <CardMedia
@@ -60,14 +60,28 @@ function CartProductList() {
                       <Box
                         sx={{
                           display: "flex",
-                          // alignItems: "center",
                           justifyContent: "center",
                           gap: 2
                         }}
                       >
-                        <AddToCartButton product={item} display={"+"} />
+                        <Typography>{item.size}</Typography>
+                      </Box>
+                    </TableCell>
+                    <TableCell align="center" sx={{}}>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "center",
+                          gap: 2
+                        }}
+                      >
+                        <AddToCartButton
+                          product={item}
+                          size={item.size}
+                          display={"+"}
+                        />
                         <Typography>{item.quantity}</Typography>
-                        <DecreaseButton product={item} />
+                        <DecreaseButton product={item} size={item.size} />
                       </Box>
                     </TableCell>
                     <TableCell align="center">${item.price}</TableCell>
@@ -75,7 +89,7 @@ function CartProductList() {
                       ${item.itemTotal.toFixed(2)}
                     </TableCell>
                     <TableCell align="center">
-                      <RemoveItemButton product={item} />
+                      <RemoveItemButton product={item} size={item.size} />
                     </TableCell>
                   </TableRow>
                 );

@@ -3,11 +3,11 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { decreaseItem, getSubtotal } from "../slices/cartSlice";
 
-function DecreaseButton({ product }) {
+function DecreaseButton({ product, size }) {
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    dispatch(decreaseItem(product));
+    dispatch(decreaseItem({ ...product, size }));
     dispatch(getSubtotal());
   };
 
