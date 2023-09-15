@@ -93,7 +93,6 @@ function UserOrderPage() {
                       >
                         {formatDate(order.createdAt)}
                       </TableCell>
-                      {/* <TableCell>product</TableCell> */}
                       <TableCell>${order.subtotal}</TableCell>
                       <TableCell>{order.payment_method}</TableCell>
                       <TableCell>

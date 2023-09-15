@@ -77,7 +77,6 @@ function ManageOrdersPage() {
                   <TableRow>
                     <TableCell>OrderId</TableCell>
                     <TableCell>Date</TableCell>
-                    {/* <TableCell>Product</TableCell> */}
                     <TableCell>Amount</TableCell>
                     <TableCell>Payment Method</TableCell>
                     <TableCell>Payment Status</TableCell>

@@ -94,7 +94,6 @@ function PlaceOrderPage() {
                         <TableCell>{item.quantity}</TableCell>
                         <TableCell>${item.price}</TableCell>
                         <TableCell>${item.price * item.quantity}</TableCell>
-                        {/* <TableCell>{currentOrder.delivery_status}</TableCell> */}
                       </TableRow>
                     );
                   })}

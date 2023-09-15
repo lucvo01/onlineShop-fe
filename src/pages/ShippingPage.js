@@ -26,11 +26,6 @@ function ShippingPage() {
   const { isLoading } = useSelector((state) => {
     return state.orders;
   });
-  // const { subtotal, products } = useSelector((state) => state.cart);
-
-  // const auth = useAuth();
-  // const { user } = useUserState();
-  // console.log(useAuth());
 
   const cookies = Cookies.get("user");
   let user;

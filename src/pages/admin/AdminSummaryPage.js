@@ -22,8 +22,6 @@ function AdminSummaryPage() {
   const [income, setIncome] = useState(0);
   const [incomePercentage, setIncomePercentage] = useState(0);
 
-  // console.log("userPercentage", userPercentage);
-
   const compare = (a, b) => {
     if (a._id < b._id) {
       return 1;
@@ -39,7 +37,6 @@ function AdminSummaryPage() {
       try {
         const res = await apiService.get("/users/stats");
         res.data.data.sort(compare);
-        // console.log("user stats", res.data.data);
 
         setUserStats(res.data.data[0]);
         setUserPercentage(
@@ -51,7 +48,6 @@ function AdminSummaryPage() {
         const resOrder = await apiService.get("/orders/stats");
 
         resOrder.data.data.sort(compare);
-        // console.log("order stats", resOrder.data.data);
 
         setOrderStats(resOrder.data.data[0]);
         setOrderPercentage(
